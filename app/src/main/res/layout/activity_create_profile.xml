@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.CreateProfileActivity">
+    <LinearLayout
+        android:id="@+id/header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/color_blackforheader"
+        >
+
+        <TextView
+            android:id="@+id/ordersetails_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="To be filled"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/headertextsize"
+            android:fontFamily="@font/montserrat_bold"
+            android:gravity="center"
+            android:padding="10dp"
+
+            />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="25dp"
+            android:layout_height="30dp"
+            android:layout_gravity="end"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@mipmap/home_notification">
+        </androidx.appcompat.widget.AppCompatImageView>
+
+    </LinearLayout>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:layout_centerHorizontal="true"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_below="@+id/header_layout">
+    <androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:cardUseCompatPadding="true"
+        app:cardElevation="4dp"
+        app:cardCornerRadius="3dp"
+        android:id="@+id/main_layout"
+        >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_marginLeft="20dp"
+    android:layout_centerHorizontal="true"
+    >
+        <TextView
+            android:id="@+id/addressheader_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_black"
+            android:text="@string/tobefilled1"
+            android:textSize="@dimen/regulartextsize"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/montserrat"
+            android:layout_marginLeft="10dp"
+
+            />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_black"
+            android:text="@string/tobefilled2"
+            android:textSize="@dimen/regulartextsize"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/montserrat"
+            android:layout_marginLeft="10dp"
+            />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_black"
+            android:text="@string/tobefilled3"
+            android:textSize="@dimen/regulartextsize"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/montserrat"
+            android:layout_marginLeft="10dp"
+            />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_black"
+            android:text="@string/tobefilled4"
+            android:textSize="@dimen/regulartextsize"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/montserrat"
+            android:layout_marginLeft="10dp"
+            />
+
+    <Button
+        android:id="@+id/createprofile_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create your profile"
+        android:textColor="@color/color_white"
+        android:background="@drawable/buttonblue_background"
+        android:padding="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:textAllCaps="false"
+        android:layout_marginRight="20dp"
+        />
+</LinearLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>
+</RelativeLayout>

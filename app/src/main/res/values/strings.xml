@@ -1,0 +1,56 @@
+<resources>
+    <string name="app_name">HS12ServicePerson</string>
+
+    <!--Login-->
+    <string name="login">Login</string>
+    <string name="forgot">Forgot Password ?</string>
+    <string name="username_hint"><font size="14">Email_id/Phone number</font></string>
+
+
+    <!-- SignUp String Values-->
+    <string name="signup">Sign Up</string>
+    <string name="name_hint"><font size="14">Full name</font></string>
+    <string name="phonenumber_hint"><font size="14">Phone number</font></string>
+    <string name="email_hint"><font size="14">Email_Id</font></string>
+    <string name="gender_hint"><font size="14">Gender</font></string>
+    <string name="dateofbirth_hint"><font size="14">Date of birth</font></string>
+
+    <string name="profession_hint"><font size="14">Primary profession</font></string>
+
+    <string name="password_hint"><font size="14">Password</font></string>
+    <string name="confirmpassword_hint"><font size="14">Confirm password</font></string>
+
+    <string name="alreadyaccount">Already have an account ?</string>
+    <string name="radiomale"><font size="14">Male</font></string>
+    <string name="radiofemale"><font size="14">Female</font></string>
+    <string name="radioothers"><font size="14">Others</font></string>
+
+    <!-- Bottom navigation-->
+    <string name="home_menu">My Task</string>
+    <string name="profile_menu">Profile</string>
+    <string name="request_menu">Requests</string>
+    <string name="more_menu">More</string>
+
+    <!-- Home My Task Screen-->
+    <string name="no_task">Your task is empty, Please fill your profile details to get your task</string>
+
+    <!-- create your profile-->
+    <string name="tobefilled1">*Enter your Service details</string>
+    <string name="tobefilled2">*Complete your profile</string>
+    <string name="tobefilled3">*Profile verification and approvol</string>
+    <string name="tobefilled4">*Buy premium partner package</string>
+
+
+    <!-- New Request List-->
+
+    <string name="qoutewillsend">Your Qutotation will be sent to the requested user</string>
+    <string name="rupies">\u20B9</string>
+
+
+   <!-- Add Services-->
+    <string name="primaryservices">My primary services</string>
+    <string name="selectservices">Select your service providing location and service.</string>
+    <string name="location">Location</string>
+    <string name="approvalbutton">Submit for approval</string>
+
+</resources>

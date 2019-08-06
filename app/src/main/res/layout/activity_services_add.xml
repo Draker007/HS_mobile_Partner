@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.ServicesAdd_Activity">
+    <LinearLayout
+        android:id="@+id/header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/color_blackforheader"
+        >
+
+
+
+        <TextView
+            android:id="@+id/myprofile_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Services"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/headertextsize"
+            android:fontFamily="@font/montserrat_bold"
+            android:gravity="center"
+            android:padding="10dp"
+
+            />
+
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:fillViewport="true"
+        android:layout_below="@+id/header_layout"
+        android:layout_marginTop="20dp"
+        >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/primaryservices"
+                android:textColor="@color/color_black"
+                android:textSize="@dimen/regulartextsize"
+                android:fontFamily="@font/montserrat_bold"
+
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/primaryservices"
+                android:textColor="@color/color_blue"
+                android:textSize="@dimen/regulartextsize"
+                android:fontFamily="@font/montserrat"
+                android:layout_marginLeft="20dp"
+                />
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/selectservices"
+            android:textSize="@dimen/regulartextsize"
+            android:fontFamily="@font/montserrat"
+            android:layout_marginTop="20dp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/location"
+                android:textColor="@color/color_black"
+                android:textSize="@dimen/regulartextsize"
+                android:fontFamily="@font/montserrat"
+                android:layout_marginTop="20dp"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:id="@+id/locationlist_recyclerview"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_height="wrap_content">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="wrap_content"
+                android:id="@+id/serviceslist_recyclerview"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_height="wrap_content">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="wrap_content"
+                android:id="@+id/subserviceslist_recyclerview"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:visibility="gone"
+                android:layout_height="wrap_content">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <TextView
+                android:id="@+id/nosubservice_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No Sub Services Found"
+                android:textColor="@color/color_blue"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                />
+        </LinearLayout>
+        
+        <Button
+            android:id="@+id/submitforapproval_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/approvalbutton"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/regulartextsize"
+            android:fontFamily="@font/montserrat"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:padding="8dp"
+            android:textAllCaps="false"
+            android:background="@drawable/buttonblue_background"
+            />
+    </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</RelativeLayout>

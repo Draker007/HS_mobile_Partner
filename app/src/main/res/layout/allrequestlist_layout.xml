@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/color_blackforheader"
+        >
+
+
+
+        <TextView
+            android:id="@+id/myprofile_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Requests"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/headertextsize"
+            android:fontFamily="@font/montserrat_bold"
+            android:gravity="center"
+            android:padding="10dp"
+
+            />
+
+    </LinearLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/allrequestlist_tablayout"
+        android:layout_below="@+id/header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/white"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@color/color_black"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="@color/color_black"
+        app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+        android:textAllCaps="false"
+        app:tabTextColor="@color/color_black"
+
+        />
+
+    <androidx.viewpager.widget.ViewPager
+        android:layout_width="match_parent"
+        android:id="@+id/allrequestlist_viewpager"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/allrequestlist_tablayout"
+        >
+
+    </androidx.viewpager.widget.ViewPager>
+
+
+</RelativeLayout>
