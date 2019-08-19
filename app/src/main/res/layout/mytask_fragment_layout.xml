@@ -14,14 +14,14 @@
         <TextView
             android:id="@+id/ordersetails_header"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="My Task"
-            android:textColor="@color/color_white"
-            android:textSize="@dimen/headertextsize"
+            android:layout_height="70dp"
+            android:layout_weight="1"
             android:fontFamily="@font/montserrat_bold"
             android:gravity="center"
             android:padding="10dp"
-            android:layout_weight="1"
+            android:text="My Task"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/headertextsize"
 
             />
         <androidx.appcompat.widget.AppCompatImageView
@@ -46,72 +46,71 @@
         android:layout_marginTop="20dp"
         >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        >
-
-        <TextView
-            android:id="@+id/category_header"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat"
-            android:text="Become a prime partner"
-            android:textColor="@color/color_blue"
-            android:textSize="18dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_gravity="center"
-            >
-        </TextView>
-        <androidx.recyclerview.widget.RecyclerView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:id="@+id/package_recyclerview"
-            android:layout_marginTop="20dp"
-            android:layout_height="wrap_content">
-
-        </androidx.recyclerview.widget.RecyclerView>
-        <TextView
-            android:id="@+id/notask_header"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat"
-            android:text="@string/no_task"
-            android:textSize="14dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_gravity="center"
-            android:background="@color/color_transparen"
-            android:padding="5dp"
-           />
-        <TextView
-            android:id="@+id/todyatask_header"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/todaytask_background"
-            android:fontFamily="@font/montserrat"
-            android:text="   Today     "
-            android:textColor="@color/color_black"
-            android:textSize="@dimen/regulartextsize"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
-            android:padding="10dp"
-            android:visibility="visible" />
+            android:orientation="vertical">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:id="@+id/todaytask_recyclerview"
-            android:layout_marginTop="20dp"
-            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/category_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:fontFamily="@font/montserrat"
+                android:text="Become a prime partner"
+                android:textColor="@color/color_blue"
+                android:textSize="18dp"></TextView>
 
-        </androidx.recyclerview.widget.RecyclerView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/package_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
 
-    </LinearLayout>
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <TextView
+                android:id="@+id/notask_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/color_transparen"
+                android:fontFamily="@font/montserrat"
+                android:padding="5dp"
+                android:text="@string/no_task"
+                android:textSize="14dp" />
+
+            <TextView
+                android:id="@+id/todyatask_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/todaytask_background"
+                android:fontFamily="@font/montserrat"
+                android:padding="10dp"
+                android:text="   Today     "
+                android:textColor="@color/color_black"
+                android:textSize="@dimen/regulartextsize"
+                android:visibility="visible" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/todaytask_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+        </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
 </RelativeLayout>

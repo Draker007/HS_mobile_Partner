@@ -17,14 +17,13 @@
             android:id="@+id/subservicename_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/regulartextsize"
-            android:textColor="@color/color_white"
-            android:fontFamily="@font/montserrat"
-            android:text="mysore"
-            android:padding="5dp"
             android:layout_gravity="center_horizontal"
-            android:layout_weight="1"
-            />
+            android:layout_weight="0"
+            android:fontFamily="@font/montserrat"
+            android:padding="5dp"
+            android:text="mysore"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/regulartextsize" />
         <CheckBox
             android:id="@+id/selectquantity_checkbox"
             android:layout_width="wrap_content"

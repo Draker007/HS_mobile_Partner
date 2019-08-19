@@ -3,5 +3,5 @@
     <item android:state_checked="true"
         android:drawable="@drawable/subservicecheckbox_checked" />
     <item android:state_checked="false"
-        android:drawable="@drawable/subservicecheckbox_checked" />
+        android:drawable="@drawable/subservicecheckbox_unchecked" />
 </selector>

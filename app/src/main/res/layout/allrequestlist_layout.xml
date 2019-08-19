@@ -14,17 +14,16 @@
         >
 
 
-
         <TextView
             android:id="@+id/myprofile_header"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Requests"
-            android:textColor="@color/color_white"
-            android:textSize="@dimen/headertextsize"
+            android:layout_height="70dp"
             android:fontFamily="@font/montserrat_bold"
             android:gravity="center"
             android:padding="10dp"
+            android:text="Requests"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/headertextsize"
 
             />
 

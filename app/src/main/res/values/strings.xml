@@ -47,10 +47,20 @@
     <string name="rupies">\u20B9</string>
 
 
-   <!-- Add Services-->
+    <!-- Add Services-->
     <string name="primaryservices">My primary services</string>
     <string name="selectservices">Select your service providing location and service.</string>
     <string name="location">Location</string>
     <string name="approvalbutton">Submit for approval</string>
+
+
+    <!-- About US Strings -->
+    <string name="aboutus1"><![CDATA[Home service is providing you the best service profesionals to fulfil your requirements.Our aim is to use smart technology & processes to buld unorganized service market all over India.]]></string>
+    <string name="about2"><![CDATA[The main objective of Home service is to hire professionals to help the customers by providing services like salon at home for men & women, carpenter, electrician,pest control, appliances & electronic repairs.]]></string>
+    <string name="award"><![CDATA[Awards & certificate Photos]]></string>
+    <string name="supportString1">"It may take some time please wait until we connect a call.</string>
+    <string name="terms">Welcome to Home service. You may use iur services through our website www.houseservice.in (\"Website\") or our mobile application (\"HS App\").Our Website and HS App have been create to provide information about our company and services to visitors and user of services, weather accessible to you web,mobile App or other platform (our services,together with our site, are the \"Service\")</string>
+    <string name="enteremailForgotPass">Enter your registered Email-ID or Phone number to continue..</string>
+    <string name="SetNewPass">Enter OTP which have sent to your Emial-ID or Phone Number</string>
 
 </resources>

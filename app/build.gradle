@@ -63,4 +63,5 @@ dependencies {
     implementation 'com.github.jhonnyx2012:horizontal-picker:1.0.6'
 
     implementation 'org.mightyfrog.centeringrecyclerview:centeringrecyclerview:1.1.8'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 }
