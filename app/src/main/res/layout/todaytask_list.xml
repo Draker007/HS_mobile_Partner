@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -18,149 +19,176 @@
         android:layout_marginRight="5dp"
         android:padding="10dp"
         >
-    <LinearLayout
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/username_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/montserrat"
+                android:text="Name"
+                android:textSize="@dimen/regulartextsize"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/date_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/montserrat"
+                android:gravity="right"
+                android:text="02_08_2019"
+                android:textSize="@dimen/regulartextsize"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/time_text"
+                app:layout_constraintTop_toTopOf="@+id/time_text" />
+
+            <TextView
+                android:id="@+id/time_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/montserrat"
+                android:gravity="right"
+                android:text="07:00PM"
+                android:textSize="@dimen/regulartextsize"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         >
 
-        <TextView
-            android:id="@+id/username_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Name"
-            android:fontFamily="@font/montserrat"
-            android:textSize="@dimen/regulartextsize"
-            android:layout_weight="1"
-            />
-        <TextView
-            android:id="@+id/date_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="02_08_2019"
-            android:fontFamily="@font/montserrat"
-            android:textSize="@dimen/regulartextsize"
-            android:layout_weight="1"
-            />
-        <TextView
-            android:id="@+id/time_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="07:00PM"
-            android:fontFamily="@font/montserrat"
-            android:textSize="@dimen/regulartextsize"
-            android:layout_weight="1"
-            />
-    </LinearLayout>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/useraddress_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="#16/1 Surebot Technology"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:fontFamily="@font/montserrat"
-            android:textSize="@dimen/regulartextsize"
-            />
+            android:text="#16/1 Surebot Technology"
+            android:textSize="@dimen/regulartextsize" />
 
         <TextView
             android:id="@+id/userphonenumber_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="123443567"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:fontFamily="@font/montserrat"
-            android:textSize="@dimen/regulartextsize"
-            />
+            android:text="123443567"
+            android:textSize="@dimen/regulartextsize" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         >
+
         <TextView
             android:id="@+id/userservices_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Facial,Hair Cut"
-            android:fontFamily="@font/montserrat"
-            android:textSize="@dimen/regulartextsize"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:layout_weight="1"
-            />
+            android:fontFamily="@font/montserrat"
+            android:text="Facial,Hair Cut"
+            android:textSize="@dimen/regulartextsize" />
 
         <TextView
             android:id="@+id/moreheader_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="More"
+            android:layout_marginTop="5dp"
             android:fontFamily="@font/montserrat"
+            android:text="More"
             android:textColor="@color/color_blue"
-            android:textSize="@dimen/regulartextsize"
 
-            />
+            android:textSize="@dimen/regulartextsize" />
 
 
 
     </LinearLayout>
+
         <LinearLayout
             android:id="@+id/map_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="gone"
-            >
-        <ImageView
-            android:id="@+id/map_iamge"
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            android:src="@mipmap/mapimage"
-            />
-            <RelativeLayout
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/map_iamge"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="30dp"
-                >
+                android:layout_height="100dp"
+                android:src="@mipmap/mapimage" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
                 <Button
                     android:id="@+id/cancel_button"
-                    android:layout_width="140dp"
-                    android:layout_height="50dp"
-                    android:text="Cancel"
-                    android:textColor="@color/color_white"
-                    android:textAllCaps="false"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="start|left"
-                    android:textSize="@dimen/regulartextsize"
-                    android:fontFamily="@font/montserrat_bold"
+                    android:layout_marginTop="8dp"
                     android:background="@drawable/cancelbutton_background"
-                    android:layout_marginRight="5dp"
-                    />
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="Cancel"
+                    android:textAllCaps="false"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/regulartextsize"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
                     android:id="@+id/startservice_button"
-                    android:layout_width="140dp"
-                    android:layout_height="50dp"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="right|end"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
                     android:background="@drawable/buttongreen_background"
                     android:fontFamily="@font/montserrat_bold"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
                     android:text="Start Service"
                     android:textAllCaps="false"
                     android:textColor="@color/color_white"
                     android:textSize="@dimen/regulartextsize"
-                    android:layout_alignParentRight="true"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
-                    android:layout_marginLeft="5dp"
-                    />
-            </RelativeLayout>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/cancel_button"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <ImageView
-            android:id="@+id/slide_iamge"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:src="@mipmap/mapimage"
-            android:layout_gravity="end"
-            android:visibility="gone"
-            />
+            <ImageView
+                android:id="@+id/slide_iamge"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="end"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/collapse"
+                android:visibility="gone" />
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

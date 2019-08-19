@@ -21,16 +21,20 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 
 import service.com.surebot.info.serviceperson.R;
+import service.com.surebot.info.serviceperson.ResponseClass.Category_List_Response;
 
-public class SignupProfessional_Adapter extends ArrayAdapter<String> {
-    ArrayList<String> gsignupspinner_Arraylist;
+public class SignupProfessional_Adapter extends ArrayAdapter<Category_List_Response.Category_List_Records> {
+
+
+    ArrayList<Category_List_Response.Category_List_Records> gsignupspinner_Arraylist;
     Context context;
 
-    public SignupProfessional_Adapter(Context context, int txtViewResourceId, ArrayList<String> gsignupspinner_Arraylist) {
+    public SignupProfessional_Adapter(Context context, int txtViewResourceId, ArrayList<Category_List_Response.Category_List_Records> gsignupspinner_Arraylist) {
+        super(context,txtViewResourceId,gsignupspinner_Arraylist);
 
-        super(context, txtViewResourceId, gsignupspinner_Arraylist);
         this.gsignupspinner_Arraylist = gsignupspinner_Arraylist;
         this.context = context;
+
     }
 
     @Override
@@ -49,7 +53,7 @@ public class SignupProfessional_Adapter extends ArrayAdapter<String> {
         // LayoutInflater inflater =ctx.getLayoutInflater();
         View mySpinner = inflater.inflate(R.layout.professionselection_layout, parent, false);
         TextView Professional_text = (TextView) mySpinner.findViewById(R.id.professional_text);
-        Professional_text.setText(gsignupspinner_Arraylist.get(position).toString());
+        Professional_text.setText(gsignupspinner_Arraylist.get(position).getCategory_Name());
 
         return mySpinner;
     }

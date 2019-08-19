@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -17,7 +18,7 @@
         android:padding="10dp"
         >
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -27,58 +28,77 @@
                 android:id="@+id/username_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Name"
-                android:fontFamily="@font/montserrat"
-                android:textSize="@dimen/regulartextsize"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:layout_weight="1"
-                />
+                android:fontFamily="@font/montserrat"
+                android:text="Name"
+                android:textSize="@dimen/regulartextsize"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/date_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="02_08_2019"
-                android:fontFamily="@font/montserrat"
-                android:textSize="@dimen/regulartextsize"
+                android:layout_marginEnd="8dp"
                 android:layout_weight="1"
-                />
+                android:fontFamily="@font/montserrat"
+                android:text="02_08_2019"
+                android:textSize="@dimen/regulartextsize"
+                app:layout_constraintBottom_toBottomOf="@+id/time_text"
+                app:layout_constraintEnd_toStartOf="@+id/time_text"
+                app:layout_constraintTop_toTopOf="@+id/time_text" />
+
             <TextView
                 android:id="@+id/time_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="07:00PM"
-                android:fontFamily="@font/montserrat"
-                android:textSize="@dimen/regulartextsize"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
                 android:layout_weight="1"
-                />
-        </LinearLayout>
+                android:fontFamily="@font/montserrat"
+                android:gravity="right"
+                android:text="07:00PM"
+                android:textSize="@dimen/regulartextsize"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <TextView
             android:id="@+id/useraddress_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="#16/1 Surebot Technology"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:fontFamily="@font/montserrat"
-            android:textSize="@dimen/regulartextsize"
-            />
+            android:text="#16/1 Surebot Technology"
+            android:textSize="@dimen/regulartextsize" />
 
 
         <TextView
             android:id="@+id/userphonenumber_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="123443567"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:fontFamily="@font/montserrat"
-            android:textSize="@dimen/regulartextsize"
-            />
+            android:text="123443567"
+            android:textSize="@dimen/regulartextsize" />
 
         <TextView
             android:id="@+id/userservices_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Facial,Hair Cut"
-            android:fontFamily="@font/montserrat"
-            android:textSize="@dimen/regulartextsize"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:layout_weight="1"
-            />
+            android:fontFamily="@font/montserrat"
+            android:text="Facial,Hair Cut"
+            android:textSize="@dimen/regulartextsize" />
 
     </LinearLayout>
 

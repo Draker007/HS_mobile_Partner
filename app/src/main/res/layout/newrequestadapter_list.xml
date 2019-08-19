@@ -30,20 +30,23 @@
                 android:id="@+id/username_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nidhi"
-                android:fontFamily="@font/montserrat"
-                android:textSize="@dimen/regulartextsize"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:layout_weight="1"
-                />
+                android:fontFamily="@font/montserrat"
+                android:text="Nidhi"
+                android:textSize="@dimen/regulartextsize" />
 
             <TextView
                 android:id="@+id/date_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="05-08-2019"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:fontFamily="@font/montserrat"
-                android:textSize="@dimen/regulartextsize"
-                />
+                android:text="05-08-2019"
+                android:textSize="@dimen/regulartextsize" />
         </LinearLayout>
 
         <LinearLayout
@@ -57,29 +60,35 @@
                 android:id="@+id/useraddress_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="#16/1 Surebot Technology"
-                android:fontFamily="@font/montserrat"
-                android:textSize="@dimen/regulartextsize"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:layout_weight="1"
-                />
+                android:fontFamily="@font/montserrat"
+                android:text="#16/1 Surebot Technology"
+                android:textSize="@dimen/regulartextsize" />
 
             <TextView
                 android:id="@+id/time_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="03:00PM"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:fontFamily="@font/montserrat"
-                android:textSize="@dimen/regulartextsize"
-                />
+                android:text="03:00PM"
+                android:textSize="@dimen/regulartextsize" />
         </LinearLayout>
+
         <TextView
             android:id="@+id/userphonenumber_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="99008877665"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:fontFamily="@font/montserrat"
-            android:textSize="@dimen/regulartextsize"
-            />
+            android:text="99008877665"
+            android:textSize="@dimen/regulartextsize" />
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="wrap_content"
             android:layout_marginLeft="10dp"
@@ -96,13 +105,13 @@
             android:id="@+id/quotesend_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/qoutewillsend"
-            android:fontFamily="@font/montserrat"
-            android:textSize="@dimen/regulartextsize"
             android:layout_gravity="center"
+            android:layout_margin="20dp"
             android:layout_marginTop="20dp"
+            android:fontFamily="@font/montserrat"
+            android:text="@string/qoutewillsend"
             android:textColor="@color/color_green"
-            />
+            android:textSize="@dimen/regulartextsize" />
 
         <RelativeLayout
             android:layout_width="wrap_content"

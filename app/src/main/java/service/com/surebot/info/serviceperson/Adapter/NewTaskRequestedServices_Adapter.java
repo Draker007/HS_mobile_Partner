@@ -24,9 +24,15 @@ public class NewTaskRequestedServices_Adapter extends RecyclerView.Adapter<NewTa
     Context context;
     ArrayList<String> gservices_List;
 
+    ArrayList<String> gSub_services_List = new ArrayList<>();
+
     public NewTaskRequestedServices_Adapter(Context context,   ArrayList<String> gservices_List) {
         this.context=context;
         this.gservices_List=gservices_List;
+
+        gSub_services_List.add("sara fruite cleanup");
+        gSub_services_List.add("hair cut");
+        gSub_services_List.add("upperlip");
     }
 
     @NonNull
@@ -40,8 +46,13 @@ public class NewTaskRequestedServices_Adapter extends RecyclerView.Adapter<NewTa
     @SuppressLint({"ResourceAsColor", "WrongConstant"})
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, final int position) {
+        LinearLayoutManager llm = new LinearLayoutManager(context);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        myViewHolder.lSubservice_Recycler.setLayoutManager(llm);
 
-        myViewHolder.lSubservicename_text.setText(gservices_List.get(position).toString());
+        NewTaskSubServicesList_Adapter lNewTaskSubServicesList_Adapter = new NewTaskSubServicesList_Adapter(context,gSub_services_List);
+        myViewHolder.lSubservice_Recycler.setAdapter(lNewTaskSubServicesList_Adapter);
+
 
     }
 
@@ -53,6 +64,7 @@ public class NewTaskRequestedServices_Adapter extends RecyclerView.Adapter<NewTa
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView lSubservicename_text;
         EditText lQuantity_Text;
+        RecyclerView lSubservice_Recycler;
 
 
         public MyViewHolder(@NonNull View itemView) {
@@ -60,7 +72,7 @@ public class NewTaskRequestedServices_Adapter extends RecyclerView.Adapter<NewTa
 
             lSubservicename_text=itemView.findViewById(R.id.subservicename_text);
             lQuantity_Text=itemView.findViewById(R.id.quantity_text);
-
+            lSubservice_Recycler =itemView.findViewById(R.id.subservice_Recycler);
 
 
 

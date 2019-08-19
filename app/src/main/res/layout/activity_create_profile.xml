@@ -5,34 +5,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.CreateProfileActivity">
+
     <LinearLayout
         android:id="@+id/header_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_height="70dp"
         android:background="@color/color_blackforheader"
-        >
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/ordersetails_header"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="To be filled"
-            android:textColor="@color/color_white"
-            android:textSize="@dimen/headertextsize"
+            android:layout_height="match_parent"
             android:fontFamily="@font/montserrat_bold"
             android:gravity="center"
             android:padding="10dp"
+            android:text="To be filled"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/headertextsize"
 
             />
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="25dp"
-            android:layout_height="30dp"
-            android:layout_gravity="end"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@mipmap/home_notification">
-        </androidx.appcompat.widget.AppCompatImageView>
 
     </LinearLayout>
 <RelativeLayout
@@ -43,87 +35,101 @@
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
     android:layout_below="@+id/header_layout">
+
     <androidx.cardview.widget.CardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/main_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        app:cardUseCompatPadding="true"
-        app:cardElevation="4dp"
-        app:cardCornerRadius="3dp"
-        android:id="@+id/main_layout"
-        >
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:layout_marginLeft="20dp"
-    android:layout_centerHorizontal="true"
-    >
-        <TextView
-            android:id="@+id/addressheader_text"
-            android:layout_width="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="5dp"
+        app:cardUseCompatPadding="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/color_black"
-            android:text="@string/tobefilled1"
-            android:textSize="@dimen/regulartextsize"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/montserrat"
-            android:layout_marginLeft="10dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
 
-            />
+            <TextView
+                android:id="@+id/addressheader_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/montserrat"
+                android:gravity="center"
+                android:text="@string/tobefilled1"
 
+                android:textColor="@color/color_black"
+                android:textSize="@dimen/regulartextsize"
+                app:layout_constraintStart_toStartOf="@+id/textView18"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/color_black"
-            android:text="@string/tobefilled2"
-            android:textSize="@dimen/regulartextsize"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/montserrat"
-            android:layout_marginLeft="10dp"
-            />
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/montserrat"
+                android:gravity="center"
+                android:text="@string/tobefilled3"
+                android:textColor="@color/color_black"
+                android:textSize="@dimen/regulartextsize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/montserrat"
+                android:gravity="center"
+                android:text="@string/tobefilled2"
+                android:textColor="@color/color_black"
+                android:textSize="@dimen/regulartextsize"
+                app:layout_constraintStart_toStartOf="@+id/textView20"
+                app:layout_constraintTop_toBottomOf="@+id/addressheader_text" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/color_black"
-            android:text="@string/tobefilled3"
-            android:textSize="@dimen/regulartextsize"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/montserrat"
-            android:layout_marginLeft="10dp"
-            />
+            <TextView
+                android:id="@+id/textView42"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/montserrat"
+                android:gravity="center"
+                android:text="@string/tobefilled4"
+                android:textColor="@color/color_black"
+                android:textSize="@dimen/regulartextsize"
+                app:layout_constraintStart_toStartOf="@+id/textView20"
+                app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/color_black"
-            android:text="@string/tobefilled4"
-            android:textSize="@dimen/regulartextsize"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/montserrat"
-            android:layout_marginLeft="10dp"
-            />
-
-    <Button
-        android:id="@+id/createprofile_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Create your profile"
-        android:textColor="@color/color_white"
-        android:background="@drawable/buttonblue_background"
-        android:padding="10dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="30dp"
-        android:textAllCaps="false"
-        android:layout_marginRight="20dp"
-        />
-</LinearLayout>
+            <Button
+                android:id="@+id/createprofile_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/buttonblue_background"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:text="Create your profile"
+                android:textAllCaps="false"
+                android:textColor="@color/color_white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView42" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </RelativeLayout>
 </RelativeLayout>
