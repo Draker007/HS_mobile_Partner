@@ -114,7 +114,7 @@ public class AccountDetailsActivity extends AppCompatActivity {
 
                         progress.dismiss();
                     }
-                    progress.dismiss();
+
 
 
                     @Override

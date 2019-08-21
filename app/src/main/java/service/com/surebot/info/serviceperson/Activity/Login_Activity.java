@@ -70,8 +70,8 @@ public class Login_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
-                if (!gUserName_Text.getText().toString().trim().equals("")) {
+                startActivity(new Intent(Login_Activity.this, ServicePersonHome_Activity.class));
+           /*     if (!gUserName_Text.getText().toString().trim().equals("")) {
                     if (isNumeric((gUserName_Text.getText().toString().trim()))) {
 
                         if ((gUserName_Text.getText().toString().trim().length() >= 8 && gUserName_Text.getText().toString().trim().length() <= 14)) {
@@ -120,7 +120,7 @@ public class Login_Activity extends AppCompatActivity {
                     gUserName_Text.setError("Enter Email");
                     gUserName_Text.requestFocus();
 
-                }
+                }*/
 
 
                 //
@@ -138,9 +138,11 @@ public class Login_Activity extends AppCompatActivity {
         });
 
     }
+
+    //Login
     private void servicePerson_Login() {
         try {
-            progress.show();
+
             OkHttpClient.Builder client = new OkHttpClient.Builder();
             HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
             registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -154,7 +156,6 @@ public class Login_Activity extends AppCompatActivity {
 
             ApiInterface request = retrofit.create(ApiInterface.class);
             Partnerlogin_Request partnerLandingPage = new Partnerlogin_Request();
-//            // lbannerimage_request.getUserLandingRequest().setUserid("1");
             partnerLandingPage.setEmail(gUserName_Text.getText().toString());
             partnerLandingPage.setPassword(gUserPassword_Text.getText().toString());
             partnerLandingPage.setDocket(Constants.TOKEN);

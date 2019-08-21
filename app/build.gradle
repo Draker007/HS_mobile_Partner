@@ -16,6 +16,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -26,6 +27,10 @@ android {
 
     repositories {
         maven { url "https://jitpack.io" }
+    }
+
+    configurations{
+        all*.exclude group: 'com.google.guava', module: 'listenablefuture'
     }
 }
 
@@ -64,4 +69,14 @@ dependencies {
 
     implementation 'org.mightyfrog.centeringrecyclerview:centeringrecyclerview:1.1.8'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+    implementation 'com.google.android.gms:play-services-places:17.0.0'
+    implementation 'com.google.android.libraries.places:places:1.1.0'
+
+
+
+
+
 }
+apply plugin: 'com.google.gms.google-services'

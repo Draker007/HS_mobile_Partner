@@ -340,7 +340,7 @@ public class SignUp_Activity extends AppCompatActivity {
             HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
             registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             client.addInterceptor(registrationInterceptor);
-
+System.out.println("Signup entering into 111111111");
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(Constants.BASE_URL)
                     .client(client.build())
@@ -349,9 +349,9 @@ public class SignUp_Activity extends AppCompatActivity {
 
             ApiInterface request = retrofit.create(ApiInterface.class);
             Category_List_Request partnerLandingPage = new Category_List_Request();
-//            // lbannerimage_request.getUserLandingRequest().setUserid("1");
-            partnerLandingPage.setDocket(Constants.TOKEN);
 
+            partnerLandingPage.setDocket(Constants.TOKEN);
+            System.out.println("Signup entering into 22222");
             Call<Category_List_Response> call = request.categoryList(partnerLandingPage);
             call.enqueue(new Callback<Category_List_Response>() {
 
@@ -359,7 +359,7 @@ public class SignUp_Activity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<Category_List_Response> call, Response<Category_List_Response> response) {
                     if (response.isSuccessful()) {
-
+                        System.out.println("Signup entering into 3333333333");
 
                         Category_List_Response responseed = response.body();
                         categoryList_Arraylist=new ArrayList<>(Arrays.asList(responseed.getCategory_response()));
@@ -372,11 +372,11 @@ public class SignUp_Activity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<Category_List_Response> call, Throwable t) {
-                    System.out.println("In User Login Method 7");
+                    System.out.println("Signup entering into 444444");
                 }
             });
         }catch (Exception e) {
-
+            System.out.println("Signup entering into 55555");
             e.printStackTrace();
 
 

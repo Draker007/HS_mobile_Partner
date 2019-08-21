@@ -10,6 +10,7 @@ import service.com.surebot.info.serviceperson.RequestClass.ChangePasswordRequest
 import service.com.surebot.info.serviceperson.RequestClass.DeleteProfilePicRequest;
 import service.com.surebot.info.serviceperson.RequestClass.ListOfServices_Request;
 import service.com.surebot.info.serviceperson.RequestClass.ListOfSubServices_Request;
+import service.com.surebot.info.serviceperson.RequestClass.NewRequestList_Request;
 import service.com.surebot.info.serviceperson.RequestClass.PartnerProfileRequest;
 import service.com.surebot.info.serviceperson.RequestClass.PartnerSigup_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Partnerlogin_Request;
@@ -24,6 +25,7 @@ import service.com.surebot.info.serviceperson.ResponseClass.EditPersonalPhotoRes
 import service.com.surebot.info.serviceperson.ResponseClass.Identity_verification_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.ListOfServices_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.ListOfSubServices_Response;
+import service.com.surebot.info.serviceperson.ResponseClass.NewRequestList_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.PartnerProfileResponse;
 import service.com.surebot.info.serviceperson.ResponseClass.PartnerSignup_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Partnerlogin_Response;
@@ -78,5 +80,12 @@ public interface ApiInterface {
 
     @POST("identity_verification_upload_image")
     Call<Identity_verification_Response>  IdentityVerif  (@Body RequestBody Identity);
+
+    //4 Request Lists
+
+    //New Request Lists
+
+    @POST("services_requests_new")
+    Call<NewRequestList_Response>  get_NewServiceRequestList  (@Body NewRequestList_Request request);
 
 }
