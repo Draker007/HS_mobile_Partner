@@ -2,6 +2,7 @@ package service.com.surebot.info.serviceperson.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,7 @@ public class AddServicesList_Adapter extends RecyclerView.Adapter<AddServicesLis
     Context context;
     ArrayList<ListOfServices_Response.ListOfServices_Records> gServicesList_Arraylist;
 
-    private  int lastItemClicked = -1;
+    private  int lastItemClicked = 0;
 
     serviceslist_Communicator Communicator;
 

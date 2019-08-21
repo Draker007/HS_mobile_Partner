@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,7 +26,9 @@ import service.com.surebot.info.serviceperson.ApiClient.ApiInterface;
 import service.com.surebot.info.serviceperson.Constants.Constants;
 import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.RequestClass.Account_details_Request;
+import service.com.surebot.info.serviceperson.RequestClass.Add_account_details_Request;
 import service.com.surebot.info.serviceperson.ResponseClass.Account_details_Response;
+import service.com.surebot.info.serviceperson.ResponseClass.Add_account_details_Response;
 import service.com.surebot.info.serviceperson.utils.AppicationClass;
 
 public class AccountDetailsActivity extends AppCompatActivity {
@@ -65,6 +69,35 @@ public class AccountDetailsActivity extends AppCompatActivity {
         //here we set layout of progress dialog
         progress.setContentView(R.layout.progressbar_background);
         progress.setCancelable(true);
+        btnConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!gbnkName.getText().toString().trim().isEmpty()){
+                    if (!gbnkBranchName.getText().toString().trim().isEmpty()){
+                        if (!gAccHolderName.getText().toString().trim().isEmpty()){
+                            if (!gAccNumber.getText().toString().trim().isEmpty()) {
+                                if (!gAccIFSCcode.getText().toString().trim().isEmpty()) {
+                                    setAccountDetails();
+                                }else {
+                                    gAccIFSCcode.setError("Fill IFSC Code");
+                                    gAccIFSCcode.requestFocus();
+                                }
+                            }else {
+                                gAccNumber.setError("Fill Account Number");
+                                gAccNumber.requestFocus();
+                            }}else {
+                            gAccHolderName.setError("Fill Account Holder Name");
+                            gAccHolderName.requestFocus();
+                        }}
+                    else {
+                        gbnkBranchName.setError("Fill Branch Name");
+                        gbnkBranchName.requestFocus();
+                    }}else {
+                    gbnkName.setError("Fill Branch Name");
+                    gbnkName.requestFocus();
+                }
+            }
+        });
 
     }
 
@@ -133,4 +166,65 @@ public class AccountDetailsActivity extends AppCompatActivity {
 
 
         }
+
+
+    public void setAccountDetails(){
+        try {
+            System.out.println("In User Login Method 1");
+            progress.show();
+            OkHttpClient.Builder client = new OkHttpClient.Builder();
+            HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
+            registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            client.addInterceptor(registrationInterceptor);
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl("http://192.168.0.82/services_at_home/Api")
+                    .client(client.build())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            System.out.println("In User Login Method 2");
+            ApiInterface request = retrofit.create(ApiInterface.class);
+            Add_account_details_Request lservice_request = new Add_account_details_Request ();
+
+
+            lservice_request.setUser_ID(AppicationClass.getUserId_FromLogin());
+            lservice_request.setDocket(Constants.TOKEN);
+            lservice_request.setAccount_Number(gAccNumber.getText().toString());
+            lservice_request.setAccount_Holder_Name(gAccHolderName.getText().toString());
+            lservice_request.setBank_Branch_Name(gbnkBranchName.getText().toString());
+            lservice_request.setBank_Name(gbnkName.getText().toString());
+            lservice_request.setIFSC_Code(gAccIFSCcode.getText().toString());
+
+            Call<Add_account_details_Response> call = request.Add_account_details(lservice_request);
+            call.enqueue(new Callback<Add_account_details_Response>() {
+                @Override
+                public void onResponse(Call<Add_account_details_Response> call, Response<Add_account_details_Response> response) {
+                    if (response.isSuccessful()) {
+
+                        Add_account_details_Response account_details_response = response.body();
+                        Toast.makeText(AccountDetailsActivity.this, "Updated Account Details ", Toast.LENGTH_SHORT).show();
+                        //TODO setup response
+                    }
+
+                    progress.dismiss();
+                }
+
+
+
+                @Override
+                public void onFailure(Call<Add_account_details_Response> call, Throwable t) {
+                    System.out.println("In User Login Method 7");
+                    progress.dismiss();
+                }
+            });
+        }
+        catch (Exception e) {
+            System.out.println("In User Login Method 8");
+            e.printStackTrace();
+            //progress.dismiss();
+
+        }
+
+
+    }
 }

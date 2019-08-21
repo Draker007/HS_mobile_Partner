@@ -70,64 +70,64 @@ public class AboutMeActivity extends AppCompatActivity {
     }
 
     private void getAboutmeData() {
-        try {
-            System.out.println("In User Login Method 1");
-            progress.show();
-            OkHttpClient.Builder client = new OkHttpClient.Builder();
-            HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
-            registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-            client.addInterceptor(registrationInterceptor);
+            try {
+                System.out.println("In User Login Method 1");
+                progress.show();
+                OkHttpClient.Builder client = new OkHttpClient.Builder();
+                HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
+                registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+                client.addInterceptor(registrationInterceptor);
 
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(Constants.BASE_URL)
-                    .client(client.build())
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-            System.out.println("In User Login Method 2");
-            ApiInterface request = retrofit.create(ApiInterface.class);
-            About_me_Request lservice_request = new About_me_Request();
-
-
-            lservice_request.setUser_ID(AppicationClass.getUserId_FromLogin());
-            lservice_request.setDocket(Constants.TOKEN);
+                Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl(Constants.BASE_URL)
+                        .client(client.build())
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+                System.out.println("In User Login Method 2");
+                ApiInterface request = retrofit.create(ApiInterface.class);
+                About_me_Request lservice_request = new About_me_Request();
 
 
-            Call<About_me_Response> call = request.getAboutme(lservice_request);
-            call.enqueue(new Callback<About_me_Response>() {
-                @Override
-                public void onResponse(Call<About_me_Response> call, Response<About_me_Response> response) {
-                    if (response.isSuccessful()) {
+                lservice_request.setUser_ID(AppicationClass.getUserId_FromLogin());
+                lservice_request.setDocket(Constants.TOKEN);
 
-                        About_me_Response aboutme_response = response.body();
 
-                        about_me_Response =new ArrayList<>(Arrays.asList(aboutme_response.getAbout_me_response()));
-                        if(!about_me_Response.get(0).getAbout_ID().equals("Invalid")){
-                            experience.setText(about_me_Response.get(0).getExperience());
-                            intro.setText(about_me_Response.get(0).getIntroduction());
-                            //TODO have to set for No of time hired
+                Call<About_me_Response> call = request.getAboutme(lservice_request);
+                call.enqueue(new Callback<About_me_Response>() {
+                    @Override
+                    public void onResponse(Call<About_me_Response> call, Response<About_me_Response> response) {
+                        if (response.isSuccessful()) {
+
+                            About_me_Response aboutme_response = response.body();
+
+                            about_me_Response =new ArrayList<>(Arrays.asList(aboutme_response.getAbout_me_response()));
+                            if(!about_me_Response.get(0).getAbout_ID().equals("Invalid")){
+                                experience.setText(about_me_Response.get(0).getExperience());
+                                intro.setText(about_me_Response.get(0).getIntroduction());
+                                //TODO have to set for No of time hired
+                            }
+
+
+                           }
+
+
+                            progress.dismiss();
                         }
 
 
-                       }
 
-
-                        progress.dismiss();
+                    @Override
+                    public void onFailure(Call<About_me_Response> call, Throwable t) {
+                        System.out.println("In User Login Method 7");
+                         progress.dismiss();
                     }
+                });
+            }
+            catch (Exception e) {
+            System.out.println("In User Login Method 8");
+            e.printStackTrace();
+            progress.dismiss();
 
-
-
-                @Override
-                public void onFailure(Call<About_me_Response> call, Throwable t) {
-                    System.out.println("In User Login Method 7");
-                     progress.dismiss();
-                }
-            });
         }
-        catch (Exception e) {
-        System.out.println("In User Login Method 8");
-        e.printStackTrace();
-        progress.dismiss();
-
-    }
     }
 }

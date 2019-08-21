@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,11 +33,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import service.com.surebot.info.serviceperson.Activity.AboutMeActivity;
 import service.com.surebot.info.serviceperson.Activity.AccountDetailsActivity;
 import service.com.surebot.info.serviceperson.Activity.IdentityVerificationActivity;
-import service.com.surebot.info.serviceperson.Activity.PaymentActivity;
 import service.com.surebot.info.serviceperson.Activity.PersonalDetailView;
 import service.com.surebot.info.serviceperson.Activity.PrimePartnerActivity;
-import service.com.surebot.info.serviceperson.Activity.awardsActivity;
-import service.com.surebot.info.serviceperson.Activity.serviceDetailsActivity;
+import service.com.surebot.info.serviceperson.Activity.AwardsAndCertificateActivity;
 import service.com.surebot.info.serviceperson.ApiClient.ApiInterface;
 import service.com.surebot.info.serviceperson.Constants.Constants;
 import service.com.surebot.info.serviceperson.DataFiles.awardsData;
@@ -46,8 +43,6 @@ import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.RequestClass.PartnerProfileRequest;
 import service.com.surebot.info.serviceperson.ResponseClass.PartnerProfileResponse;
 import service.com.surebot.info.serviceperson.utils.AppicationClass;
-
-import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class Profile_Fragment extends Fragment {
 View v;
@@ -165,7 +160,7 @@ View v;
         awards.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), awardsActivity.class));
+                startActivity(new Intent(getActivity(), AwardsAndCertificateActivity.class));
             }
         });
         accDetails.setOnClickListener(new View.OnClickListener() {

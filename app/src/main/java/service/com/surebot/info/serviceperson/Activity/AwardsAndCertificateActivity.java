@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -26,39 +27,56 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import service.com.surebot.info.serviceperson.Adapter.awardsAdapter;
+import service.com.surebot.info.serviceperson.ApiClient.ApiInterface;
+import service.com.surebot.info.serviceperson.Constants.Constants;
 import service.com.surebot.info.serviceperson.DataFiles.awardsData;
 import service.com.surebot.info.serviceperson.R;
+import service.com.surebot.info.serviceperson.ResponseClass.Awards_and_CertificateResponse;
+import service.com.surebot.info.serviceperson.utils.AppicationClass;
 
-public class awardsActivity extends AppCompatActivity implements awardsAdapter.onAwardsListner {
+public class AwardsAndCertificateActivity extends AppCompatActivity implements awardsAdapter.onAwardsListner {
 
     ImageView camera,gallery;
     RecyclerView r1;
     Button save;
+
     awardsAdapter adapter,adapter2;
     int i=0;
     List<awardsData> awardsDatas2 = new ArrayList<>();
     List<awardsData> awardsDatas = new ArrayList<>();
     List<String> Awards = new ArrayList<>();
     ArrayList<String>AwardsUP=new ArrayList<>();
+    ImageView back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_awards);
-      //  r2=findViewById(R.id.awardRecycler2);
         camera = findViewById(R.id.AwardCamera);
         gallery = findViewById(R.id.AwardGallery);
         r1=findViewById(R.id.awardRecycler1);
         save = findViewById(R.id.AwardSave);
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(awardsActivity.this,2);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(AwardsAndCertificateActivity.this,2);
         r1.setLayoutManager(layoutManager);
         adapter = new awardsAdapter(awardsDatas,this);
-
-      //  RecyclerView.LayoutManager layoutManager1 = new LinearLayoutManager(getApplicationContext());
-//        r2.setLayoutManager(layoutManager1);
-//        adapter2 = new awardsAdapter(awardsDatas2,this);
-//        r2.setAdapter(adapter2);
+        back = findViewById(R.id.AwardsBack);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
         camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,19 +97,98 @@ public class awardsActivity extends AppCompatActivity implements awardsAdapter.o
           @Override
           public void onClick(View view) {
               awardsDatas2 = adapter.retrieveData();
-              for (int j = 0; j < Awards.size(); j++) {
-                  Log.e("lol", "onClick: "+Awards.get(j) );
-                  AwardsUP.add(Awards.get(j));
-                  if (awardsDatas2.get(j).getText() == null) {
-                      AwardsUP.add(" ");
-                  } else AwardsUP.add(awardsDatas2.get(i).getText());
-              }
-              Log.e("lol", "onCreate: "+AwardsUP );
+              if(Awards.isEmpty()){
+                  Toast.makeText(AwardsAndCertificateActivity.this, "Select Image or click picture", Toast.LENGTH_SHORT).show();
+              }else{
+                  Log.e("Draker", "onClick: "+Awards.size());
+
+              Log.e("lol", "onCreate: "+awardsDatas2.get(0).getText() );
               //TODO have to clean Array List AwardUP after calling upload api
+              award_and_certificate_photos_API();
+
+
+          }
           }
 
-
       });
+    }
+
+    private void award_and_certificate_photos_API() {
+        try {
+
+            //progress.show();
+            MultipartBody.Builder builder = new MultipartBody.Builder();
+            builder.setType(MultipartBody.FORM);
+
+            OkHttpClient.Builder client = new OkHttpClient.Builder();
+            HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
+            registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            client.addInterceptor(registrationInterceptor);
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(Constants.BASE_URL)
+                    .client(client.build())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+
+            ApiInterface request = retrofit.create(ApiInterface.class);
+
+            builder.addFormDataPart("User_ID", "68");
+
+            builder.addFormDataPart("docket",Constants.TOKEN);
+
+            Log.e("draker", "award_and_certificate_photos_API: "+awardsDatas2 );
+        for(int o = 0;o<Awards.size();o++){
+
+            File AddressFront = new File(Awards.get(o));
+//                AddressFront.getName().replace(" ", "s");
+            //Log.e("Draker", "IdentityVeriafy: 1"+AddressFront );
+            Log.e("Draker", "IdentityVerify: 1"+awardsDatas2 );
+            builder.addFormDataPart("FirstImage[]", AddressFront.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), AddressFront));
+if(awardsDatas2.get(o).getText()==null){
+    builder.addFormDataPart("Document_Description[]","");
+}else {
+    builder.addFormDataPart("Document_Description[]", awardsDatas2.get(o).getText());
+}       }
+            MultipartBody requestBody = builder.build();
+            Call<Awards_and_CertificateResponse> call = request.AwardsAndCertificate(requestBody);
+            call.enqueue(new Callback<Awards_and_CertificateResponse>() {
+                @Override
+                public void onResponse(Call<Awards_and_CertificateResponse> call, Response<Awards_and_CertificateResponse> response) {
+
+                    if (response.isSuccessful()) {
+                        Log.e("Draker", "onResponse: 1" );
+                        Awards_and_CertificateResponse lResponse = response.body();
+                   if(lResponse.getAward_cerificate_photo_response().equals("valid")){
+                            Log.e("Draker", "onResponse: 1" );
+                            System.out.println("Place order entering into method valid");
+                            Toast.makeText(AwardsAndCertificateActivity.this, "Awards and Certificate updated successfully", Toast.LENGTH_SHORT).show();
+
+                        }
+                        //progress.dismiss();
+                    }
+
+                 //   progress.dismiss();
+                }
+
+                @Override
+                public void onFailure(Call<Awards_and_CertificateResponse> call, Throwable t) {
+                    Log.e("Draker", "onFailed: 1" +t);
+                    //   progress.dismiss();
+                }
+            });
+
+
+
+        }
+
+        catch (Exception e){
+
+            //progress.dismiss();
+            Log.e("draker", "addPersonaldetailsAPI: "+e );
+            e.printStackTrace();
+        }
+
     }
 
 
@@ -134,37 +231,11 @@ public class awardsActivity extends AppCompatActivity implements awardsAdapter.o
 //                    if(i==0) {
 
 
-                    Awards.add(f.toString());
+                    Awards.add(f.getPath());
                     awardsData a = new awardsData(thumbnail);
                         awardsDatas.add(a);
                         r1.setAdapter(adapter);
-//                            i=1;
-//                    }else{
-//                        awardsData a = new awardsData(thumbnail);
-//                        awardsDatas2.add(a);
-//                        r2.setAdapter(adapter2);
-//                        i=0;
-//                    }
 
-                    String path = android.os.Environment
-                            .getExternalStorageDirectory()
-                            + File.separator
-                            + "Phoenix" + File.separator + "default";
-                    f.delete();
-                    OutputStream outFile = null;
-                    File file = new File(path, String.valueOf(System.currentTimeMillis()) + ".jpg");
-                    try {
-                        outFile = new FileOutputStream(file);
-
-                        outFile.flush();
-                        outFile.close();
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

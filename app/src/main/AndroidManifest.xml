@@ -49,7 +49,7 @@
         <activity android:name=".Activity.IdentityVerificationActivity" />
         <activity android:name=".Activity.congratsActivity" />
         <activity android:name=".Activity.PrimePartnerActivity" />
-        <activity android:name=".Activity.awardsActivity" />
+        <activity android:name=".Activity.AwardsAndCertificateActivity" />
         <activity android:name=".Activity.PaymentActivity" />
         <activity android:name=".Activity.changePasswordActivity" />
         <activity android:name=".Activity.Login_Activity" > <intent-filter>

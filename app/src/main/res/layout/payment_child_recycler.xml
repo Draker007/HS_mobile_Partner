@@ -21,14 +21,11 @@
 
     <TextView
         android:id="@+id/payServiceDesc"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         android:text="TextView"
         app:fontFamily="@font/montserrat"
-        app:layout_constraintEnd_toStartOf="@+id/textView63"
         app:layout_constraintStart_toStartOf="@+id/PayService"
         app:layout_constraintTop_toBottomOf="@+id/PayService" />
 
@@ -37,8 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:text="TextView"
+        android:text="100"
         android:textColor="@color/color_black"
         android:textSize="16sp"
         app:fontFamily="@font/montserrat"
@@ -58,4 +54,14 @@
         app:layout_constraintBottom_toBottomOf="@+id/payServiceDesc"
         app:layout_constraintEnd_toStartOf="@+id/PayServiceCharge"
         app:layout_constraintTop_toTopOf="@+id/PayService" />
+
+    <TextView
+        android:id="@+id/subServiceqty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="(2)"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/payServiceDesc"
+        app:layout_constraintTop_toTopOf="@+id/payServiceDesc" />
 </androidx.constraintlayout.widget.ConstraintLayout>

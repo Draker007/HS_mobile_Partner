@@ -143,6 +143,8 @@ public class Login_Activity extends AppCompatActivity {
     private void servicePerson_Login() {
         try {
 
+            //progress.show();
+
             OkHttpClient.Builder client = new OkHttpClient.Builder();
             HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
             registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -184,7 +186,7 @@ public class Login_Activity extends AppCompatActivity {
                                 editer.putString("User_Name", partnerlogin_response.getUserName());
                                 editer.commit();
 
-                                startActivity(new Intent(Login_Activity.this, ServicePersonHome_Activity.class));
+                                startActivity(new Intent(Login_Activity.this, ServicesAdd_Activity.class));
                             }
                         } else{
 
