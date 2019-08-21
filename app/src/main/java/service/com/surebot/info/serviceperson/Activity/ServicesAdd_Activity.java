@@ -102,12 +102,12 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
 
 
 
-
+                        //For Service List
         gServicelayoutmanager = new LinearLayoutManager(ServicesAdd_Activity.this);
         gServicelayoutmanager.setOrientation(LinearLayoutManager.VERTICAL);
         gServiceslist_recyclerview.setLayoutManager(gServicelayoutmanager);
 
-
+                        //For Sub Service List
 
         gSub_Servicelayoutmanager = new LinearLayoutManager(ServicesAdd_Activity.this);
         gSub_Servicelayoutmanager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -127,7 +127,7 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
     }  //On Create close
 
 
-    //List Of Services
+    //List Of Services  c
     public  void service_List(){
         try{
             progress.show();
