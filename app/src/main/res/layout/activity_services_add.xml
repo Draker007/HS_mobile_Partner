@@ -14,17 +14,16 @@
         >
 
 
-
         <TextView
             android:id="@+id/myprofile_header"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Services"
-            android:textColor="@color/color_white"
-            android:textSize="@dimen/headertextsize"
+            android:layout_height="70dp"
             android:fontFamily="@font/montserrat_bold"
             android:gravity="center"
             android:padding="10dp"
+            android:text="Services"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/headertextsize"
 
             />
 
@@ -63,14 +62,14 @@
                 />
 
             <TextView
+                android:id="@+id/PrimaryService"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/montserrat"
                 android:text="@string/primaryservices"
                 android:textColor="@color/color_blue"
-                android:textSize="@dimen/regulartextsize"
-                android:fontFamily="@font/montserrat"
-                android:layout_marginLeft="20dp"
-                />
+                android:textSize="@dimen/regulartextsize" />
         </LinearLayout>
         <TextView
             android:layout_width="wrap_content"
@@ -97,11 +96,11 @@
                 />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
                 android:id="@+id/locationlist_recyclerview"
-                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_height="wrap_content">
+                android:layout_marginTop="20dp">
 
             </androidx.recyclerview.widget.RecyclerView>
 
@@ -111,12 +110,13 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             >
+
             <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="wrap_content"
                 android:id="@+id/serviceslist_recyclerview"
-                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_height="wrap_content">
+                android:layout_marginTop="20dp">
 
             </androidx.recyclerview.widget.RecyclerView>
 

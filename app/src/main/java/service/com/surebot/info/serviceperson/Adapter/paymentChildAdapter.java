@@ -14,9 +14,9 @@ import service.com.surebot.info.serviceperson.DataFiles.paymentChildData;
 import service.com.surebot.info.serviceperson.R;
 
 public class paymentChildAdapter extends RecyclerView.Adapter<paymentChildAdapter.MyViewHolder> {
-    List<paymentChildData> paymentChildDataList;
+    List<String> paymentChildDataList;
 
-    public paymentChildAdapter(List<paymentChildData> paymentChildDataList) {
+    public paymentChildAdapter(List<String> paymentChildDataList) {
         this.paymentChildDataList = paymentChildDataList;
     }
 
@@ -31,9 +31,10 @@ public class paymentChildAdapter extends RecyclerView.Adapter<paymentChildAdapte
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         paymentChildData a = paymentChildDataList.get(position);
-        holder.serviceCost.setText(a.getCost());
-        holder.serviceDesc.setText(a.getServiceDesc());
-        holder.serviceName.setText(a.getServiceName());
+        holder.serviceCost.setText();
+        holder.serviceDesc.setText();
+        holder.serviceName.setText();
+        holder.quntity.setText();
 
 
     }
@@ -44,14 +45,14 @@ public class paymentChildAdapter extends RecyclerView.Adapter<paymentChildAdapte
     }
 
     public static class  MyViewHolder extends  RecyclerView.ViewHolder{
-        TextView serviceName,serviceDesc,serviceCost;
+        TextView serviceName,serviceDesc,serviceCost,quntity;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             serviceName = itemView.findViewById(R.id.PayService);
             serviceDesc = itemView.findViewById(R.id.payServiceDesc);
             serviceCost =itemView.findViewById(R.id.PayServiceCharge);
-
+            quntity = itemView.findViewById(R.id.subServiceqty);
         }
     }
 }

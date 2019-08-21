@@ -107,6 +107,7 @@ public class AddPersonalDetailsActivity extends AppCompatActivity {
         //here we set layout of progress dialog
         progress.setContentView(R.layout.progressbar_background);
         progress.setCancelable(true);
+        images[1]=images[2]="0";
         requestMultiplePermissions();
         initialize();
         listner();
@@ -124,7 +125,11 @@ public class AddPersonalDetailsActivity extends AppCompatActivity {
                                 if (!gCity.getText().toString().trim().isEmpty()) {
                                     if (!gState.getText().toString().trim().isEmpty()) {
                                         if (!gPin.getText().toString().trim().isEmpty()) {
+                                           if(images[1].equals("0")){
+                                               Toast.makeText(AddPersonalDetailsActivity.this, "Upload Your Address Proof to Continue", Toast.LENGTH_SHORT).show();
+                                           }else{
                                             addPersonaldetailsAPI();
+                                           }
                                         } else {
                                             gPin.setError("Enter PinCode");
                                             gPin.requestFocus();
@@ -203,6 +208,7 @@ public class AddPersonalDetailsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 close1.setVisibility(View.GONE);
                 Glide.with(getApplicationContext()).load(R.drawable.image_border).into(frontproof);
+                images[1]="0";
                 j=2;
             }
         });
@@ -211,6 +217,7 @@ public class AddPersonalDetailsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 close2.setVisibility(View.GONE);
                 Glide.with(getApplicationContext()).load(R.drawable.image_border).into(backprof);
+                images[2]="0";
             }
         });
 
@@ -588,7 +595,7 @@ public class AddPersonalDetailsActivity extends AppCompatActivity {
 
                     progress.dismiss();
                 }
-                progress.dismiss();
+              //  progress.dismiss();
 
 
                 @Override

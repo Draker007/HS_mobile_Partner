@@ -38,8 +38,7 @@ public class awardsAdapter extends RecyclerView.Adapter<awardsAdapter.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         awardsData data = awardsDataList.get(position);
-        //setImage
-        //holder.Text.getText();
+
         holder.Image.setImageBitmap(data.getImage());
 
         holder.Text.addTextChangedListener(new TextWatcher() {
@@ -50,8 +49,9 @@ public class awardsAdapter extends RecyclerView.Adapter<awardsAdapter.MyViewHold
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            awardsDataList.get(position).setText(charSequence.toString());
-            }
+           if (charSequence!=null) {
+               awardsDataList.get(position).setText(charSequence.toString());
+           }}
 
             @Override
             public void afterTextChanged(Editable editable) {
@@ -70,14 +70,16 @@ public class awardsAdapter extends RecyclerView.Adapter<awardsAdapter.MyViewHold
 
     public static class  MyViewHolder extends  RecyclerView.ViewHolder implements View.OnClickListener{
 
-        ImageView Image;
+        ImageView close,Image;
         EditText Text;
+
         onAwardsListner onAwardsListner;
 
         public MyViewHolder(@NonNull View itemView, onAwardsListner onAwardsListner) {
             super(itemView);
             Image = itemView.findViewById(R.id.awardImage);
             Text = itemView.findViewById(R.id.awardText);
+            close = itemView.findViewById(R.id.AwardClose);
             this.onAwardsListner = onAwardsListner;
             itemView.setOnClickListener(this);
 

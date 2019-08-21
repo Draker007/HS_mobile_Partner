@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,8 +35,12 @@ import service.com.surebot.info.serviceperson.Constants.Constants;
 import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.RequestClass.ListOfServices_Request;
 import service.com.surebot.info.serviceperson.RequestClass.ListOfSubServices_Request;
+import service.com.surebot.info.serviceperson.RequestClass.Partner_package_Request;
+import service.com.surebot.info.serviceperson.RequestClass.Select_service_partner_Request;
 import service.com.surebot.info.serviceperson.ResponseClass.ListOfServices_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.ListOfSubServices_Response;
+import service.com.surebot.info.serviceperson.ResponseClass.Partner_package_Response;
+import service.com.surebot.info.serviceperson.ResponseClass.Select_service_partner_Response;
 
 public class ServicesAdd_Activity extends AppCompatActivity implements  AddServicesList_Adapter.serviceslist_Communicator {
 
@@ -44,6 +50,8 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
     @BindView(R.id.serviceslist_recyclerview)
     RecyclerView gServiceslist_recyclerview;
 
+    @BindView(R.id.PrimaryService)
+    TextView gPrimaryService;
 
     @BindView(R.id.subserviceslist_recyclerview)
     RecyclerView gSubserviceslist_recyclerview;
@@ -62,7 +70,7 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
 
     ArrayList<String> gAreaName_List;
     private Dialog progress;
-
+    ArrayList<String > location_City= new ArrayList<>();
     ArrayList<ListOfServices_Response.ListOfServices_Records> gServicesList_Arraylist;
 
     ArrayList<ListOfSubServices_Response.ListOfSubServices_Records> gSubServicesList_Arraylist;
@@ -84,19 +92,15 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
         progress.setCancelable(true);
 
         llm = new LinearLayoutManager(ServicesAdd_Activity.this);
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        llm.setOrientation(LinearLayoutManager.HORIZONTAL);
         gLocationlist_recyclerview.setLayoutManager(llm);
 
         gAreaName_List = new ArrayList<String>();
-        gAreaName_List.add("Indiranagar");
-        gAreaName_List.add("Vijayanagara");
-        gAreaName_List.add("Banashankari");
-        gAreaName_List.add("Rajaji Nagara");
+        //Calling API for Location City
+        location_list();
 
 
 
-        AddServicesLocationlist_Adapter lAddServicesLocationlist_Adapter = new AddServicesLocationlist_Adapter(ServicesAdd_Activity.this,gAreaName_List);
-        gLocationlist_recyclerview.setAdapter(lAddServicesLocationlist_Adapter);
 
 
         gServicelayoutmanager = new LinearLayoutManager(ServicesAdd_Activity.this);
@@ -126,7 +130,7 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
     //List Of Services
     public  void service_List(){
         try{
-
+            progress.show();
             System.out.println("In User Login Method 1");
             progress.show();
             OkHttpClient.Builder client = new OkHttpClient.Builder();
@@ -283,6 +287,81 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
 
         }
     }
+
+
+    //List of Location
+    public void location_list(){
+        try{
+
+            System.out.println("In User Login Method 1");
+            progress.show();
+            OkHttpClient.Builder client = new OkHttpClient.Builder();
+            HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
+            registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            client.addInterceptor(registrationInterceptor);
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(Constants.BASE_URL)
+                    .client(client.build())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            System.out.println("In User Login Method 2");
+            ApiInterface request = retrofit.create(ApiInterface.class);
+            Select_service_partner_Request locationRequest = new Select_service_partner_Request();
+
+
+            locationRequest.setUser_ID("1");
+            locationRequest.setCategory_ID("1");
+            locationRequest.setDocket(Constants.TOKEN);
+
+
+            Call<Select_service_partner_Response> call = request.SelectSeviceAndLocation(locationRequest);
+            call.enqueue(new Callback<Select_service_partner_Response>() {
+                @Override
+                public void onResponse(Call<Select_service_partner_Response> call, Response<Select_service_partner_Response> response) {
+                    if(response.isSuccessful()){
+
+                        Select_service_partner_Response lservice_response = response.body();
+                        ArrayList<Select_service_partner_Response.Location_Records> location_response = new ArrayList<>(Arrays.asList(lservice_response.getLocation_reponse()));
+                        for (int i =0;i<location_response.size();i++){
+                            location_City.add(location_response.get(i).getCity_Name());
+                        }
+                        Set<String> set = new HashSet<>(location_City);
+                        location_City.clear();
+                        location_City.addAll(set);
+
+                        AddServicesLocationlist_Adapter lAddServicesLocationlist_Adapter = new AddServicesLocationlist_Adapter(ServicesAdd_Activity.this,location_City,location_response);
+                        gLocationlist_recyclerview.setAdapter(lAddServicesLocationlist_Adapter);
+
+
+
+                        progress.dismiss();
+                    }
+                    progress.dismiss();
+                }
+
+                @Override
+                public void onFailure(Call<Select_service_partner_Response> call, Throwable t) {
+                    System.out.println("In User Login Method 7");
+                    progress.dismiss();
+                }
+            });
+
+
+
+        }
+
+        catch (Exception e) {
+            System.out.println("In User Login Method 8");
+            e.printStackTrace();
+            progress.dismiss();
+
+        }
+    }
+
+
+
+
 
     @Override
     public void servicesslist(String serviceid) {

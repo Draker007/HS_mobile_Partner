@@ -16,16 +16,17 @@ import java.util.List;
 import service.com.surebot.info.serviceperson.DataFiles.paymentChildData;
 import service.com.surebot.info.serviceperson.DataFiles.paymentParentData;
 import service.com.surebot.info.serviceperson.R;
+import service.com.surebot.info.serviceperson.ResponseClass.Partner_payment_Response;
 
 public class paymentParentAdapter extends RecyclerView.Adapter<paymentParentAdapter.MyViewHolder> {
 
     List<paymentChildData> paymentChildDataList;
     List<paymentParentData> paymentParentDataList;
+    List<Partner_payment_Response.Complete_transaction_record> PaymentDetials;
 
-    public paymentParentAdapter( List<paymentParentData> paymentParentDataList) {
 
-        this.paymentParentDataList = paymentParentDataList;
-
+    public paymentParentAdapter(List<Partner_payment_Response.Complete_transaction_record> paymentDetials) {
+        PaymentDetials = paymentDetials;
     }
 
     @NonNull
@@ -38,18 +39,10 @@ public class paymentParentAdapter extends RecyclerView.Adapter<paymentParentAdap
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, int position) {
-        paymentParentData a = paymentParentDataList.get(position);
-        paymentChildAdapter adapter = new paymentChildAdapter(a.getPaymentChildData());
-        Log.e("lola", "onBindViewHolder: "+a.getPaymentChildData() );
-        RecyclerView.LayoutManager lm = new LinearLayoutManager(holder.r1.getContext());
-        holder.r1.setLayoutManager(lm);
-        holder.r1.setAdapter(adapter);
-        holder.total.setText(a.getTotal());
-        holder.id.setText(a.getId());
-        holder.name.setText(a.getName());
-        holder.cost.setText(a.getPaidMoney());
-        holder.date.setText(a.getDate());
-        holder.time.setText(a.getTime());
+        holder.id.setText(PaymentDetials.get(position).getBooking_Id());
+        holder.cost.setText(PaymentDetials.get(position).getTotal_Amount());
+        holder.date.setText(PaymentDetials.get(position).getBooking_Date());
+        holder.time.setText(PaymentDetials.get(position).getBooking_Start_Time());
 
         holder.more.setOnClickListener(new View.OnClickListener() {
             @Override

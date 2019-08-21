@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="5dp">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -15,23 +15,33 @@
 
         <TextView
             android:id="@+id/subservicename_text"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_weight="0"
             android:fontFamily="@font/montserrat"
             android:padding="5dp"
             android:text="mysore"
             android:textColor="@color/color_white"
-            android:textSize="@dimen/regulartextsize" />
+            android:textSize="@dimen/regulartextsize"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/selectquantity_checkbox"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <CheckBox
             android:id="@+id/selectquantity_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
             android:layout_gravity="center_horizontal"
-            app:buttonTint="@color/color_blackforheader"
             android:button="@drawable/subservicecheckbox_background"
-            />
-    </LinearLayout>
+            android:textAlignment="center"
+            app:buttonTint="@color/color_blackforheader"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </RelativeLayout>
