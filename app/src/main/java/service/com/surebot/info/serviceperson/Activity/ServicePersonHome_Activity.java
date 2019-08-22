@@ -26,6 +26,8 @@ public class ServicePersonHome_Activity extends AppCompatActivity {
    // ConstraintLayout moree,payment,myService,Logout,helpCenter,ChangePass;
     BottomNavigationView navigation;
     ImageView closeMore;
+    // this will setup
+    int status =1;
     Fragment fragment = null;
     @BindView(R.id.AboutUs)
     ConstraintLayout Aboutus;
@@ -116,26 +118,58 @@ public class ServicePersonHome_Activity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_mytask:
+                    status=1;
+                    if (moree.getVisibility() == View.VISIBLE)
+                    {
+                        moree.setVisibility(View.GONE);
+                    }
                     fragment = new MyTask_Fragment();
                     loadFragment(fragment);
                     //   back = 0;
                     break;
                 case R.id.navigation_profile:
+                    status=2;
+                    if (moree.getVisibility() == View.VISIBLE)
+                    {
+                        moree.setVisibility(View.GONE);
+                    }
                     fragment = new Profile_Fragment();
                     loadFragment(fragment);
                     back = 0;
                     break;
                 case R.id.navigation_allrequest:
+                    status=3;
+                    if (moree.getVisibility() == View.VISIBLE)
+                    {
+                        moree.setVisibility(View.GONE);
+                    }
                     fragment = new AllRequestList_Fragment();
                     loadFragment(fragment);
                     back = 0;
                     break;
                 case R.id.navigation_more:
-                    moree.setVisibility(View.VISIBLE);
+
+                    if (moree.getVisibility() == View.VISIBLE)
+                    {
+                            moree.setVisibility(View.GONE);
+
+                    }
+                    else
+                    {
+                        moree.setVisibility(View.VISIBLE);
+                    }
                     closeMore.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             moree.setVisibility(View.GONE);
+                            switch (status){
+                                case 1: navigation.setSelectedItemId(R.id.navigation_mytask);
+                                    break;
+                                case 2: navigation.setSelectedItemId(R.id.navigation_profile);
+                                    break;
+                                case 3: navigation.setSelectedItemId(R.id.navigation_allrequest);
+                                    break;
+                            }
                         }
                     });
                     back = 0;

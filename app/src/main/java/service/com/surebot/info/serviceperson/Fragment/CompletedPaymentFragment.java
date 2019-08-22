@@ -35,7 +35,7 @@ import service.com.surebot.info.serviceperson.RequestClass.Partner_payment_Reque
 import service.com.surebot.info.serviceperson.ResponseClass.Partner_payment_Response;
 import service.com.surebot.info.serviceperson.utils.AppicationClass;
 
-public class completedPaymentFragment extends Fragment {
+public class CompletedPaymentFragment extends Fragment {
     View view;
     RecyclerView r1;
     paymentParentAdapter adapter;
@@ -84,7 +84,7 @@ public class completedPaymentFragment extends Fragment {
             Partner_payment_Request lservice_request = new Partner_payment_Request();
 
 
-            lservice_request.setUser_ID(AppicationClass.getUserId_FromLogin());
+            lservice_request.setUser_ID("2");
             lservice_request.setDocket(Constants.TOKEN);
 
 
@@ -97,7 +97,7 @@ public class completedPaymentFragment extends Fragment {
                         Partner_payment_Response aboutme_response = response.body();
 
                         ArrayList<Partner_payment_Response.Complete_transaction_record> CompletedPaymentResponse = new ArrayList<>(Arrays.asList(aboutme_response.getComplete_transaction_response()));
-                        adapter = new paymentParentAdapter( CompletedPaymentResponse);
+                        adapter = new paymentParentAdapter( CompletedPaymentResponse,getActivity());
                         r1.setAdapter(adapter);
 
                     }
