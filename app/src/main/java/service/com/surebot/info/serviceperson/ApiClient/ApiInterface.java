@@ -116,9 +116,11 @@ public interface ApiInterface {
     @POST("List_packages")
     Call<Partner_package_Response> List_packages (@Body Partner_package_Request request);
 
-
-    //Completed Payment
-    @POST("List_packages")
+    //Payment
+    @POST("partner_pay_completed")
     Call<Partner_payment_Response> CompletedPayment (@Body Partner_payment_Request request);
+
+    @POST("partner_pay_pending")
+    Call<Partner_payment_Response> PendingPayment (@Body Partner_payment_Request request);
 
 }

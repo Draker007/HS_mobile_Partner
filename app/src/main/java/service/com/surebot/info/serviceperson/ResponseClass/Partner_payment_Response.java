@@ -2,6 +2,15 @@ package service.com.surebot.info.serviceperson.ResponseClass;
 
 public class Partner_payment_Response {
     Complete_transaction_record[] complete_transaction_response;
+    Complete_transaction_record[] pending_transaction_response;
+
+    public Complete_transaction_record[] getPending_transaction_response() {
+        return pending_transaction_response;
+    }
+
+    public void setPending_transaction_response(Complete_transaction_record[] pending_transaction_response) {
+        this.pending_transaction_response = pending_transaction_response;
+    }
 
     public Complete_transaction_record[] getComplete_transaction_response() {
         return complete_transaction_response;
@@ -12,7 +21,15 @@ public class Partner_payment_Response {
     }
 
     public class Complete_transaction_record{
-        String Transaction_ID,Total_Amount,Booking_Id,Service_Mapping_ID,Category_Name,service,Sub_Service_Name,Quantity,Quantity_Amount,Booking_Date,Booking_Start_Time;
+        String Transaction_ID,Total_Amount,Booking_Id,Service_Mapping_ID,Category_Name,User_Name,service,Sub_Service_Name,Quantity,Quantity_Amount,Booking_Date,Booking_Start_Time;
+
+        public String getUser_Name() {
+            return User_Name;
+        }
+
+        public void setUser_Name(String user_Name) {
+            User_Name = user_Name;
+        }
 
         public String getTransaction_ID() {
             return Transaction_ID;

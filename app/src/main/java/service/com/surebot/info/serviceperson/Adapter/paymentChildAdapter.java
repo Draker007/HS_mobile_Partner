@@ -8,16 +8,24 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import service.com.surebot.info.serviceperson.DataFiles.paymentChildData;
 import service.com.surebot.info.serviceperson.R;
 
 public class paymentChildAdapter extends RecyclerView.Adapter<paymentChildAdapter.MyViewHolder> {
-    List<String> paymentChildDataList;
 
-    public paymentChildAdapter(List<String> paymentChildDataList) {
-        this.paymentChildDataList = paymentChildDataList;
+    List<String> services = new ArrayList<>();
+    List<String> subServices =new ArrayList<>();
+    List<String> quntity =new ArrayList<>();
+    List<String> quntityAmount= new ArrayList<>();
+
+    public paymentChildAdapter(List<String> services, List<String> subServices, List<String> quntity, List<String> quntityAmount) {
+        this.services.addAll(services);
+        this.subServices.addAll(subServices);
+        this.quntity.addAll(quntity);
+        this.quntityAmount.addAll(quntityAmount);
     }
 
     @NonNull
@@ -30,18 +38,18 @@ public class paymentChildAdapter extends RecyclerView.Adapter<paymentChildAdapte
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        paymentChildData a = paymentChildDataList.get(position);
-        holder.serviceCost.setText();
-        holder.serviceDesc.setText();
-        holder.serviceName.setText();
-        holder.quntity.setText();
+//        paymentChildData a = paymentChildDataList.get(position);
+        holder.serviceCost.setText(quntityAmount.get(position));
+        holder.serviceDesc.setText(subServices.get(position));
+        holder.serviceName.setText(services.get(position));
+        holder.quntity.setText("("+quntity.get(position)+")");
 
 
     }
 
     @Override
     public int getItemCount() {
-        return paymentChildDataList.size();
+        return services.size();
     }
 
     public static class  MyViewHolder extends  RecyclerView.ViewHolder{

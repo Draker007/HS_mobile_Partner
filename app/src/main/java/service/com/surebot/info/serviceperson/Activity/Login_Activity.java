@@ -3,11 +3,13 @@ package service.com.surebot.info.serviceperson.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -55,7 +57,7 @@ public class Login_Activity extends AppCompatActivity {
 
     SharedPreferences.Editor editer;
     SharedPreferences gSharedPrefrance;
-
+    private Dialog progress;
 
     AlertDialog.Builder builder;
 
@@ -65,7 +67,11 @@ public class Login_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         mCacheManager = new CacheManager(this);
-
+        progress = new Dialog(this, android.R.style.Theme_Translucent);
+        progress.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //here we set layout of progress dialog
+        progress.setContentView(R.layout.progressbar_background);
+        progress.setCancelable(true);
         gLogin_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -140,7 +146,7 @@ public class Login_Activity extends AppCompatActivity {
     }
     private void servicePerson_Login() {
         try {
-            //progress.show();
+             progress.show();
             OkHttpClient.Builder client = new OkHttpClient.Builder();
             HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
             registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -187,8 +193,10 @@ public class Login_Activity extends AppCompatActivity {
                             }
                         } else{
 
+
                             Toast.makeText(Login_Activity.this,partnerlogin_response.getPartner_login_response(), Toast.LENGTH_SHORT).show();
                         }
+                        progress.dismiss();
                     }}
 
                 @Override
