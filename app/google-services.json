@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "215905304366",
+    "firebase_url": "https://hs12serviceperson.firebaseio.com",
+    "project_id": "hs12serviceperson",
+    "storage_bucket": "hs12serviceperson.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:215905304366:android:b67dbac6e906e788",
+        "android_client_info": {
+          "package_name": "service.com.surebot.info.serviceperson"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "215905304366-9q5mpjnb85pt2gtbr90uvj1din17l7tu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcDmIS24SIcDYyBhdI0I3llkAdSVvwdjc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "215905304366-9q5mpjnb85pt2gtbr90uvj1din17l7tu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

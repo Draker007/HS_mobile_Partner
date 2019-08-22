@@ -595,7 +595,11 @@ public class AddPersonalDetailsActivity extends AppCompatActivity {
 
                     progress.dismiss();
                 }
+
+               // progress.dismiss();
+
               //  progress.dismiss();
+
 
 
                 @Override

@@ -11,7 +11,11 @@ import service.com.surebot.info.serviceperson.RequestClass.ChangePasswordRequest
 import service.com.surebot.info.serviceperson.RequestClass.DeleteProfilePicRequest;
 import service.com.surebot.info.serviceperson.RequestClass.ListOfServices_Request;
 import service.com.surebot.info.serviceperson.RequestClass.ListOfSubServices_Request;
+
+import service.com.surebot.info.serviceperson.RequestClass.NewRequestList_Request;
+
 import service.com.surebot.info.serviceperson.RequestClass.Notification_Request;
+
 import service.com.surebot.info.serviceperson.RequestClass.PartnerProfileRequest;
 import service.com.surebot.info.serviceperson.RequestClass.PartnerSigup_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Partner_package_Request;
@@ -31,7 +35,11 @@ import service.com.surebot.info.serviceperson.ResponseClass.EditPersonalPhotoRes
 import service.com.surebot.info.serviceperson.ResponseClass.Identity_verification_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.ListOfServices_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.ListOfSubServices_Response;
+
+import service.com.surebot.info.serviceperson.ResponseClass.NewRequestList_Response;
+
 import service.com.surebot.info.serviceperson.ResponseClass.Notification_Response;
+
 import service.com.surebot.info.serviceperson.ResponseClass.PartnerProfileResponse;
 import service.com.surebot.info.serviceperson.ResponseClass.PartnerSignup_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Partner_package_Response;
@@ -94,6 +102,14 @@ public interface ApiInterface {
     @POST("identity_verification_upload_image")
     Call<Identity_verification_Response>  IdentityVerif  (@Body RequestBody Identity);
 
+
+    //4 Request Lists
+
+    //New Request Lists
+
+    @POST("services_requests_new")
+    Call<NewRequestList_Response>  get_NewServiceRequestList  (@Body NewRequestList_Request request);
+
         @POST("award_and_certificate_photos_upload")
     Call<Awards_and_CertificateResponse>  AwardsAndCertificate  (@Body RequestBody Identity);
 
@@ -120,7 +136,10 @@ public interface ApiInterface {
     @POST("partner_pay_completed")
     Call<Partner_payment_Response> CompletedPayment (@Body Partner_payment_Request request);
 
+<<<<<<< HEAD
     @POST("partner_pay_pending")
     Call<Partner_payment_Response> PendingPayment (@Body Partner_payment_Request request);
+=======
+>>>>>>> 035e00b2520bf72c506b9b80ea2bfa72d8dc0eb2
 
 }

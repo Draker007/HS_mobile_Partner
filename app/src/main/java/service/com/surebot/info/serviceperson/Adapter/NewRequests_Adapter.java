@@ -61,6 +61,22 @@ public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapte
 
         myViewHolder.lUserName_Text.setText(gUserName_List.get(position).toString());
 
+        myViewHolder.lMore_Textview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myViewHolder.lServicedetails_Layout.setVisibility(View.VISIBLE);
+                myViewHolder.lMore_Textview.setVisibility(View.GONE);
+            }
+        });
+
+        myViewHolder.lLess_Textview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myViewHolder.lServicedetails_Layout.setVisibility(View.GONE);
+                myViewHolder.lMore_Textview.setVisibility(View.VISIBLE);
+            }
+        });
+
     }
 
     @Override
@@ -75,6 +91,11 @@ public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapte
         TextView lTime_Text;
         TextView lUserPhonenumber_Text;
         RecyclerView lRequestedservicelist_recyclerview;
+        TextView lMore_Textview;
+        TextView lLess_Textview;
+        LinearLayout lServicedetails_Layout;
+
+
 
 
 
@@ -92,10 +113,10 @@ public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapte
             lTime_Text=itemView.findViewById(R.id.username_text);
             lUserPhonenumber_Text=itemView.findViewById(R.id.username_text);
             lRequestedservicelist_recyclerview=itemView.findViewById(R.id.requestedservicelist_recyclerview);
-
-
+            lMore_Textview=itemView.findViewById(R.id.more_text);
+            lLess_Textview=itemView.findViewById(R.id.less_text);
             lMain_Layout=itemView.findViewById(R.id.main_layout);
-
+            lServicedetails_Layout=itemView.findViewById(R.id.servicedetails_layout);
 
 
         }
