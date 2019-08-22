@@ -30,11 +30,6 @@ public class paymentChildAdapter extends RecyclerView.Adapter<paymentChildAdapte
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        paymentChildData a = paymentChildDataList.get(position);
-        holder.serviceCost.setText();
-        holder.serviceDesc.setText();
-        holder.serviceName.setText();
-        holder.quntity.setText();
 
 
     }

@@ -60,14 +60,6 @@ public class NewTaskSubServicesList_Adapter extends RecyclerView.Adapter<NewTask
         EditText lQuantity_Text;
         TextView  lSubservicename_text;
 
-
-
-
-
-
-
-
-
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 

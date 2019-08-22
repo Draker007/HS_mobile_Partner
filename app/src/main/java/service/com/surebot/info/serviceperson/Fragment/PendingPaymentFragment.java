@@ -32,7 +32,7 @@ public class PendingPaymentFragment extends Fragment {
         view = inflater.inflate(R.layout.payment_fragment, container, false);
         r1 = view.findViewById(R.id.paymentRecycler);
         RecyclerView.LayoutManager lm = new LinearLayoutManager(getActivity());
-        adapter = new paymentParentAdapter( paymentParentDataList);
+        //adapter = new paymentParentAdapter( paymentParentDataList);
         r1.setLayoutManager(lm);
         paymentChildDataList.add(new paymentChildData("asd","asd","asd"));
         paymentChildDataList.add(new paymentChildData("asd","asd","asd"));

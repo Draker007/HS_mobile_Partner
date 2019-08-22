@@ -12,6 +12,7 @@ import service.com.surebot.info.serviceperson.RequestClass.DeleteProfilePicReque
 import service.com.surebot.info.serviceperson.RequestClass.ListOfServices_Request;
 import service.com.surebot.info.serviceperson.RequestClass.ListOfSubServices_Request;
 
+import service.com.surebot.info.serviceperson.RequestClass.NewRequestListDetails_Request;
 import service.com.surebot.info.serviceperson.RequestClass.NewRequestList_Request;
 
 import service.com.surebot.info.serviceperson.RequestClass.Notification_Request;
@@ -24,6 +25,7 @@ import service.com.surebot.info.serviceperson.RequestClass.Partnerlogin_Request;
 import service.com.surebot.info.serviceperson.RequestClass.About_me_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Payment_completed_transaction_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Select_service_partner_Request;
+import service.com.surebot.info.serviceperson.RequestClass.UpcomingRequestList_Request;
 import service.com.surebot.info.serviceperson.ResponseClass.Account_details_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Add_account_details_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Add_partner_personal_details_Response;
@@ -36,6 +38,7 @@ import service.com.surebot.info.serviceperson.ResponseClass.Identity_verificatio
 import service.com.surebot.info.serviceperson.ResponseClass.ListOfServices_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.ListOfSubServices_Response;
 
+import service.com.surebot.info.serviceperson.ResponseClass.NewRequestListDetails_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.NewRequestList_Response;
 
 import service.com.surebot.info.serviceperson.ResponseClass.Notification_Response;
@@ -48,6 +51,7 @@ import service.com.surebot.info.serviceperson.ResponseClass.Partnerlogin_Respons
 import service.com.surebot.info.serviceperson.ResponseClass.About_me_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Payment_completed_transaction_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Select_service_partner_Response;
+import service.com.surebot.info.serviceperson.ResponseClass.UpcomingRequestList_Response;
 
 public interface ApiInterface {
 
@@ -103,12 +107,6 @@ public interface ApiInterface {
     Call<Identity_verification_Response>  IdentityVerif  (@Body RequestBody Identity);
 
 
-    //4 Request Lists
-
-    //New Request Lists
-
-    @POST("services_requests_new")
-    Call<NewRequestList_Response>  get_NewServiceRequestList  (@Body NewRequestList_Request request);
 
         @POST("award_and_certificate_photos_upload")
     Call<Awards_and_CertificateResponse>  AwardsAndCertificate  (@Body RequestBody Identity);
@@ -136,6 +134,23 @@ public interface ApiInterface {
     //Completed Payment
     @POST("List_packages")
     Call<Partner_payment_Response> CompletedPayment (@Body Partner_payment_Request request);
+
+
+    //4 Request Lists
+
+    //New Request Lists
+
+    @POST("services_requests_new")
+    Call<NewRequestList_Response>  get_NewServiceRequestList  (@Body NewRequestList_Request request);
+
+    //New Request Details
+    @POST("servicesrequests_new_details")
+    Call<NewRequestListDetails_Response>  get_NewServiceRequestDetails  (@Body NewRequestListDetails_Request request);
+
+//Get Upcoming Service Request List
+@POST("servicesrequests_upcoming_details")
+Call<UpcomingRequestList_Response>  get_UpcomingServiceRequestList  (@Body UpcomingRequestList_Request request);
+
 
 
 }

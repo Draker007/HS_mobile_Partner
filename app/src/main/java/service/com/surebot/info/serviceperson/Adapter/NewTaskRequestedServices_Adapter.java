@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import service.com.surebot.info.serviceperson.R;
-
+import service.com.surebot.info.serviceperson.ResponseClass.NewRequestListDetails_Response;
 
 
 public class NewTaskRequestedServices_Adapter extends RecyclerView.Adapter<NewTaskRequestedServices_Adapter.MyViewHolder> {
@@ -24,15 +24,18 @@ public class NewTaskRequestedServices_Adapter extends RecyclerView.Adapter<NewTa
     Context context;
     ArrayList<String> gservices_List;
 
-    ArrayList<String> gSub_services_List = new ArrayList<>();
+    ArrayList<NewRequestListDetails_Response.NewRequestserviceDetails_Records> gNewRequestList_Arraylist;
 
-    public NewTaskRequestedServices_Adapter(Context context,   ArrayList<String> gservices_List) {
+    ArrayList<String > gServiceName_List = new ArrayList<>();
+
+
+
+    public NewTaskRequestedServices_Adapter(Context context,  ArrayList<String > gServiceName_List,  ArrayList<NewRequestListDetails_Response.NewRequestserviceDetails_Records> gNewRequestList_Arraylist) {
         this.context=context;
-        this.gservices_List=gservices_List;
+        this.gServiceName_List=gServiceName_List;
+        this.gNewRequestList_Arraylist=gNewRequestList_Arraylist;
 
-        gSub_services_List.add("sara fruite cleanup");
-        gSub_services_List.add("hair cut");
-        gSub_services_List.add("upperlip");
+
     }
 
     @NonNull
@@ -46,32 +49,40 @@ public class NewTaskRequestedServices_Adapter extends RecyclerView.Adapter<NewTa
     @SuppressLint({"ResourceAsColor", "WrongConstant"})
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, final int position) {
+
+        myViewHolder.lServicename_text.setText(gServiceName_List.get(position).toString());
         LinearLayoutManager llm = new LinearLayoutManager(context);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         myViewHolder.lSubservice_Recycler.setLayoutManager(llm);
 
-        NewTaskSubServicesList_Adapter lNewTaskSubServicesList_Adapter = new NewTaskSubServicesList_Adapter(context,gSub_services_List);
-        myViewHolder.lSubservice_Recycler.setAdapter(lNewTaskSubServicesList_Adapter);
 
+        ArrayList<String> lSub_ServicesList = new ArrayList<>();
+        for (int i=0;i<gNewRequestList_Arraylist.size();i++){
+            if(gNewRequestList_Arraylist.get(i).getService_Name().equals(gServiceName_List.get(position))){
+                lSub_ServicesList.add(gNewRequestList_Arraylist.get(i).getSub_Service_Name());
+            }
+        }
+        NewTaskSubServicesList_Adapter lNewTaskSubServicesList_Adapter = new NewTaskSubServicesList_Adapter(context,lSub_ServicesList);
+        myViewHolder.lSubservice_Recycler.setAdapter(lNewTaskSubServicesList_Adapter);
 
     }
 
     @Override
     public int getItemCount() {
-        return gservices_List.size();
+        return gServiceName_List.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView lSubservicename_text;
-        EditText lQuantity_Text;
+        TextView lServicename_text;
+
         RecyclerView lSubservice_Recycler;
 
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            lSubservicename_text=itemView.findViewById(R.id.subservicename_text);
-            lQuantity_Text=itemView.findViewById(R.id.quantity_text);
+            lServicename_text=itemView.findViewById(R.id.servicename_text);
+
             lSubservice_Recycler =itemView.findViewById(R.id.subservice_Recycler);
 
 

@@ -13,15 +13,14 @@ public class NewRequestList_Response {
 
     public  class NewRequestList_Response_Records{
          private  String User_ID;
-
-        private  String User_Name;
+         private  String User_Name;
         private  String User_Full_Address;
         private  String Phone_location;
-        private  String Booking_Id;
+
         private  String Booking_Date;
         private  String Transaction_ID;
-        private  String Service_ID;
-        private  String Service_Name;
+        private  String Booking_Start_Time;
+        private  String AddressID;
 
         public String getUser_ID() {
             return User_ID;
@@ -55,13 +54,7 @@ public class NewRequestList_Response {
             Phone_location = phone_location;
         }
 
-        public String getBooking_Id() {
-            return Booking_Id;
-        }
 
-        public void setBooking_Id(String booking_Id) {
-            Booking_Id = booking_Id;
-        }
 
         public String getBooking_Date() {
             return Booking_Date;
@@ -79,21 +72,23 @@ public class NewRequestList_Response {
             Transaction_ID = transaction_ID;
         }
 
-        public String getService_ID() {
-            return Service_ID;
+        public String getBooking_Start_Time() {
+            return Booking_Start_Time;
         }
 
-        public void setService_ID(String service_ID) {
-            Service_ID = service_ID;
+        public void setBooking_Start_Time(String booking_Start_Time) {
+            Booking_Start_Time = booking_Start_Time;
         }
 
-        public String getService_Name() {
-            return Service_Name;
+        public String getAddressID() {
+            return AddressID;
         }
 
-        public void setService_Name(String service_Name) {
-            Service_Name = service_Name;
+        public void setAddressID(String addressID) {
+            AddressID = addressID;
         }
+
+
     }
 }
 

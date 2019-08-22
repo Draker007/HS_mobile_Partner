@@ -5,8 +5,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,12 +17,12 @@ import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.ResponseClass.UpcomingRequestList_Response;
 
 
-public class UpcomingRequest_Adapter extends RecyclerView.Adapter<UpcomingRequest_Adapter.MyViewHolder> {
+public class CompletedRequest_Adapter extends RecyclerView.Adapter<CompletedRequest_Adapter.MyViewHolder> {
 
     Context context;
     ArrayList<UpcomingRequestList_Response.UpcomingRequestList_Records> gUpcomingRequestList_Arraylist;
 
-    public UpcomingRequest_Adapter(Context context,   ArrayList<UpcomingRequestList_Response.UpcomingRequestList_Records> gUpcomingRequestList_Arraylist) {
+    public CompletedRequest_Adapter(Context context,   ArrayList<UpcomingRequestList_Response.UpcomingRequestList_Records> gUpcomingRequestList_Arraylist) {
         this.context=context;
         this.gUpcomingRequestList_Arraylist=gUpcomingRequestList_Arraylist;
     }
@@ -33,7 +31,7 @@ public class UpcomingRequest_Adapter extends RecyclerView.Adapter<UpcomingReques
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.upcomingrequestadapter_list, viewGroup, false);
-        return new UpcomingRequest_Adapter.MyViewHolder(view);
+        return new CompletedRequest_Adapter.MyViewHolder(view);
         // return null;
     }
 
