@@ -19,13 +19,19 @@ import service.com.surebot.info.serviceperson.RequestClass.Notification_Request;
 
 import service.com.surebot.info.serviceperson.RequestClass.PartnerProfileRequest;
 import service.com.surebot.info.serviceperson.RequestClass.PartnerSigup_Request;
+import service.com.surebot.info.serviceperson.RequestClass.Partner_my_task_today_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Partner_package_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Partner_payment_Request;
+import service.com.surebot.info.serviceperson.RequestClass.Partner_set_new_password_otp_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Partnerlogin_Request;
 import service.com.surebot.info.serviceperson.RequestClass.About_me_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Payment_completed_transaction_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Select_service_partner_Request;
+<<<<<<< HEAD
+import service.com.surebot.info.serviceperson.RequestClass.Send_otp_mail_Request;
+=======
 import service.com.surebot.info.serviceperson.RequestClass.UpcomingRequestList_Request;
+>>>>>>> eb35d16176319a0376f5d3497ce3d6d5fce95b5b
 import service.com.surebot.info.serviceperson.ResponseClass.Account_details_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Add_account_details_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Add_partner_personal_details_Response;
@@ -47,13 +53,19 @@ import service.com.surebot.info.serviceperson.ResponseClass.Notification_Respons
 
 import service.com.surebot.info.serviceperson.ResponseClass.PartnerProfileResponse;
 import service.com.surebot.info.serviceperson.ResponseClass.PartnerSignup_Response;
+import service.com.surebot.info.serviceperson.ResponseClass.Partner_my_task_today_response;
 import service.com.surebot.info.serviceperson.ResponseClass.Partner_package_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Partner_payment_Response;
+import service.com.surebot.info.serviceperson.ResponseClass.Partner_set_new_password_otp_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Partnerlogin_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.About_me_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Payment_completed_transaction_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Select_service_partner_Response;
+<<<<<<< HEAD
+import service.com.surebot.info.serviceperson.ResponseClass.Send_otp_mail_Response;
+=======
 import service.com.surebot.info.serviceperson.ResponseClass.UpcomingRequestList_Response;
+>>>>>>> eb35d16176319a0376f5d3497ce3d6d5fce95b5b
 
 public interface ApiInterface {
 
@@ -136,6 +148,20 @@ public interface ApiInterface {
     @POST("partner_pay_completed")
     Call<Partner_payment_Response> CompletedPayment (@Body Partner_payment_Request request);
 
+<<<<<<< HEAD
+    @POST("partner_pay_pending")
+    Call<Partner_payment_Response> PendingPayment (@Body Partner_payment_Request request);
+
+    @POST("partner_my_task_today")
+    Call<Partner_my_task_today_response> Partner_myTaskToday (@Body Partner_my_task_today_Request request);
+
+    //ResetPassword
+    @POST("partner_set_new_password_otp")
+    Call<Partner_set_new_password_otp_Response> ResetPassOTP(@Body Partner_set_new_password_otp_Request request);
+
+    @POST("send_otp_mail")
+    Call<Send_otp_mail_Response> SendMailGetOTP (@Body Send_otp_mail_Request request);
+=======
 
     @POST("partner_pay_pending")
     Call<Partner_payment_Response> PendingPayment (@Body Partner_payment_Request request);
@@ -153,9 +179,13 @@ public interface ApiInterface {
         @POST("servicesrequests_new_details")
         Call<NewRequestListDetails_Response>  get_NewServiceRequestDetails  (@Body NewRequestListDetails_Request request);
 
+<<<<<<< HEAD
         //Get Upcoming Service Request List
         @POST("servicesrequests_upcoming_details")
         Call<UpcomingRequestList_Response>  get_UpcomingServiceRequestList  (@Body UpcomingRequestList_Request request);
+=======
+>>>>>>> eb35d16176319a0376f5d3497ce3d6d5fce95b5b
+>>>>>>> 1c25d20dd1999ec566f56f19c396db53132b0280
 
         //Get Completed Service Request List
         @POST("servicesrequests_completed_details")

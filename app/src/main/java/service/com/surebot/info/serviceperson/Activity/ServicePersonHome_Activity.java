@@ -6,10 +6,12 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -43,6 +45,7 @@ public class ServicePersonHome_Activity extends AppCompatActivity {
     ConstraintLayout logout;
     @BindView(R.id.moree)
     ConstraintLayout moree;
+    private Dialog progress;
 
 
     int back = 0;
@@ -53,7 +56,11 @@ public class ServicePersonHome_Activity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-
+        progress = new Dialog(this, android.R.style.Theme_Translucent);
+        progress.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //here we set layout of progress dialog
+        progress.setContentView(R.layout.progressbar_background);
+        progress.setCancelable(true);
         navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setItemIconTintList(null);
@@ -74,7 +81,7 @@ public class ServicePersonHome_Activity extends AppCompatActivity {
         myService.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ServicePersonHome_Activity.this,serviceDetailsActivity.class));
+                startActivity(new Intent(ServicePersonHome_Activity.this,ServicesAdd_Activity.class));
             }
         });
 

@@ -111,7 +111,7 @@ public class AboutMeActivity extends AppCompatActivity {
                            }
 
 
-                            progress.dismiss();
+                                progress.dismiss();
                         }
 
 

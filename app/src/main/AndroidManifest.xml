@@ -27,7 +27,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
-        <activity android:name=".Activity.SetNewPasswordActivity"></activity>
+        <activity android:name=".Activity.SetNewPasswordActivity"><intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter></activity>
         <activity android:name=".Activity.ForgotPasswordActivity" />
         <activity android:name=".Activity.Terms" />
         <activity android:name=".Activity.HelpCenterActivity" />
@@ -39,7 +43,7 @@
         </activity>
         <activity android:name=".Activity.AboutUsActivity" />
         <activity android:name=".Activity.AboutMeActivity" />
-        <activity android:name=".Activity.ServicesAdd_Activity" />
+        <activity android:name=".Activity.ServicesAdd_Activity" ></activity>
         <activity android:name=".Activity.CreateProfileActivity" />
         <activity android:name=".Activity.ServicePersonHome_Activity" />
         <activity android:name=".Activity.SignUp_Activity" />
@@ -52,11 +56,7 @@
         <activity android:name=".Activity.AwardsAndCertificateActivity" />
         <activity android:name=".Activity.PaymentActivity" />
         <activity android:name=".Activity.changePasswordActivity" />
-        <activity android:name=".Activity.Login_Activity" > <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter></activity>
+        <activity android:name=".Activity.Login_Activity" > </activity>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />

@@ -2,9 +2,11 @@ package service.com.surebot.info.serviceperson.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -20,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -28,131 +31,83 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
 import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.utils.UserAddress_Location;
 
 import static service.com.surebot.info.serviceperson.utils.UserAddress_Location.VIEW_MAP;
 
 
+
 public class TodaysTask_Adapter extends RecyclerView.Adapter<TodaysTask_Adapter.MyViewHolder>{
 
     Context context;
     ArrayList<String> gUserName_List;
-    private final List<UserAddress_Location> items;
-
+    private final List<String> items;
+    int i = 0,j=0;
     private SupportMapFragment mapFragment;
 
-     UserAddress_Location timeSlot =new UserAddress_Location();
+    String TAG = "cocacola";
+    UserAddress_Location timeSlot =new UserAddress_Location();
 
     double latitude, longitude;
 
-    public TodaysTask_Adapter(Context context,  List<UserAddress_Location> items, ArrayList<String> gUserName_List) {
+    public TodaysTask_Adapter(Context context,  List<String> items, ArrayList<String> gUserName_List) {
+        Log.e(TAG, "TodaysTask_Adapter: "+items.get(0));
+        Log.e(TAG, "TodaysTask_Adapter: "+items.get(1));
         this.context=context;
         this.items=items;
         this.gUserName_List=gUserName_List;
 
-        System.out.println("Inside Constructor Arralist size is " + items.size());
+
+
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
-
-
-       /* int layoutId = R.layout.content_list_text;
-        if (i == UserAddress_Location.VIEW_MAP) {
-            layoutId = R.layout.content_list_map;
-        }*/
-
-
         View inflatedView = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.content_list_map, viewGroup, false);
+                .inflate(R.layout.todaytask_list, viewGroup, false);
         return new MyViewHolder(inflatedView);
     }
 
-    @Override
-    public void onViewAttachedToWindow(MyViewHolder holder) {
-        super.onViewAttachedToWindow(holder);
 
-        final UserAddress_Location item = holder.item;
-
-       // if (item != null && item.viewType == VIEW_MAP) {
-            holder.getMapFragmentAndCallback(new OnMapReadyCallback() {
-                @Override
-                public void onMapReady(GoogleMap googleMap) {
-
-                 /*   for (int i = 0; i < items.size(); i++) {
-                        timeSlot = items.get(i);
-
-
-             System.out.println("Lat and Long from other classes " + items.get(i) );
-
-
-                }*/
-                  /*  String s = timeSlot.getLatitutde();
-                    String[] split = s.split(",");
-                    double latitude, longitude;
-                    latitude = Double.parseDouble(split[0]);
-                    longitude = Double.parseDouble(split[1]);*/
-                    LatLng location = new LatLng(latitude, longitude);
-                    //  LatLng latLng = timeSlot.ge();
-                    googleMap.addMarker(new MarkerOptions().position(location));
-                    googleMap.animateCamera(CameraUpdateFactory.newLatLng(location));
-
-                    System.out.println("map values inside Adapter is position are " + latitude + longitude + items.size());
-                }
-            });
-       // }
-    }
 
     @Override
     public void onViewDetachedFromWindow(MyViewHolder holder) {
         super.onViewDetachedFromWindow(holder);
+        Log.e(TAG, "onViewDetachedFromWindow: ");
 
-      //  if (holder.item != null && holder.item.viewType == VIEW_MAP) {
-            // If error still occur unpredictably, it's best to remove fragment here
-            holder.removeMapFragment();
-       // }
+        holder.removeMapFragment();
+
     }
 
 
 
     @SuppressLint("ResourceAsColor")
     @Override
-    public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, final int position) {
+    public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder,  int position) {
+        Log.e(TAG, "onBindViewHolder: "+items.size() +position);
+        String item = items.get(position);
+        System.out.println("Position inside onBind is " + position + item);
 
-//System.out.println("Position inside onBind is " + position + items.get(position));
-
-        final UserAddress_Location item = items.get(position);
-        System.out.println("Position inside onBind is " + position + item.getLatitutde());
-
-        String s = item.getLatitutde();
+        String s = item;
         String[] split = s.split(",");
-     /*   ArrayList<String> gsplitedArraylist = new ArrayList<>();
-
-        for(int i=0;i<split.length;i++){
-
-
-        }*/
-
-
         latitude = Double.parseDouble(split[0]);
         longitude = Double.parseDouble(split[1]);
 
+    }
 
-        System.out.println("only map values inside Adapter is " +  item  );
-
-       /* if (item.viewType == UserAddress_Location.VIEW_TEXT) {
-         //  myViewHolder.textView.setText(item.text);
+    @Override
+    public void onViewRecycled(MyViewHolder holder)
+    {
+        // Cleanup MapView here?
+        if (holder.mapCurrnet != null)
+        {
+            holder.mapCurrnet.clear();
+            holder.mapCurrnet.setMapType(GoogleMap.MAP_TYPE_NONE);
         }
-        else if (item.viewType == VIEW_MAP) {
-            myViewHolder.item = item;
-            myViewHolder.textView.setText(gUserName_List.get(position).toString());
-        }*/
-
-      //  myViewHolder.item = item;
-        myViewHolder.textView.setText(gUserName_List.get(position).toString());
     }
 
 
@@ -162,23 +117,36 @@ public class TodaysTask_Adapter extends RecyclerView.Adapter<TodaysTask_Adapter.
     }
 
 
-   /* @Override
-    public int getItemViewType(int position) {
-        return items.get(position).viewType;
-    }*/
 
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView textView;
-        public FrameLayout mapLayout;
-
+    public class MyViewHolder extends RecyclerView.ViewHolder implements OnMapReadyCallback {
+        public TextView username_text,date_text,time_text,useraddress_text,userphonenumber_text,requestID_text,moreheader_text;
+        public MapView map;
+        public LinearLayout map_layout;
+        Button cancel,start;
+        public GoogleMap mapCurrnet;
         public  UserAddress_Location item;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-           textView = (TextView) itemView.findViewById(R.id.locationNameTextView);
-            mapLayout = (FrameLayout) itemView.findViewById(R.id.map);
+            username_text = (TextView) itemView.findViewById(R.id.username_text);
+            date_text = (TextView) itemView.findViewById(R.id.date_text);
+            time_text = (TextView) itemView.findViewById(R.id.time_text);
+            useraddress_text = (TextView) itemView.findViewById(R.id.useraddress_text);
+            userphonenumber_text = (TextView) itemView.findViewById(R.id.userphonenumber_text);
+            requestID_text = (TextView) itemView.findViewById(R.id.requestID_text);
+            moreheader_text = (TextView) itemView.findViewById(R.id.moreheader_text);
+            cancel = (Button) itemView.findViewById(R.id.cancel_button);
+            start = (Button) itemView.findViewById(R.id.startservice_button);
+            map_layout = itemView.findViewById(R.id.map_layout);
+            map = (MapView) itemView.findViewById(R.id.mapView);
+            if (map != null)
+            {
+                ((MapView) map).onCreate(null);
+                ((MapView) map).onResume();
+                ((MapView) map).getMapAsync(this);
+            }
 
         }
 
@@ -187,21 +155,47 @@ public class TodaysTask_Adapter extends RecyclerView.Adapter<TodaysTask_Adapter.
             if (mapFragment == null) {
                 mapFragment = SupportMapFragment.newInstance();
                 mapFragment.getMapAsync(callback);
+                Log.e(TAG, "getMapFragmentAndCallback: " );
+
             }
 
             // for fragment
             // FragmentManager fragmentManager = getChildFragmentManager();
             // for activity
             FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.map, mapFragment).commit();
+            fragmentManager.beginTransaction().replace(R.id.mapView, mapFragment).commit();
             return mapFragment;
         }
         public void removeMapFragment() {
             if (mapFragment != null) {
                 FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
                 fragmentManager.beginTransaction().remove(mapFragment).commitAllowingStateLoss();
+                Log.e(TAG, "removeMapFragment: "+i );
                 mapFragment = null;
+
             }
+        }
+
+        @Override
+        public void onMapReady(GoogleMap googleMap) {
+
+            if(i<items.size()) {
+                String s = items.get(i);
+                String[] split = s.split(",");
+                latitude = Double.parseDouble(split[0]);
+                longitude = Double.parseDouble(split[1]);
+                LatLng location = new LatLng(latitude, longitude);
+                //  LatLng latLng = timeSlot.ge();
+                googleMap.addMarker(new MarkerOptions().position(location));
+                googleMap.animateCamera(CameraUpdateFactory.newLatLng(location));
+                Log.e(TAG, "onMapReady: " + latitude);
+                System.out.println(" is position are " + latitude + longitude + items.size());
+                mapCurrnet = googleMap;
+                i++;
+
+            }
+
+
         }
     }
     public interface bannerslist_Communicator {

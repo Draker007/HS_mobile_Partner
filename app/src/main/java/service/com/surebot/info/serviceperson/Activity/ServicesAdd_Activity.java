@@ -57,8 +57,7 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
     RecyclerView gSubserviceslist_recyclerview;
 
 
-    @BindView(R.id.nosubservice_text)
-    TextView gNosubservice_text;
+
 
     @BindView(R.id.submitforapproval_button)
     Button gSubmitforapproval_button;
@@ -104,7 +103,7 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
 
                         //For Service List
         gServicelayoutmanager = new LinearLayoutManager(ServicesAdd_Activity.this);
-        gServicelayoutmanager.setOrientation(LinearLayoutManager.VERTICAL);
+        gServicelayoutmanager.setOrientation(LinearLayoutManager.HORIZONTAL);
         gServiceslist_recyclerview.setLayoutManager(gServicelayoutmanager);
 
                         //For Sub Service List
@@ -241,7 +240,7 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
                         gSubServicesList_Arraylist= new ArrayList<>(Arrays.asList(lsubservice_response.getSub_services_response()));
                         if(!gSubServicesList_Arraylist.get(0).getService_Mapping_ID().equals("No Results Found")){
                             gSubserviceslist_recyclerview.setVisibility(View.VISIBLE);
-                            gNosubservice_text.setVisibility(View.GONE);
+
 
                             // gSubServiceList_Adapter = new SubServiceList_Adapter(UserServiceListActivity.this,gSubServicesList_Arraylist);
 
@@ -257,7 +256,7 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
 
                         else{
                             gSubserviceslist_recyclerview.setVisibility(View.GONE);
-                            gNosubservice_text.setVisibility(View.VISIBLE);
+
                         }
 
 
