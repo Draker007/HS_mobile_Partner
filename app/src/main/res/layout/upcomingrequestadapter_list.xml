@@ -94,7 +94,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/requestID_text"
+                android:id="@+id/requestid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -103,12 +103,12 @@
                 android:text="23"
                 android:textSize="@dimen/regulartextsize"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView81"
+                app:layout_constraintStart_toEndOf="@+id/requestid_text"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="1.0" />
 
             <TextView
-                android:id="@+id/textView81"
+                android:id="@+id/requestid_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat"

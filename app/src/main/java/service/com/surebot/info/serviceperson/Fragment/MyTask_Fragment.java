@@ -84,8 +84,13 @@ public class MyTask_Fragment  extends Fragment {
 
 
 
+<<<<<<< HEAD
 //        HomePackage_Adapter lHomePackage_Adapter = new HomePackage_Adapter(getActivity(),partner_package_response);
         //   gPackage_recyclerview.setAdapter(lHomePackage_Adapter);
+=======
+      /*  HomePackage_Adapter lHomePackage_Adapter = new HomePackage_Adapter(getActivity(),partner_package_response);
+        gPackage_recyclerview.setAdapter(lHomePackage_Adapter);*/
+>>>>>>> eb35d16176319a0376f5d3497ce3d6d5fce95b5b
 
 
 

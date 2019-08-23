@@ -51,7 +51,11 @@ public class PendingPaymentFragment extends Fragment {
         view = inflater.inflate(R.layout.payment_fragment, container, false);
         r1 = view.findViewById(R.id.paymentRecycler);
         RecyclerView.LayoutManager lm = new LinearLayoutManager(getActivity());
+
+        //adapter = new paymentParentAdapter( paymentParentDataList);
+
         adapter = new paymentParentAdapter(Payment_details,getActivity());
+
         r1.setLayoutManager(lm);
         progress = new Dialog(getActivity(), android.R.style.Theme_Translucent);
         progress.requestWindowFeature(Window.FEATURE_NO_TITLE);

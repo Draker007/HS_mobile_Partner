@@ -38,11 +38,14 @@ public class paymentChildAdapter extends RecyclerView.Adapter<paymentChildAdapte
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+
+
 //        paymentChildData a = paymentChildDataList.get(position);
         holder.serviceCost.setText(quntityAmount.get(position));
         holder.serviceDesc.setText(subServices.get(position));
         holder.serviceName.setText(services.get(position));
         holder.quntity.setText("("+quntity.get(position)+")");
+
 
 
     }

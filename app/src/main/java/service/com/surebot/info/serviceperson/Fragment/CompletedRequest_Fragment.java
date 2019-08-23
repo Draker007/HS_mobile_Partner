@@ -49,8 +49,8 @@ public class CompletedRequest_Fragment  extends Fragment {
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         gNewrequestlist_recyclerview.setLayoutManager(llm);
 
-        UpcomingRequest_Adapter lUpcomingRequest_Adapter = new UpcomingRequest_Adapter(getActivity(),gUserName_List);
-        gNewrequestlist_recyclerview.setAdapter(lUpcomingRequest_Adapter);
+       /* UpcomingRequest_Adapter lUpcomingRequest_Adapter = new UpcomingRequest_Adapter(getActivity(),gUserName_List);
+        gNewrequestlist_recyclerview.setAdapter(lUpcomingRequest_Adapter);*/
 
 
         return view;
