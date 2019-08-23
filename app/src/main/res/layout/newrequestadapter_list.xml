@@ -177,7 +177,7 @@
             android:visibility="gone"
             >
             <Button
-                android:id="@+id/cancel_button"
+                android:id="@+id/reject_button"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:text="Reject"
@@ -191,7 +191,7 @@
                 />
 
             <Button
-                android:id="@+id/confirm_button"
+                android:id="@+id/send_button"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_gravity="right|end"

@@ -30,8 +30,10 @@ import service.com.surebot.info.serviceperson.ResponseClass.Account_details_Resp
 import service.com.surebot.info.serviceperson.ResponseClass.Add_account_details_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Add_partner_personal_details_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Awards_and_CertificateResponse;
+import service.com.surebot.info.serviceperson.ResponseClass.CancelledRequestList_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Category_List_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.ChangePasswordResponse;
+import service.com.surebot.info.serviceperson.ResponseClass.CompletedRequestList_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.DeleteProfilePicResponse;
 import service.com.surebot.info.serviceperson.ResponseClass.EditPersonalPhotoResponse;
 import service.com.surebot.info.serviceperson.ResponseClass.Identity_verification_Response;
@@ -144,17 +146,22 @@ public interface ApiInterface {
 
     //New Request Lists
 
-    @POST("services_requests_new")
-    Call<NewRequestList_Response>  get_NewServiceRequestList  (@Body NewRequestList_Request request);
+        @POST("services_requests_new")
+        Call<NewRequestList_Response>  get_NewServiceRequestList  (@Body NewRequestList_Request request);
 
     //New Request Details
-    @POST("servicesrequests_new_details")
-    Call<NewRequestListDetails_Response>  get_NewServiceRequestDetails  (@Body NewRequestListDetails_Request request);
+        @POST("servicesrequests_new_details")
+        Call<NewRequestListDetails_Response>  get_NewServiceRequestDetails  (@Body NewRequestListDetails_Request request);
 
-//Get Upcoming Service Request List
-@POST("servicesrequests_upcoming_details")
-Call<UpcomingRequestList_Response>  get_UpcomingServiceRequestList  (@Body UpcomingRequestList_Request request);
+        //Get Upcoming Service Request List
+        @POST("servicesrequests_upcoming_details")
+        Call<UpcomingRequestList_Response>  get_UpcomingServiceRequestList  (@Body UpcomingRequestList_Request request);
 
+        //Get Completed Service Request List
+        @POST("servicesrequests_completed_details")
+        Call<CompletedRequestList_Response>  get_CompletedServiceRequestList  (@Body UpcomingRequestList_Request request);
 
-
+    //Get Cancelled Service Request List
+        @POST("servicesrequests_cancelled_details")
+        Call<CancelledRequestList_Response>  get_CancelledServiceRequestList  (@Body UpcomingRequestList_Request request);
 }

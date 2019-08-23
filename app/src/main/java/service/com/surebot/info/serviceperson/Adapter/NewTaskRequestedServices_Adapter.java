@@ -14,9 +14,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.ResponseClass.NewRequestListDetails_Response;
+import service.com.surebot.info.serviceperson.utils.SendquotetoUser;
 
 
 public class NewTaskRequestedServices_Adapter extends RecyclerView.Adapter<NewTaskRequestedServices_Adapter.MyViewHolder> {
@@ -27,7 +29,7 @@ public class NewTaskRequestedServices_Adapter extends RecyclerView.Adapter<NewTa
     ArrayList<NewRequestListDetails_Response.NewRequestserviceDetails_Records> gNewRequestList_Arraylist;
 
     ArrayList<String > gServiceName_List = new ArrayList<>();
-
+    private List<SendquotetoUser> gSendquotetoUserList;
 
 
     public NewTaskRequestedServices_Adapter(Context context,  ArrayList<String > gServiceName_List,  ArrayList<NewRequestListDetails_Response.NewRequestserviceDetails_Records> gNewRequestList_Arraylist) {

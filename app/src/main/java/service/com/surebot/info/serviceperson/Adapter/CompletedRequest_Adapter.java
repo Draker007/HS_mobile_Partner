@@ -14,15 +14,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import service.com.surebot.info.serviceperson.R;
+import service.com.surebot.info.serviceperson.ResponseClass.CompletedRequestList_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.UpcomingRequestList_Response;
 
 
 public class CompletedRequest_Adapter extends RecyclerView.Adapter<CompletedRequest_Adapter.MyViewHolder> {
 
     Context context;
-    ArrayList<UpcomingRequestList_Response.UpcomingRequestList_Records> gUpcomingRequestList_Arraylist;
+    ArrayList<CompletedRequestList_Response.CompletedRequestList_Records> gUpcomingRequestList_Arraylist;
 
-    public CompletedRequest_Adapter(Context context,   ArrayList<UpcomingRequestList_Response.UpcomingRequestList_Records> gUpcomingRequestList_Arraylist) {
+    public CompletedRequest_Adapter(Context context,   ArrayList<CompletedRequestList_Response.CompletedRequestList_Records> gUpcomingRequestList_Arraylist) {
         this.context=context;
         this.gUpcomingRequestList_Arraylist=gUpcomingRequestList_Arraylist;
     }

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -31,21 +32,24 @@ import service.com.surebot.info.serviceperson.Constants.Constants;
 import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.RequestClass.UpcomingRequestList_Request;
 import service.com.surebot.info.serviceperson.ResponseClass.UpcomingRequestList_Response;
+import service.com.surebot.info.serviceperson.utils.AppicationClass;
 
 public class UpcomingRequest_Fragment  extends Fragment {
 
 
     @BindView(R.id.newrequestlist_recyclerview)
-    RecyclerView gNewrequestlist_recyclerview;
+    RecyclerView gUpcomingrequestlist_recyclerview;
     @BindView(R.id.norequest_text)
     TextView gNorequest_text;
 
 
     LinearLayoutManager llm;
-    ArrayList<String> gUserName_List;
+
 
     private Dialog progress;
     ArrayList<UpcomingRequestList_Response.UpcomingRequestList_Records> gUpcomingRequestList_Arraylist;
+    String gUserId_FromLogin;
+
     @SuppressLint("WrongConstant")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,15 +64,12 @@ public class UpcomingRequest_Fragment  extends Fragment {
         progress.setContentView(R.layout.progressbar_background);
         progress.setCancelable(true);
 
-        gUserName_List = new ArrayList<String>();
-        gUserName_List.add("Aditi");
-        gUserName_List.add("Sahana");
-        gUserName_List.add("Aditi");
+        gUserId_FromLogin = AppicationClass.getUserId_FromLogin();
 
 
         llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
-        gNewrequestlist_recyclerview.setLayoutManager(llm);
+        gUpcomingrequestlist_recyclerview.setLayoutManager(llm);
         get_UpcomingServiceRequestList();
 
         return view;
@@ -108,8 +109,18 @@ public class UpcomingRequest_Fragment  extends Fragment {
                         UpcomingRequestList_Response lUpcomingRequestList_Response = response.body();
 
                         gUpcomingRequestList_Arraylist = new ArrayList<>(Arrays.asList(lUpcomingRequestList_Response.getPartner_requests_upcoming()));
-                        UpcomingRequest_Adapter lUpcomingRequest_Adapter = new UpcomingRequest_Adapter(getActivity(),gUpcomingRequestList_Arraylist);
-                        gNewrequestlist_recyclerview.setAdapter(lUpcomingRequest_Adapter);
+                       if(gUpcomingRequestList_Arraylist.get(0).getUser_ID()!=null){
+                           gNorequest_text.setVisibility(View.GONE);
+                           gUpcomingrequestlist_recyclerview.setVisibility(View.VISIBLE);
+                           UpcomingRequest_Adapter lUpcomingRequest_Adapter = new UpcomingRequest_Adapter(getActivity(),gUpcomingRequestList_Arraylist);
+                           gUpcomingrequestlist_recyclerview.setAdapter(lUpcomingRequest_Adapter);
+                       }
+                       else {
+
+                           gNorequest_text.setVisibility(View.VISIBLE);
+                           gUpcomingrequestlist_recyclerview.setVisibility(View.GONE);
+                       }
+
                         progress.dismiss();
                     }
                     progress.dismiss();
@@ -117,6 +128,7 @@ public class UpcomingRequest_Fragment  extends Fragment {
 
                 @Override
                 public void onFailure(Call<UpcomingRequestList_Response> call, Throwable t) {
+                    Toast.makeText(getActivity(), getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
                     progress.dismiss();
                 }
             });

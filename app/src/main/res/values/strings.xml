@@ -62,5 +62,5 @@
     <string name="terms">Welcome to Home service. You may use iur services through our website www.houseservice.in (\"Website\") or our mobile application (\"HS App\").Our Website and HS App have been create to provide information about our company and services to visitors and user of services, weather accessible to you web,mobile App or other platform (our services,together with our site, are the \"Service\")</string>
     <string name="enteremailForgotPass">Enter your registered Email-ID or Phone number to continue..</string>
     <string name="SetNewPass">Enter OTP which have sent to your Emial-ID or Phone Number</string>
-
+    <string name="onfailure">Something went wrong</string>
 </resources>

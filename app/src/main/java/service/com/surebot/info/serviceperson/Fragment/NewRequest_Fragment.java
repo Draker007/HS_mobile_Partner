@@ -36,7 +36,7 @@ import service.com.surebot.info.serviceperson.ResponseClass.Account_details_Resp
 import service.com.surebot.info.serviceperson.ResponseClass.NewRequestList_Response;
 import service.com.surebot.info.serviceperson.utils.AppicationClass;
 
-public class NewRequest_Fragment  extends Fragment {
+public class NewRequest_Fragment  extends Fragment implements NewRequests_Adapter.ServiceList_Communicator {
 
 
     @BindView(R.id.newrequestlist_recyclerview)
@@ -47,12 +47,12 @@ public class NewRequest_Fragment  extends Fragment {
     LinearLayoutManager llm;
 
 
-    ArrayList<String> gUserName_List;
+
 
     private Dialog progress;
 
     ArrayList<NewRequestList_Response.NewRequestList_Response_Records> gNewRequestList_Arraylist;
-
+    String gUserId_FromLogin;
 
     @SuppressLint("WrongConstant")
     @Override
@@ -69,20 +69,12 @@ public class NewRequest_Fragment  extends Fragment {
         progress.setCancelable(true);
 
 
-
-        gUserName_List = new ArrayList<String>();
-        gUserName_List.add("Aditi");
-        gUserName_List.add("Sahana");
-        gUserName_List.add("Aditi");
-
-
         llm = new LinearLayoutManager(getActivity());
          llm.setOrientation(LinearLayoutManager.VERTICAL);
         gNewrequestlist_recyclerview.setLayoutManager(llm);
 
+        gUserId_FromLogin = AppicationClass.getUserId_FromLogin();
 
-       /* NewRequests_Adapter lTodaysTask_Adapter = new NewRequests_Adapter(getActivity(),gUserName_List);
-        gNewrequestlist_recyclerview.setAdapter(lTodaysTask_Adapter);*/
 
         get_NewServiceRequestList();
            return view;
@@ -107,8 +99,8 @@ public class NewRequest_Fragment  extends Fragment {
 
             ApiInterface request = retrofit.create(ApiInterface.class);
             NewRequestList_Request lNewRequestList_Request = new NewRequestList_Request();
-            lNewRequestList_Request.setUser_ID("11");
 
+            lNewRequestList_Request.setUser_ID("11");
             lNewRequestList_Request.setDocket(Constants.TOKEN);
 
             Call<NewRequestList_Response> call = request.get_NewServiceRequestList(lNewRequestList_Request);
@@ -121,8 +113,20 @@ public class NewRequest_Fragment  extends Fragment {
                         NewRequestList_Response lNewRequestList_Response = response.body();
 
                         gNewRequestList_Arraylist = new ArrayList<>(Arrays.asList(lNewRequestList_Response.getPartner_my_task_details_response()));
-                        NewRequests_Adapter lNewRequests_Adapter = new NewRequests_Adapter(getActivity(),gNewRequestList_Arraylist);
-                        gNewrequestlist_recyclerview.setAdapter(lNewRequests_Adapter);
+                     if(gNewRequestList_Arraylist.get(0).getUser_ID()!=null){
+
+                         gNewrequestlist_recyclerview.setVisibility(View.VISIBLE);
+                         gNorequest_text.setVisibility(View.GONE);
+
+                         NewRequests_Adapter lNewRequests_Adapter = new NewRequests_Adapter(getActivity(),gNewRequestList_Arraylist);
+                         gNewrequestlist_recyclerview.setAdapter(lNewRequests_Adapter);
+                         lNewRequests_Adapter.setServiceList_Communicator(NewRequest_Fragment.this);
+                     }
+                     else {
+                         gNewrequestlist_recyclerview.setVisibility(View.GONE);
+                         gNorequest_text.setVisibility(View.VISIBLE);
+                     }
+
                         progress.dismiss();
                     }
                     progress.dismiss();
@@ -130,6 +134,7 @@ public class NewRequest_Fragment  extends Fragment {
 
                 @Override
                 public void onFailure(Call<NewRequestList_Response> call, Throwable t) {
+                    Toast.makeText(getActivity(), getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
                     progress.dismiss();
                 }
             });
@@ -142,4 +147,8 @@ public class NewRequest_Fragment  extends Fragment {
 
     }
 
+    @Override
+    public void addquotationlist(String serviceid) {
+
+    }
 }

@@ -7,10 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -20,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import okhttp3.OkHttpClient;
@@ -35,6 +38,7 @@ import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.RequestClass.NewRequestListDetails_Request;
 import service.com.surebot.info.serviceperson.ResponseClass.NewRequestListDetails_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.NewRequestList_Response;
+import service.com.surebot.info.serviceperson.utils.SendquotetoUser;
 
 
 public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapter.MyViewHolder> {
@@ -46,7 +50,13 @@ public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapte
     private Dialog progress;
 
     ArrayList<String > gServiceName_List= new ArrayList<>();
+    ServiceList_Communicator communicator;
 
+    private  ArrayList<String> gSendquotetoUserList_New = new ArrayList<>();
+
+    List<String> Awards = new ArrayList<>();
+
+    NewTaskSubServicesList_Adapter adapter;
 
     public NewRequests_Adapter(Context context,   ArrayList<NewRequestList_Response.NewRequestList_Response_Records> gNewservicesRequest_List) {
         this.context=context;
@@ -84,15 +94,13 @@ public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapte
 
 
         System.out.println("Request Adapter value is " + gNewservicesRequest_List.get(position).getUser_Name() +gNewservicesRequest_List.get(position).getBooking_Date() );
+
+    //Clicks on More text
         myViewHolder.lMore_Textview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 myViewHolder.lServicedetails_Layout.setVisibility(View.VISIBLE);
                 myViewHolder.lMore_Textview.setVisibility(View.GONE);
-
-
-
-
                 //For New Request Details
               //Api method starts
 
@@ -151,6 +159,7 @@ public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapte
 
                         @Override
                         public void onFailure(Call<NewRequestListDetails_Response> call, Throwable t) {
+                            Toast.makeText(context, context.getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
                             progress.dismiss();
                         }
                     });
@@ -162,7 +171,7 @@ public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapte
                 } //Api method close
             }
         });
-
+//Clicks on Less twxt
         myViewHolder.lLess_Textview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -171,6 +180,34 @@ public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapte
             }
         });
 
+        //Clicks on Send Button
+
+        myViewHolder.lSend_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                gSendquotetoUserList_New = adapter.retrieveData();
+                if(Awards.isEmpty()){
+                    //Toast.makeText(AwardsAndCertificateActivity.this, "Select Image or click picture", Toast.LENGTH_SHORT).show();
+                }else{
+
+                }
+
+
+
+
+            }
+        });
+        //Clicks on Reject Button
+        myViewHolder.lReject_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+    }
+    public void setServiceList_Communicator(ServiceList_Communicator communicator) {
+        this.communicator = communicator;
     }
 
     @Override
@@ -189,10 +226,9 @@ public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapte
         TextView lLess_Textview;
         LinearLayout lServicedetails_Layout;
         RelativeLayout lButton_layout;
+        Button lSend_button;
+        Button lReject_button;
         TextView lQuotesend_text;
-
-
-
 
         CardView lMain_Layout;
 
@@ -213,12 +249,17 @@ public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapte
             lMain_Layout=itemView.findViewById(R.id.main_layout);
             lServicedetails_Layout=itemView.findViewById(R.id.servicedetails_layout);
             lButton_layout=itemView.findViewById(R.id.button_layout);
+            lSend_button =itemView.findViewById(R.id.send_button);
+            lReject_button =itemView.findViewById(R.id.reject_button);
             lQuotesend_text=itemView.findViewById(R.id.quotesend_text);
         }
     }
 
 
+    public interface ServiceList_Communicator {
+        void addquotationlist(String serviceid);
 
+    }
 
 
 

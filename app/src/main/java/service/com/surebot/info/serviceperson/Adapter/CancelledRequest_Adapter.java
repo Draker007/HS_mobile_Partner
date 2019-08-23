@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import service.com.surebot.info.serviceperson.R;
+import service.com.surebot.info.serviceperson.ResponseClass.CancelledRequestList_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.UpcomingRequestList_Response;
 
 
@@ -21,11 +22,11 @@ import service.com.surebot.info.serviceperson.ResponseClass.UpcomingRequestList_
 public class CancelledRequest_Adapter extends RecyclerView.Adapter<CancelledRequest_Adapter.MyViewHolder> {
 
     Context context;
-    ArrayList<UpcomingRequestList_Response.UpcomingRequestList_Records> gUpcomingRequestList_Arraylist;
+    ArrayList<CancelledRequestList_Response.CancelledRequestList_Records> gCancelledRequestList_Arraylist;
 
-    public CancelledRequest_Adapter(Context context,   ArrayList<UpcomingRequestList_Response.UpcomingRequestList_Records> gUpcomingRequestList_Arraylist) {
+    public CancelledRequest_Adapter(Context context,   ArrayList<CancelledRequestList_Response.CancelledRequestList_Records> gCancelledRequestList_Arraylist) {
         this.context=context;
-        this.gUpcomingRequestList_Arraylist=gUpcomingRequestList_Arraylist;
+        this.gCancelledRequestList_Arraylist=gCancelledRequestList_Arraylist;
     }
 
     @NonNull
@@ -41,17 +42,17 @@ public class CancelledRequest_Adapter extends RecyclerView.Adapter<CancelledRequ
     public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, final int position) {
 
 
-        myViewHolder.lUserName_Text.setText(gUpcomingRequestList_Arraylist.get(position).getUser_Name());
-        myViewHolder.lUserAddress_text.setText(gUpcomingRequestList_Arraylist.get(position).getUser_Full_Address());
-        myViewHolder.lDate_text.setText(gUpcomingRequestList_Arraylist.get(position).getBooking_Date());
-        myViewHolder.lTime_text.setText(gUpcomingRequestList_Arraylist.get(position).getBooking_Start_Time());
-        myViewHolder.lUserphonenumber_text.setText(gUpcomingRequestList_Arraylist.get(position).getPhone_location());
-        myViewHolder.lRequestID_text.setText(gUpcomingRequestList_Arraylist.get(position).getBooking_Id());
+        myViewHolder.lUserName_Text.setText(gCancelledRequestList_Arraylist.get(position).getUser_Name());
+        myViewHolder.lUserAddress_text.setText(gCancelledRequestList_Arraylist.get(position).getUser_Full_Address());
+        myViewHolder.lDate_text.setText(gCancelledRequestList_Arraylist.get(position).getBooking_Date());
+        myViewHolder.lTime_text.setText(gCancelledRequestList_Arraylist.get(position).getBooking_Start_Time());
+        myViewHolder.lUserphonenumber_text.setText(gCancelledRequestList_Arraylist.get(position).getPhone_location());
+        myViewHolder.lRequestID_text.setText(gCancelledRequestList_Arraylist.get(position).getBooking_Id());
     }
 
     @Override
     public int getItemCount() {
-        return gUpcomingRequestList_Arraylist.size();
+        return gCancelledRequestList_Arraylist.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
