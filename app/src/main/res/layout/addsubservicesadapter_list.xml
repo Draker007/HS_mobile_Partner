@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="5dp">
+    android:padding="2dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_height="45dp"
         android:background="@drawable/subservicepink_background"
-        >
+        android:orientation="horizontal">
 
 
         <TextView
@@ -23,10 +22,9 @@
             android:layout_marginEnd="8dp"
             android:layout_weight="0"
             android:fontFamily="@font/montserrat"
-            android:padding="5dp"
             android:text="mysore"
             android:textColor="@color/color_white"
-            android:textSize="@dimen/regulartextsize"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/editText"
             app:layout_constraintStart_toStartOf="parent"
@@ -49,11 +47,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:background="@drawable/roundedittxtblack"
+            android:background="@drawable/round_edit_txt_white"
             android:ems="4"
             android:inputType="numberDecimal"
             android:maxLength="8"
-            android:padding="4dp"
+            android:padding="5dp"
             android:text="1111111"
             android:textSize="@dimen/regulartextsize"
             app:layout_constraintBottom_toBottomOf="parent"

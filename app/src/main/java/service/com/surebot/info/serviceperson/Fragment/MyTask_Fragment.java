@@ -2,6 +2,7 @@ package service.com.surebot.info.serviceperson.Fragment;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,8 +84,8 @@ public class MyTask_Fragment  extends Fragment {
 
 
 
-        HomePackage_Adapter lHomePackage_Adapter = new HomePackage_Adapter(getActivity(),partner_package_response);
-        gPackage_recyclerview.setAdapter(lHomePackage_Adapter);
+//        HomePackage_Adapter lHomePackage_Adapter = new HomePackage_Adapter(getActivity(),partner_package_response);
+        //   gPackage_recyclerview.setAdapter(lHomePackage_Adapter);
 
 
 
@@ -103,10 +104,10 @@ public class MyTask_Fragment  extends Fragment {
         items.add(new UserAddress_Location("Item 9"));*/
 
         ArrayList<String> gTimeslotArraylist = new ArrayList<>();
-        gTimeslotArraylist.add("14.22262, 76.40038");
-        gTimeslotArraylist.add("1.289545, 103.849972");
-        gTimeslotArraylist.add("14.22262, 76.40038");
-        gTimeslotArraylist.add("1.289545, 103.849972");
+        gTimeslotArraylist.add(0,"37.0902, 95.7129");
+        gTimeslotArraylist.add(1,"1.289545, 103.849972");
+        gTimeslotArraylist.add(2,"56.1304, 106.3468");
+        gTimeslotArraylist.add(3,"20.5937, 78.9629");
         UserAddress_Location lUserAddress_Location = new UserAddress_Location();
         /*lUserAddress_Location.setPosition(new LatLng(14.22262, 76.40038));
         lUserAddress_Location.setPosition(new LatLng(1.289545, 103.849972));
@@ -121,15 +122,18 @@ public class MyTask_Fragment  extends Fragment {
 
 
         for(int i=0;i<gTimeslotArraylist.size();i++){
-    lUserAddress_Location.setLatitutde(gTimeslotArraylist.get(i));
+            lUserAddress_Location.setLatitutde(gTimeslotArraylist.get(i));
 
-    items.add(lUserAddress_Location);
+            items.add(i,lUserAddress_Location);
 
-            TodaysTask_Adapter lTodaysTask_Adapter = new TodaysTask_Adapter(getActivity(),items,gUserName_List);
-            gTodaytask_recyclerview.setAdapter(lTodaysTask_Adapter);
 
-            lTodaysTask_Adapter.notifyDataSetChanged();
-}
+        }
+        Log.e("cocacola", "onCreateView: "+items.get(1).getLatitutde() );
+
+        TodaysTask_Adapter lTodaysTask_Adapter = new TodaysTask_Adapter(getActivity(),gTimeslotArraylist,gUserName_List);
+        gTodaytask_recyclerview.setAdapter(lTodaysTask_Adapter);
+
+        lTodaysTask_Adapter.notifyDataSetChanged();
 
 
        /* items.add(new UserAddress_Location(new LatLng(14.22262, 76.40038)));
@@ -176,9 +180,9 @@ public class MyTask_Fragment  extends Fragment {
                         System.out.println("asd1");
                         Partner_package_Response ListPackage = response.body();
 
-                        partner_package_response =new ArrayList<>(Arrays.asList(ListPackage.getPartner_package_response()));
-                        HomePackage_Adapter lHomePackage_Adapter = new HomePackage_Adapter(getActivity(),partner_package_response);
-                        gPackage_recyclerview.setAdapter(lHomePackage_Adapter);
+//                        partner_package_response =new ArrayList<>(Arrays.asList(ListPackage.getPartner_package_response()));
+//                        HomePackage_Adapter lHomePackage_Adapter = new HomePackage_Adapter(getActivity(),partner_package_response);
+//                        gPackage_recyclerview.setAdapter(lHomePackage_Adapter);
 
                     }
 

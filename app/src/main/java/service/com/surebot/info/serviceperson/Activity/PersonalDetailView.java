@@ -1,9 +1,11 @@
 package service.com.surebot.info.serviceperson.Activity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -55,6 +57,7 @@ public class PersonalDetailView extends AppCompatActivity {
     @BindView(R.id.PerDetailImage)
     ImageView profileImage;
 
+    private Dialog progress;
 
     TextView address;
     @Override
@@ -65,7 +68,11 @@ public class PersonalDetailView extends AppCompatActivity {
         edit= findViewById(R.id.editProfIMG);
         address = findViewById(R.id.AddressView);
         address.setEnabled(false);
-
+        progress = new Dialog(this, android.R.style.Theme_Translucent);
+        progress.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //here we set layout of progress dialog
+        progress.setContentView(R.layout.progressbar_background);
+        progress.setCancelable(true);
         getPersonalDetails();
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,6 +84,7 @@ public class PersonalDetailView extends AppCompatActivity {
 
     private void getPersonalDetails() {
         try {
+            progress.show();
             OkHttpClient.Builder client = new OkHttpClient.Builder();
             HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
             registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -124,17 +132,20 @@ public class PersonalDetailView extends AppCompatActivity {
 
 
                     }
+                    progress.dismiss();
 
 
                 }
+
 
                 @Override
                 public void onFailure(Call<PartnerProfileResponse> call, Throwable t) {
                     System.out.println("In User Login Method 7");
+                    progress.dismiss();
                 }
             });
         }catch (Exception e) {
-
+            progress.dismiss();
             e.printStackTrace();
 
 

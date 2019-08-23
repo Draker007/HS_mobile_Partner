@@ -76,60 +76,30 @@ public class Login_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                startActivity(new Intent(Login_Activity.this, ServicePersonHome_Activity.class));
-           /*     if (!gUserName_Text.getText().toString().trim().equals("")) {
-                    if (isNumeric((gUserName_Text.getText().toString().trim()))) {
+                if (!gUserName_Text.getText().toString().trim().equals("")) {
+                    if (!gUserPassword_Text.getText().toString().trim().equals("")) {
 
-                        if ((gUserName_Text.getText().toString().trim().length() >= 8 && gUserName_Text.getText().toString().trim().length() <= 14)) {
-                            if (!gUserPassword_Text.getText().toString().trim().equals("")) {
-
-                                System.out.println("In User Login Method Login button clicked 1");
-                                servicePerson_Login();
-
-                            } else {
-                                gUserPassword_Text.setError("Enter Password");
-                                gUserPassword_Text.requestFocus();
-
-                            }
-
+                        System.out.println("In User Login Method Login button clicked 1");
+                        network = NetworkUtil.getConnectivityStatusString(Login_Activity.this);
+                        System.out.print("network :" + network);
+                        if (!network.equals("No internet is available")) {
+                            System.out.println("In User Login Method Login button clicked 2");
+                            servicePerson_Login();
 
                         } else {
-
-                            gUserName_Text.setError("Enter valid phone number");
-                            gUserName_Text.requestFocus();
+                            networkChecking();
                         }
-
 
                     } else {
-
-                        if (!gUserPassword_Text.getText().toString().trim().equals("")) {
-                            network = NetworkUtil.getConnectivityStatusString(Login_Activity.this);
-                            System.out.print("network :" + network);
-                            if (!network.equals("No internet is available")) {
-                                System.out.println("In User Login Method Login button clicked 2");
-                                servicePerson_Login();
-
-                            } else {
-                                networkChecking();
-                            }
-                        } else {
-                            gUserPassword_Text.setError("Enter Password");
-                            gUserPassword_Text.requestFocus();
-
-                        }
-
+                        gUserPassword_Text.setError("Enter Password");
+                        gUserPassword_Text.requestFocus();
 
                     }
-
-
                 } else {
+
                     gUserName_Text.setError("Enter Email");
                     gUserName_Text.requestFocus();
-
-                }*/
-
-
-                //
+                }
 
             }
 
@@ -148,13 +118,12 @@ public class Login_Activity extends AppCompatActivity {
     //Login
     private void servicePerson_Login() {
         try {
-<<<<<<< HEAD
+
              progress.show();
-=======
+
 
             //progress.show();
 
->>>>>>> 035e00b2520bf72c506b9b80ea2bfa72d8dc0eb2
             OkHttpClient.Builder client = new OkHttpClient.Builder();
             HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
             registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);

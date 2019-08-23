@@ -1,5 +1,6 @@
 package service.com.surebot.info.serviceperson.Activity;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -50,7 +52,7 @@ public class AwardsAndCertificateActivity extends AppCompatActivity implements a
     ImageView camera,gallery;
     RecyclerView r1;
     Button save;
-
+    private Dialog progress;
     awardsAdapter adapter,adapter2;
     int i=0;
     List<awardsData> awardsDatas2 = new ArrayList<>();
@@ -64,6 +66,11 @@ public class AwardsAndCertificateActivity extends AppCompatActivity implements a
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_awards);
         camera = findViewById(R.id.AwardCamera);
+        progress = new Dialog(this, android.R.style.Theme_Translucent);
+        progress.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //here we set layout of progress dialog
+        progress.setContentView(R.layout.progressbar_background);
+        progress.setCancelable(true);
         gallery = findViewById(R.id.AwardGallery);
         r1=findViewById(R.id.awardRecycler1);
         save = findViewById(R.id.AwardSave);
@@ -116,7 +123,7 @@ public class AwardsAndCertificateActivity extends AppCompatActivity implements a
     private void award_and_certificate_photos_API() {
         try {
 
-            //progress.show();
+           progress.show();
             MultipartBody.Builder builder = new MultipartBody.Builder();
             builder.setType(MultipartBody.FORM);
 
@@ -165,16 +172,16 @@ if(awardsDatas2.get(o).getText()==null){
                             Toast.makeText(AwardsAndCertificateActivity.this, "Awards and Certificate updated successfully", Toast.LENGTH_SHORT).show();
 
                         }
-                        //progress.dismiss();
+                       progress.dismiss();
                     }
 
-                 //   progress.dismiss();
+                    progress.dismiss();
                 }
 
                 @Override
                 public void onFailure(Call<Awards_and_CertificateResponse> call, Throwable t) {
                     Log.e("Draker", "onFailed: 1" +t);
-                    //   progress.dismiss();
+                      progress.dismiss();
                 }
             });
 
@@ -184,7 +191,7 @@ if(awardsDatas2.get(o).getText()==null){
 
         catch (Exception e){
 
-            //progress.dismiss();
+            progress.dismiss();
             Log.e("draker", "addPersonaldetailsAPI: "+e );
             e.printStackTrace();
         }
@@ -226,10 +233,8 @@ if(awardsDatas2.get(o).getText()==null){
                 try {
 
                     Uri tempUri = getImageUri(getApplicationContext(), thumbnail);
-                    // CALL THIS METHOD TO GET THE ACTUAL PATH
-                    File f = new File(getRealPathFromURI(tempUri));
-//                    if(i==0) {
 
+                    File f = new File(getRealPathFromURI(tempUri));
 
                     Awards.add(f.getPath());
                     awardsData a = new awardsData(thumbnail);
@@ -251,19 +256,10 @@ if(awardsDatas2.get(o).getText()==null){
                 Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
                 Log.w("path of image from ", picturePath + "");
 
-//                if(i==0) {
                 Awards.add(picturePath);
                 awardsData a = new awardsData(thumbnail);
                 awardsDatas.add(a);
                 r1.setAdapter(adapter);
-//                    i=1;
-//                }else{
-//                    awardsData a = new awardsData(thumbnail);
-//                    awardsDatas2.add(a);
-//                    r2.setAdapter(adapter2);
-//                    i=0;
-//                }
-
 
             }
 

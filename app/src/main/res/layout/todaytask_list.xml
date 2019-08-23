@@ -133,24 +133,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="visible">
 
-            <ImageView
-                android:id="@+id/map_iamge"
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:src="@mipmap/mapimage"
-                android:visibility="gone"
-                />
-            <fragment
-                          android:id="@+id/map_new"
-                          android:name="com.google.android.gms.maps.SupportMapFragment"
-                          android:layout_width="match_parent"
-                          android:layout_height="180dp"
-                          android:layout_marginTop="30dp"
-                          android:layout_marginBottom="10dp"
-                          />
-         <!--   <FrameLayout
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/mapView"
+                android:layout_width="match_parent"
+                android:layout_height="250dp" />
+
+            <!--   <FrameLayout
                 android:id="@+id/map"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
@@ -213,7 +203,7 @@
                 android:layout_gravity="end"
                 android:layout_marginTop="8dp"
                 android:src="@drawable/collapse"
-                android:visibility="gone" />
+                android:visibility="visible" />
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
