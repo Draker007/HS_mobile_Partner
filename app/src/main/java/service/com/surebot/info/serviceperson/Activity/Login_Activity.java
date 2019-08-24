@@ -75,9 +75,9 @@ public class Login_Activity extends AppCompatActivity {
         gLogin_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Login_Activity.this, ServicesAdd_Activity.class));
+              //  startActivity(new Intent(Login_Activity.this, ServicesAdd_Activity.class));
 
-           /*     if (!gUserName_Text.getText().toString().trim().equals("")) {
+                if (!gUserName_Text.getText().toString().trim().equals("")) {
                     if (!gUserPassword_Text.getText().toString().trim().equals("")) {
 
                         System.out.println("In User Login Method Login button clicked 1");
@@ -100,7 +100,7 @@ public class Login_Activity extends AppCompatActivity {
 
                     gUserName_Text.setError("Enter Email");
                     gUserName_Text.requestFocus();
-                }*/
+                }
 
             }
 
@@ -167,7 +167,15 @@ public class Login_Activity extends AppCompatActivity {
                                 editer.putString("User_Name", partnerlogin_response.getUserName());
                                 editer.commit();
 
-                                startActivity(new Intent(Login_Activity.this, ServicesAdd_Activity.class));
+                                mCacheManager.setFirstTimeLaunch(false);
+                                mCacheManager.setUserName(partnerlogin_response.getUserName());
+                                mCacheManager.setUserRole(partnerlogin_response.getUser_Role());
+                                mCacheManager.setUserId(partnerlogin_response.getUser_ID());
+
+
+
+                                startActivity(new Intent(Login_Activity.this,SplashActivity.class));
+                                finish();
                             }
                         } else{
 
