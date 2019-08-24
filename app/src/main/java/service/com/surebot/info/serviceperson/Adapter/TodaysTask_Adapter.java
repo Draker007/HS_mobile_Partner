@@ -98,6 +98,20 @@ public class TodaysTask_Adapter extends RecyclerView.Adapter<TodaysTask_Adapter.
         String[] split = s.split(",");
         latitude = Double.parseDouble(split[0]);
         longitude = Double.parseDouble(split[1]);
+        myViewHolder.more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myViewHolder.map_layout.setVisibility(View.VISIBLE);
+                myViewHolder.more.setVisibility(View.GONE);
+            }
+        });
+        myViewHolder.hide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myViewHolder.map_layout.setVisibility(View.GONE);
+                myViewHolder.more.setVisibility(View.VISIBLE);
+            }
+        });
 
         myViewHolder.start.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,10 +148,11 @@ public class TodaysTask_Adapter extends RecyclerView.Adapter<TodaysTask_Adapter.
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements OnMapReadyCallback {
-        public TextView username_text,date_text,time_text,useraddress_text,userphonenumber_text,requestID_text,moreheader_text;
+        public TextView username_text,date_text,time_text,useraddress_text,userphonenumber_text,requestID_text,moreheader_text,more;
         public MapView map;
         public LinearLayout map_layout;
         Button cancel,start;
+        ImageView hide;
         public GoogleMap mapCurrnet;
         public  UserAddress_Location item;
 
@@ -155,6 +170,8 @@ public class TodaysTask_Adapter extends RecyclerView.Adapter<TodaysTask_Adapter.
             start = (Button) itemView.findViewById(R.id.startservice_button);
             map_layout = itemView.findViewById(R.id.map_layout);
             map = (MapView) itemView.findViewById(R.id.mapView);
+            more = itemView.findViewById(R.id.moreheader_text);
+            hide = itemView.findViewById(R.id.slide_image);
             if (map != null)
             {
                 ((MapView) map).onCreate(null);

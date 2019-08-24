@@ -1,18 +1,26 @@
 package service.com.surebot.info.serviceperson.ResponseClass;
 
 public class Notification_Response {
-    partner_services_notification_records[] partner_services_notification_response;
+    partner_services_notification_records[] partner_notification_request_response;
 
     public partner_services_notification_records[] getPartner_services_notification_response() {
-        return partner_services_notification_response;
+        return partner_notification_request_response;
     }
 
     public void setPartner_services_notification_response(partner_services_notification_records[] partner_services_notification_response) {
-        this.partner_services_notification_response = partner_services_notification_response;
+        this.partner_notification_request_response = partner_services_notification_response;
     }
 
     public class partner_services_notification_records{
         String Booking_Id,Booking_Start_Time,Transaction_ID,AddressID,User_Full_Address,User_ID,User_Name,User_Contact_Number,Booking_date;
+
+        public String getBooking_date() {
+            return Booking_date;
+        }
+
+        public void setBooking_date(String booking_date) {
+            Booking_date = booking_date;
+        }
 
         public String getBooking_Id() {
             return Booking_Id;

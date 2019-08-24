@@ -22,14 +22,23 @@ import service.com.surebot.info.serviceperson.RequestClass.PartnerSigup_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Partner_my_task_today_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Partner_package_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Partner_payment_Request;
+import service.com.surebot.info.serviceperson.RequestClass.Partner_set_new_password_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Partner_set_new_password_otp_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Partnerlogin_Request;
 import service.com.surebot.info.serviceperson.RequestClass.About_me_Request;
 import service.com.surebot.info.serviceperson.RequestClass.PaymentReceived_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Payment_completed_transaction_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Select_service_partner_Request;
+
 import service.com.surebot.info.serviceperson.RequestClass.Send_otp_mail_Request;
 import service.com.surebot.info.serviceperson.RequestClass.UpcomingRequestList_Request;
+
+
+import service.com.surebot.info.serviceperson.RequestClass.Send_otp_mail_Request;
+
+import service.com.surebot.info.serviceperson.RequestClass.UpcomingRequestList_Request;
+
+
 import service.com.surebot.info.serviceperson.ResponseClass.Account_details_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Add_account_details_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Add_partner_personal_details_Response;
@@ -54,6 +63,7 @@ import service.com.surebot.info.serviceperson.ResponseClass.PartnerSignup_Respon
 import service.com.surebot.info.serviceperson.ResponseClass.Partner_my_task_today_response;
 import service.com.surebot.info.serviceperson.ResponseClass.Partner_package_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Partner_payment_Response;
+import service.com.surebot.info.serviceperson.ResponseClass.Partner_set_new_password_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Partner_set_new_password_otp_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Partnerlogin_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.About_me_Response;
@@ -61,10 +71,15 @@ import service.com.surebot.info.serviceperson.ResponseClass.PaymentReceived_Resp
 import service.com.surebot.info.serviceperson.ResponseClass.Payment_completed_transaction_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Select_service_partner_Response;
 
+
 import service.com.surebot.info.serviceperson.ResponseClass.Send_otp_mail_Response;
 
 import service.com.surebot.info.serviceperson.ResponseClass.UpcomingRequestList_Response;
 
+
+
+import service.com.surebot.info.serviceperson.ResponseClass.Send_otp_mail_Response;
+import service.com.surebot.info.serviceperson.ResponseClass.UpcomingRequestList_Response;
 
 public interface ApiInterface {
 
@@ -160,6 +175,10 @@ public interface ApiInterface {
 
     @POST("send_otp_mail")
     Call<Send_otp_mail_Response> SendMailGetOTP (@Body Send_otp_mail_Request request);
+
+
+    @POST("partner_set_new_password")
+    Call<Partner_set_new_password_Response> SetNew_Password (@Body Partner_set_new_password_Request request);
 
 
 

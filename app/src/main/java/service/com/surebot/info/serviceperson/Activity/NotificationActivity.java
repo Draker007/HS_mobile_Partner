@@ -2,7 +2,9 @@ package service.com.surebot.info.serviceperson.Activity;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -32,12 +34,14 @@ public class NotificationActivity extends AppCompatActivity {
     RecyclerView r1;
     NotificationAdapter adapter;
     private Dialog progress;
+    TextView noNotification;
     List<NotificationData> notificationDataList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
         r1 = findViewById(R.id.notificationRecycler);
+        noNotification = findViewById(R.id.NoNotification);
         progress = new Dialog(this, android.R.style.Theme_Translucent);
         progress.requestWindowFeature(Window.FEATURE_NO_TITLE);
         //here we set layout of progress dialog
@@ -46,20 +50,11 @@ public class NotificationActivity extends AppCompatActivity {
         adapter = new NotificationAdapter(notificationDataList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(NotificationActivity.this);
         r1.setLayoutManager(layoutManager);
-        setdata();
+        getNotification();
+
     }
 
-    private void setdata() {
-            NotificationData a =new NotificationData("Draker","#73,durgambaasda asdasd asdass dasda sdassd asd asda ssdd asd asdd asd","123456789",
-            "124","20-06-1995","07:30 AM");
 
-
-            notificationDataList.add(a);
-        notificationDataList.add(a);
-        notificationDataList.add(a);
-        notificationDataList.add(a);
-        r1.setAdapter(adapter);
-    }
     void getNotification(){
         try {
             System.out.println("In User Login Method 1");
@@ -77,7 +72,7 @@ public class NotificationActivity extends AppCompatActivity {
             System.out.println("In User Login Method 2");
             ApiInterface request = retrofit.create(ApiInterface.class);
             Notification_Request lservice_request = new Notification_Request();
-        lservice_request.setUser_ID(AppicationClass.getUserId_FromLogin());
+        lservice_request.setUser_ID("4");
             lservice_request.setDocket(Constants.TOKEN);
 
 
@@ -90,11 +85,17 @@ public class NotificationActivity extends AppCompatActivity {
                         Notification_Response account_details_response = response.body();
 
                         ArrayList<Notification_Response.partner_services_notification_records> notification_Response = new ArrayList<>(Arrays.asList(account_details_response.getPartner_services_notification_response()));
+                       if(!notification_Response.get(0).getUser_ID().equals("No Results Found")){
                         for(int i=0 ; i<notification_Response.size();i++) {
-                           // NotificationData c = new NotificationData(notification_Response.get(i).getUser_Name(), notification_Response.get(i).getUser_Full_Address(), notification_Response.get(i).getUser_Contact_Number(), notification_Response.get(i).getBooking_Id(), notification_Response.get(i).getDate(), notification_Response.get(i).getBooking_Start_Time());
-                          //  notificationDataList.add(c);
+                            NotificationData c = new NotificationData(notification_Response.get(i).getUser_Name(), notification_Response.get(i).getUser_Full_Address(), notification_Response.get(i).getUser_Contact_Number(), notification_Response.get(i).getBooking_Id(), notification_Response.get(i).getBooking_date(), notification_Response.get(i).getBooking_Start_Time());
+                            notificationDataList.add(c);
+                            noNotification.setVisibility(View.GONE);
                         }
                         r1.setAdapter(adapter);
+                    }else
+                       {    r1.setVisibility(View.GONE);
+                           noNotification.setVisibility(View.VISIBLE);
+                       }
                     }
 
 

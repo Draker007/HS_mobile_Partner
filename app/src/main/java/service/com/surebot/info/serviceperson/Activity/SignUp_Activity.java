@@ -335,7 +335,6 @@ public class SignUp_Activity extends AppCompatActivity {
     void get_CategoryList(){
 
         try {
-            progress.show();
             OkHttpClient.Builder client = new OkHttpClient.Builder();
             HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
             registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -363,6 +362,7 @@ System.out.println("Signup entering into 111111111");
 
                         Category_List_Response responseed = response.body();
                         categoryList_Arraylist=new ArrayList<>(Arrays.asList(responseed.getCategory_response()));
+                        Log.e("lols", "onResponse: "+categoryList_Arraylist );
                         Spinner mySpinner = (Spinner) findViewById(R.id.spinner_professionselection);
                         mySpinner.setAdapter(new SignupProfessional_Adapter(SignUp_Activity.this, R.layout.professionselection_layout, categoryList_Arraylist));
 
