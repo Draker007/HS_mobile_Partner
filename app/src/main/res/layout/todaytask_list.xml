@@ -133,7 +133,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <com.google.android.gms.maps.MapView
                 android:id="@+id/mapView"
@@ -197,7 +197,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ImageView
-                android:id="@+id/slide_iamge"
+                android:id="@+id/slide_image"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_gravity="end"

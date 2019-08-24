@@ -1,11 +1,14 @@
 package service.com.surebot.info.serviceperson.Fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -30,6 +33,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import service.com.surebot.info.serviceperson.Activity.NotificationActivity;
 import service.com.surebot.info.serviceperson.Adapter.HomePackage_Adapter;
 import service.com.surebot.info.serviceperson.Adapter.TodaysTask_Adapter;
 import service.com.surebot.info.serviceperson.ApiClient.ApiInterface;
@@ -51,6 +55,8 @@ public class MyTask_Fragment  extends Fragment {
     @BindView(R.id.todaytask_recyclerview)
     RecyclerView gTodaytask_recyclerview;
 
+    @BindView(R.id.notificationIcon)
+    ImageView notification;
 
 
 
@@ -67,11 +73,21 @@ public class MyTask_Fragment  extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.mytask_fragment_layout, container, false);
         ButterKnife.bind(this, view);
+        notification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), NotificationActivity.class));
+            }
+        });
+
+
+
         callListPackageAPI();
         gPackages_List = new ArrayList<Integer>();
         gPackages_List.add(R.mipmap.package1);
         gPackages_List.add(R.mipmap.package2);
         gPackages_List.add(R.mipmap.package3);
+
 
         gUserName_List = new ArrayList<String>();
         gUserName_List.add("Aditi");
@@ -84,13 +100,13 @@ public class MyTask_Fragment  extends Fragment {
 
 
 
-<<<<<<< HEAD
+
 //        HomePackage_Adapter lHomePackage_Adapter = new HomePackage_Adapter(getActivity(),partner_package_response);
         //   gPackage_recyclerview.setAdapter(lHomePackage_Adapter);
-=======
+
       /*  HomePackage_Adapter lHomePackage_Adapter = new HomePackage_Adapter(getActivity(),partner_package_response);
         gPackage_recyclerview.setAdapter(lHomePackage_Adapter);*/
->>>>>>> eb35d16176319a0376f5d3497ce3d6d5fce95b5b
+
 
 
 

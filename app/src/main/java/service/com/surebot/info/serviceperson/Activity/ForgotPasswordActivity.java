@@ -3,9 +3,11 @@ package service.com.surebot.info.serviceperson.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -29,8 +31,8 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     @BindView(R.id.EmailORNumber)
     EditText gEmailORNumber;
 
-    @BindView(R.id.SendOTPbtn)
-    EditText gSendOTPbtn;
+    @BindView(R.id.sendotp)
+    Button gSendOTPbtn;
         Dialog progress;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +53,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                 }
                 else{
     //CallAPI to Get OTP
-
+                    CallGetOTPAPI();
                 }
                     }
         });
@@ -67,7 +69,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             client.addInterceptor(registrationInterceptor);
 
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("http://192.168.0.82/services_at_home_test/Api/")
+                    .baseUrl(Constants.BASE_URL)
                     .client(client.build())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
@@ -84,14 +86,20 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             call.enqueue(new Callback<Send_otp_mail_Response>() {
                 @Override
                 public void onResponse(Call<Send_otp_mail_Response> call, Response<Send_otp_mail_Response> response) {
+                        if(response.isSuccessful()){
 
+                            if(response.body().getNotification_status_response().equals("valid")){
+                                Intent intent = new Intent(ForgotPasswordActivity.this,SetNewPasswordActivity.class);
+                                intent.putExtra("email",gEmailORNumber.getText().toString());
+                                startActivity(intent);
+                            }else{
+                                Toast.makeText(ForgotPasswordActivity.this, response.body().getNotification_status_response(), Toast.LENGTH_SHORT).show();
+                                progress.dismiss();
+                            }
+                        }
 
 
                     }
-
-
-                 //   progress.dismiss();
-               // }
 
 
 

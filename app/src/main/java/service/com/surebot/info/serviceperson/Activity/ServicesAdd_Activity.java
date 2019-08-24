@@ -56,7 +56,8 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
     @BindView(R.id.subserviceslist_recyclerview)
     RecyclerView gSubserviceslist_recyclerview;
 
-
+    @BindView(R.id.NoSubServiceText)
+    TextView gNoSubServiceText;
 
 
     @BindView(R.id.submitforapproval_button)
@@ -75,6 +76,7 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
     ArrayList<ListOfSubServices_Response.ListOfSubServices_Records> gSubServicesList_Arraylist;
 
     String gServiceId_FromService;
+
 
     @SuppressLint("WrongConstant")
     @Override
@@ -172,9 +174,9 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
 
 
 
-                        progress.dismiss();
+
                     }
-                    progress.dismiss();
+
                 }
 
                 @Override
@@ -246,9 +248,9 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
 
                             AddSubServicesList_Adapter lAddSubServicesList_Adapter = new AddSubServicesList_Adapter(ServicesAdd_Activity.this,gSubServicesList_Arraylist);
                             gSubserviceslist_recyclerview.setAdapter(lAddSubServicesList_Adapter);
+                                gSubmitforapproval_button.setVisibility(View.VISIBLE);
 
-
-
+                            progress.dismiss();
 
 
 
@@ -256,16 +258,17 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
 
                         else{
                             gSubserviceslist_recyclerview.setVisibility(View.GONE);
-
+                            gNoSubServiceText.setVisibility(View.VISIBLE);
+                            progress.dismiss();
                         }
 
 
 
 
 
-                        progress.dismiss();
+
                     }
-                    progress.dismiss();
+
                 }
 
                 @Override
@@ -293,7 +296,7 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
         try{
 
             System.out.println("In User Login Method 1");
-            progress.show();
+
             OkHttpClient.Builder client = new OkHttpClient.Builder();
             HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
             registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -328,6 +331,8 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
                         Set<String> set = new HashSet<>(location_City);
                         location_City.clear();
                         location_City.addAll(set);
+                        ArrayList<Select_service_partner_Response.Category_Records> Category = new ArrayList<>(Arrays.asList(lservice_response.getCategory_response()));
+                        gPrimaryService.setText(Category.get(0).getCategory_Name());
 
                         AddServicesLocationlist_Adapter lAddServicesLocationlist_Adapter = new AddServicesLocationlist_Adapter(ServicesAdd_Activity.this,location_City,location_response);
                         gLocationlist_recyclerview.setAdapter(lAddServicesLocationlist_Adapter);

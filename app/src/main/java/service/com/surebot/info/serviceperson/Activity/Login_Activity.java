@@ -124,10 +124,7 @@ public class Login_Activity extends AppCompatActivity {
 
             //progress.show();
 
-<<<<<<< HEAD
-=======
 
->>>>>>> eb35d16176319a0376f5d3497ce3d6d5fce95b5b
             OkHttpClient.Builder client = new OkHttpClient.Builder();
             HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
             registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
