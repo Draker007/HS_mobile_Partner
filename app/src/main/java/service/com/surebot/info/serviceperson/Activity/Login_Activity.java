@@ -75,8 +75,9 @@ public class Login_Activity extends AppCompatActivity {
         gLogin_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                startActivity(new Intent(Login_Activity.this, ServicesAdd_Activity.class));
 
-                if (!gUserName_Text.getText().toString().trim().equals("")) {
+           /*     if (!gUserName_Text.getText().toString().trim().equals("")) {
                     if (!gUserPassword_Text.getText().toString().trim().equals("")) {
 
                         System.out.println("In User Login Method Login button clicked 1");
@@ -99,7 +100,7 @@ public class Login_Activity extends AppCompatActivity {
 
                     gUserName_Text.setError("Enter Email");
                     gUserName_Text.requestFocus();
-                }
+                }*/
 
             }
 
@@ -124,10 +125,6 @@ public class Login_Activity extends AppCompatActivity {
 
             //progress.show();
 
-<<<<<<< HEAD
-=======
-
->>>>>>> eb35d16176319a0376f5d3497ce3d6d5fce95b5b
             OkHttpClient.Builder client = new OkHttpClient.Builder();
             HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
             registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);

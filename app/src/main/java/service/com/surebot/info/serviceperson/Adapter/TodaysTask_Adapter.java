@@ -52,6 +52,8 @@ public class TodaysTask_Adapter extends RecyclerView.Adapter<TodaysTask_Adapter.
 
     double latitude, longitude;
 
+    startservicelist_Communicator communicator;
+
     public TodaysTask_Adapter(Context context,  List<String> items, ArrayList<String> gUserName_List) {
         Log.e(TAG, "TodaysTask_Adapter: "+items.get(0));
         Log.e(TAG, "TodaysTask_Adapter: "+items.get(1));
@@ -97,6 +99,18 @@ public class TodaysTask_Adapter extends RecyclerView.Adapter<TodaysTask_Adapter.
         latitude = Double.parseDouble(split[0]);
         longitude = Double.parseDouble(split[1]);
 
+        myViewHolder.start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                communicator.startservice("1");
+            }
+        });
+
+    }
+
+    public void setstartservicelist_Communicator(startservicelist_Communicator communicator) {
+        this.communicator = communicator;
     }
 
     @Override
@@ -198,8 +212,8 @@ public class TodaysTask_Adapter extends RecyclerView.Adapter<TodaysTask_Adapter.
 
         }
     }
-    public interface bannerslist_Communicator {
-        void bannerslist(String serviceid);
+    public interface startservicelist_Communicator {
+        void startservice(String serviceid);
 
     }
 
