@@ -344,7 +344,7 @@ public class SignUp_Activity extends AppCompatActivity {
             HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
             registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             client.addInterceptor(registrationInterceptor);
-System.out.println("Signup entering into 111111111");
+                System.out.println("Signup entering into 111111111");
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(Constants.BASE_URL)
                     .client(client.build())

@@ -110,7 +110,7 @@ String gUserId_FromLogin;
 
                         gCompeltedRequestList_Arraylist = new ArrayList<>(Arrays.asList(lCompletedRequestList_Response.getPartner_requests_upcoming()));
 
-                       if(gCompeltedRequestList_Arraylist.get(0).getUser_ID()!=null){
+                       if(!gCompeltedRequestList_Arraylist.get(0).getUser_ID().equals("No Results Found")){
                            gNorequest_text.setVisibility(View.GONE);
                            gCompletedrequestlist_recyclerview.setVisibility(View.VISIBLE);
                            CompletedRequest_Adapter lCompletedRequest_Adapter = new CompletedRequest_Adapter(getActivity(),gCompeltedRequestList_Arraylist);

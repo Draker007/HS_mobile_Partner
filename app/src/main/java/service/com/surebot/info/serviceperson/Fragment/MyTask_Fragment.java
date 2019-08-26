@@ -1,14 +1,27 @@
 package service.com.surebot.info.serviceperson.Fragment;
 
 import android.annotation.SuppressLint;
+
+import android.app.Dialog;
+import android.content.Intent;
 import android.content.Intent;
 import android.media.Image;
+
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import android.view.Window;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import android.widget.ImageView;
+
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -33,7 +46,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import service.com.surebot.info.serviceperson.Activity.serviceDetailsActivity;
+
 import service.com.surebot.info.serviceperson.Activity.NotificationActivity;
+
 import service.com.surebot.info.serviceperson.Adapter.HomePackage_Adapter;
 import service.com.surebot.info.serviceperson.Adapter.TodaysTask_Adapter;
 import service.com.surebot.info.serviceperson.ApiClient.ApiInterface;
@@ -46,7 +63,7 @@ import service.com.surebot.info.serviceperson.RequestClass.Partner_package_Reque
 import service.com.surebot.info.serviceperson.ResponseClass.Partner_package_Response;
 
 
-public class MyTask_Fragment  extends Fragment {
+public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.startservicelist_Communicator {
 
 
     @BindView(R.id.package_recyclerview)
@@ -66,6 +83,9 @@ public class MyTask_Fragment  extends Fragment {
     LinearLayoutManager llm;
     ArrayList<Partner_package_Response.Partner_package_records> partner_package_response ;
 
+    Dialog gEnterCode_Dialog;
+    EditText lOtp_text1, lOtp_text2, lOtp_text3, lOtp_text4;
+    String otp ,otp1 , otp2 , otp3 , otp4;
     @SuppressLint("WrongConstant")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -153,7 +173,7 @@ public class MyTask_Fragment  extends Fragment {
 
         TodaysTask_Adapter lTodaysTask_Adapter = new TodaysTask_Adapter(getActivity(),gTimeslotArraylist,gUserName_List);
         gTodaytask_recyclerview.setAdapter(lTodaysTask_Adapter);
-
+        lTodaysTask_Adapter.setstartservicelist_Communicator(MyTask_Fragment.this);
         lTodaysTask_Adapter.notifyDataSetChanged();
 
 
@@ -227,5 +247,113 @@ public class MyTask_Fragment  extends Fragment {
 
         }
     }
+
+    @Override
+    public void startservice(String serviceid) {
+
+
+        gEnterCode_Dialog = new Dialog(getActivity(), R.style.dailogboxtheme);
+        gEnterCode_Dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        gEnterCode_Dialog.getWindow().setBackgroundDrawableResource(R.color.color_transparen);
+        gEnterCode_Dialog.setContentView(R.layout.entercodeforstartservice_popup);
+
+
+        TextView lOkay_text = gEnterCode_Dialog.findViewById(R.id.ok_text);
+         lOtp_text1 = gEnterCode_Dialog.findViewById(R.id.otp_text1);
+         lOtp_text2 = gEnterCode_Dialog.findViewById(R.id.otp_text2);
+         lOtp_text3 = gEnterCode_Dialog.findViewById(R.id.otp_text3);
+         lOtp_text4 = gEnterCode_Dialog.findViewById(R.id.otp_text4);
+
+        lOtp_text1.addTextChangedListener(new SampleTextWatcherClass(lOtp_text1));
+        lOtp_text2.addTextChangedListener(new SampleTextWatcherClass(lOtp_text2));
+        lOtp_text3.addTextChangedListener(new SampleTextWatcherClass(lOtp_text3));
+        lOtp_text4.addTextChangedListener(new SampleTextWatcherClass(lOtp_text4));
+
+
+
+        lOkay_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                if (lOtp_text1.getText().toString().isEmpty()||lOtp_text2.getText().toString().isEmpty()||lOtp_text3.getText().toString().isEmpty()||lOtp_text4.getText().toString().isEmpty()){
+                    Toast.makeText(getActivity(), "Enter 4 Digit Code Sent To User", Toast.LENGTH_LONG).show();
+
+                }
+                else{
+                    otp = otp1+otp2+otp3+otp4;
+                 System.out.println("Entered Otp " + otp);
+                    startActivity(new Intent(getActivity(), serviceDetailsActivity.class));
+                    gEnterCode_Dialog.dismiss();
+                }
+            }
+        });
+
+        gEnterCode_Dialog.setCancelable(false);
+        gEnterCode_Dialog.show();
+
+
+    }
+
+
+    // Class for getting otp from EditText
+
+    public class SampleTextWatcherClass implements TextWatcher{
+        private View view;
+        private SampleTextWatcherClass(View view)
+        {
+            this.view = view;
+        }
+
+
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            String text = editable.toString();
+            switch (view.getId()) {
+
+                case R.id.otp_text1:
+                    if (text.length() == 1)
+                        lOtp_text2.requestFocus();
+                    otp1=text;
+                    break;
+                case R.id.otp_text2:
+                    if (text.length() == 1)
+                    {
+                        lOtp_text3.requestFocus();
+                        otp2 = text;
+                    }
+                    else if (text.length() == 0)
+                        lOtp_text1.requestFocus();
+                    break;
+                case R.id.otp_text3:
+                    if (text.length() == 1)
+                    {
+                        lOtp_text4.requestFocus();
+                        otp3=text;
+                    }
+                    else if (text.length() == 0)
+                        lOtp_text2.requestFocus();
+                    break;
+                case R.id.otp_text4:
+                    if (text.length() == 0)
+                        lOtp_text3.requestFocus();
+                    else
+                        otp4=text;
+                    break;
+
+            }
+        }
+    }
+
 
 }

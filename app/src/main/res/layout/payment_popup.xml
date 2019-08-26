@@ -4,7 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    >
+
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
@@ -13,11 +17,13 @@
         android:layout_marginLeft="40dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:background="@color/color_green"
+        android:background="@drawable/paymentreceived_greenbackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/as"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:foregroundGravity="center_vertical"
+        >
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -27,11 +33,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
-        android:layout_marginBottom="16dp"
-        android:background="@color/color_white"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/paymentreceived_whitebackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -46,6 +52,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginBottom="10dp"
             app:srcCompat="@mipmap/check_mark" />
 
         <TextView
@@ -57,18 +64,25 @@
             android:layout_marginTop="8dp"
             android:text="Amount Paid"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView2"
+            android:fontFamily="@font/montserrat"
+            android:textSize="@dimen/regulartextsize"
+            android:textColor="@color/color_black"
+            />
 
         <TextView
-            android:id="@+id/textView37"
-            android:layout_width="wrap_content"
+            android:id="@+id/ammountpaid_text"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
-            android:text="TextView"
+            android:text="50"
             app:layout_constraintBottom_toBottomOf="@+id/textView30"
             app:layout_constraintStart_toEndOf="@+id/textView30"
-            app:layout_constraintTop_toTopOf="@+id/textView30" />
+            app:layout_constraintTop_toTopOf="@+id/textView30"
+            android:fontFamily="@font/montserrat"
+            android:textSize="@dimen/regulartextsize"
+            />
 
         <TextView
             android:id="@+id/textView38"
@@ -76,8 +90,24 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Service"
+            android:fontFamily="@font/montserrat"
+            android:textSize="@dimen/regulartextsize"
+            android:textColor="@color/color_black"
             app:layout_constraintStart_toStartOf="@+id/textView30"
-            app:layout_constraintTop_toBottomOf="@+id/textView37" />
+            app:layout_constraintTop_toBottomOf="@+id/ammountpaid_text" />
+
+        <TextView
+            android:id="@+id/servicelist_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/montserrat"
+            android:text="TextView1,servixce 2 , services 3 , Services 4"
+            android:textSize="@dimen/regulartextsize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView38"
+
+            app:layout_constraintTop_toTopOf="@+id/textView38" />
 
         <TextView
             android:id="@+id/date"
@@ -85,10 +115,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
+            android:fontFamily="@font/montserrat"
             android:text="TextView"
+            android:textColor="@color/color_black"
+            android:textSize="@dimen/regulartextsize"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView38"
-            app:layout_constraintTop_toBottomOf="@+id/textView38"
+            app:layout_constraintTop_toBottomOf="@+id/servicelist_text"
+
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
@@ -100,7 +134,11 @@
             android:text="TextView"
             app:layout_constraintBottom_toBottomOf="@+id/date"
             app:layout_constraintStart_toEndOf="@+id/date"
-            app:layout_constraintTop_toTopOf="@+id/date" />
+            app:layout_constraintTop_toTopOf="@+id/date"
+            android:fontFamily="@font/montserrat"
+            android:textSize="@dimen/regulartextsize"
+            android:textColor="@color/color_black"
+            />
 
         <Button
             android:id="@+id/button2"
@@ -108,18 +146,24 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/buttonblue_background"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/buttongreen_background"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:text="Payment received"
+            android:textColor="@color/color_white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/date"
-            app:layout_constraintTop_toBottomOf="@+id/time" />
+            app:layout_constraintTop_toBottomOf="@+id/time"
+            android:textAllCaps="false"
+            android:padding="5dp"
+            android:fontFamily="@font/montserrat"
+            android:textSize="@dimen/regulartextsize"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

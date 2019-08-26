@@ -46,7 +46,8 @@
         <activity android:name=".Activity.serviceDetailsActivity" />
         <activity android:name=".Activity.PersonalDetailView" />
         <activity android:name=".Activity.NotificationActivity" />
-        <activity android:name=".Activity.IdentityVerificationActivity" s/>
+        <activity android:name=".Activity.IdentityVerificationActivity" >
+        </activity>
         <activity android:name=".Activity.congratsActivity" />
         <activity android:name=".Activity.PrimePartnerActivity" />
         <activity android:name=".Activity.AwardsAndCertificateActivity" />

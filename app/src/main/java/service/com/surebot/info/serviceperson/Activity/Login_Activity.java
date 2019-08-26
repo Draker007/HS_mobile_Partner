@@ -75,6 +75,7 @@ public class Login_Activity extends AppCompatActivity {
         gLogin_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+              //  startActivity(new Intent(Login_Activity.this, ServicesAdd_Activity.class));
 
                 if (!gUserName_Text.getText().toString().trim().equals("")) {
                     if (!gUserPassword_Text.getText().toString().trim().equals("")) {
@@ -166,7 +167,15 @@ public class Login_Activity extends AppCompatActivity {
                                 editer.putString("User_Name", partnerlogin_response.getUserName());
                                 editer.commit();
 
-                                startActivity(new Intent(Login_Activity.this, ServicesAdd_Activity.class));
+                                mCacheManager.setFirstTimeLaunch(false);
+                                mCacheManager.setUserName(partnerlogin_response.getUserName());
+                                mCacheManager.setUserRole(partnerlogin_response.getUser_Role());
+                                mCacheManager.setUserId(partnerlogin_response.getUser_ID());
+
+
+
+                                startActivity(new Intent(Login_Activity.this,SplashActivity.class));
+                                finish();
                             }
                         } else{
 

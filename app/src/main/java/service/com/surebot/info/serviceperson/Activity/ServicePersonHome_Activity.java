@@ -31,6 +31,7 @@ import butterknife.ButterKnife;
 import service.com.surebot.info.serviceperson.Fragment.AllRequestList_Fragment;
 import service.com.surebot.info.serviceperson.Fragment.MyTask_Fragment;
 import service.com.surebot.info.serviceperson.Fragment.Profile_Fragment;
+import service.com.surebot.info.serviceperson.Manager.CacheManager;
 import service.com.surebot.info.serviceperson.R;
 
 public class ServicePersonHome_Activity extends AppCompatActivity {
@@ -57,6 +58,7 @@ public class ServicePersonHome_Activity extends AppCompatActivity {
     ConstraintLayout moree;
     private Dialog progress;
 
+    private CacheManager mCacheManager;
 
     int back = 0;
     @Override
@@ -65,10 +67,13 @@ public class ServicePersonHome_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_service_person_home);
 
         ButterKnife.bind(this);
+
         check = getIntent().getStringExtra("status");
         if(check=="1"){
             navigation.setSelectedItemId(R.id.navigation_profile);
         }
+        mCacheManager = new CacheManager(ServicePersonHome_Activity.this);
+
         progress = new Dialog(this, android.R.style.Theme_Translucent);
         progress.requestWindowFeature(Window.FEATURE_NO_TITLE);
         //here we set layout of progress dialog
@@ -155,6 +160,13 @@ public class ServicePersonHome_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //TODO: logout
+
+                mCacheManager.setUserId("");
+                mCacheManager.setUserRole("");
+                mCacheManager.setFirstTimeLaunch(true);
+                mCacheManager.setUserName("");
+                startActivity(new Intent(ServicePersonHome_Activity.this, SplashActivity.class));
+               finish();
             }
         });
 

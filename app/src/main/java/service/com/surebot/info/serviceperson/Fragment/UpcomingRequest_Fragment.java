@@ -109,7 +109,7 @@ public class UpcomingRequest_Fragment  extends Fragment {
                         UpcomingRequestList_Response lUpcomingRequestList_Response = response.body();
 
                         gUpcomingRequestList_Arraylist = new ArrayList<>(Arrays.asList(lUpcomingRequestList_Response.getPartner_requests_upcoming()));
-                       if(gUpcomingRequestList_Arraylist.get(0).getUser_ID()!=null){
+                       if(!gUpcomingRequestList_Arraylist.get(0).getUser_ID().equals("No Results Found")){
                            gNorequest_text.setVisibility(View.GONE);
                            gUpcomingrequestlist_recyclerview.setVisibility(View.VISIBLE);
                            UpcomingRequest_Adapter lUpcomingRequest_Adapter = new UpcomingRequest_Adapter(getActivity(),gUpcomingRequestList_Arraylist);
