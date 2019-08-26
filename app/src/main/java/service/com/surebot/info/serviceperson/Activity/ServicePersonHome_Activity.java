@@ -6,6 +6,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,8 +15,16 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,6 +39,7 @@ public class ServicePersonHome_Activity extends AppCompatActivity {
     ImageView closeMore;
     // this will setup
     int status =1;
+    String check=null;
     Fragment fragment = null;
     @BindView(R.id.AboutUs)
     ConstraintLayout Aboutus;
@@ -55,7 +65,10 @@ public class ServicePersonHome_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_service_person_home);
 
         ButterKnife.bind(this);
-
+        check = getIntent().getStringExtra("status");
+        if(check=="1"){
+            navigation.setSelectedItemId(R.id.navigation_profile);
+        }
         progress = new Dialog(this, android.R.style.Theme_Translucent);
         progress.requestWindowFeature(Window.FEATURE_NO_TITLE);
         //here we set layout of progress dialog
@@ -69,12 +82,41 @@ public class ServicePersonHome_Activity extends AppCompatActivity {
         transaction.add(R.id.fragment_container, fragment);
         transaction.commit();
        Listners();
+        requestMultiplePermissions();
         closeMore = findViewById(R.id.moreCLose);
 
 
 
     }  //Oncreate close
 
+
+    private void  requestMultiplePermissions(){
+        Dexter.withActivity(ServicePersonHome_Activity.this)
+                .withPermissions(
+                        Manifest.permission.CAMERA,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE)
+                .withListener(new MultiplePermissionsListener() {
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport report) {
+                        if (report.areAllPermissionsGranted()) {
+                            Toast.makeText(getApplicationContext(), "All permissions are granted by user!", Toast.LENGTH_SHORT).show();
+                        }
+
+                        // check for permanent denial of any permission
+                        if (report.isAnyPermissionPermanentlyDenied()) {
+                            // show alert dialog navigating to Settings
+                            //openSettingsDialog();
+                        }
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+
+                    }
+                }).onSameThread()
+                .check();
+    }
     private void Listners() {
 
 

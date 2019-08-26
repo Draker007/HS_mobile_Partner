@@ -1,8 +1,10 @@
 package service.com.surebot.info.serviceperson.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -68,7 +70,7 @@ public class AddPersonalDetailsActivity extends AppCompatActivity {
     String[] images = new String[3];
 
     @BindView(R.id.AddDetailsBack)
-    ImageView goback;
+    ConstraintLayout back;
 
     @BindView(R.id.editName)
     TextView name;
@@ -98,6 +100,8 @@ public class AddPersonalDetailsActivity extends AppCompatActivity {
     TextView gState;
 
     private Dialog progress;
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_personal_details);
@@ -108,9 +112,13 @@ public class AddPersonalDetailsActivity extends AppCompatActivity {
         progress.setContentView(R.layout.progressbar_background);
         progress.setCancelable(true);
         images[1]=images[2]="0";
-        requestMultiplePermissions();
         initialize();
         listner();
+        String imagepath = getIntent().getStringExtra("image");
+        if (!imagepath.equals("")){
+            Glide.with(AddPersonalDetailsActivity.this).load(Constants.IMAGEBASE_URL+imagepath).into(editImageProf);
+        }
+
     }
 
     private void listner() {
@@ -126,8 +134,11 @@ public class AddPersonalDetailsActivity extends AppCompatActivity {
                                     if (!gState.getText().toString().trim().isEmpty()) {
                                         if (!gPin.getText().toString().trim().isEmpty()) {
                                            if(images[1].equals("0")){
-                                               Toast.makeText(AddPersonalDetailsActivity.this, "Upload Your Address Proof to Continue", Toast.LENGTH_SHORT).show();
-                                           }else{
+                                               Toast.makeText(AddPersonalDetailsActivity.this, "Upload Front Side of Your Address Proof to Continue", Toast.LENGTH_SHORT).show();
+                                           }else{if (images[2].equals(null)){
+                                               Toast.makeText(AddPersonalDetailsActivity.this, "Upload Back Side of Your Address Proof to Continue", Toast.LENGTH_SHORT).show();
+
+                                           }else
                                             addPersonaldetailsAPI();
                                            }
                                         } else {
@@ -221,12 +232,14 @@ public class AddPersonalDetailsActivity extends AppCompatActivity {
             }
         });
 
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            onBackPressed();
+            }
+        });
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-    }
 
     private void initialize() {
         deleteImg = findViewById(R.id.deleteIMG);
@@ -247,33 +260,7 @@ public class AddPersonalDetailsActivity extends AppCompatActivity {
 
 
 
-    private void  requestMultiplePermissions(){
-        Dexter.withActivity(AddPersonalDetailsActivity.this)
-                .withPermissions(
-                        Manifest.permission.CAMERA,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                        Manifest.permission.READ_EXTERNAL_STORAGE)
-                .withListener(new MultiplePermissionsListener() {
-                    @Override
-                    public void onPermissionsChecked(MultiplePermissionsReport report) {
-                        if (report.areAllPermissionsGranted()) {
-                            Toast.makeText(getApplicationContext(), "All permissions are granted by user!", Toast.LENGTH_SHORT).show();
-                        }
 
-                        // check for permanent denial of any permission
-                        if (report.isAnyPermissionPermanentlyDenied()) {
-                            // show alert dialog navigating to Settings
-                            //openSettingsDialog();
-                        }
-                    }
-
-                    @Override
-                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
-
-                    }
-                }).onSameThread()
-                .check();
-    }
 
     public Uri getImageUri(Context inContext, Bitmap inImage) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
@@ -440,8 +427,8 @@ public class AddPersonalDetailsActivity extends AppCompatActivity {
                         if(lResponse.getRequest_response().equals("valid")){
                             Log.e("Draker", "onResponse: 1" );
                             System.out.println("Place order entering into method valid");
-                            Toast.makeText(AddPersonalDetailsActivity.this, "Profile picture updates successfully", Toast.LENGTH_SHORT).show();
-
+                            Toast.makeText(AddPersonalDetailsActivity.this, "Address Updated Successfully ", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(AddPersonalDetailsActivity.this,PersonalDetailView.class));
                         }
                       progress.dismiss();
                     }
@@ -452,7 +439,7 @@ public class AddPersonalDetailsActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(Call<Add_partner_personal_details_Response> call, Throwable t) {
                     Log.e("Draker", "failed: 1" +t);
-                 //   progress.dismiss();
+                    progress.dismiss();
                 }
             });
 

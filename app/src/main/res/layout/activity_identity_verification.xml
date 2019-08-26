@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".Activity.IdentityVerificationActivity">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header_layout"
         android:layout_width="match_parent"
         android:layout_height="70dp"
@@ -17,19 +17,46 @@
         <TextView
             android:id="@+id/ordersetails_header"
             android:layout_width="wrap_content"
-            android:layout_height="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:fontFamily="@font/montserrat_bold"
             android:gravity="center"
             android:padding="10dp"
+
             android:text="Identity Verification"
             android:textColor="@color/color_white"
             android:textSize="@dimen/headertextsize"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/identityVerfBack"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/identityVerfBack"
+            android:layout_width="wrap_content"
+            android:layout_height="54dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView14"
+                android:layout_width="10dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/back" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/textView17"
@@ -47,6 +74,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
+        style="@style/SpinnerTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -66,10 +94,7 @@
                 android:id="@+id/spinner1"
                 android:layout_width="30dp"
                 android:layout_height="25dp"
-                android:background="@drawable/custom_spinnerbg"
-
                 android:popupBackground="#ffffff"
-                android:popupElevation="10dp"
                 android:spinnerMode="dropdown"
                 android:textAlignment="center"
                 android:textSize="14sp"
@@ -82,9 +107,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:gravity="center"
 
+                android:layout_marginBottom="8dp"
+                android:gravity="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/spinner1"
                 app:layout_constraintStart_toStartOf="parent"
@@ -124,10 +151,6 @@
                 android:id="@+id/verroot"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -138,9 +161,9 @@
 
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="12dp"
+                    android:layout_margin="2dp"
                     android:background="@drawable/image_border"
-                    android:scaleType="fitXY" />
+                    android:scaleType="centerCrop" />
 
             </FrameLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -168,6 +191,7 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -176,9 +200,9 @@
 
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="12dp"
+                    android:layout_margin="2dp"
                     android:background="@drawable/image_border"
-                    android:scaleType="fitXY" />
+                    android:scaleType="centerCrop" />
 
             </FrameLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

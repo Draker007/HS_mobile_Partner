@@ -100,7 +100,7 @@ public interface ApiInterface {
     @POST("add_partner_personal_details")
     Call<Add_partner_personal_details_Response>  add_personal_details (@Body RequestBody requestBody);
 
-    @POST("edit_photo_partner_personal_details")
+    @POST("edit_photo_personal_details")
     Call<EditPersonalPhotoResponse>  add_personal_photo  (@Body RequestBody requestBody);
 
     @POST("partner_change_password")

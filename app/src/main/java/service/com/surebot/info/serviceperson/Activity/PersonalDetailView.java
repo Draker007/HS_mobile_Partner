@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.bumptech.glide.Glide;
 
@@ -47,12 +48,14 @@ public class PersonalDetailView extends AppCompatActivity {
     @BindView(R.id.ProfessionView)
     TextView gProfession;
 
-
+    String imagePath="";
     @BindView(R.id.AddressView)
     TextView gAddress;
 
-    @BindView(R.id.dobView)
-    TextView gDob;
+
+
+    @BindView(R.id.PersonalDetailBack)
+    ConstraintLayout back;
 
     @BindView(R.id.PerDetailImage)
     ImageView profileImage;
@@ -74,12 +77,31 @@ public class PersonalDetailView extends AppCompatActivity {
         progress.setContentView(R.layout.progressbar_background);
         progress.setCancelable(true);
         getPersonalDetails();
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(PersonalDetailView.this,AddPersonalDetailsActivity.class));
+                Intent intent = new Intent(PersonalDetailView.this,AddPersonalDetailsActivity.class);
+                    intent.putExtra("image", imagePath);
+
+                startActivity(intent);
+
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(PersonalDetailView.this,ServicePersonHome_Activity.class);
+        intent.putExtra("status","1");
+        startActivity(new Intent(PersonalDetailView.this,ServicePersonHome_Activity.class));
+        finish();
     }
 
     private void getPersonalDetails() {
@@ -120,7 +142,12 @@ public class PersonalDetailView extends AppCompatActivity {
                         }
                             gEmail.setText(partnerProfileRecords.get(0).getUser_Email());
                             gGender.setText(partnerProfileRecords.get(0).getUser_Gender());
+                            gProfession.setText(partnerProfileRecords.get(0).getCategory_Name());
                             gNumber.setText(partnerProfileRecords.get(0).getUser_Contact_Number());
+                        if (!partnerProfileRecords.get(0).getUser_Image_Path().equals("")){
+                            imagePath = partnerProfileRecords.get(0).getUser_Image_Path();
+                            Glide.with(PersonalDetailView.this).load(Constants.IMAGEBASE_URL+partnerProfileRecords.get(0).getUser_Image_Path()).into(profileImage);
+                        }
                             if (partnerProfileRecords.get(0).getUser_Full_Address() == null) {
                                 gAddress.setTextColor(getResources().getColor(R.color.color_red));
                                 gAddress.setText("* Your current Address is required");

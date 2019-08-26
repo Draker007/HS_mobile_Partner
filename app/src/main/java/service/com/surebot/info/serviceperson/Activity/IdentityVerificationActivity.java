@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.bumptech.glide.Glide;
 
@@ -56,9 +57,13 @@ public class IdentityVerificationActivity extends AppCompatActivity {
     Spinner dropdown;
     ImageView front,back;
     Button submit;
+
+    @BindView(R.id.identityVerfBack)
+    ConstraintLayout goback;
+
     @BindView(R.id.idProofText)
     TextView gidProofText;
-    String front1 ,back1;
+    String front1="" ,back1="";
     int i,j;
     private Dialog progress;
     @Override
@@ -83,6 +88,12 @@ public class IdentityVerificationActivity extends AppCompatActivity {
     }
 
     private void listner() {
+        goback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
         front.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -102,6 +113,10 @@ public class IdentityVerificationActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 Log.e("lol", "onItemSelected: "+items[position] );
                 gidProofText.setText(items  [position]);
+                back1="";
+                Glide.with(IdentityVerificationActivity.this).load(R.drawable.plus_button).into(front);
+                Glide.with(IdentityVerificationActivity.this).load(R.drawable.plus_button).into(back);
+                front1="";
                 j=position;
             }
 
@@ -115,12 +130,18 @@ public class IdentityVerificationActivity extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(front1.isEmpty()|| back1.isEmpty()){
-                    Toast.makeText(IdentityVerificationActivity.this, "Upload documents First", Toast.LENGTH_SHORT).show();
+                if(j==0){
+                    Toast.makeText(IdentityVerificationActivity.this, "Select ID Proof", Toast.LENGTH_SHORT).show();
                 }
-                else{
+                else if(front1.isEmpty()){
+                    Toast.makeText(IdentityVerificationActivity.this, "Upload Front Side First", Toast.LENGTH_SHORT).show();
+                }
+                else if (back1.isEmpty()){
+                    Toast.makeText(IdentityVerificationActivity.this, "Upload Reverse Side of Image", Toast.LENGTH_SHORT).show();
+                }else{
                     IdentityVerify();
-                }
+
+                    }
             }
         });
 
@@ -176,7 +197,7 @@ public class IdentityVerificationActivity extends AppCompatActivity {
                         if(lResponse.getRequest_response().equals("valid")){
                             Log.e("Draker", "onResponse: 1" );
                             System.out.println("Place order entering into method valid");
-                            Toast.makeText(IdentityVerificationActivity.this, "Profile picture updates successfully", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(IdentityVerificationActivity.this, "Documents  updated successfully", Toast.LENGTH_SHORT).show();
 
                         }
                         progress.dismiss();

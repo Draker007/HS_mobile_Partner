@@ -1,11 +1,13 @@
 package service.com.surebot.info.serviceperson.Fragment;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -15,6 +17,8 @@ import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -59,6 +63,8 @@ View v;
     @BindView(R.id.FragproEmail)
     TextView email;
 
+    Dialog progress;
+
     @BindView(R.id.FragproNumber)
     TextView number;
     ArrayList<PartnerProfileResponse.PartnerProfileRecords> partnerProfileRecords ;
@@ -70,6 +76,11 @@ View v;
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v  = inflater.inflate(R.layout.profile_fragment_layout, container, false);
         ButterKnife.bind(this, v);
+        progress = new Dialog(getActivity(), android.R.style.Theme_Translucent);
+        progress.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //here we set layout of progress dialog
+        progress.setContentView(R.layout.progressbar_background);
+        progress.setCancelable(true);
         callProfileAPI();
         Initialize();
         Listners();
@@ -82,6 +93,7 @@ View v;
     private void callProfileAPI() {
 
         try {
+            progress.show();
             OkHttpClient.Builder client = new OkHttpClient.Builder();
             HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
             registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -117,19 +129,23 @@ View v;
                             name.setText(partnerProfileRecords.get(0).getUser_Name());
                             email.setText(partnerProfileRecords.get(0).getUser_Email());
                             number.setText(partnerProfileRecords.get(0).getUser_ID());
+                            if(!partnerProfileRecords.get(0).getUser_Image_Path().equals("")) {
+                                Glide.with(getActivity()).load(Constants.IMAGEBASE_URL+partnerProfileRecords.get(0).getUser_Image_Path()).into(profImge);
+                            }progress.dismiss();
 
                     }
 
-
+                    progress.dismiss();
                 }
 
             @Override
             public void onFailure(Call<PartnerProfileResponse> call, Throwable t) {
                 System.out.println("In User Login Method 7");
+                progress.dismiss();
             }
         });
     }catch (Exception e) {
-
+            progress.dismiss();
         e.printStackTrace();
 
 

@@ -12,14 +12,14 @@ public class Notification_Response {
     }
 
     public class partner_services_notification_records{
-        String Booking_Id,Booking_Start_Time,Transaction_ID,AddressID,User_Full_Address,User_ID,User_Name,User_Contact_Number,Booking_date;
+        String Booking_Id,Booking_Start_Time,Transaction_ID,AddressID,User_Full_Address,User_ID,User_Name,User_Contact_Number,Booking_Date;
 
         public String getBooking_date() {
-            return Booking_date;
+            return Booking_Date;
         }
 
         public void setBooking_date(String booking_date) {
-            Booking_date = booking_date;
+            Booking_Date = booking_date;
         }
 
         public String getBooking_Id() {
