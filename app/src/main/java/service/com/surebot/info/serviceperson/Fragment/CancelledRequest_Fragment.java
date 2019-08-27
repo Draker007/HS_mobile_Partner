@@ -2,6 +2,7 @@ package service.com.surebot.info.serviceperson.Fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,6 +69,10 @@ String gUserId_FromLogin;
 
 
         gUserId_FromLogin = AppicationClass.getUserId_FromLogin();
+
+
+
+
 
         llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);

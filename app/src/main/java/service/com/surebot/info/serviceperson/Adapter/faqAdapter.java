@@ -13,16 +13,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import service.com.surebot.info.serviceperson.R;
+import service.com.surebot.info.serviceperson.ResponseClass.ListofFaqs_Response;
 
 public class faqAdapter extends RecyclerView.Adapter<faqAdapter.MyViewHolder> {
     Context context;
-    ArrayList<String> gFAQquestionList;
-    ArrayList<String> gFAQanswerList;
+    ArrayList<ListofFaqs_Response.ListofFaqs_Records> gListofFaqs_Arraylist;
 
-    public faqAdapter(Context context, ArrayList<String> gFAQquestionList, ArrayList<String> gFAQanswerList) {
+    public faqAdapter(Context context,ArrayList<ListofFaqs_Response.ListofFaqs_Records> gListofFaqs_Arraylist) {
         this.context = context;
-        this.gFAQquestionList = gFAQquestionList;
-        this.gFAQanswerList = gFAQanswerList;
+        this.gListofFaqs_Arraylist = gListofFaqs_Arraylist;
+
     }
 
     @NonNull
@@ -34,8 +34,8 @@ public class faqAdapter extends RecyclerView.Adapter<faqAdapter.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.question.setText(gFAQquestionList.get(position).toString());
-        holder.answer.setText(gFAQanswerList.get(position).toString());
+        holder.question.setText(gListofFaqs_Arraylist.get(position).getQuestion());
+        holder.answer.setText(gListofFaqs_Arraylist.get(position).getAnswer());
 
         holder.question.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,7 +67,7 @@ public class faqAdapter extends RecyclerView.Adapter<faqAdapter.MyViewHolder> {
 
     @Override
     public int getItemCount() {
-        return gFAQquestionList.size();
+        return gListofFaqs_Arraylist.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
