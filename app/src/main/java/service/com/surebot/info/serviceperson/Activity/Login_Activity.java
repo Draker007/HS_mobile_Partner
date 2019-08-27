@@ -193,7 +193,7 @@ public class Login_Activity extends AppCompatActivity {
         }catch (Exception e) {
 
             e.printStackTrace();
-
+            progress.dismiss();
 
         }
 

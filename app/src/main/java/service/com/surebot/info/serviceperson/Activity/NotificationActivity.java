@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,6 +36,7 @@ public class NotificationActivity extends AppCompatActivity {
     NotificationAdapter adapter;
     private Dialog progress;
     TextView noNotification;
+    ImageView back;
     List<NotificationData> notificationDataList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,13 @@ public class NotificationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_notification);
         r1 = findViewById(R.id.notificationRecycler);
         noNotification = findViewById(R.id.NoNotification);
+        back = findViewById(R.id.NotificationGoBack);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
         progress = new Dialog(this, android.R.style.Theme_Translucent);
         progress.requestWindowFeature(Window.FEATURE_NO_TITLE);
         //here we set layout of progress dialog

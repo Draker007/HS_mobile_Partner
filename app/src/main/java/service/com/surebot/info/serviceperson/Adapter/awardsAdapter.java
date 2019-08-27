@@ -1,5 +1,6 @@
 package service.com.surebot.info.serviceperson.Adapter;
 
+import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -11,6 +12,9 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import java.util.List;
 
 import service.com.surebot.info.serviceperson.DataFiles.awardsData;
@@ -20,11 +24,14 @@ public class awardsAdapter extends RecyclerView.Adapter<awardsAdapter.MyViewHold
 
     private List<awardsData> awardsDataList;
     private onAwardsListner onAwardsListner;
+    Context context;
 
-    public awardsAdapter(List<awardsData> awardsDataList, awardsAdapter.onAwardsListner onAwardsListner) {
+    public awardsAdapter(List<awardsData> awardsDataList, awardsAdapter.onAwardsListner onAwardsListner, Context context) {
         this.awardsDataList = awardsDataList;
         this.onAwardsListner = onAwardsListner;
+        this.context = context;
     }
+
 
     @NonNull
     @Override
@@ -38,9 +45,13 @@ public class awardsAdapter extends RecyclerView.Adapter<awardsAdapter.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         awardsData data = awardsDataList.get(position);
-
-        holder.Image.setImageBitmap(data.getImage());
-
+        RequestOptions myOptions = new RequestOptions()
+                .override(150, 150);
+        Glide.with(context)
+                .asBitmap()
+                .apply(myOptions)
+                .load(data.getImage())
+                .into(holder.Image);
         holder.Text.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

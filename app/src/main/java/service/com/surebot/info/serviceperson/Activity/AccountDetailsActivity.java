@@ -1,6 +1,7 @@
 package service.com.surebot.info.serviceperson.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -39,6 +40,8 @@ public class AccountDetailsActivity extends AppCompatActivity {
     @BindView(R.id.bnkBranchName)
     EditText gbnkBranchName;
 
+    @BindView(R.id.accountDetailsBack)
+    ConstraintLayout gaccountDetailsBack;
 
     @BindView(R.id.AccHolderName)
     EditText gAccHolderName;
@@ -69,6 +72,13 @@ public class AccountDetailsActivity extends AppCompatActivity {
         //here we set layout of progress dialog
         progress.setContentView(R.layout.progressbar_background);
         progress.setCancelable(true);
+        gaccountDetailsBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -152,7 +162,9 @@ public class AccountDetailsActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<Account_details_Response> call, Throwable t) {
-                        System.out.println("In User Login Method 7");
+
+                        Toast.makeText(AccountDetailsActivity.this, getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
+
                         progress.dismiss();
                     }
                 });
@@ -178,7 +190,7 @@ public class AccountDetailsActivity extends AppCompatActivity {
             client.addInterceptor(registrationInterceptor);
 
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("http://192.168.0.82/services_at_home/Api")
+                    .baseUrl(Constants.BASE_URL)
                     .client(client.build())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
@@ -202,8 +214,11 @@ public class AccountDetailsActivity extends AppCompatActivity {
                     if (response.isSuccessful()) {
 
                         Add_account_details_Response account_details_response = response.body();
-                        Toast.makeText(AccountDetailsActivity.this, "Updated Account Details ", Toast.LENGTH_SHORT).show();
-                        //TODO setup response
+                        if (account_details_response.getAccount_details_response().equals("true")) {
+                            Toast.makeText(AccountDetailsActivity.this, "Updated Account Details ", Toast.LENGTH_SHORT).show();
+                            //TODO setup response
+
+                        }
                     }
 
                     progress.dismiss();
@@ -213,7 +228,8 @@ public class AccountDetailsActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<Add_account_details_Response> call, Throwable t) {
-                    System.out.println("In User Login Method 7");
+                    Toast.makeText(AccountDetailsActivity.this, getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
+
                     progress.dismiss();
                 }
             });

@@ -10,5 +10,5 @@ public class Constants {
 
 
 
-    public static final String IMAGEBASE_URL="https://hsqa.surebotdev.com/";
+    public static final String IMAGEBASE_URL="http://192.168.0.82/services_at_home/";
 }

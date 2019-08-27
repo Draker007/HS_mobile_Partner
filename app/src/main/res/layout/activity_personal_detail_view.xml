@@ -44,15 +44,12 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="24dp"
                     android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
                     android:layout_marginBottom="8dp"
                     app:layout_constraintBottom_toBottomOf="@+id/PerDetailImage"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/textView"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView"
                     app:layout_constraintVertical_bias="0.13999999"
                     app:srcCompat="@drawable/edit" />
 
@@ -61,7 +58,7 @@
                     android:layout_width="150dp"
                     android:layout_height="150dp"
 
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
                     android:src="@drawable/ic_launcher_background"
                     app:civ_border_color="#00000000"
                     app:civ_border_width="2dp"
@@ -72,10 +69,10 @@
                 <TextView
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="70dp"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
+                    android:gravity="center"
                     android:text="Personal Details"
                     android:textColor="#ffffff"
                     android:textSize="@dimen/headertextsize"
@@ -86,13 +83,10 @@
 
                 <TextView
                     android:id="@+id/NameView"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
-                    android:layout_marginLeft="24dp"
                     android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    android:text="Draker"
                     android:textColor="#ffffff"
                     android:textSize="14sp"
                     app:fontFamily="@font/montserrat"
@@ -115,12 +109,10 @@
 
                 <TextView
                     android:id="@+id/NumberView"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    android:text="+91 929598929895"
                     android:textColor="#ffffff"
                     android:textSize="14sp"
                     app:fontFamily="@font/montserrat"
@@ -143,12 +135,10 @@
 
                 <TextView
                     android:id="@+id/EmailView"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    android:text="draker@draker.com"
                     android:textColor="#ffffff"
                     android:textSize="14sp"
                     app:fontFamily="@font/montserrat"
@@ -171,12 +161,10 @@
 
                 <TextView
                     android:id="@+id/GenderView"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    android:text="Male"
                     android:textColor="#ffffff"
                     android:textSize="14sp"
                     app:fontFamily="@font/montserrat"
@@ -184,34 +172,6 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/EmailView"
                     app:layout_constraintTop_toBottomOf="@+id/EmailView" />
-
-                <TextView
-                    android:id="@+id/textView10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="DOB"
-                    android:textColor="#a1a1a1"
-                    android:textSize="14sp"
-                    app:fontFamily="@font/montserrat"
-                    app:layout_constraintStart_toStartOf="@+id/textView8"
-                    app:layout_constraintTop_toBottomOf="@+id/GenderView" />
-
-                <TextView
-                    android:id="@+id/dobView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    android:text="20-06-1995"
-                    android:textColor="#ffffff"
-                    android:textSize="14sp"
-                    app:fontFamily="@font/montserrat"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/GenderView"
-                    app:layout_constraintTop_toBottomOf="@+id/GenderView" />
 
                 <TextView
                     android:id="@+id/textView12"
@@ -222,24 +182,21 @@
                     android:textColor="#a1a1a1"
                     android:textSize="14sp"
                     app:fontFamily="@font/montserrat"
-                    app:layout_constraintStart_toStartOf="@+id/textView10"
-                    app:layout_constraintTop_toBottomOf="@+id/dobView" />
+                    app:layout_constraintStart_toStartOf="@+id/textView8"
+                    app:layout_constraintTop_toBottomOf="@+id/GenderView" />
 
                 <TextView
                     android:id="@+id/ProfessionView"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    android:text="Developer"
                     android:textColor="#ffffff"
                     android:textSize="14sp"
                     app:fontFamily="@font/montserrat"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/dobView"
-                    app:layout_constraintTop_toBottomOf="@+id/dobView" />
+                    app:layout_constraintStart_toStartOf="@+id/GenderView"
+                    app:layout_constraintTop_toBottomOf="@+id/GenderView" />
 
                 <TextView
                     android:id="@+id/textView14"
@@ -263,12 +220,32 @@
                     android:ems="10"
                     android:gravity="start|top"
                     android:inputType="none"
-                    android:text="yelahanka,kattigehnali, bangalore,karnataka"
                     android:textColor="#FFFFFF"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/ProfessionView"
                     app:layout_constraintTop_toBottomOf="@+id/ProfessionView" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/PersonalDetailBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="70dp"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/imageView17"
+                        android:layout_width="10dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/back" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>

@@ -287,6 +287,8 @@ public class SignUp_Activity extends AppCompatActivity {
 
                         }
                         else {
+
+                            progress.dismiss();
                             Toast.makeText(SignUp_Activity.this, partnerUserDetails.getRegister_response(), Toast.LENGTH_SHORT).show();
                         }
 
@@ -297,11 +299,14 @@ public class SignUp_Activity extends AppCompatActivity {
                 @Override
                 public void onFailure(Call<PartnerSignup_Response> call, Throwable t) {
                     System.out.println("In User Login Method 7");
+                    progress.dismiss();
                 }
             });
         }catch (Exception e) {
 
             e.printStackTrace();
+            progress.dismiss();
+
 
 
         }

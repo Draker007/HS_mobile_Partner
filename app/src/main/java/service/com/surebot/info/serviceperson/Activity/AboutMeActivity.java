@@ -1,6 +1,7 @@
 package service.com.surebot.info.serviceperson.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,7 +44,7 @@ public class AboutMeActivity extends AppCompatActivity {
     EditText experience;
 
     @BindView(R.id.aboutBack)
-    ImageView back;
+    ConstraintLayout back;
 
     private Dialog progress;
 
@@ -118,7 +120,7 @@ public class AboutMeActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<About_me_Response> call, Throwable t) {
-                        System.out.println("In User Login Method 7");
+                        Toast.makeText(AboutMeActivity.this, getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
                          progress.dismiss();
                     }
                 });
