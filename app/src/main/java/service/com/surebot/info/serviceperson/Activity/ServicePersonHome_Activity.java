@@ -1,6 +1,7 @@
 package service.com.surebot.info.serviceperson.Activity;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
@@ -95,6 +96,7 @@ public class ServicePersonHome_Activity extends AppCompatActivity {
     }  //Oncreate close
 
 
+
     private void  requestMultiplePermissions(){
         Dexter.withActivity(ServicePersonHome_Activity.this)
                 .withPermissions(
@@ -105,13 +107,11 @@ public class ServicePersonHome_Activity extends AppCompatActivity {
                     @Override
                     public void onPermissionsChecked(MultiplePermissionsReport report) {
                         if (report.areAllPermissionsGranted()) {
-                            Toast.makeText(getApplicationContext(), "All permissions are granted by user!", Toast.LENGTH_SHORT).show();
-                        }
+                            }
 
                         // check for permanent denial of any permission
                         if (report.isAnyPermissionPermanentlyDenied()) {
-                            // show alert dialog navigating to Settings
-                            //openSettingsDialog();
+                            Toast.makeText(ServicePersonHome_Activity.this, "Request Denied By  User", Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -253,9 +253,6 @@ public class ServicePersonHome_Activity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
-
-
         if (back == 0) {
             back++;
             navigation.setSelectedItemId(R.id.navigation_mytask);
@@ -265,6 +262,7 @@ public class ServicePersonHome_Activity extends AppCompatActivity {
             transaction.addToBackStack(null);
             transaction.commit();
         } else if (back == 1) {
+            finishAffinity();
             System.exit(0);
         }
     }

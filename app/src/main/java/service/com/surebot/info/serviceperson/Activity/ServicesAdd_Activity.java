@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,6 +42,7 @@ import service.com.surebot.info.serviceperson.ResponseClass.ListOfServices_Respo
 import service.com.surebot.info.serviceperson.ResponseClass.ListOfSubServices_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Partner_package_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Select_service_partner_Response;
+import service.com.surebot.info.serviceperson.utils.AppicationClass;
 
 public class ServicesAdd_Activity extends AppCompatActivity implements  AddServicesList_Adapter.serviceslist_Communicator {
 
@@ -68,7 +70,7 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
     LinearLayoutManager gServicelayoutmanager;
     LinearLayoutManager gSub_Servicelayoutmanager;
 
-    ArrayList<String> gAreaName_List;
+    ArrayList<String> gAreaName_List , subService;
     private Dialog progress;
     ArrayList<String > location_City= new ArrayList<>();
     ArrayList<ListOfServices_Response.ListOfServices_Records> gServicesList_Arraylist;
@@ -181,7 +183,8 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
 
                 @Override
                 public void onFailure(Call<ListOfServices_Response> call, Throwable t) {
-                    System.out.println("In User Login Method 7");
+                    Toast.makeText(ServicesAdd_Activity.this, getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
+
                     progress.dismiss();
                 }
             });
@@ -221,7 +224,7 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
             ListOfSubServices_Request lsubservice_request = new ListOfSubServices_Request();
 
 
-            lsubservice_request.setUser_ID("1");
+            lsubservice_request.setUser_ID(AppicationClass.getUserId_FromLogin());
             lsubservice_request.setCategory_ID("1");
             lsubservice_request.setDocket(Constants.TOKEN);
             lsubservice_request.setService_ID(serviceId);
@@ -273,7 +276,7 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
 
                 @Override
                 public void onFailure(Call<ListOfSubServices_Response> call, Throwable t) {
-                    System.out.println("In User Login Method 7");
+                    Toast.makeText(ServicesAdd_Activity.this, getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
                     progress.dismiss();
                 }
             });
@@ -346,7 +349,7 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
 
                 @Override
                 public void onFailure(Call<Select_service_partner_Response> call, Throwable t) {
-                    System.out.println("In User Login Method 7");
+                    Toast.makeText(ServicesAdd_Activity.this, getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
                     progress.dismiss();
                 }
             });

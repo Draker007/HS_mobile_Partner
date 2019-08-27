@@ -26,7 +26,7 @@
             android:textColor="@color/color_white"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/editText"
+            app:layout_constraintEnd_toStartOf="@+id/addSubServiceMoney"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -43,16 +43,16 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/addSubServiceMoney"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:background="@drawable/round_edit_txt_white"
             android:ems="4"
+            android:gravity="center"
             android:inputType="numberDecimal"
             android:maxLength="8"
             android:padding="5dp"
-            android:text="1111111"
             android:textSize="@dimen/regulartextsize"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

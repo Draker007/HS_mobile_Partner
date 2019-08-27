@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -59,7 +60,7 @@ public class AwardsAndCertificateActivity extends AppCompatActivity implements a
     List<awardsData> awardsDatas = new ArrayList<>();
     List<String> Awards = new ArrayList<>();
     ArrayList<String>AwardsUP=new ArrayList<>();
-    ImageView back;
+    ConstraintLayout back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +77,7 @@ public class AwardsAndCertificateActivity extends AppCompatActivity implements a
         save = findViewById(R.id.AwardSave);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(AwardsAndCertificateActivity.this,2);
         r1.setLayoutManager(layoutManager);
-        adapter = new awardsAdapter(awardsDatas,this);
+        adapter = new awardsAdapter(awardsDatas,this,this);
         back = findViewById(R.id.AwardsBack);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,7 +141,7 @@ public class AwardsAndCertificateActivity extends AppCompatActivity implements a
 
             ApiInterface request = retrofit.create(ApiInterface.class);
 
-            builder.addFormDataPart("User_ID", "68");
+            builder.addFormDataPart("User_ID", AppicationClass.getUserId_FromLogin());
 
             builder.addFormDataPart("docket",Constants.TOKEN);
 
@@ -180,7 +181,7 @@ if(awardsDatas2.get(o).getText()==null){
 
                 @Override
                 public void onFailure(Call<Awards_and_CertificateResponse> call, Throwable t) {
-                    Log.e("Draker", "onFailed: 1" +t);
+                    Toast.makeText(AwardsAndCertificateActivity.this, getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
                       progress.dismiss();
                 }
             });

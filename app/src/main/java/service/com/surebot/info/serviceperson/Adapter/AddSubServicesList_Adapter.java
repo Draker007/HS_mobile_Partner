@@ -2,16 +2,20 @@ package service.com.surebot.info.serviceperson.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import service.com.surebot.info.serviceperson.R;
@@ -22,8 +26,9 @@ public class AddSubServicesList_Adapter extends RecyclerView.Adapter<AddSubServi
 
     Context context;
     ArrayList<ListOfSubServices_Response.ListOfSubServices_Records> gSubServicesList_Arraylist;
+    ArrayList<String> SubServiceData = new ArrayList<>();
 
-    private  int lastItemClicked = -1;
+    ArrayList<String> addedSubService;
 
     public AddSubServicesList_Adapter(Context context,  ArrayList<ListOfSubServices_Response.ListOfSubServices_Records> gSubServicesList_Arraylist) {
         this.context=context;
@@ -44,9 +49,39 @@ public class AddSubServicesList_Adapter extends RecyclerView.Adapter<AddSubServi
 
 
         myViewHolder.lSubServicesName_Text.setText(gSubServicesList_Arraylist.get(position).getService_Name());
+        myViewHolder.price.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (charSequence!=null) {
+
+                    SubServiceData.add(position,charSequence.toString());
+
+                }}
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        myViewHolder.lQuantityCheckBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            addedSubService.add(gSubServicesList_Arraylist.get(position).getService_ID());
+
+            }
+        });
 
 
+    }
 
+    public ArrayList getPrimeData(){return SubServiceData;}
+    public ArrayList getDataCheckBox(){
+        return addedSubService;
     }
 
     @Override
@@ -58,6 +93,7 @@ public class AddSubServicesList_Adapter extends RecyclerView.Adapter<AddSubServi
         TextView lSubServicesName_Text;
         CheckBox  lQuantityCheckBox;
         LinearLayout lMain_layout;
+        EditText price;
 
 
 
@@ -67,7 +103,7 @@ public class AddSubServicesList_Adapter extends RecyclerView.Adapter<AddSubServi
 
             lSubServicesName_Text=itemView.findViewById(R.id.subservicename_text);
             lQuantityCheckBox=itemView.findViewById(R.id.selectquantity_checkbox);
-
+            price = itemView.findViewById(R.id.addSubServiceMoney);
         }
     }
 
