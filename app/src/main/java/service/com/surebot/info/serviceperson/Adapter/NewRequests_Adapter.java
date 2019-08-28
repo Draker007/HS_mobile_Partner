@@ -38,7 +38,9 @@ import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.RequestClass.NewRequestListDetails_Request;
 import service.com.surebot.info.serviceperson.ResponseClass.NewRequestListDetails_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.NewRequestList_Response;
+import service.com.surebot.info.serviceperson.utils.AppicationClass;
 import service.com.surebot.info.serviceperson.utils.SendquotetoUser;
+import service.com.surebot.info.serviceperson.utils.SendquotetoUser_New;
 
 
 public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapter.MyViewHolder> {
@@ -58,6 +60,11 @@ public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapte
 
     NewTaskSubServicesList_Adapter adapter;
 
+    ArrayList<SendquotetoUser> gSub_services_List_quantity = new ArrayList<>();
+
+    ArrayList<SendquotetoUser> gSub_services_List = new ArrayList<>();
+
+    NewTaskSubServicesList_Adapter new_adapter;
     public NewRequests_Adapter(Context context,   ArrayList<NewRequestList_Response.NewRequestList_Response_Records> gNewservicesRequest_List) {
         this.context=context;
         this.gNewservicesRequest_List=gNewservicesRequest_List;
@@ -125,6 +132,9 @@ public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapte
 
                     ApiInterface request = retrofit.create(ApiInterface.class);
                     NewRequestListDetails_Request lNewRequestListDetails_Request = new NewRequestListDetails_Request();
+                   /* lNewRequestListDetails_Request.setUser_ID(gNewservicesRequest_List.get(position).getUser_ID());
+                    lNewRequestListDetails_Request.setTransaction_ID(gNewservicesRequest_List.get(position).getTransaction_ID());*/
+
                     lNewRequestListDetails_Request.setUser_ID("11");
                     lNewRequestListDetails_Request.setTransaction_ID("5");
                     lNewRequestListDetails_Request.setDocket(Constants.TOKEN);
@@ -137,22 +147,26 @@ public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapte
                         public void onResponse(Call<NewRequestListDetails_Response> call, Response<NewRequestListDetails_Response> response) {
                             if (response.isSuccessful()) {
                                 NewRequestListDetails_Response lNewRequestList_Response = response.body();
-                                ArrayList<NewRequestListDetails_Response.NewRequestserviceDetails_Records> gNewRequestList_Arraylist =  new ArrayList<>(Arrays.asList(lNewRequestList_Response.getPartner_service_details_response()));
+                                ArrayList<NewRequestListDetails_Response.NewRequestserviceDetails_Records> gNewRequestList_Arraylist = new ArrayList<>(Arrays.asList(lNewRequestList_Response.getPartner_service_details_response()));
+                                if (!gNewRequestList_Arraylist.get(0).getTransaction_Partner_Quote_ID().equals("User Does Not Exists")) {
 
-                            for(int i=0;i<gNewRequestList_Arraylist.size();i++){
 
-                                gServiceName_List.add(gNewRequestList_Arraylist.get(i).getService_Name());
-                            }
+
+                                for (int i = 0; i < gNewRequestList_Arraylist.size(); i++) {
+
+                                    gServiceName_List.add(gNewRequestList_Arraylist.get(i).getService_Name());
+                                }
 
                                 Set<String> set = new HashSet<>(gServiceName_List);
                                 gServiceName_List.clear();
                                 gServiceName_List.addAll(set);
 
-                                NewTaskRequestedServices_Adapter lNewTaskRequestedServices_Adapter = new NewTaskRequestedServices_Adapter(context,gServiceName_List,gNewRequestList_Arraylist);
+                                NewTaskRequestedServices_Adapter lNewTaskRequestedServices_Adapter = new NewTaskRequestedServices_Adapter(context, gServiceName_List, gNewRequestList_Arraylist);
                                 myViewHolder.lRequestedservicelist_recyclerview.setAdapter(lNewTaskRequestedServices_Adapter);
                                 myViewHolder.lButton_layout.setVisibility(View.VISIBLE);
                                 myViewHolder.lQuotesend_text.setVisibility(View.VISIBLE);
                                 progress.dismiss();
+                            }
                             }
                             progress.dismiss();
                         }
@@ -185,15 +199,11 @@ public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapte
         myViewHolder.lSend_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                gSendquotetoUserList_New = adapter.retrieveData();
-                if(Awards.isEmpty()){
-                    //Toast.makeText(AwardsAndCertificateActivity.this, "Select Image or click picture", Toast.LENGTH_SHORT).show();
-                }else{
-
-                }
+                 ArrayList<SendquotetoUser_New> gAddedServices_ArrayList = new ArrayList<>();
+                gAddedServices_ArrayList = AppicationClass.getList();
 
 
+System.out.println("Arralist value in Send Button " + gAddedServices_ArrayList.size() + gAddedServices_ArrayList.get(position).getSubservicename());
 
 
             }

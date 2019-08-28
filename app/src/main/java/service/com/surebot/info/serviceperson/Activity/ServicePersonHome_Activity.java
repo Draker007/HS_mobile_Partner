@@ -69,7 +69,7 @@ public class ServicePersonHome_Activity extends AppCompatActivity {
 
     int back = 0;
 
-    String gUserId_FromLogin,gUserName_FromLogin;
+    String gUserId_FromLogin,gUserName_FromLogin,gPremium_PartnerId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,9 +81,11 @@ public class ServicePersonHome_Activity extends AppCompatActivity {
         SharedPreferences sp1 =ServicePersonHome_Activity.this.getSharedPreferences("User_Info", 0);
         gUserId_FromLogin = sp1.getString("User_Id", null);
         gUserName_FromLogin= sp1.getString("User_Name", null);
+        gPremium_PartnerId =  sp1.getString("Premium_PartnerId", null);
 
         AppicationClass.setUserId_FromLogin(gUserId_FromLogin);
         AppicationClass.setUserName_FromLogin(gUserName_FromLogin);
+        AppicationClass.setPremium_PartenerId(gPremium_PartnerId);
 
 
         check = getIntent().getStringExtra("status");

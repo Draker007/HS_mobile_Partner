@@ -32,7 +32,6 @@
                 android:layout_marginBottom="8dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/montserrat"
-                android:text="Name"
                 android:textSize="@dimen/regulartextsize"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +46,6 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/montserrat"
                 android:gravity="right"
-                android:text="02_08_2019"
                 android:textSize="@dimen/regulartextsize"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/time_text"
@@ -62,7 +60,6 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/montserrat"
                 android:gravity="right"
-                android:text="07:00PM"
                 android:textSize="@dimen/regulartextsize"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -84,7 +81,6 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:fontFamily="@font/montserrat"
-            android:text="#16/1 Surebot Technology"
             android:textSize="@dimen/regulartextsize" />
 
         <TextView
@@ -94,7 +90,6 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:fontFamily="@font/montserrat"
-            android:text="123443567"
             android:textSize="@dimen/regulartextsize" />
     <LinearLayout
         android:layout_width="match_parent"
@@ -110,7 +105,6 @@
             android:layout_marginBottom="5dp"
             android:layout_weight="1"
             android:fontFamily="@font/montserrat"
-            android:text="Facial,Hair Cut"
             android:textSize="@dimen/regulartextsize" />
 
         <TextView

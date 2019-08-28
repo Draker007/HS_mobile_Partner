@@ -18,19 +18,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import service.com.surebot.info.serviceperson.R;
+import service.com.surebot.info.serviceperson.utils.AppicationClass;
 import service.com.surebot.info.serviceperson.utils.SendquotetoUser;
+import service.com.surebot.info.serviceperson.utils.SendquotetoUser_New;
 
 
 public class NewTaskSubServicesList_Adapter extends RecyclerView.Adapter<NewTaskSubServicesList_Adapter.MyViewHolder> {
 
     Context context;
-
+    static ArrayList<SendquotetoUser_New> gAddedServices_ArrayList = new ArrayList<>();
     //ArrayList<SendquotetoUser> lSub_ServicesList;
-    ArrayList<String> gSub_services_List;
-
+  //  ArrayList<String> gSub_services_List;
+    ArrayList<SendquotetoUser> gSub_services_List = new ArrayList<>();
         // private  ArrayList<SendquotetoUser> gSendquotetoUserList = new ArrayList<>();
-        private ArrayList<String> gSendquotetoUserList_New = new ArrayList<String>();
-    public NewTaskSubServicesList_Adapter(Context context,ArrayList<String> gSub_services_List) {
+       // private ArrayList<String> gSendquotetoUserList_New = new ArrayList<String>();
+      public NewTaskSubServicesList_Adapter(Context context,  ArrayList<SendquotetoUser> gSub_services_List) {
         this.context=context;
         this.gSub_services_List=gSub_services_List;
 
@@ -49,7 +51,11 @@ public class NewTaskSubServicesList_Adapter extends RecyclerView.Adapter<NewTask
     @SuppressLint({"ResourceAsColor", "WrongConstant"})
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, final int position) {
-        myViewHolder.lSubservicename_text.setText(gSub_services_List.get(position).toString());
+
+        SendquotetoUser data = gSub_services_List.get(position);
+
+        myViewHolder.lSubservicename_text.setText(data.getSubServicename());
+        myViewHolder.lQuantity_Text.setText(data.getQuantity());
 
         myViewHolder.lQuantity_Text.addTextChangedListener(new TextWatcher() {
             @Override
@@ -62,8 +68,18 @@ public class NewTaskSubServicesList_Adapter extends RecyclerView.Adapter<NewTask
 
         if (charSequence!=null) {
           // gSendquotetoUserList.get(position).setQuantity(charSequence.toString());
-            gSendquotetoUserList_New.add(charSequence.toString());
-            System.out.println("Chare Sequesnce Value Are " + charSequence.toString() + gSendquotetoUserList_New.size());
+          //  gSendquotetoUserList_New.add(charSequence.toString());
+
+
+          /*  gSub_services_List.get(position).setQuantity(charSequence.toString());
+            gSub_services_List.get(position).setPartnermaping_Id(charSequence.toString());
+            System.out.println("Chare Sequesnce Value Are " + charSequence.toString() + gSub_services_List.size());*/
+            SendquotetoUser_New lsendquote = new SendquotetoUser_New();
+            lsendquote.setQuantity(charSequence.toString());
+            lsendquote.setSubservicename(gSub_services_List.get(position).getSubServicename());
+            lsendquote.setServicequantityid(gSub_services_List.get(position).getPartnermaping_Id());
+            gAddedServices_ArrayList.add(lsendquote);
+            AppicationClass.setList(gAddedServices_ArrayList);
         }
 
     }
@@ -76,9 +92,9 @@ public class NewTaskSubServicesList_Adapter extends RecyclerView.Adapter<NewTask
 
     }
 
-    public ArrayList<String> retrieveData()
+    public ArrayList<SendquotetoUser> retrieveData()
     {
-        return gSendquotetoUserList_New;
+        return gSub_services_List;
     }
 
     @Override

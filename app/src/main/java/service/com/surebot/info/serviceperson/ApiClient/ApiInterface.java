@@ -5,6 +5,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
 import service.com.surebot.info.serviceperson.RequestClass.Account_details_Request;
+import service.com.surebot.info.serviceperson.RequestClass.AddAboutme_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Add_account_details_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Category_List_Request;
 import service.com.surebot.info.serviceperson.RequestClass.ChangePasswordRequest;
@@ -21,6 +22,7 @@ import service.com.surebot.info.serviceperson.RequestClass.Notification_Request;
 
 import service.com.surebot.info.serviceperson.RequestClass.PartnerProfileRequest;
 import service.com.surebot.info.serviceperson.RequestClass.PartnerSigup_Request;
+import service.com.surebot.info.serviceperson.RequestClass.PartnerStartService_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Partner_my_task_today_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Partner_package_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Partner_payment_Request;
@@ -41,7 +43,9 @@ import service.com.surebot.info.serviceperson.RequestClass.Send_otp_mail_Request
 import service.com.surebot.info.serviceperson.RequestClass.UpcomingRequestList_Request;
 
 
+import service.com.surebot.info.serviceperson.ResponseClass.AboutUs_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Account_details_Response;
+import service.com.surebot.info.serviceperson.ResponseClass.AddAboutme_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Add_account_details_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Add_partner_personal_details_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Awards_and_CertificateResponse;
@@ -64,6 +68,7 @@ import service.com.surebot.info.serviceperson.ResponseClass.Notification_Respons
 
 import service.com.surebot.info.serviceperson.ResponseClass.PartnerProfileResponse;
 import service.com.surebot.info.serviceperson.ResponseClass.PartnerSignup_Response;
+import service.com.surebot.info.serviceperson.ResponseClass.PartnerStartService_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Partner_my_task_today_response;
 import service.com.surebot.info.serviceperson.ResponseClass.Partner_package_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Partner_payment_Response;
@@ -114,6 +119,11 @@ public interface ApiInterface {
     Call<PartnerProfileResponse> profileDetails(@Body PartnerProfileRequest request);
 
 
+    //Add About me
+    @POST("add_about_me")
+    Call<AddAboutme_Response> add_Aboutme (@Body AddAboutme_Request request);
+
+  //Get About me
     @POST("about_me")
     Call<About_me_Response> getAboutme (@Body About_me_Request request);
 
@@ -169,9 +179,14 @@ public interface ApiInterface {
 
     @POST("partner_pay_pending")
     Call<Partner_payment_Response> PendingPayment (@Body Partner_payment_Request request);
-
+   //For Getting List OfTodays Task
     @POST("partner_my_task_today")
-    Call<Partner_my_task_today_response> Partner_myTaskToday (@Body Partner_my_task_today_Request request);
+    Call<Partner_my_task_today_response> Get_TodaysTaskList (@Body Partner_my_task_today_Request request);
+
+    //For Getting Code
+    @POST("partner_start_service")
+    Call<PartnerStartService_Response> Get_partner_start_servicecode (@Body PartnerStartService_Request request);
+
 
     //ResetPassword
     @POST("partner_set_new_password_otp")
@@ -231,4 +246,9 @@ public interface ApiInterface {
 
     @POST("support_page")
     Call<CustomerSupport_Response>  get_CustomerSupportDetails  (@Body CustomerSupport_Request request);
+
+    // Add About Us
+    @POST("about_us")
+    Call<AboutUs_Response> Get_AboutUs (@Body About_me_Request request);
+
 }

@@ -1,7 +1,7 @@
 package service.com.surebot.info.serviceperson.ResponseClass;
 
 public class Partnerlogin_Response {
-    String UserName,User_Role,User_ID,partner_login_response,Status_Response;
+    String UserName,User_Role,User_ID,User_Premium,partner_login_response,Status_Response;
 
     public String getUserName() {
         return UserName;
@@ -25,6 +25,14 @@ public class Partnerlogin_Response {
 
     public void setUser_ID(String user_ID) {
         User_ID = user_ID;
+    }
+
+    public String getUser_Premium() {
+        return User_Premium;
+    }
+
+    public void setUser_Premium(String user_Premium) {
+        User_Premium = user_Premium;
     }
 
     public String getPartner_login_response() {

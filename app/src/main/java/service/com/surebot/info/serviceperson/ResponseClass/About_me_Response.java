@@ -2,43 +2,44 @@ package service.com.surebot.info.serviceperson.ResponseClass;
 
 public class About_me_Response {
 
-    private   About_me_Records[] about_me_response;
+    private   About_me_Records about_me_response;
 
-    public About_me_Records[] getAbout_me_response() {
+    public About_me_Records getAbout_me_response() {
         return about_me_response;
     }
 
-    public void setAbout_me_response(About_me_Records[] about_me_response) {
+    public void setAbout_me_response(About_me_Records about_me_response) {
         this.about_me_response = about_me_response;
     }
+
     //2nd Class
 
 
     public class  About_me_Records {
-        String About_ID,Introduction,Experience;
+        String UserAddInfoId,User_Intro,User_Experience;
 
-        public String getAbout_ID() {
-            return About_ID;
+        public String getUserAddInfoId() {
+            return UserAddInfoId;
         }
 
-        public void setAbout_ID(String about_ID) {
-            About_ID = about_ID;
+        public void setUserAddInfoId(String userAddInfoId) {
+            UserAddInfoId = userAddInfoId;
         }
 
-        public String getIntroduction() {
-            return Introduction;
+        public String getUser_Intro() {
+            return User_Intro;
         }
 
-        public void setIntroduction(String introduction) {
-            Introduction = introduction;
+        public void setUser_Intro(String user_Intro) {
+            User_Intro = user_Intro;
         }
 
-        public String getExperience() {
-            return Experience;
+        public String getUser_Experience() {
+            return User_Experience;
         }
 
-        public void setExperience(String experience) {
-            Experience = experience;
+        public void setUser_Experience(String user_Experience) {
+            User_Experience = user_Experience;
         }
     }
 }

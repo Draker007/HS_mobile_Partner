@@ -102,19 +102,22 @@ public class NewRequest_Fragment  extends Fragment implements NewRequests_Adapte
 
             lNewRequestList_Request.setUser_ID("11");
             lNewRequestList_Request.setDocket(Constants.TOKEN);
+            System.out.println("Get New Request APi 1111111111");
 
             Call<NewRequestList_Response> call = request.get_NewServiceRequestList(lNewRequestList_Request);
             call.enqueue(new Callback<NewRequestList_Response>() {
 
-
                 @Override
                 public void onResponse(Call<NewRequestList_Response> call, Response<NewRequestList_Response> response) {
+                    System.out.println("Get New Request APi 22222222");
                     if (response.isSuccessful()) {
+
+                        System.out.println("Get New Request APi 3333333333");
                         NewRequestList_Response lNewRequestList_Response = response.body();
 
                         gNewRequestList_Arraylist = new ArrayList<>(Arrays.asList(lNewRequestList_Response.getPartner_my_task_details_response()));
                      if(gNewRequestList_Arraylist.get(0).getUser_ID()!=null){
-
+                         System.out.println("Get New Request APi 44444444");
                          gNewrequestlist_recyclerview.setVisibility(View.VISIBLE);
                          gNorequest_text.setVisibility(View.GONE);
 
@@ -123,6 +126,8 @@ public class NewRequest_Fragment  extends Fragment implements NewRequests_Adapte
                          lNewRequests_Adapter.setServiceList_Communicator(NewRequest_Fragment.this);
                      }
                      else {
+
+                         System.out.println("Get New Request APi 555555555");
                          gNewrequestlist_recyclerview.setVisibility(View.GONE);
                          gNorequest_text.setVisibility(View.VISIBLE);
                      }
@@ -134,6 +139,7 @@ public class NewRequest_Fragment  extends Fragment implements NewRequests_Adapte
 
                 @Override
                 public void onFailure(Call<NewRequestList_Response> call, Throwable t) {
+                    System.out.println("Get New Request APi 666666");
                     Toast.makeText(getActivity(), getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
                     progress.dismiss();
                 }

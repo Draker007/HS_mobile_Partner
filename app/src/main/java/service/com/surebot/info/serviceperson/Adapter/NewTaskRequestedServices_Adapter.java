@@ -58,14 +58,22 @@ public class NewTaskRequestedServices_Adapter extends RecyclerView.Adapter<NewTa
         myViewHolder.lSubservice_Recycler.setLayoutManager(llm);
 
 
-        ArrayList<String> lSub_ServicesList = new ArrayList<>();
+        ArrayList<SendquotetoUser> lSub_ServicesList = new ArrayList<>();
         for (int i=0;i<gNewRequestList_Arraylist.size();i++){
             if(gNewRequestList_Arraylist.get(i).getService_Name().equals(gServiceName_List.get(position))){
-                lSub_ServicesList.add(gNewRequestList_Arraylist.get(i).getSub_Service_Name());
+               // lSub_ServicesList.add(gNewRequestList_Arraylist.get(i).getSub_Service_Name());
+
+                SendquotetoUser a = new SendquotetoUser(gNewRequestList_Arraylist.get(i).getSub_Service_Name(),gNewRequestList_Arraylist.get(i).getTransaction_Partner_Quote_ID(),gNewRequestList_Arraylist.get(i).getQuantity_Amount());
+                lSub_ServicesList.add(a);
+               // lSub_ServicesList.add(gNewRequestList_Arraylist.get(i).getSub_Service_Name(),gNewRequestList_Arraylist.get(i).getTransaction_Partner_Quote_ID(),gNewRequestList_Arraylist.get(i).getQuantity_Amount())
             }
         }
         NewTaskSubServicesList_Adapter lNewTaskSubServicesList_Adapter = new NewTaskSubServicesList_Adapter(context,lSub_ServicesList);
         myViewHolder.lSubservice_Recycler.setAdapter(lNewTaskSubServicesList_Adapter);
+
+
+
+
 
     }
 
