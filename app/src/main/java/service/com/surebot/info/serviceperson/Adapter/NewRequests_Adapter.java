@@ -108,14 +108,14 @@ public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapte
                 }
                 Log.e("lola", "onClick: "+id+"  "+price );
                 ArrayList<String> finalPriceList = new ArrayList<>();
-                ArrayList<String> testID = new ArrayList<>();
+                ArrayList<String>finalmapingIdList = new ArrayList<>();
 
                 int items=0;
                 for ( int j = 0; j<price.size();j++)
                 {
                     int i =1;
-                    for (int check = 0 ; check<testID.size();check++){
-                        if (!id.get(j).equals(testID.get(check))){
+                    for (int check = 0 ; check<finalmapingIdList.size();check++){
+                        if (!id.get(j).equals(finalmapingIdList.get(check))){
                             i = 1;
                         }else{
                             i = 0;
@@ -126,7 +126,7 @@ public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapte
                             if(id.get(j).equals(id.get(o))){
 
                                 Log.e("asdasd", "onClick: "+ id.get(o) );
-                                testID.add(items,id.get(o));
+                                finalmapingIdList.add(items,id.get(o));
                                 finalPriceList.add(items,price.get(o));
                                 o=0;
 
@@ -137,8 +137,13 @@ public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapte
                     }
 
                 }
-                Log.e("lol1", "onClick: "+testID+finalPriceList );
+                Log.e("lol1", "onClick: "+finalmapingIdList+finalPriceList );
                 AppicationClass.test1.clear();
+
+                communicator.addquotationlist(finalmapingIdList,finalPriceList,"1");
+            System.out.println("In Send Button " + finalmapingIdList + finalPriceList);
+
+
             }
         });
 
@@ -296,12 +301,11 @@ public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapte
 
 
     public interface ServiceList_Communicator {
-        void addquotationlist(String serviceid);
+        void addquotationlist( ArrayList<String> finalmapingIdList, ArrayList<String> finalammountList,String StatusId);
+
+
 
     }
-
-
-
 
 
 }

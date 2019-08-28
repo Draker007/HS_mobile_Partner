@@ -34,6 +34,7 @@ import service.com.surebot.info.serviceperson.RequestClass.PaymentReceived_Reque
 import service.com.surebot.info.serviceperson.RequestClass.Payment_completed_transaction_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Select_service_partner_Request;
 
+import service.com.surebot.info.serviceperson.RequestClass.SendQuotetoUser_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Send_otp_mail_Request;
 import service.com.surebot.info.serviceperson.RequestClass.UpcomingRequestList_Request;
 
@@ -81,6 +82,7 @@ import service.com.surebot.info.serviceperson.ResponseClass.Payment_completed_tr
 import service.com.surebot.info.serviceperson.ResponseClass.Select_service_partner_Response;
 
 
+import service.com.surebot.info.serviceperson.ResponseClass.SendQuotetoUser_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Send_otp_mail_Response;
 
 import service.com.surebot.info.serviceperson.ResponseClass.UpcomingRequestList_Response;
@@ -170,9 +172,7 @@ public interface ApiInterface {
     Call<Select_service_partner_Response> SelectSeviceAndLocation (@Body Select_service_partner_Request request);
 
 
-    //Premium Pacakge
-    @POST("List_packages")
-    Call<Partner_package_Response> List_packages (@Body Partner_package_Request request);
+
 
     //Payment
     @POST("partner_pay_completed")
@@ -181,7 +181,14 @@ public interface ApiInterface {
 
     @POST("partner_pay_pending")
     Call<Partner_payment_Response> PendingPayment (@Body Partner_payment_Request request);
-   //For Getting List OfTodays Task
+
+    //In Todays Task Fragment In Home Screen
+
+    //Premium Pacakge
+    @POST("List_packages")
+    Call<Partner_package_Response> List_packages (@Body Partner_package_Request request);
+
+    //For Getting List OfTodays Task
     @POST("partner_my_task_today")
     Call<Partner_my_task_today_response> Get_TodaysTaskList (@Body Partner_my_task_today_Request request);
 
@@ -208,14 +215,19 @@ public interface ApiInterface {
 
     //4 Request Lists
 
-    //New Request Lists
+      //New Request Lists
 
         @POST("services_requests_new")
         Call<NewRequestList_Response>  get_NewServiceRequestList  (@Body NewRequestList_Request request);
 
-    //New Request Details
+      //New Request Details
         @POST("servicesrequests_new_details")
         Call<NewRequestListDetails_Response>  get_NewServiceRequestDetails  (@Body NewRequestListDetails_Request request);
+
+      //Send Quote to use
+
+    @POST("add_request_quotation")
+    Call<SendQuotetoUser_Response> sendQuote_toUser (@Body SendQuotetoUser_Request request);
 
 
         //Get Upcoming Service Request List
