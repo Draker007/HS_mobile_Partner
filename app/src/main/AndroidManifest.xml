@@ -48,16 +48,17 @@
         <activity android:name=".Activity.NotificationActivity" />
         <activity android:name=".Activity.IdentityVerificationActivity" >
         </activity>
+        <activity android:name=".Activity.SplashActivity"><intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter> </activity>
         <activity android:name=".Activity.congratsActivity" />
         <activity android:name=".Activity.PrimePartnerActivity" />
         <activity android:name=".Activity.AwardsAndCertificateActivity" />
         <activity android:name=".Activity.PaymentActivity" />
         <activity android:name=".Activity.changePasswordActivity" />
-        <activity android:name=".Activity.Login_Activity" ><intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter> </activity>
+        <activity android:name=".Activity.Login_Activity" ></activity>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
