@@ -3,6 +3,7 @@ package service.com.surebot.info.serviceperson.Adapter;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -40,7 +42,6 @@ import service.com.surebot.info.serviceperson.ResponseClass.NewRequestListDetail
 import service.com.surebot.info.serviceperson.ResponseClass.NewRequestList_Response;
 import service.com.surebot.info.serviceperson.utils.AppicationClass;
 import service.com.surebot.info.serviceperson.utils.SendquotetoUser;
-import service.com.surebot.info.serviceperson.utils.SendquotetoUser_New;
 
 
 public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapter.MyViewHolder> {
@@ -60,11 +61,6 @@ public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapte
 
     NewTaskSubServicesList_Adapter adapter;
 
-    ArrayList<SendquotetoUser> gSub_services_List_quantity = new ArrayList<>();
-
-    ArrayList<SendquotetoUser> gSub_services_List = new ArrayList<>();
-
-    NewTaskSubServicesList_Adapter new_adapter;
     public NewRequests_Adapter(Context context,   ArrayList<NewRequestList_Response.NewRequestList_Response_Records> gNewservicesRequest_List) {
         this.context=context;
         this.gNewservicesRequest_List=gNewservicesRequest_List;
@@ -98,18 +94,64 @@ public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapte
         myViewHolder.lUserAddress_Text.setText(gNewservicesRequest_List.get(position).getUser_Full_Address());
         myViewHolder.lUserPhonenumber_Text.setText(gNewservicesRequest_List.get(position).getPhone_location());
         myViewHolder.lTime_Text.setText(gNewservicesRequest_List.get(position).getBooking_Start_Time());
+        myViewHolder.lSend_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e("lol1", "onClick: "+ AppicationClass.test1);
+                ArrayList<String > id =new ArrayList<>();
+                ArrayList<String > price =new ArrayList<>();
 
+                for (int p = 0 ; p<AppicationClass.test1.size();p++){
+                    String[] list = AppicationClass.test1.get(p).split(",");
+                    id.add(list[0]);
+                    price.add(list[1]);
+                }
+                Log.e("lola", "onClick: "+id+"  "+price );
+                ArrayList<String> finalPriceList = new ArrayList<>();
+                ArrayList<String> testID = new ArrayList<>();
+
+                int items=0;
+                for ( int j = 0; j<price.size();j++)
+                {
+                    int i =1;
+                    for (int check = 0 ; check<testID.size();check++){
+                        if (!id.get(j).equals(testID.get(check))){
+                            i = 1;
+                        }else{
+                            i = 0;
+                        }
+                    }
+                    if (i == 1){
+                        for (int o = id.size()-1 ; o>=0;o--){
+                            if(id.get(j).equals(id.get(o))){
+
+                                Log.e("asdasd", "onClick: "+ id.get(o) );
+                                testID.add(items,id.get(o));
+                                finalPriceList.add(items,price.get(o));
+                                o=0;
+
+                            }
+
+                        }
+                        items++;
+                    }
+
+                }
+                Log.e("lol1", "onClick: "+testID+finalPriceList );
+                AppicationClass.test1.clear();
+            }
+        });
 
         System.out.println("Request Adapter value is " + gNewservicesRequest_List.get(position).getUser_Name() +gNewservicesRequest_List.get(position).getBooking_Date() );
 
-    //Clicks on More text
+        //Clicks on More text
         myViewHolder.lMore_Textview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 myViewHolder.lServicedetails_Layout.setVisibility(View.VISIBLE);
                 myViewHolder.lMore_Textview.setVisibility(View.GONE);
                 //For New Request Details
-              //Api method starts
+                //Api method starts
 
                 try {
 
@@ -132,9 +174,6 @@ public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapte
 
                     ApiInterface request = retrofit.create(ApiInterface.class);
                     NewRequestListDetails_Request lNewRequestListDetails_Request = new NewRequestListDetails_Request();
-                   /* lNewRequestListDetails_Request.setUser_ID(gNewservicesRequest_List.get(position).getUser_ID());
-                    lNewRequestListDetails_Request.setTransaction_ID(gNewservicesRequest_List.get(position).getTransaction_ID());*/
-
                     lNewRequestListDetails_Request.setUser_ID("11");
                     lNewRequestListDetails_Request.setTransaction_ID("5");
                     lNewRequestListDetails_Request.setDocket(Constants.TOKEN);
@@ -147,12 +186,9 @@ public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapte
                         public void onResponse(Call<NewRequestListDetails_Response> call, Response<NewRequestListDetails_Response> response) {
                             if (response.isSuccessful()) {
                                 NewRequestListDetails_Response lNewRequestList_Response = response.body();
-                                ArrayList<NewRequestListDetails_Response.NewRequestserviceDetails_Records> gNewRequestList_Arraylist = new ArrayList<>(Arrays.asList(lNewRequestList_Response.getPartner_service_details_response()));
-                                if (!gNewRequestList_Arraylist.get(0).getTransaction_Partner_Quote_ID().equals("User Does Not Exists")) {
+                                ArrayList<NewRequestListDetails_Response.NewRequestserviceDetails_Records> gNewRequestList_Arraylist =  new ArrayList<>(Arrays.asList(lNewRequestList_Response.getPartner_service_details_response()));
 
-
-
-                                for (int i = 0; i < gNewRequestList_Arraylist.size(); i++) {
+                                for(int i=0;i<gNewRequestList_Arraylist.size();i++){
 
                                     gServiceName_List.add(gNewRequestList_Arraylist.get(i).getService_Name());
                                 }
@@ -161,12 +197,11 @@ public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapte
                                 gServiceName_List.clear();
                                 gServiceName_List.addAll(set);
 
-                                NewTaskRequestedServices_Adapter lNewTaskRequestedServices_Adapter = new NewTaskRequestedServices_Adapter(context, gServiceName_List, gNewRequestList_Arraylist);
+                                NewTaskRequestedServices_Adapter lNewTaskRequestedServices_Adapter = new NewTaskRequestedServices_Adapter(context,gServiceName_List,gNewRequestList_Arraylist);
                                 myViewHolder.lRequestedservicelist_recyclerview.setAdapter(lNewTaskRequestedServices_Adapter);
                                 myViewHolder.lButton_layout.setVisibility(View.VISIBLE);
                                 myViewHolder.lQuotesend_text.setVisibility(View.VISIBLE);
                                 progress.dismiss();
-                            }
                             }
                             progress.dismiss();
                         }
@@ -196,18 +231,12 @@ public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapte
 
         //Clicks on Send Button
 
-        myViewHolder.lSend_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                 ArrayList<SendquotetoUser_New> gAddedServices_ArrayList = new ArrayList<>();
-                gAddedServices_ArrayList = AppicationClass.getList();
 
 
-System.out.println("Arralist value in Send Button " + gAddedServices_ArrayList.size() + gAddedServices_ArrayList.get(position).getSubservicename());
 
 
-            }
-        });
+
+
         //Clicks on Reject Button
         myViewHolder.lReject_button.setOnClickListener(new View.OnClickListener() {
             @Override

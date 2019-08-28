@@ -6,6 +6,25 @@ public class AppicationClass {
 
     public static String UserId_FromLogin;
     public static String UserName_FromLogin;
+    public static ArrayList<String> test1 =new ArrayList<>();
+    public static ArrayList<String> test2 = new ArrayList<>();
+
+
+    public static ArrayList<String> getTest1() {
+        return test1;
+    }
+
+    public static void setTest1(ArrayList<String> test1) {
+        AppicationClass.test1 = test1;
+    }
+
+    public static ArrayList<String> getTest2() {
+        return test2;
+    }
+
+    public static void setTest2(ArrayList<String> test2) {
+        AppicationClass.test2 = test2;
+    }
 
     public static String Premium_PartenerId;
 

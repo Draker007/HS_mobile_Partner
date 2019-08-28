@@ -72,6 +72,7 @@ public class AccountDetailsActivity extends AppCompatActivity {
         //here we set layout of progress dialog
         progress.setContentView(R.layout.progressbar_background);
         progress.setCancelable(true);
+        getAccountDetails();
         gaccountDetailsBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -122,7 +123,7 @@ public class AccountDetailsActivity extends AppCompatActivity {
                 client.addInterceptor(registrationInterceptor);
 
                 Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl(Constants.BASE_URL)
+                        .baseUrl("http://192.168.0.82/services_at_home_test/Api/")
                         .client(client.build())
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
@@ -131,7 +132,7 @@ public class AccountDetailsActivity extends AppCompatActivity {
                 Account_details_Request lservice_request = new Account_details_Request ();
 
 
-                lservice_request.setUser_ID(AppicationClass.getUserId_FromLogin());
+                lservice_request.setUser_ID("3");
                 lservice_request.setDocket(Constants.TOKEN);
 
 
@@ -144,13 +145,34 @@ public class AccountDetailsActivity extends AppCompatActivity {
                             Account_details_Response account_details_response = response.body();
 
                             account_details_records = new ArrayList<>(Arrays.asList(account_details_response.getAccount_details_records()));
-                           //TODO have to set Validation
-                            gbnkName.setText(account_details_records.get(0).getBank_Name());
-                            gAccHolderName.setText(account_details_records.get(0).getAccount_Holder_Name());
-                            gAccIFSCcode.setText(account_details_records.get(0).getIFSC_Code());
-                            gAccNumber.setText(account_details_records.get(0).getAccount_Number());
-                            gbnkBranchName.setText(account_details_records.get(0).getBank_Branch_Name());
+                           if(account_details_records.get(0).getUser_ID().equals("No Results Found")){
+                               Toast.makeText(AccountDetailsActivity.this, "Please Enter Account Detials", Toast.LENGTH_SHORT).show();
+                           }else if(account_details_records.get(0).getApproval_Status().equals("Reject"))
+                           {
+                               Toast.makeText(AccountDetailsActivity.this, "Your Account Detials Has been Rejected Please Enter New Detials", Toast.LENGTH_LONG).show();
+                           }else if (account_details_records.get(0).getApproval_Status().equals("Waiting")){
+                               Toast.makeText(AccountDetailsActivity.this, "Waiting For Approval", Toast.LENGTH_SHORT).show();
 
+                               gbnkName.setText(account_details_records.get(0).getBank_Name());
+                               gAccHolderName.setText(account_details_records.get(0).getAccount_Holder_Name());
+                               gAccIFSCcode.setText(account_details_records.get(0).getIFSC_Code());
+                               gAccNumber.setText(account_details_records.get(0).getAccount_Number());
+                               gbnkBranchName.setText(account_details_records.get(0).getBank_Branch_Name());
+                            gbnkName.setEnabled(false);
+                               gAccHolderName.setEnabled(false);
+                               gAccIFSCcode.setEnabled(false);
+                               gAccNumber.setEnabled(false);
+                               gbnkBranchName.setEnabled(false);
+                               btnConfirm.setEnabled(false);
+
+                           }else {
+                               gbnkName.setText(account_details_records.get(0).getBank_Name());
+                               gAccHolderName.setText(account_details_records.get(0).getAccount_Holder_Name());
+                               gAccIFSCcode.setText(account_details_records.get(0).getIFSC_Code());
+                               gAccNumber.setText(account_details_records.get(0).getAccount_Number());
+                               gbnkBranchName.setText(account_details_records.get(0).getBank_Branch_Name());
+                               Toast.makeText(AccountDetailsActivity.this, "Detials Apprved By Admin", Toast.LENGTH_SHORT).show();
+                           }
 
                         }
 
