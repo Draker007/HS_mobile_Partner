@@ -63,4 +63,5 @@
     <string name="enteremailForgotPass">Enter your registered Email-ID or Phone number to continue..</string>
     <string name="SetNewPass">Enter OTP which have sent to your Emial-ID or Phone Number</string>
     <string name="onfailure">Something went wrong</string>
+    <string name="supportnumber">9886106330</string>
 </resources>

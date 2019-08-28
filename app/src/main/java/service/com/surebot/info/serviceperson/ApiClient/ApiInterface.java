@@ -8,10 +8,12 @@ import service.com.surebot.info.serviceperson.RequestClass.Account_details_Reque
 import service.com.surebot.info.serviceperson.RequestClass.Add_account_details_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Category_List_Request;
 import service.com.surebot.info.serviceperson.RequestClass.ChangePasswordRequest;
+import service.com.surebot.info.serviceperson.RequestClass.CustomerSupport_Request;
 import service.com.surebot.info.serviceperson.RequestClass.DeleteProfilePicRequest;
 import service.com.surebot.info.serviceperson.RequestClass.ListOfServices_Request;
 import service.com.surebot.info.serviceperson.RequestClass.ListOfSubServices_Request;
 
+import service.com.surebot.info.serviceperson.RequestClass.ListofFaqs_Request;
 import service.com.surebot.info.serviceperson.RequestClass.NewRequestListDetails_Request;
 import service.com.surebot.info.serviceperson.RequestClass.NewRequestList_Request;
 
@@ -47,12 +49,14 @@ import service.com.surebot.info.serviceperson.ResponseClass.CancelledRequestList
 import service.com.surebot.info.serviceperson.ResponseClass.Category_List_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.ChangePasswordResponse;
 import service.com.surebot.info.serviceperson.ResponseClass.CompletedRequestList_Response;
+import service.com.surebot.info.serviceperson.ResponseClass.CustomerSupport_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.DeleteProfilePicResponse;
 import service.com.surebot.info.serviceperson.ResponseClass.EditPersonalPhotoResponse;
 import service.com.surebot.info.serviceperson.ResponseClass.Identity_verification_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.ListOfServices_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.ListOfSubServices_Response;
 
+import service.com.surebot.info.serviceperson.ResponseClass.ListofFaqs_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.NewRequestListDetails_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.NewRequestList_Response;
 
@@ -219,4 +223,14 @@ public interface ApiInterface {
 
     @POST("payment_confirmation")
     Call<PaymentReceived_Response>  get_PaymentReceivedDetails  (@Body PaymentReceived_Request request);
+
+    //Get List Of FAQS
+
+    @POST("listing_faqs")
+    Call<ListofFaqs_Response>  get_FaqList  (@Body ListofFaqs_Request request);
+
+    //Get Customer Support Details
+
+    @POST("support_page")
+    Call<CustomerSupport_Response>  get_CustomerSupportDetails  (@Body CustomerSupport_Request request);
 }

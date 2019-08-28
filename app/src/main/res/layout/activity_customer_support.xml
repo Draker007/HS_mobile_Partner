@@ -74,7 +74,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView53" />
 
             <Button
-                android:id="@+id/button4"
+                android:id="@+id/requestcall_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -122,12 +122,11 @@
             app:srcCompat="@drawable/mail" />
 
         <TextView
-            android:id="@+id/textView57"
+            android:id="@+id/emailid_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/montserrat"
-            android:text="lord@darius.lol"
             app:layout_constraintBottom_toBottomOf="@+id/textView56"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView56" />
@@ -140,7 +139,7 @@
             android:fontFamily="@font/montserrat"
             android:text="EMAIL ID:"
             app:layout_constraintBottom_toBottomOf="@+id/imageView11"
-            app:layout_constraintEnd_toStartOf="@+id/textView57"
+            app:layout_constraintEnd_toStartOf="@+id/emailid_text"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -177,14 +176,13 @@
             app:srcCompat="@drawable/placeholder" />
 
         <TextView
-            android:id="@+id/textView62"
+            android:id="@+id/address_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/montserrat"
             android:gravity="center"
-            android:text="vvvvvvvvvvvvvvwwwwwwwweasdsaaaaaaaaaaaaaaaaaaaaasssssssssssssssd"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/textView58"
             app:layout_constraintStart_toStartOf="@+id/textView58"
