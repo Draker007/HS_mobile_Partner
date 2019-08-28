@@ -2,6 +2,7 @@ package service.com.surebot.info.serviceperson.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,8 +25,9 @@ import service.com.surebot.info.serviceperson.utils.SendquotetoUser;
 public class NewTaskRequestedServices_Adapter extends RecyclerView.Adapter<NewTaskRequestedServices_Adapter.MyViewHolder> {
 
     Context context;
-    ArrayList<String> gservices_List;
 
+    ArrayList<String> gservices_List;
+    NewTaskSubServicesList_Adapter lNewTaskSubServicesList_Adapter ;
     ArrayList<NewRequestListDetails_Response.NewRequestserviceDetails_Records> gNewRequestList_Arraylist;
 
     ArrayList<String > gServiceName_List = new ArrayList<>();
@@ -52,21 +54,28 @@ public class NewTaskRequestedServices_Adapter extends RecyclerView.Adapter<NewTa
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, final int position) {
 
+
+//
+//                gservices_List = lNewTaskSubServicesList_Adapter.retrieveData();
+//        Log.e("lol123", "onFling: "+gservices_List );
         myViewHolder.lServicename_text.setText(gServiceName_List.get(position).toString());
         LinearLayoutManager llm = new LinearLayoutManager(context);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         myViewHolder.lSubservice_Recycler.setLayoutManager(llm);
 
-
+        ArrayList<String> lSub_ServicesListid = new ArrayList<>();
         ArrayList<String> lSub_ServicesList = new ArrayList<>();
+
         for (int i=0;i<gNewRequestList_Arraylist.size();i++){
             if(gNewRequestList_Arraylist.get(i).getService_Name().equals(gServiceName_List.get(position))){
                 lSub_ServicesList.add(gNewRequestList_Arraylist.get(i).getSub_Service_Name());
+                lSub_ServicesListid.add(gNewRequestList_Arraylist.get(i).getService_Mapping_ID());
             }
         }
-        NewTaskSubServicesList_Adapter lNewTaskSubServicesList_Adapter = new NewTaskSubServicesList_Adapter(context,lSub_ServicesList);
+         lNewTaskSubServicesList_Adapter = new NewTaskSubServicesList_Adapter(context,lSub_ServicesList,lSub_ServicesListid);
         myViewHolder.lSubservice_Recycler.setAdapter(lNewTaskSubServicesList_Adapter);
-
+        gservices_List = lNewTaskSubServicesList_Adapter.retrieveData();
+        Log.e("lol123", "onFling: "+gservices_List );
     }
 
     @Override

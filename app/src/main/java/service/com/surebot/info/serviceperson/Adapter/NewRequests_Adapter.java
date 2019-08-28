@@ -3,6 +3,7 @@ package service.com.surebot.info.serviceperson.Adapter;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -38,6 +40,7 @@ import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.RequestClass.NewRequestListDetails_Request;
 import service.com.surebot.info.serviceperson.ResponseClass.NewRequestListDetails_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.NewRequestList_Response;
+import service.com.surebot.info.serviceperson.utils.AppicationClass;
 import service.com.surebot.info.serviceperson.utils.SendquotetoUser;
 
 
@@ -91,7 +94,53 @@ public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapte
         myViewHolder.lUserAddress_Text.setText(gNewservicesRequest_List.get(position).getUser_Full_Address());
         myViewHolder.lUserPhonenumber_Text.setText(gNewservicesRequest_List.get(position).getPhone_location());
         myViewHolder.lTime_Text.setText(gNewservicesRequest_List.get(position).getBooking_Start_Time());
+        myViewHolder.lSend_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e("lol1", "onClick: "+ AppicationClass.test1);
+                ArrayList<String > id =new ArrayList<>();
+                ArrayList<String > price =new ArrayList<>();
 
+                for (int p = 0 ; p<AppicationClass.test1.size();p++){
+                    String[] list = AppicationClass.test1.get(p).split(",");
+                    id.add(list[0]);
+                    price.add(list[1]);
+                }
+                Log.e("lola", "onClick: "+id+"  "+price );
+                ArrayList<String> finalPriceList = new ArrayList<>();
+                ArrayList<String> testID = new ArrayList<>();
+
+                int items=0;
+                for ( int j = 0; j<price.size();j++)
+                {
+                int i =1;
+                for (int check = 0 ; check<testID.size();check++){
+                    if (!id.get(j).equals(testID.get(check))){
+                        i = 1;
+                    }else{
+                        i = 0;
+                    }
+                }
+                if (i == 1){
+                for (int o = id.size()-1 ; o>=0;o--){
+                    if(id.get(j).equals(id.get(o))){
+
+                        Log.e("asdasd", "onClick: "+ id.get(o) );
+                        testID.add(items,id.get(o));
+                        finalPriceList.add(items,price.get(o));
+                        o=0;
+
+                    }
+
+                }
+                items++;
+                }
+
+                }
+                Log.e("lol1", "onClick: "+testID+finalPriceList );
+                AppicationClass.test1.clear();
+            }
+        });
 
         System.out.println("Request Adapter value is " + gNewservicesRequest_List.get(position).getUser_Name() +gNewservicesRequest_List.get(position).getBooking_Date() );
 
@@ -182,22 +231,12 @@ public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapte
 
         //Clicks on Send Button
 
-        myViewHolder.lSend_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                gSendquotetoUserList_New = adapter.retrieveData();
-                if(Awards.isEmpty()){
-                    //Toast.makeText(AwardsAndCertificateActivity.this, "Select Image or click picture", Toast.LENGTH_SHORT).show();
-                }else{
-
-                }
 
 
 
 
-            }
-        });
+
+
         //Clicks on Reject Button
         myViewHolder.lReject_button.setOnClickListener(new View.OnClickListener() {
             @Override

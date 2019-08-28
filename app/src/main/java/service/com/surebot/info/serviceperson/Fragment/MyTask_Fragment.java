@@ -177,7 +177,7 @@ public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.st
         lTodaysTask_Adapter.notifyDataSetChanged();
 
 
-       /* items.add(new UserAddress_Location(new LatLng(14.22262, 76.40038)));
+           /* items.add(new UserAddress_Location(new LatLng(14.22262, 76.40038)));
         items.add(new UserAddress_Location(new LatLng(1.289545, 103.849972)));
         items.add(new UserAddress_Location(new LatLng(1.289545, 103.849972)));
         items.add(new UserAddress_Location(new LatLng(1.289545, 103.849972)));*/

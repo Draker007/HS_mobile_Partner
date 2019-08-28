@@ -2,21 +2,37 @@ package service.com.surebot.info.serviceperson.ResponseClass;
 
 public class Account_details_Response {
 
-    private account_details_records[] account_details_records;
+    private account_details_records[] partner_account_details_response;
 
     public account_details_records[] getAccount_details_records() {
-        return account_details_records;
+        return partner_account_details_response;
     }
 
     public void setAccount_details_records(account_details_records[] account_details_records) {
-        this.account_details_records = account_details_records;
+        this.partner_account_details_response = account_details_records;
     }
 
 
     //2nd Class
     public class account_details_records{
 
-        String Bank_Name,Bank_Branch_Name,Account_Holder_Name,Account_Number,IFSC_Code;
+        String Bank_Name,Bank_Branch_Name,Account_Holder_Name,Account_Number,IFSC_Code,User_ID,Approval_Status;
+
+        public String getUser_ID() {
+            return User_ID;
+        }
+
+        public void setUser_ID(String user_ID) {
+            User_ID = user_ID;
+        }
+
+        public String getApproval_Status() {
+            return Approval_Status;
+        }
+
+        public void setApproval_Status(String approval_Status) {
+            Approval_Status = approval_Status;
+        }
 
         public String getBank_Name() {
             return Bank_Name;

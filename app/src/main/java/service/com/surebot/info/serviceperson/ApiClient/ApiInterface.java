@@ -122,7 +122,7 @@ public interface ApiInterface {
     @POST("partner_change_password")
     Call<ChangePasswordResponse> ChangePassword (@Body ChangePasswordRequest request);
 
-    @POST("account_details")
+    @POST("partner_account_details")
     Call<Account_details_Response> AccountDetails (@Body Account_details_Request request);
 
     @POST("delete_photo_personal_details")
@@ -141,6 +141,8 @@ public interface ApiInterface {
 
     @POST("Add_account_details")
     Call<Add_account_details_Response> Add_account_details  (@Body Add_account_details_Request request);
+
+
 
 
     //Notification API

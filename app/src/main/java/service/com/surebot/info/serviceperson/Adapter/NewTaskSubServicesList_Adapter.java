@@ -15,9 +15,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.maps.MapView;
+
 import java.util.ArrayList;
 
 import service.com.surebot.info.serviceperson.R;
+import service.com.surebot.info.serviceperson.ResponseClass.NewRequestListDetails_Response;
+import service.com.surebot.info.serviceperson.utils.AppicationClass;
 import service.com.surebot.info.serviceperson.utils.SendquotetoUser;
 
 
@@ -27,15 +31,15 @@ public class NewTaskSubServicesList_Adapter extends RecyclerView.Adapter<NewTask
 
     //ArrayList<SendquotetoUser> lSub_ServicesList;
     ArrayList<String> gSub_services_List;
+    ArrayList<String> MapppingID;
 
         // private  ArrayList<SendquotetoUser> gSendquotetoUserList = new ArrayList<>();
         private ArrayList<String> gSendquotetoUserList_New = new ArrayList<String>();
-    public NewTaskSubServicesList_Adapter(Context context,ArrayList<String> gSub_services_List) {
-        this.context=context;
-        this.gSub_services_List=gSub_services_List;
 
-
-
+    public NewTaskSubServicesList_Adapter(Context context, ArrayList<String> gSub_services_List, ArrayList<String> mapppingID) {
+        this.context = context;
+        this.gSub_services_List = gSub_services_List;
+        MapppingID = mapppingID;
     }
 
     @NonNull
@@ -63,6 +67,9 @@ public class NewTaskSubServicesList_Adapter extends RecyclerView.Adapter<NewTask
         if (charSequence!=null) {
           // gSendquotetoUserList.get(position).setQuantity(charSequence.toString());
             gSendquotetoUserList_New.add(charSequence.toString());
+            if(charSequence.length() >0) {
+                AppicationClass.test1.add(MapppingID.get(position)+","+ charSequence.toString());
+            }
             System.out.println("Chare Sequesnce Value Are " + charSequence.toString() + gSendquotetoUserList_New.size());
         }
 
