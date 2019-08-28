@@ -57,8 +57,17 @@
         <activity android:name=".Activity.PrimePartnerActivity" />
         <activity android:name=".Activity.AwardsAndCertificateActivity" />
         <activity android:name=".Activity.PaymentActivity" />
+        <activity android:name=".Activity.Login_Activity" />
         <activity android:name=".Activity.changePasswordActivity" />
+<<<<<<< HEAD
         <activity android:name=".Activity.Login_Activity" ></activity>
+=======
+        <activity android:name=".Activity.SplashActivity" ><intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter> </activity>
+>>>>>>> 8e47e3427a90969d8d24a06eec6144c8ac6bc225
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />

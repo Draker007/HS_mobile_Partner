@@ -33,6 +33,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import service.com.surebot.info.serviceperson.R;
+import service.com.surebot.info.serviceperson.ResponseClass.Partner_my_task_today_response;
 import service.com.surebot.info.serviceperson.utils.UserAddress_Location;
 
 import static service.com.surebot.info.serviceperson.utils.UserAddress_Location.VIEW_MAP;
@@ -43,7 +44,7 @@ public class TodaysTask_Adapter extends RecyclerView.Adapter<TodaysTask_Adapter.
 
     Context context;
     ArrayList<String> gUserName_List;
-    private final List<String> items;
+    //private final List<String> items;
     int i = 0,j=0;
     private SupportMapFragment mapFragment;
 
@@ -54,12 +55,14 @@ public class TodaysTask_Adapter extends RecyclerView.Adapter<TodaysTask_Adapter.
 
     startservicelist_Communicator communicator;
 
-    public TodaysTask_Adapter(Context context,  List<String> items, ArrayList<String> gUserName_List) {
-        Log.e(TAG, "TodaysTask_Adapter: "+items.get(0));
-        Log.e(TAG, "TodaysTask_Adapter: "+items.get(1));
+    ArrayList<Partner_my_task_today_response.Partner_my_task_today_Records> lTodaysTask_Arraylist ;
+
+    public TodaysTask_Adapter(Context context,ArrayList<Partner_my_task_today_response.Partner_my_task_today_Records> lTodaysTask_Arraylist) {
+        /*Log.e(TAG, "TodaysTask_Adapter: "+items.get(0));
+        Log.e(TAG, "TodaysTask_Adapter: "+items.get(1));*/
         this.context=context;
-        this.items=items;
-        this.gUserName_List=gUserName_List;
+     //   this.items=items;
+        this.lTodaysTask_Arraylist=lTodaysTask_Arraylist;
 
 
 
@@ -90,14 +93,23 @@ public class TodaysTask_Adapter extends RecyclerView.Adapter<TodaysTask_Adapter.
     @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder,  int position) {
-        Log.e(TAG, "onBindViewHolder: "+items.size() +position);
+      /*  Log.e(TAG, "onBindViewHolder: "+items.size() +position);
         String item = items.get(position);
         System.out.println("Position inside onBind is " + position + item);
 
         String s = item;
-        String[] split = s.split(",");
-        latitude = Double.parseDouble(split[0]);
-        longitude = Double.parseDouble(split[1]);
+        String[] split = s.split(",");*/
+        latitude =Double.parseDouble(lTodaysTask_Arraylist.get(position).getLatitude_val()); //Double.parseDouble(split[0]);
+        longitude = Double.parseDouble(lTodaysTask_Arraylist.get(position).getLongitude_val());
+
+        myViewHolder.username_text.setText(lTodaysTask_Arraylist.get(position).getUser_Name());
+        myViewHolder.date_text.setText(lTodaysTask_Arraylist.get(position).getBooking_Date());
+        myViewHolder.time_text.setText(lTodaysTask_Arraylist.get(position).getBooking_Start_Time());
+        myViewHolder.useraddress_text.setText(lTodaysTask_Arraylist.get(position).getUser_Full_Address());
+        myViewHolder.userphonenumber_text.setText(lTodaysTask_Arraylist.get(position).getUser_Contact_Number());
+        myViewHolder.requestID_text.setText(lTodaysTask_Arraylist.get(position).getServices());
+
+
         myViewHolder.more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -141,7 +153,7 @@ public class TodaysTask_Adapter extends RecyclerView.Adapter<TodaysTask_Adapter.
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return lTodaysTask_Arraylist.size();
     }
 
 
@@ -210,21 +222,27 @@ public class TodaysTask_Adapter extends RecyclerView.Adapter<TodaysTask_Adapter.
         @Override
         public void onMapReady(GoogleMap googleMap) {
 
-            if(i<items.size()) {
-                String s = items.get(i);
-                String[] split = s.split(",");
-                latitude = Double.parseDouble(split[0]);
-                longitude = Double.parseDouble(split[1]);
+          //  if(i<items.size()) {
+
+            for(int i=0;i<lTodaysTask_Arraylist.size();i++){
+              /*  String s = items.get(i);
+                String[] split = s.split(",");*/
+                latitude = Double.parseDouble(lTodaysTask_Arraylist.get(i).getLatitude_val());
+                longitude = Double.parseDouble(lTodaysTask_Arraylist.get(i).getLongitude_val());
+
+                System.out.println("lat and long in onMapready " +  latitude + longitude);
                 LatLng location = new LatLng(latitude, longitude);
                 //  LatLng latLng = timeSlot.ge();
-                googleMap.addMarker(new MarkerOptions().position(location));
+                googleMap.addMarker(new MarkerOptions().position(location).title(lTodaysTask_Arraylist.get(i).getUser_Full_Address()));
                 googleMap.animateCamera(CameraUpdateFactory.newLatLng(location));
                 Log.e(TAG, "onMapReady: " + latitude);
-                System.out.println(" is position are " + latitude + longitude + items.size());
+              //  System.out.println(" is position are " + latitude + longitude + items.size());
                 mapCurrnet = googleMap;
                 i++;
-
             }
+
+
+          //  }
 
 
         }

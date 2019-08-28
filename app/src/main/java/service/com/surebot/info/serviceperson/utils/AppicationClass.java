@@ -26,6 +26,8 @@ public class AppicationClass {
         AppicationClass.test2 = test2;
     }
 
+    public static String Premium_PartenerId;
+
     //User Id From Login
     public static String getUserId_FromLogin() {
         return UserId_FromLogin;
@@ -41,5 +43,26 @@ public class AppicationClass {
 
     public static void setUserName_FromLogin(String userName_FromLogin) {
         UserName_FromLogin = userName_FromLogin;
+    }
+
+
+
+    static ArrayList<SendquotetoUser_New> gAddedServices_ArrayList = new ArrayList<>();
+
+    public static ArrayList<SendquotetoUser_New> getList() {
+        return new ArrayList<>(gAddedServices_ArrayList);
+    }
+
+    public static void setList(ArrayList<SendquotetoUser_New> listToBeSet) {
+        if (listToBeSet != null)
+            gAddedServices_ArrayList.addAll(listToBeSet);
+    }
+
+    public static String getPremium_PartenerId() {
+        return Premium_PartenerId;
+    }
+
+    public static void setPremium_PartenerId(String premium_PartenerId) {
+        Premium_PartenerId = premium_PartenerId;
     }
 }

@@ -108,50 +108,55 @@ public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapte
                 }
                 Log.e("lola", "onClick: "+id+"  "+price );
                 ArrayList<String> finalPriceList = new ArrayList<>();
-                ArrayList<String> testID = new ArrayList<>();
+                ArrayList<String>finalmapingIdList = new ArrayList<>();
 
                 int items=0;
                 for ( int j = 0; j<price.size();j++)
                 {
-                int i =1;
-                for (int check = 0 ; check<testID.size();check++){
-                    if (!id.get(j).equals(testID.get(check))){
-                        i = 1;
-                    }else{
-                        i = 0;
+                    int i =1;
+                    for (int check = 0 ; check<finalmapingIdList.size();check++){
+                        if (!id.get(j).equals(finalmapingIdList.get(check))){
+                            i = 1;
+                        }else{
+                            i = 0;
+                        }
                     }
-                }
-                if (i == 1){
-                for (int o = id.size()-1 ; o>=0;o--){
-                    if(id.get(j).equals(id.get(o))){
+                    if (i == 1){
+                        for (int o = id.size()-1 ; o>=0;o--){
+                            if(id.get(j).equals(id.get(o))){
 
-                        Log.e("asdasd", "onClick: "+ id.get(o) );
-                        testID.add(items,id.get(o));
-                        finalPriceList.add(items,price.get(o));
-                        o=0;
+                                Log.e("asdasd", "onClick: "+ id.get(o) );
+                                finalmapingIdList.add(items,id.get(o));
+                                finalPriceList.add(items,price.get(o));
+                                o=0;
 
+                            }
+
+                        }
+                        items++;
                     }
 
                 }
-                items++;
-                }
-
-                }
-                Log.e("lol1", "onClick: "+testID+finalPriceList );
+                Log.e("lol1", "onClick: "+finalmapingIdList+finalPriceList );
                 AppicationClass.test1.clear();
+
+                communicator.addquotationlist(finalmapingIdList,finalPriceList,"1");
+            System.out.println("In Send Button " + finalmapingIdList + finalPriceList);
+
+
             }
         });
 
         System.out.println("Request Adapter value is " + gNewservicesRequest_List.get(position).getUser_Name() +gNewservicesRequest_List.get(position).getBooking_Date() );
 
-    //Clicks on More text
+        //Clicks on More text
         myViewHolder.lMore_Textview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 myViewHolder.lServicedetails_Layout.setVisibility(View.VISIBLE);
                 myViewHolder.lMore_Textview.setVisibility(View.GONE);
                 //For New Request Details
-              //Api method starts
+                //Api method starts
 
                 try {
 
@@ -188,10 +193,10 @@ public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapte
                                 NewRequestListDetails_Response lNewRequestList_Response = response.body();
                                 ArrayList<NewRequestListDetails_Response.NewRequestserviceDetails_Records> gNewRequestList_Arraylist =  new ArrayList<>(Arrays.asList(lNewRequestList_Response.getPartner_service_details_response()));
 
-                            for(int i=0;i<gNewRequestList_Arraylist.size();i++){
+                                for(int i=0;i<gNewRequestList_Arraylist.size();i++){
 
-                                gServiceName_List.add(gNewRequestList_Arraylist.get(i).getService_Name());
-                            }
+                                    gServiceName_List.add(gNewRequestList_Arraylist.get(i).getService_Name());
+                                }
 
                                 Set<String> set = new HashSet<>(gServiceName_List);
                                 gServiceName_List.clear();
@@ -296,12 +301,11 @@ public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapte
 
 
     public interface ServiceList_Communicator {
-        void addquotationlist(String serviceid);
+        void addquotationlist( ArrayList<String> finalmapingIdList, ArrayList<String> finalammountList,String StatusId);
+
+
 
     }
-
-
-
 
 
 }

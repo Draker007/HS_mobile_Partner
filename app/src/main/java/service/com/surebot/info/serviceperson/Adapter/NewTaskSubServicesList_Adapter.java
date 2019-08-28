@@ -33,8 +33,8 @@ public class NewTaskSubServicesList_Adapter extends RecyclerView.Adapter<NewTask
     ArrayList<String> gSub_services_List;
     ArrayList<String> MapppingID;
 
-        // private  ArrayList<SendquotetoUser> gSendquotetoUserList = new ArrayList<>();
-        private ArrayList<String> gSendquotetoUserList_New = new ArrayList<String>();
+    // private  ArrayList<SendquotetoUser> gSendquotetoUserList = new ArrayList<>();
+    private ArrayList<String> gSendquotetoUserList_New = new ArrayList<String>();
 
     public NewTaskSubServicesList_Adapter(Context context, ArrayList<String> gSub_services_List, ArrayList<String> mapppingID) {
         this.context = context;
@@ -61,25 +61,25 @@ public class NewTaskSubServicesList_Adapter extends RecyclerView.Adapter<NewTask
 
             }
 
-    @Override
-    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-        if (charSequence!=null) {
-          // gSendquotetoUserList.get(position).setQuantity(charSequence.toString());
-            gSendquotetoUserList_New.add(charSequence.toString());
-            if(charSequence.length() >0) {
-                AppicationClass.test1.add(MapppingID.get(position)+","+ charSequence.toString());
+                if (charSequence!=null) {
+                    // gSendquotetoUserList.get(position).setQuantity(charSequence.toString());
+                    gSendquotetoUserList_New.add(charSequence.toString());
+                    if(charSequence.length() >0) {
+                        AppicationClass.test1.add(MapppingID.get(position)+","+ charSequence.toString());
+                    }
+                    System.out.println("Chare Sequesnce Value Are " + charSequence.toString() + gSendquotetoUserList_New.size());
+                }
+
             }
-            System.out.println("Chare Sequesnce Value Are " + charSequence.toString() + gSendquotetoUserList_New.size());
-        }
 
-    }
+            @Override
+            public void afterTextChanged(Editable editable) {
 
-    @Override
-    public void afterTextChanged(Editable editable) {
-
-    }
-});
+            }
+        });
 
     }
 

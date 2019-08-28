@@ -57,6 +57,10 @@ import service.com.surebot.info.serviceperson.ApiClient.ApiInterface;
 import service.com.surebot.info.serviceperson.Constants.Constants;
 import service.com.surebot.info.serviceperson.R;
 
+import service.com.surebot.info.serviceperson.RequestClass.PartnerStartService_Request;
+import service.com.surebot.info.serviceperson.RequestClass.Partner_my_task_today_Request;
+import service.com.surebot.info.serviceperson.ResponseClass.PartnerStartService_Response;
+import service.com.surebot.info.serviceperson.ResponseClass.Partner_my_task_today_response;
 import service.com.surebot.info.serviceperson.utils.UserAddress_Location;
 
 import service.com.surebot.info.serviceperson.RequestClass.Partner_package_Request;
@@ -75,6 +79,9 @@ public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.st
     @BindView(R.id.notificationIcon)
     ImageView notification;
 
+    @BindView(R.id.notask_header)
+    TextView gNotask_header;
+
 
 
     ArrayList<Integer> gPackages_List;
@@ -83,9 +90,17 @@ public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.st
     LinearLayoutManager llm;
     ArrayList<Partner_package_Response.Partner_package_records> partner_package_response ;
 
+
+    ArrayList<Partner_my_task_today_response.Partner_my_task_today_Records> lTodaysTask_Arraylist ;
+
+
     Dialog gEnterCode_Dialog;
     EditText lOtp_text1, lOtp_text2, lOtp_text3, lOtp_text4;
     String otp ,otp1 , otp2 , otp3 , otp4;
+
+    private Dialog progress;
+
+
     @SuppressLint("WrongConstant")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -93,6 +108,13 @@ public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.st
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.mytask_fragment_layout, container, false);
         ButterKnife.bind(this, view);
+
+        progress = new Dialog(getActivity(), android.R.style.Theme_Translucent);
+        progress.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //here we set layout of progress dialog
+        progress.setContentView(R.layout.progressbar_background);
+        progress.setCancelable(true);
+
         notification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -144,12 +166,12 @@ public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.st
         items.add(new UserAddress_Location("Item 8"));
         items.add(new UserAddress_Location("Item 9"));*/
 
-        ArrayList<String> gTimeslotArraylist = new ArrayList<>();
+      /*  ArrayList<String> gTimeslotArraylist = new ArrayList<>();
         gTimeslotArraylist.add(0,"37.0902, 95.7129");
         gTimeslotArraylist.add(1,"1.289545, 103.849972");
         gTimeslotArraylist.add(2,"56.1304, 106.3468");
         gTimeslotArraylist.add(3,"20.5937, 78.9629");
-        UserAddress_Location lUserAddress_Location = new UserAddress_Location();
+        UserAddress_Location lUserAddress_Location = new UserAddress_Location();*/
         /*lUserAddress_Location.setPosition(new LatLng(14.22262, 76.40038));
         lUserAddress_Location.setPosition(new LatLng(1.289545, 103.849972));
         lUserAddress_Location.setPosition(new LatLng(14.22262, 76.40038));
@@ -162,19 +184,19 @@ public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.st
         gTodaytask_recyclerview.setLayoutManager(llm);
 
 
-        for(int i=0;i<gTimeslotArraylist.size();i++){
+   /*     for(int i=0;i<gTimeslotArraylist.size();i++){
             lUserAddress_Location.setLatitutde(gTimeslotArraylist.get(i));
 
             items.add(i,lUserAddress_Location);
 
 
-        }
-        Log.e("cocacola", "onCreateView: "+items.get(1).getLatitutde() );
+        }*/
+  //      Log.e("cocacola", "onCreateView: "+items.get(1).getLatitutde() );
 
-        TodaysTask_Adapter lTodaysTask_Adapter = new TodaysTask_Adapter(getActivity(),gTimeslotArraylist,gUserName_List);
+       /* TodaysTask_Adapter lTodaysTask_Adapter = new TodaysTask_Adapter(getActivity(),gTimeslotArraylist,gUserName_List);
         gTodaytask_recyclerview.setAdapter(lTodaysTask_Adapter);
         lTodaysTask_Adapter.setstartservicelist_Communicator(MyTask_Fragment.this);
-        lTodaysTask_Adapter.notifyDataSetChanged();
+        lTodaysTask_Adapter.notifyDataSetChanged();*/
 
 
            /* items.add(new UserAddress_Location(new LatLng(14.22262, 76.40038)));
@@ -183,7 +205,7 @@ public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.st
         items.add(new UserAddress_Location(new LatLng(1.289545, 103.849972)));*/
 
 
-
+        Get_TodaysTaskList();
 
 
         return view;
@@ -251,46 +273,10 @@ public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.st
     @Override
     public void startservice(String serviceid) {
 
-
-        gEnterCode_Dialog = new Dialog(getActivity(), R.style.dailogboxtheme);
-        gEnterCode_Dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        gEnterCode_Dialog.getWindow().setBackgroundDrawableResource(R.color.color_transparen);
-        gEnterCode_Dialog.setContentView(R.layout.entercodeforstartservice_popup);
-
-
-        TextView lOkay_text = gEnterCode_Dialog.findViewById(R.id.ok_text);
-         lOtp_text1 = gEnterCode_Dialog.findViewById(R.id.otp_text1);
-         lOtp_text2 = gEnterCode_Dialog.findViewById(R.id.otp_text2);
-         lOtp_text3 = gEnterCode_Dialog.findViewById(R.id.otp_text3);
-         lOtp_text4 = gEnterCode_Dialog.findViewById(R.id.otp_text4);
-
-        lOtp_text1.addTextChangedListener(new SampleTextWatcherClass(lOtp_text1));
-        lOtp_text2.addTextChangedListener(new SampleTextWatcherClass(lOtp_text2));
-        lOtp_text3.addTextChangedListener(new SampleTextWatcherClass(lOtp_text3));
-        lOtp_text4.addTextChangedListener(new SampleTextWatcherClass(lOtp_text4));
+        Get_partner_start_servicecode();
 
 
 
-        lOkay_text.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-                if (lOtp_text1.getText().toString().isEmpty()||lOtp_text2.getText().toString().isEmpty()||lOtp_text3.getText().toString().isEmpty()||lOtp_text4.getText().toString().isEmpty()){
-                    Toast.makeText(getActivity(), "Enter 4 Digit Code Sent To User", Toast.LENGTH_LONG).show();
-
-                }
-                else{
-                    otp = otp1+otp2+otp3+otp4;
-                 System.out.println("Entered Otp " + otp);
-                    startActivity(new Intent(getActivity(), serviceDetailsActivity.class));
-                    gEnterCode_Dialog.dismiss();
-                }
-            }
-        });
-
-        gEnterCode_Dialog.setCancelable(false);
-        gEnterCode_Dialog.show();
 
 
     }
@@ -355,5 +341,187 @@ public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.st
         }
     }
 
+
+    //Get Todays Task List
+    private void Get_TodaysTaskList() {
+
+        try {
+            System.out.println("In User Login Method 1");
+             progress.show();
+            OkHttpClient.Builder client = new OkHttpClient.Builder();
+            HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
+            registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            client.addInterceptor(registrationInterceptor);
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(Constants.BASE_URL)
+                    .client(client.build())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            System.out.println("asd1");
+            ApiInterface request = retrofit.create(ApiInterface.class);
+            Partner_my_task_today_Request lservice_request = new Partner_my_task_today_Request();
+            lservice_request.setDocket(Constants.TOKEN);
+            lservice_request.setUser_ID("2");
+
+
+            Call<Partner_my_task_today_response> call = request.Get_TodaysTaskList(lservice_request);
+            call.enqueue(new Callback<Partner_my_task_today_response>() {
+                @Override
+                public void onResponse(Call<Partner_my_task_today_response> call, Response<Partner_my_task_today_response> response) {
+                    if (response.isSuccessful()) {
+                        System.out.println("asd1");
+                        Partner_my_task_today_response ListPackage = response.body();
+                        lTodaysTask_Arraylist = new ArrayList<>(Arrays.asList(ListPackage.getPartner_my_task_today_response()));
+
+                        List<UserAddress_Location> items = new ArrayList<>();
+                       if( !lTodaysTask_Arraylist.get(0).getUser_ID().equals("No Results Found") && !lTodaysTask_Arraylist.get(0).getUser_ID().equals("User Does Not Exists")){
+                           gTodaytask_recyclerview.setVisibility(View.VISIBLE);
+                           gNotask_header.setVisibility(View.GONE);
+
+                           TodaysTask_Adapter lTodaysTask_Adapter = new TodaysTask_Adapter(getActivity(),lTodaysTask_Arraylist);
+                           gTodaytask_recyclerview.setAdapter(lTodaysTask_Adapter);
+                           lTodaysTask_Adapter.setstartservicelist_Communicator(MyTask_Fragment.this);
+                           lTodaysTask_Adapter.notifyDataSetChanged();
+                       }
+                       else{
+
+                           gTodaytask_recyclerview.setVisibility(View.GONE);
+                           gNotask_header.setVisibility(View.VISIBLE);
+                       }
+
+                        progress.dismiss();
+                    }
+
+
+                    progress.dismiss();
+                }
+
+
+
+                @Override
+                public void onFailure(Call<Partner_my_task_today_response> call, Throwable t) {
+                    Toast.makeText(getActivity(), getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
+                      progress.dismiss();
+                }
+            });
+        }
+        catch (Exception e) {
+            System.out.println("In User Login Method 8");
+            e.printStackTrace();
+//            progress.dismiss();
+
+        }
+    }
+
+
+    //Get Code For Start Service
+    private void Get_partner_start_servicecode() {
+
+        try {
+            System.out.println("In User Login Method 1");
+            progress.show();
+            OkHttpClient.Builder client = new OkHttpClient.Builder();
+            HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
+            registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            client.addInterceptor(registrationInterceptor);
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(Constants.BASE_URL)
+                    .client(client.build())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            System.out.println("asd1");
+            ApiInterface request = retrofit.create(ApiInterface.class);
+            PartnerStartService_Request lservice_request = new PartnerStartService_Request();
+            lservice_request.setDocket(Constants.TOKEN);
+            lservice_request.setUser_ID("1");
+            lservice_request.setTransaction_ID("38");
+
+
+            Call<PartnerStartService_Response> call = request.Get_partner_start_servicecode(lservice_request);
+            call.enqueue(new Callback<PartnerStartService_Response>() {
+                @Override
+                public void onResponse(Call<PartnerStartService_Response> call, Response<PartnerStartService_Response> response) {
+                    if (response.isSuccessful()) {
+
+                        PartnerStartService_Response lPartnerStartService_Response = response.body();
+                        if(!lPartnerStartService_Response.equals("Invalid")){
+                            Toast.makeText(getActivity(), lPartnerStartService_Response.getPartner_start_service_get_otp_response(), Toast.LENGTH_SHORT).show();
+                            gEnterCode_Dialog = new Dialog(getActivity(), R.style.dailogboxtheme);
+                            gEnterCode_Dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                            gEnterCode_Dialog.getWindow().setBackgroundDrawableResource(R.color.color_transparen);
+                            gEnterCode_Dialog.setContentView(R.layout.entercodeforstartservice_popup);
+
+
+                            TextView lOkay_text = gEnterCode_Dialog.findViewById(R.id.ok_text);
+                            lOtp_text1 = gEnterCode_Dialog.findViewById(R.id.otp_text1);
+                            lOtp_text2 = gEnterCode_Dialog.findViewById(R.id.otp_text2);
+                            lOtp_text3 = gEnterCode_Dialog.findViewById(R.id.otp_text3);
+                            lOtp_text4 = gEnterCode_Dialog.findViewById(R.id.otp_text4);
+
+                            lOtp_text1.addTextChangedListener(new SampleTextWatcherClass(lOtp_text1));
+                            lOtp_text2.addTextChangedListener(new SampleTextWatcherClass(lOtp_text2));
+                            lOtp_text3.addTextChangedListener(new SampleTextWatcherClass(lOtp_text3));
+                            lOtp_text4.addTextChangedListener(new SampleTextWatcherClass(lOtp_text4));
+
+
+
+                            lOkay_text.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+
+
+                                    if (lOtp_text1.getText().toString().isEmpty()||lOtp_text2.getText().toString().isEmpty()||lOtp_text3.getText().toString().isEmpty()||lOtp_text4.getText().toString().isEmpty()){
+                                        Toast.makeText(getActivity(), "Enter 4 Digit Code Sent To User", Toast.LENGTH_LONG).show();
+
+                                    }
+                                    else{
+                                        otp = otp1+otp2+otp3+otp4;
+                                        System.out.println("Entered Otp " + otp);
+
+                                        if(otp.equals(lPartnerStartService_Response.getPartner_start_service_get_otp_response())){
+                                            startActivity(new Intent(getActivity(), serviceDetailsActivity.class));
+                                            gEnterCode_Dialog.dismiss();
+                                        }
+                                       else{
+                                            Toast.makeText(getActivity(),"Invalid Otp", Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    }
+                                }
+                            });
+
+                            gEnterCode_Dialog.setCancelable(false);
+                            gEnterCode_Dialog.show();
+
+
+
+
+                        }
+
+                        progress.dismiss();
+                    }
+
+
+                    progress.dismiss();
+                }
+
+
+
+                @Override
+                public void onFailure(Call<PartnerStartService_Response> call, Throwable t) {
+                    Toast.makeText(getActivity(), getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
+                    progress.dismiss();
+                }
+            });
+        }
+        catch (Exception e) {
+            System.out.println("In User Login Method 8");
+            e.printStackTrace();
+//            progress.dismiss();
+
+        }
+    }
 
 }

@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.ResponseClass.ListOfSubServices_Response;
+import service.com.surebot.info.serviceperson.utils.AppicationClass;
 
 
 public class AddSubServicesList_Adapter extends RecyclerView.Adapter<AddSubServicesList_Adapter.MyViewHolder> {
@@ -29,6 +30,8 @@ public class AddSubServicesList_Adapter extends RecyclerView.Adapter<AddSubServi
     ArrayList<String> SubServiceData = new ArrayList<>();
 
     ArrayList<String> addedSubService;
+
+   String gPremiumPartner_Id = AppicationClass.getPremium_PartenerId();
 
     public AddSubServicesList_Adapter(Context context,  ArrayList<ListOfSubServices_Response.ListOfSubServices_Records> gSubServicesList_Arraylist) {
         this.context=context;
@@ -46,10 +49,21 @@ public class AddSubServicesList_Adapter extends RecyclerView.Adapter<AddSubServi
     @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, final int position) {
+System.out.println("Premium partner Id is " + gPremiumPartner_Id);
 
+        if(gPremiumPartner_Id.equals("1")){
+            myViewHolder.lPrice.setVisibility(View.VISIBLE);
+            myViewHolder.lQuantityCheckBox.setVisibility(View.GONE);
+        }
+
+        if(gPremiumPartner_Id.equals("0")){
+            myViewHolder.lQuantityCheckBox.setVisibility(View.VISIBLE);
+            myViewHolder.lPrice.setVisibility(View.GONE);
+
+        }
 
         myViewHolder.lSubServicesName_Text.setText(gSubServicesList_Arraylist.get(position).getService_Name());
-        myViewHolder.price.addTextChangedListener(new TextWatcher() {
+        myViewHolder.lPrice.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -93,7 +107,7 @@ public class AddSubServicesList_Adapter extends RecyclerView.Adapter<AddSubServi
         TextView lSubServicesName_Text;
         CheckBox  lQuantityCheckBox;
         LinearLayout lMain_layout;
-        EditText price;
+        EditText lPrice;
 
 
 
@@ -103,7 +117,7 @@ public class AddSubServicesList_Adapter extends RecyclerView.Adapter<AddSubServi
 
             lSubServicesName_Text=itemView.findViewById(R.id.subservicename_text);
             lQuantityCheckBox=itemView.findViewById(R.id.selectquantity_checkbox);
-            price = itemView.findViewById(R.id.addSubServiceMoney);
+            lPrice = itemView.findViewById(R.id.addSubServiceMoney);
         }
     }
 

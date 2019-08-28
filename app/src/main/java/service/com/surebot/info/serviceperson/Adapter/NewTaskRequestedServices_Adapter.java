@@ -72,7 +72,7 @@ public class NewTaskRequestedServices_Adapter extends RecyclerView.Adapter<NewTa
                 lSub_ServicesListid.add(gNewRequestList_Arraylist.get(i).getService_Mapping_ID());
             }
         }
-         lNewTaskSubServicesList_Adapter = new NewTaskSubServicesList_Adapter(context,lSub_ServicesList,lSub_ServicesListid);
+        lNewTaskSubServicesList_Adapter = new NewTaskSubServicesList_Adapter(context,lSub_ServicesList,lSub_ServicesListid);
         myViewHolder.lSubservice_Recycler.setAdapter(lNewTaskSubServicesList_Adapter);
         gservices_List = lNewTaskSubServicesList_Adapter.retrieveData();
         Log.e("lol123", "onFling: "+gservices_List );

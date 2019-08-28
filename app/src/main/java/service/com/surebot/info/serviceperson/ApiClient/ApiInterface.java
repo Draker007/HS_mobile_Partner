@@ -5,6 +5,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
 import service.com.surebot.info.serviceperson.RequestClass.Account_details_Request;
+import service.com.surebot.info.serviceperson.RequestClass.AddAboutme_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Add_account_details_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Category_List_Request;
 import service.com.surebot.info.serviceperson.RequestClass.ChangePasswordRequest;
@@ -21,6 +22,7 @@ import service.com.surebot.info.serviceperson.RequestClass.Notification_Request;
 
 import service.com.surebot.info.serviceperson.RequestClass.PartnerProfileRequest;
 import service.com.surebot.info.serviceperson.RequestClass.PartnerSigup_Request;
+import service.com.surebot.info.serviceperson.RequestClass.PartnerStartService_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Partner_my_task_today_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Partner_package_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Partner_payment_Request;
@@ -32,6 +34,7 @@ import service.com.surebot.info.serviceperson.RequestClass.PaymentReceived_Reque
 import service.com.surebot.info.serviceperson.RequestClass.Payment_completed_transaction_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Select_service_partner_Request;
 
+import service.com.surebot.info.serviceperson.RequestClass.SendQuotetoUser_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Send_otp_mail_Request;
 import service.com.surebot.info.serviceperson.RequestClass.UpcomingRequestList_Request;
 
@@ -41,7 +44,9 @@ import service.com.surebot.info.serviceperson.RequestClass.Send_otp_mail_Request
 import service.com.surebot.info.serviceperson.RequestClass.UpcomingRequestList_Request;
 
 
+import service.com.surebot.info.serviceperson.ResponseClass.AboutUs_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Account_details_Response;
+import service.com.surebot.info.serviceperson.ResponseClass.AddAboutme_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Add_account_details_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Add_partner_personal_details_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Awards_and_CertificateResponse;
@@ -64,6 +69,7 @@ import service.com.surebot.info.serviceperson.ResponseClass.Notification_Respons
 
 import service.com.surebot.info.serviceperson.ResponseClass.PartnerProfileResponse;
 import service.com.surebot.info.serviceperson.ResponseClass.PartnerSignup_Response;
+import service.com.surebot.info.serviceperson.ResponseClass.PartnerStartService_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Partner_my_task_today_response;
 import service.com.surebot.info.serviceperson.ResponseClass.Partner_package_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Partner_payment_Response;
@@ -76,6 +82,7 @@ import service.com.surebot.info.serviceperson.ResponseClass.Payment_completed_tr
 import service.com.surebot.info.serviceperson.ResponseClass.Select_service_partner_Response;
 
 
+import service.com.surebot.info.serviceperson.ResponseClass.SendQuotetoUser_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Send_otp_mail_Response;
 
 import service.com.surebot.info.serviceperson.ResponseClass.UpcomingRequestList_Response;
@@ -114,6 +121,11 @@ public interface ApiInterface {
     Call<PartnerProfileResponse> profileDetails(@Body PartnerProfileRequest request);
 
 
+    //Add About me
+    @POST("add_about_me")
+    Call<AddAboutme_Response> add_Aboutme (@Body AddAboutme_Request request);
+
+  //Get About me
     @POST("about_me")
     Call<About_me_Response> getAboutme (@Body About_me_Request request);
 
@@ -160,9 +172,7 @@ public interface ApiInterface {
     Call<Select_service_partner_Response> SelectSeviceAndLocation (@Body Select_service_partner_Request request);
 
 
-    //Premium Pacakge
-    @POST("List_packages")
-    Call<Partner_package_Response> List_packages (@Body Partner_package_Request request);
+
 
     //Payment
     @POST("partner_pay_completed")
@@ -172,8 +182,20 @@ public interface ApiInterface {
     @POST("partner_pay_pending")
     Call<Partner_payment_Response> PendingPayment (@Body Partner_payment_Request request);
 
+    //In Todays Task Fragment In Home Screen
+
+    //Premium Pacakge
+    @POST("List_packages")
+    Call<Partner_package_Response> List_packages (@Body Partner_package_Request request);
+
+    //For Getting List OfTodays Task
     @POST("partner_my_task_today")
-    Call<Partner_my_task_today_response> Partner_myTaskToday (@Body Partner_my_task_today_Request request);
+    Call<Partner_my_task_today_response> Get_TodaysTaskList (@Body Partner_my_task_today_Request request);
+
+    //For Getting Code
+    @POST("partner_start_service")
+    Call<PartnerStartService_Response> Get_partner_start_servicecode (@Body PartnerStartService_Request request);
+
 
     //ResetPassword
     @POST("partner_set_new_password_otp")
@@ -193,14 +215,19 @@ public interface ApiInterface {
 
     //4 Request Lists
 
-    //New Request Lists
+      //New Request Lists
 
         @POST("services_requests_new")
         Call<NewRequestList_Response>  get_NewServiceRequestList  (@Body NewRequestList_Request request);
 
-    //New Request Details
+      //New Request Details
         @POST("servicesrequests_new_details")
         Call<NewRequestListDetails_Response>  get_NewServiceRequestDetails  (@Body NewRequestListDetails_Request request);
+
+      //Send Quote to use
+
+    @POST("add_request_quotation")
+    Call<SendQuotetoUser_Response> sendQuote_toUser (@Body SendQuotetoUser_Request request);
 
 
         //Get Upcoming Service Request List
@@ -233,4 +260,9 @@ public interface ApiInterface {
 
     @POST("support_page")
     Call<CustomerSupport_Response>  get_CustomerSupportDetails  (@Body CustomerSupport_Request request);
+
+    // Add About Us
+    @POST("about_us")
+    Call<AboutUs_Response> Get_AboutUs (@Body About_me_Request request);
+
 }

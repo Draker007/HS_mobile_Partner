@@ -80,6 +80,8 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
     String gServiceId_FromService;
 
 
+    String gPremiumPartner_Id;
+
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +100,8 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
         llm.setOrientation(LinearLayoutManager.HORIZONTAL);
         gLocationlist_recyclerview.setLayoutManager(llm);
 
+
+        gPremiumPartner_Id = AppicationClass.getPremium_PartenerId();
         gAreaName_List = new ArrayList<String>();
         //Calling API for Location City
         location_list();
@@ -165,13 +169,21 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
                         ListOfServices_Response lservice_response = response.body();
 
                         gServicesList_Arraylist= new ArrayList<>(Arrays.asList(lservice_response.getServices_response()));
+                if(!gServicesList_Arraylist.get(0).getService_Mapping_ID().equals("No Results Found")){
 
-                        AddServicesList_Adapter lAddServicesList_Adapter = new AddServicesList_Adapter(ServicesAdd_Activity.this,gServicesList_Arraylist);
-                        gServiceslist_recyclerview.setAdapter(lAddServicesList_Adapter);
+                    AddServicesList_Adapter lAddServicesList_Adapter = new AddServicesList_Adapter(ServicesAdd_Activity.this,gServicesList_Arraylist);
+                    gServiceslist_recyclerview.setAdapter(lAddServicesList_Adapter);
 
-                        gServiceId_FromService=gServicesList_Arraylist.get(0).getService_ID();
+                    gServiceId_FromService=gServicesList_Arraylist.get(0).getService_ID();
 
-                        subService_List(gServiceId_FromService);
+                    subService_List(gServiceId_FromService);
+                }
+
+                else
+                {
+
+
+                }
 
 
 

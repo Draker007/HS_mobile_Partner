@@ -300,6 +300,7 @@ public class SignUp_Activity extends AppCompatActivity {
                                 cacheManager.setUserId(partnerUserDetails.getUser_ID());
 
                                 startActivity(new Intent(SignUp_Activity.this, CreateProfileActivity.class));
+                                finish();
                             }
 
                         }

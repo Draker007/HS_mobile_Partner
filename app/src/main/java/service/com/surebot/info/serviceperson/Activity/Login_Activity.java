@@ -51,6 +51,9 @@ public class Login_Activity extends AppCompatActivity {
     @BindView(R.id.login_button)
     ImageView gLogin_button;
 
+    @BindView(R.id.forgotpassword_text)
+    TextView gForgotpassword_text;
+
     String network;
 
     private CacheManager mCacheManager;
@@ -75,7 +78,7 @@ public class Login_Activity extends AppCompatActivity {
         gLogin_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              //  startActivity(new Intent(Login_Activity.this, ServicesAdd_Activity.class));
+              //  startActivity(new Intent(Login_Activity.this, ServicePersonHome_Activity.class));
 
                 if (!gUserName_Text.getText().toString().trim().equals("")) {
                     if (!gUserPassword_Text.getText().toString().trim().equals("")) {
@@ -114,7 +117,16 @@ public class Login_Activity extends AppCompatActivity {
             }
         });
 
-    }
+        gForgotpassword_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(Login_Activity.this,ForgotPasswordActivity.class));
+
+            }
+        });
+
+    }  //On create close
 
     //Login
     private void servicePerson_Login() {
@@ -122,9 +134,7 @@ public class Login_Activity extends AppCompatActivity {
 
              progress.show();
 
-
-            //progress.show();
-
+             //progress.show();
 
             OkHttpClient.Builder client = new OkHttpClient.Builder();
             HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
@@ -157,14 +167,18 @@ public class Login_Activity extends AppCompatActivity {
                         System.out.println("In User Login Method 4"+partnerlogin_response.getPartner_login_response()+" "+partnerlogin_response.getUser_Role());
                         if(partnerlogin_response.getPartner_login_response().equals("valid")) {
                             System.out.println("In User Login Method 5");
+                            if(partnerlogin_response.getPartner_login_response().equals("valid"))
+                            {
                             if (partnerlogin_response.getUser_Role().equals("2")) {
                                 System.out.println("In User Login Method 6");
 
                                 AppicationClass.setUserId_FromLogin(partnerlogin_response.getUser_ID());
                                 AppicationClass.setUserName_FromLogin(partnerlogin_response.getUserName());
+                                AppicationClass.setPremium_PartenerId(partnerlogin_response.getUser_Premium());
 
                                 editer.putString("User_Id", partnerlogin_response.getUser_ID());
                                 editer.putString("User_Name", partnerlogin_response.getUserName());
+                                editer.putString("Premium_PartnerId", partnerlogin_response.getUser_Premium());
                                 editer.commit();
 
                                 mCacheManager.setFirstTimeLaunch(false);
@@ -172,11 +186,10 @@ public class Login_Activity extends AppCompatActivity {
                                 mCacheManager.setUserRole(partnerlogin_response.getUser_Role());
                                 mCacheManager.setUserId(partnerlogin_response.getUser_ID());
 
-
-
-                                startActivity(new Intent(Login_Activity.this,SplashActivity.class));
+                                startActivity(new Intent(Login_Activity.this, SplashActivity.class));
                                 finish();
                             }
+                        }
                         } else{
 
 

@@ -29,27 +29,29 @@ import service.com.surebot.info.serviceperson.ApiClient.ApiInterface;
 import service.com.surebot.info.serviceperson.Constants.Constants;
 import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.RequestClass.About_me_Request;
+import service.com.surebot.info.serviceperson.RequestClass.AddAboutme_Request;
 import service.com.surebot.info.serviceperson.ResponseClass.About_me_Response;
+import service.com.surebot.info.serviceperson.ResponseClass.AddAboutme_Response;
 import service.com.surebot.info.serviceperson.utils.AppicationClass;
 
 public class AboutMeActivity extends AppCompatActivity {
 
     @BindView(R.id.boutMeIntro)
-    EditText intro;
+    EditText gIntoroduction_text;
 
     @BindView(R.id.boutmeHired)
     EditText hiredNo;
 
     @BindView(R.id.BoutmeExper)
-    EditText experience;
+    EditText gExperience_Text;
 
     @BindView(R.id.aboutBack)
     ConstraintLayout back;
 
     private Dialog progress;
 
-    @BindView(R.id.btnBoutmeSave)
-    Button savebtn;
+    @BindView(R.id.save_button)
+    Button gSave_button;
     ArrayList<About_me_Response.About_me_Records> about_me_Response;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,8 +71,99 @@ public class AboutMeActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
+        gSave_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(!gIntoroduction_text.getText().toString().trim().equals("")){
+
+                    if(!gExperience_Text.getText().toString().trim().equals("")){
+
+                        add_AboutmeData();
+                    }
+
+                    else{
+                        gExperience_Text.setError("Enter Experience");
+                        gExperience_Text.requestFocus();
+                    }
+                }
+
+                else{
+                    gIntoroduction_text.setError("Enter Introduction");
+                    gIntoroduction_text.requestFocus();
+                }
+            }
+        });
+
+
     }
 
+    //Add About me  Details
+
+    private void add_AboutmeData() {
+        try {
+            System.out.println("In User Login Method 1");
+            progress.show();
+            OkHttpClient.Builder client = new OkHttpClient.Builder();
+            HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
+            registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            client.addInterceptor(registrationInterceptor);
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(Constants.BASE_URL)
+                    .client(client.build())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            System.out.println("In User Login Method 2");
+            ApiInterface request = retrofit.create(ApiInterface.class);
+            AddAboutme_Request lAddAboutme_Request = new AddAboutme_Request();
+
+
+            lAddAboutme_Request.setUser_ID(AppicationClass.getUserId_FromLogin());
+            lAddAboutme_Request.setUser_Intro(gIntoroduction_text.getText().toString().trim());
+            lAddAboutme_Request.setUser_Experience(gExperience_Text.getText().toString().trim());
+            lAddAboutme_Request.setDocket(Constants.TOKEN);
+
+
+            Call<AddAboutme_Response> call = request.add_Aboutme(lAddAboutme_Request);
+            call.enqueue(new Callback<AddAboutme_Response>() {
+                @Override
+                public void onResponse(Call<AddAboutme_Response> call, Response<AddAboutme_Response> response) {
+                    if (response.isSuccessful()) {
+
+                        AddAboutme_Response aboutme_response = response.body();
+
+                        if(aboutme_response.getAdd_about_me_response().equals("Valid")){
+                            Toast.makeText(AboutMeActivity.this, "Addedd Successfully", Toast.LENGTH_SHORT).show();
+                            finish();
+
+                        }
+
+
+                    }
+
+
+                    progress.dismiss();
+                }
+
+
+
+                @Override
+                public void onFailure(Call<AddAboutme_Response> call, Throwable t) {
+                    Toast.makeText(AboutMeActivity.this, getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
+                    progress.dismiss();
+                }
+            });
+        }
+        catch (Exception e) {
+            System.out.println("In User Login Method 8");
+            e.printStackTrace();
+            progress.dismiss();
+
+        }
+    }
+    //Get About me Details
     private void getAboutmeData() {
             try {
                 System.out.println("In User Login Method 1");
@@ -101,13 +194,11 @@ public class AboutMeActivity extends AppCompatActivity {
                         if (response.isSuccessful()) {
 
                             About_me_Response aboutme_response = response.body();
+                        if(!aboutme_response.getAbout_me_response().getUserAddInfoId().equals("No Results Found")){
+                            gIntoroduction_text.setText(aboutme_response.getAbout_me_response().getUser_Intro());
+                            gExperience_Text.setText(aboutme_response.getAbout_me_response().getUser_Experience());
 
-                            about_me_Response =new ArrayList<>(Arrays.asList(aboutme_response.getAbout_me_response()));
-                            if(!about_me_Response.get(0).getAbout_ID().equals("Invalid")){
-                                experience.setText(about_me_Response.get(0).getExperience());
-                                intro.setText(about_me_Response.get(0).getIntroduction());
-                                //TODO have to set for No of time hired
-                            }
+                        }
 
 
                            }
