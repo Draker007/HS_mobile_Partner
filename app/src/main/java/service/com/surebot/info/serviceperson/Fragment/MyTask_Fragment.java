@@ -251,9 +251,9 @@ public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.st
                         System.out.println("asd1");
                         Partner_package_Response ListPackage = response.body();
 
-//                        partner_package_response =new ArrayList<>(Arrays.asList(ListPackage.getPartner_package_response()));
-//                        HomePackage_Adapter lHomePackage_Adapter = new HomePackage_Adapter(getActivity(),partner_package_response);
-//                        gPackage_recyclerview.setAdapter(lHomePackage_Adapter);
+                        partner_package_response =new ArrayList<>(Arrays.asList(ListPackage.getPartner_package_response()));
+                        HomePackage_Adapter lHomePackage_Adapter = new HomePackage_Adapter(getActivity(),partner_package_response);
+                      gPackage_recyclerview.setAdapter(lHomePackage_Adapter);
 
                     }
 

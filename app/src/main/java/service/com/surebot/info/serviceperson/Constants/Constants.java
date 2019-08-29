@@ -10,5 +10,5 @@ public class Constants {
 
     public static final String BASE_URL = "http://192.168.0.82/services_at_home_test/Api/";
 
-    public static final String IMAGEBASE_URL="http://192.168.0.86/services_at_home/";
+    public static final String IMAGEBASE_URL="http://192.168.0.82/services_at_home/";
 }

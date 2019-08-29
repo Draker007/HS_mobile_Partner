@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -70,7 +71,10 @@ public class SignUp_Activity extends AppCompatActivity {
     @BindView(R.id.password_text)
     EditText gUserPassword_text;
 
-    @BindView(R.id.alreadyaccount_text)
+    @BindView(R.id.spin)
+    ImageView gSpin;
+
+    @BindView(R.id.alreadyAccount_text)
     TextView gAlreadyaccount_text;
 
     ArrayList<Category_List_Response.Category_List_Records> categoryList_Arraylist;
@@ -79,7 +83,7 @@ public class SignUp_Activity extends AppCompatActivity {
     @BindView(R.id.confirmPassword_text)
     EditText gUserConfirmPassword_text;
 
-    @BindView(R.id.signup_button)
+    @BindView(R.id.signup_Button)
     AppCompatButton gSignup_button;
 
 
@@ -126,14 +130,27 @@ public class SignUp_Activity extends AppCompatActivity {
         progress.setContentView(R.layout.progressbar_background);
         progress.setCancelable(true);
         //SignUp Button CLickable
-   gUserPassword_text.setOnClickListener(new View.OnClickListener() {
-       @Override
-       public void onClick(View view) {
-           gProfession_text.setText(categoryList_Arraylist.get(gSpinner_professionselection.getSelectedItemPosition()).getCategory_Name());
-           gProfession_text.setEnabled(false);
+        gSpin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gSpinner_professionselection.setVisibility(View.VISIBLE);
+                gSpin.setVisibility(View.GONE);
+            }
+        });
+        gSpinner_professionselection.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                                                   @Override
+                                                                   public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                                                                       gProfession_text.setText(categoryList_Arraylist.get(gSpinner_professionselection.getSelectedItemPosition()).getCategory_Name());
+                                                                       gProfession_text.setEnabled(false);
+                                                                       gSpinner_professionselection.setVisibility(View.GONE);
+                                                                       gSpin.setVisibility(View.VISIBLE);
+                                                                   }
 
-       }
-   });
+                                                                   @Override
+                                                                   public void onNothingSelected(AdapterView<?> adapterView) {
+
+                                                                   }
+                                                               });
         gSignup_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

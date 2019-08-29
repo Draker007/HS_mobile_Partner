@@ -20,6 +20,8 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.maps.MapView;
+
 import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -29,6 +31,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import okhttp3.OkHttpClient;
@@ -56,12 +59,13 @@ public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapte
 
     private Dialog progress;
 
+
     ArrayList<String > gServiceName_List= new ArrayList<>();
     ServiceList_Communicator communicator;
 
-    private  ArrayList<String> gSendquotetoUserList_New = new ArrayList<>();
+    private  ArrayList<String> MappingSubService = new ArrayList<>();
 
-    List<String> Awards = new ArrayList<>();
+    List<String> MappingIds = new ArrayList<>();
 
     NewTaskSubServicesList_Adapter adapter;
 
@@ -161,10 +165,40 @@ public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapte
 
                 }
                 Log.e("lol1", "onClick: "+finalmapingIdList+finalPriceList );
-                AppicationClass.test1.clear();
+                if(finalmapingIdList.size()== MappingIds.size()){
+                    AppicationClass.test1.clear();
 
-                communicator.addquotationlist(finalmapingIdList,finalPriceList,"1");
-            System.out.println("In Send Button " + finalmapingIdList + finalPriceList);
+                    communicator.addquotationlist(finalmapingIdList,finalPriceList,"1");
+
+                }else{
+                    Toast.makeText(context, "Please Fill Price For All Services", Toast.LENGTH_SHORT).show();
+//                    int[] arr = new int[MappingIds.size()];
+//                    for(int i=0; i<MappingIds.size(); i++) {
+//                        arr[i] = Integer.parseInt(MappingIds.get(i));
+//                    }
+//                    int[] arr1 = new int[finalmapingIdList.size()];
+//
+//                    for(int i=0; i<finalmapingIdList.size(); i++) {
+//                        arr[i] = Integer.parseInt(finalmapingIdList.get(i));
+//                    }
+//                    Arrays.sort(arr1);
+//                    Arrays.sort(arr);
+//                    String temp = null;
+//                    for (int i = 0; i < MappingIds.size(); i++){
+//                        if (arr1[i] != arr[i]) {
+//                            temp = String.valueOf(arr[i]);
+//                            break ;
+//                        }
+//                    }
+//
+//
+//
+//                    Toast.makeText(context, "Enter Price for " +MappingSubService.get(MappingIds.indexOf(temp)), Toast.LENGTH_SHORT).show();
+//
+
+
+                }
+                 System.out.println("In Send Button " + finalmapingIdList + finalPriceList);
 
 
             }
@@ -219,6 +253,8 @@ public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapte
                                 for(int i=0;i<gNewRequestList_Arraylist.size();i++){
 
                                     gServiceName_List.add(gNewRequestList_Arraylist.get(i).getService_Name());
+                                    MappingIds.add(gNewRequestList_Arraylist.get(i).getService_Mapping_ID());
+                                    MappingSubService.add(gNewRequestList_Arraylist.get(i).getSub_Service_Name());
                                 }
 
                                 Set<String> set = new HashSet<>(gServiceName_List);
