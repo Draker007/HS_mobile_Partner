@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -43,6 +45,7 @@ public class PendingPaymentFragment extends Fragment {
     View view;
     String TAG = "payment";
     private Dialog progress;
+    TextView paymentText;
     List<Partner_payment_Response.Complete_transaction_record> Payment_details = new ArrayList<>();
     List<paymentChildData> paymentChildDataList = new ArrayList<>();
     @Nullable
@@ -51,7 +54,7 @@ public class PendingPaymentFragment extends Fragment {
         view = inflater.inflate(R.layout.payment_fragment, container, false);
         r1 = view.findViewById(R.id.paymentRecycler);
         RecyclerView.LayoutManager lm = new LinearLayoutManager(getActivity());
-
+        paymentText = view.findViewById(R.id.paymentText);
         //adapter = new paymentParentAdapter( paymentParentDataList);
 
         adapter = new paymentParentAdapter(Payment_details,getActivity());
@@ -101,9 +104,17 @@ public class PendingPaymentFragment extends Fragment {
 
                         Partner_payment_Response aboutme_response = response.body();
                         Log.e(TAG, "onResponse: "+aboutme_response);
-                        ArrayList<Partner_payment_Response.Complete_transaction_record> PendingPaymentResponse = new ArrayList<>(Arrays.asList(aboutme_response.getPending_transaction_response()));
-                        adapter = new paymentParentAdapter( PendingPaymentResponse,getActivity());
-                        r1.setAdapter(adapter);
+                        if (aboutme_response.getPending_transaction_response()!=null) {
+                            r1.setVisibility(View.VISIBLE);
+                            paymentText.setVisibility(View.GONE);
+                            ArrayList<Partner_payment_Response.Complete_transaction_record> PendingPaymentResponse = new ArrayList<>(Arrays.asList(aboutme_response.getPending_transaction_response()));
+                            adapter = new paymentParentAdapter(PendingPaymentResponse, getActivity());
+                            r1.setAdapter(adapter);
+                        }
+                        else {
+                            paymentText.setText("No Payment is Pending..");
+                            r1.setVisibility(View.GONE);
+                        }
 
                     }
 
@@ -115,7 +126,7 @@ public class PendingPaymentFragment extends Fragment {
 
                 @Override
                 public void onFailure(Call<Partner_payment_Response> call, Throwable t) {
-                    System.out.println("In User Login Method 7");
+                    Toast.makeText(getActivity(), getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
                     progress.dismiss();
                 }
             });

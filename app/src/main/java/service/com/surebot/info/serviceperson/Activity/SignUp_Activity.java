@@ -71,8 +71,7 @@ public class SignUp_Activity extends AppCompatActivity {
     @BindView(R.id.password_text)
     EditText gUserPassword_text;
 
-    @BindView(R.id.spin)
-    ImageView gSpin;
+
 
     @BindView(R.id.alreadyAccount_text)
     TextView gAlreadyaccount_text;
@@ -130,20 +129,14 @@ public class SignUp_Activity extends AppCompatActivity {
         progress.setContentView(R.layout.progressbar_background);
         progress.setCancelable(true);
         //SignUp Button CLickable
-        gSpin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                gSpinner_professionselection.setVisibility(View.VISIBLE);
-                gSpin.setVisibility(View.GONE);
-            }
-        });
+
         gSpinner_professionselection.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                                                    @Override
                                                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                                                                        gProfession_text.setText(categoryList_Arraylist.get(gSpinner_professionselection.getSelectedItemPosition()).getCategory_Name());
                                                                        gProfession_text.setEnabled(false);
-                                                                       gSpinner_professionselection.setVisibility(View.GONE);
-                                                                       gSpin.setVisibility(View.VISIBLE);
+
+
                                                                    }
 
                                                                    @Override

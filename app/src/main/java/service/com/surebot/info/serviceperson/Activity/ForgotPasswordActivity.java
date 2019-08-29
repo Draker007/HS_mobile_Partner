@@ -105,7 +105,8 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<Send_otp_mail_Response> call, Throwable t) {
-                    System.out.println("In User Login Method 7");
+
+                    Toast.makeText(ForgotPasswordActivity.this, getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
                     progress.dismiss();
                 }
             });

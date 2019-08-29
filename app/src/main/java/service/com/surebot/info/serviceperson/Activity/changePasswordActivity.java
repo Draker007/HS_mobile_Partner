@@ -28,6 +28,7 @@ import service.com.surebot.info.serviceperson.Constants.Constants;
 import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.RequestClass.ChangePasswordRequest;
 import service.com.surebot.info.serviceperson.ResponseClass.ChangePasswordResponse;
+import service.com.surebot.info.serviceperson.utils.AppicationClass;
 
 public class changePasswordActivity extends AppCompatActivity {
 
@@ -114,7 +115,7 @@ public class changePasswordActivity extends AppCompatActivity {
             ChangePasswordRequest lservice_request = new ChangePasswordRequest();
 
 
-            lservice_request.setUser_ID("68");
+            lservice_request.setUser_ID(AppicationClass.getUserId_FromLogin());
             lservice_request.setCurrent_Password(gCurrentPass.getText().toString());
             lservice_request.setPassword(gNewPass.getText().toString());
             lservice_request.setDocket(Constants.TOKEN);
@@ -131,6 +132,8 @@ public class changePasswordActivity extends AppCompatActivity {
 
                             if(aboutme_response.getPartner_change_password_response().equals("valid")){
                                 Toast.makeText(changePasswordActivity.this, "Password Changed", Toast.LENGTH_SHORT).show();
+                            }else {
+                                Toast.makeText(changePasswordActivity.this, response.body().getPartner_change_password_response(), Toast.LENGTH_SHORT).show();
                             }
 
 
@@ -145,7 +148,7 @@ public class changePasswordActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<ChangePasswordResponse> call, Throwable t) {
-                    System.out.println("In User Login Method 7");
+                    Toast.makeText(changePasswordActivity.this, getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
                     progress.dismiss();
                 }
             });

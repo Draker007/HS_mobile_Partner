@@ -209,6 +209,7 @@ public class IdentityVerificationActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(Call<Identity_verification_Response> call, Throwable t) {
                     Log.e("Draker", "onFailed: 1" +t);
+
                     //   progress.dismiss();
                 }
             });

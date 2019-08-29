@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -39,6 +41,7 @@ public class CompletedPaymentFragment extends Fragment {
     View view;
     RecyclerView r1;
     paymentParentAdapter adapter;
+    TextView paymentText;
     List<paymentParentData> paymentParentDataList= new ArrayList<>();
     List<paymentChildData> paymentChildDataList = new ArrayList<>();
     private Dialog progress;
@@ -47,6 +50,7 @@ public class CompletedPaymentFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.payment_fragment, container, false);
         r1 = view.findViewById(R.id.paymentRecycler);
+        paymentText = view.findViewById(R.id.paymentText);
         RecyclerView.LayoutManager lm = new LinearLayoutManager(getActivity());
         progress = new Dialog(getActivity(), android.R.style.Theme_Translucent);
         progress.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -95,11 +99,16 @@ public class CompletedPaymentFragment extends Fragment {
                     if (response.isSuccessful()) {
 
                         Partner_payment_Response aboutme_response = response.body();
-
-                        ArrayList<Partner_payment_Response.Complete_transaction_record> CompletedPaymentResponse = new ArrayList<>(Arrays.asList(aboutme_response.getComplete_transaction_response()));
-                        adapter = new paymentParentAdapter( CompletedPaymentResponse,getActivity());
-                        r1.setAdapter(adapter);
-
+                        if (aboutme_response.getComplete_transaction_response()!=null) {
+                            r1.setVisibility(View.VISIBLE);
+                            paymentText.setVisibility(View.GONE);
+                            ArrayList<Partner_payment_Response.Complete_transaction_record> CompletedPaymentResponse = new ArrayList<>(Arrays.asList(aboutme_response.getComplete_transaction_response()));
+                            adapter = new paymentParentAdapter(CompletedPaymentResponse, getActivity());
+                            r1.setAdapter(adapter);
+                        }else{
+                            paymentText.setText("No Payment Done Yet..!");
+                            r1.setVisibility(View.GONE);
+                        }
                     }
 
 
@@ -110,7 +119,7 @@ public class CompletedPaymentFragment extends Fragment {
 
                 @Override
                 public void onFailure(Call<Partner_payment_Response> call, Throwable t) {
-                    System.out.println("In User Login Method 7");
+                    Toast.makeText(getActivity(), getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
                     progress.dismiss();
                 }
             });
