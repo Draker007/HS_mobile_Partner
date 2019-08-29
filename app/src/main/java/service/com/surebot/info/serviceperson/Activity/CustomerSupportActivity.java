@@ -31,6 +31,7 @@ import service.com.surebot.info.serviceperson.Constants.Constants;
 import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.RequestClass.CustomerSupport_Request;
 import service.com.surebot.info.serviceperson.ResponseClass.CustomerSupport_Response;
+import service.com.surebot.info.serviceperson.utils.AppicationClass;
 
 public class CustomerSupportActivity extends AppCompatActivity {
 
@@ -49,6 +50,8 @@ public class CustomerSupportActivity extends AppCompatActivity {
     ArrayList<CustomerSupport_Response.CustomerSupport_Records> gCustomerSupportDetails_Arraylist;
 
     String gSupport_phoneNumber;
+    String gUserId_FromLogin;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +64,8 @@ public class CustomerSupportActivity extends AppCompatActivity {
         //here we set layout of progress dialog
         progress.setContentView(R.layout.progressbar_background);
         progress.setCancelable(true);
+
+        gUserId_FromLogin = AppicationClass.getUserId_FromLogin();
 
         gRequestcall_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,7 +106,7 @@ public class CustomerSupportActivity extends AppCompatActivity {
 
             ApiInterface request = retrofit.create(ApiInterface.class);
             CustomerSupport_Request lListofFaqs_Request = new CustomerSupport_Request();
-            lListofFaqs_Request.setUser_ID("1");
+            lListofFaqs_Request.setUser_ID(gUserId_FromLogin);
             lListofFaqs_Request.setDocket(Constants.TOKEN);
 
             Call<CustomerSupport_Response> call = request.get_CustomerSupportDetails(lListofFaqs_Request);

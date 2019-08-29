@@ -69,7 +69,7 @@ public class ServicePersonHome_Activity extends AppCompatActivity {
 
     int back = 0;
 
-    String gUserId_FromLogin,gUserName_FromLogin,gPremium_PartnerId;
+    String gUserId_FromLogin,gUserName_FromLogin,gPremium_PartnerId,gCategoryId_FromLogin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,10 +82,12 @@ public class ServicePersonHome_Activity extends AppCompatActivity {
         gUserId_FromLogin = sp1.getString("User_Id", null);
         gUserName_FromLogin= sp1.getString("User_Name", null);
         gPremium_PartnerId =  sp1.getString("Premium_PartnerId", null);
+        gCategoryId_FromLogin=  sp1.getString("Category_Id", null);
 
         AppicationClass.setUserId_FromLogin(gUserId_FromLogin);
         AppicationClass.setUserName_FromLogin(gUserName_FromLogin);
         AppicationClass.setPremium_PartenerId(gPremium_PartnerId);
+        AppicationClass.setCategoryId_FromLogin(gCategoryId_FromLogin);
 
 
         check = getIntent().getStringExtra("status");

@@ -75,6 +75,8 @@ public class SetNewPasswordActivity extends AppCompatActivity  {
     ConstraintLayout gnewPasswordLayout;
     String email;
     private Dialog progress;
+    String gUserId_FromLogin;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +88,9 @@ public class SetNewPasswordActivity extends AppCompatActivity  {
         //here we set layout of progress dialog
         progress.setContentView(R.layout.progressbar_background);
         progress.setCancelable(true);
+
+        gUserId_FromLogin= AppicationClass.getUserId_FromLogin();
+
         gotp1.addTextChangedListener(new SampleTextWatcherClass(gotp1));
         gotp2.addTextChangedListener(new SampleTextWatcherClass(gotp2));
         gotp3.addTextChangedListener(new SampleTextWatcherClass(gotp3));
@@ -154,7 +159,7 @@ public class SetNewPasswordActivity extends AppCompatActivity  {
             Partner_set_new_password_otp_Request lservice_request = new Partner_set_new_password_otp_Request();
 
 
-            lservice_request.setUser_ID("2");
+            lservice_request.setUser_ID(gUserId_FromLogin);
             lservice_request.setDocket(Constants.TOKEN);
             lservice_request.setOtp_code(otp);
 
@@ -222,7 +227,7 @@ public class SetNewPasswordActivity extends AppCompatActivity  {
             Partner_set_new_password_Request lservice_request = new Partner_set_new_password_Request();
 
 
-            lservice_request.setUser_ID("2");
+            lservice_request.setUser_ID(gUserId_FromLogin);
             lservice_request.setDocket(Constants.TOKEN);
             lservice_request.setUser_Email(email);
 

@@ -19,7 +19,10 @@ public class ListOfSubServices_Response {
 
         private String Service_Name;
 
-        private  String Service_Description;
+        private String Service_Description;
+
+        private String Service_Amount;
+
 
         public String getService_Mapping_ID() {
             return Service_Mapping_ID;
@@ -52,5 +55,14 @@ public class ListOfSubServices_Response {
         public void setService_Description(String service_Description) {
             Service_Description = service_Description;
         }
+
+        public String getService_Amount() {
+            return Service_Amount;
+        }
+
+        public void setService_Amount(String service_Amount) {
+            Service_Amount = service_Amount;
+        }
     }
 }
+

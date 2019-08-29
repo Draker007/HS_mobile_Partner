@@ -49,7 +49,7 @@ public class AddSubServicesList_Adapter extends RecyclerView.Adapter<AddSubServi
     @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, final int position) {
-System.out.println("Premium partner Id is " + gPremiumPartner_Id);
+      System.out.println("Premium partner Id is " + gPremiumPartner_Id);
 
         if(gPremiumPartner_Id.equals("1")){
             myViewHolder.lPrice.setVisibility(View.VISIBLE);
@@ -73,7 +73,11 @@ System.out.println("Premium partner Id is " + gPremiumPartner_Id);
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (charSequence!=null) {
 
-                    SubServiceData.add(position,charSequence.toString());
+                //    SubServiceData.add(position,charSequence.toString());
+
+                    if(charSequence.length() >0) {
+                        AppicationClass.addservicemapingid.add(gSubServicesList_Arraylist.get(position).getService_Mapping_ID()+","+ charSequence.toString());
+                    }
 
                 }}
 
@@ -85,15 +89,19 @@ System.out.println("Premium partner Id is " + gPremiumPartner_Id);
         myViewHolder.lQuantityCheckBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            addedSubService.add(gSubServicesList_Arraylist.get(position).getService_ID());
-
+            addedSubService.add(gSubServicesList_Arraylist.get(position).getService_Mapping_ID());
+              //  AppicationClass.addservicemapingid.add(gSubServicesList_Arraylist.get(position).getService_Mapping_ID()+","+ "0");
             }
         });
 
 
     }
 
-    public ArrayList getPrimeData(){return SubServiceData;}
+    public ArrayList getPrimeData(){
+
+        return SubServiceData;
+
+    }
     public ArrayList getDataCheckBox(){
         return addedSubService;
     }

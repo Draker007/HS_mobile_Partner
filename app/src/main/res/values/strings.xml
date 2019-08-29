@@ -52,6 +52,7 @@
     <string name="selectservices">Select your service providing location and service.</string>
     <string name="location">Location</string>
     <string name="approvalbutton">Submit for approval</string>
+    <string name="waitingapprovalbutton">Waiting for approval</string>
 
 
     <!-- About US Strings -->

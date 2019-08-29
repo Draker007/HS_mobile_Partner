@@ -28,6 +28,7 @@ import service.com.surebot.info.serviceperson.Constants.Constants;
 import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.RequestClass.ChangePasswordRequest;
 import service.com.surebot.info.serviceperson.ResponseClass.ChangePasswordResponse;
+import service.com.surebot.info.serviceperson.utils.AppicationClass;
 
 public class changePasswordActivity extends AppCompatActivity {
 
@@ -114,7 +115,7 @@ public class changePasswordActivity extends AppCompatActivity {
             ChangePasswordRequest lservice_request = new ChangePasswordRequest();
 
 
-            lservice_request.setUser_ID("68");
+            lservice_request.setUser_ID(AppicationClass.getUserId_FromLogin());
             lservice_request.setCurrent_Password(gCurrentPass.getText().toString());
             lservice_request.setPassword(gNewPass.getText().toString());
             lservice_request.setDocket(Constants.TOKEN);

@@ -123,7 +123,7 @@ public class AccountDetailsActivity extends AppCompatActivity {
                 client.addInterceptor(registrationInterceptor);
 
                 Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("http://192.168.0.82/services_at_home_test/Api/")
+                        .baseUrl(Constants.BASE_URL)
                         .client(client.build())
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
@@ -132,7 +132,7 @@ public class AccountDetailsActivity extends AppCompatActivity {
                 Account_details_Request lservice_request = new Account_details_Request ();
 
 
-                lservice_request.setUser_ID("3");
+                lservice_request.setUser_ID(AppicationClass.getUserId_FromLogin());
                 lservice_request.setDocket(Constants.TOKEN);
 
 

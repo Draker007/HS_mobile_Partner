@@ -81,7 +81,7 @@ public class NotificationActivity extends AppCompatActivity {
             System.out.println("In User Login Method 2");
             ApiInterface request = retrofit.create(ApiInterface.class);
             Notification_Request lservice_request = new Notification_Request();
-        lservice_request.setUser_ID("4");
+        lservice_request.setUser_ID(AppicationClass.getUserId_FromLogin());
             lservice_request.setDocket(Constants.TOKEN);
 
 

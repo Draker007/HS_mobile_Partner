@@ -271,10 +271,13 @@ public class SignUp_Activity extends AppCompatActivity {
                             if(partnerUserDetails.getUser_Role().equals("2")) {
                                 AppicationClass.setUserId_FromLogin(partnerUserDetails.getUser_ID());
                                 AppicationClass.setUserName_FromLogin(partnerUserDetails.getUser_Name());
-
+                                AppicationClass.setPremium_PartenerId(partnerUserDetails.getUser_Premium());
+                                AppicationClass.setCategoryId_FromLogin(partnerUserDetails.getCategory_ID());
 
                                 editer.putString("User_Id", partnerUserDetails.getUser_ID());
                                 editer.putString("User_Name", partnerUserDetails.getUser_Name());
+                                editer.putString("Premium_PartnerId", partnerUserDetails.getUser_Premium());
+                                editer.putString("Category_Id", partnerUserDetails.getCategory_ID());
                                 editer.commit();
 
                                 cacheManager.setFirstTimeLaunch(false);

@@ -8,6 +8,7 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -38,10 +39,12 @@ import service.com.surebot.info.serviceperson.RequestClass.ListOfServices_Reques
 import service.com.surebot.info.serviceperson.RequestClass.ListOfSubServices_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Partner_package_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Select_service_partner_Request;
+import service.com.surebot.info.serviceperson.RequestClass.SubmitForApproval_Request;
 import service.com.surebot.info.serviceperson.ResponseClass.ListOfServices_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.ListOfSubServices_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Partner_package_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Select_service_partner_Response;
+import service.com.surebot.info.serviceperson.ResponseClass.SubmitForApproval_Response;
 import service.com.surebot.info.serviceperson.utils.AppicationClass;
 
 public class ServicesAdd_Activity extends AppCompatActivity implements  AddServicesList_Adapter.serviceslist_Communicator {
@@ -65,6 +68,12 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
     @BindView(R.id.submitforapproval_button)
     Button gSubmitforapproval_button;
 
+    @BindView(R.id.waitingforapproval_button)
+    Button gWaitingforapproval_button;
+
+
+
+
     LinearLayoutManager llm;
 
     LinearLayoutManager gServicelayoutmanager;
@@ -80,7 +89,7 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
     String gServiceId_FromService;
 
 
-    String gPremiumPartner_Id;
+    String gUserId_FromLogin,gCategoryId_FromLogin,gPremiumPartner_Id;
 
     @SuppressLint("WrongConstant")
     @Override
@@ -100,8 +109,12 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
         llm.setOrientation(LinearLayoutManager.HORIZONTAL);
         gLocationlist_recyclerview.setLayoutManager(llm);
 
-
+        gUserId_FromLogin= AppicationClass.getUserId_FromLogin();
+        gCategoryId_FromLogin=AppicationClass.getCategoryId_FromLogin();
         gPremiumPartner_Id = AppicationClass.getPremium_PartenerId();
+
+
+        System.out.println("User id and Category id in Add Service " + gUserId_FromLogin + gCategoryId_FromLogin );
         gAreaName_List = new ArrayList<String>();
         //Calling API for Location City
         location_list();
@@ -127,8 +140,57 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
         gSubmitforapproval_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                submitFor_Approval();
 
-                startActivity(new Intent(ServicesAdd_Activity.this,ServicePersonHome_Activity.class));
+                Log.e("lol1", "onClick: "+ AppicationClass.addservicemapingid);
+                ArrayList<String > id =new ArrayList<>();
+                ArrayList<String > price =new ArrayList<>();
+
+                for (int p = 0 ; p<AppicationClass.addservicemapingid.size();p++){
+                    String[] list = AppicationClass.addservicemapingid.get(p).split(",");
+                    id.add(list[0]);
+                    price.add(list[1]);
+                }
+                Log.e("lola", "onClick: "+id+"  "+price );
+                ArrayList<String> finalPriceList = new ArrayList<>();
+                ArrayList<String>finalmapingIdList = new ArrayList<>();
+
+                int items=0;
+                for ( int j = 0; j<price.size();j++)
+                {
+                    int i =1;
+                    for (int check = 0 ; check<finalmapingIdList.size();check++){
+                        if (!id.get(j).equals(finalmapingIdList.get(check))){
+                            i = 1;
+                        }else{
+                            i = 0;
+                        }
+                    }
+                    if (i == 1){
+                        for (int o = id.size()-1 ; o>=0;o--){
+                            if(id.get(j).equals(id.get(o))){
+
+                                Log.e("asdasd", "onClick: "+ id.get(o) );
+                                finalmapingIdList.add(items,id.get(o));
+                                finalPriceList.add(items,price.get(o));
+                                o=0;
+
+                            }
+
+                        }
+                        items++;
+                    }
+
+                }
+                Log.e("lol1", "onClick: "+finalmapingIdList+finalPriceList );
+                AppicationClass.addservicemapingid.clear();
+
+               // communicator.addquotationlist(finalmapingIdList,finalPriceList,"1");
+                System.out.println("In Submit  Button in Add Service List " + finalmapingIdList + finalPriceList);
+
+
+
+               // startActivity(new Intent(ServicesAdd_Activity.this,ServicePersonHome_Activity.class));
             }
         });
     }  //On Create close
@@ -155,8 +217,11 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
             ListOfServices_Request lservice_request = new ListOfServices_Request();
 
 
-            lservice_request.setUser_ID("1");
-            lservice_request.setCategory_ID("1");
+          /*  lservice_request.setUser_ID(gUserId_FromLogin);
+            lservice_request.setCategory_ID(gCategoryId_FromLogin);*/
+
+            lservice_request.setUser_ID(gUserId_FromLogin);
+            lservice_request.setCategory_ID(gCategoryId_FromLogin);
             lservice_request.setDocket(Constants.TOKEN);
 
 
@@ -236,8 +301,8 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
             ListOfSubServices_Request lsubservice_request = new ListOfSubServices_Request();
 
 
-            lsubservice_request.setUser_ID(AppicationClass.getUserId_FromLogin());
-            lsubservice_request.setCategory_ID("1");
+            lsubservice_request.setUser_ID(gUserId_FromLogin);
+            lsubservice_request.setCategory_ID(gCategoryId_FromLogin);
             lsubservice_request.setDocket(Constants.TOKEN);
             lsubservice_request.setService_ID(serviceId);
 
@@ -327,8 +392,8 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
             Select_service_partner_Request locationRequest = new Select_service_partner_Request();
 
 
-            locationRequest.setUser_ID("1");
-            locationRequest.setCategory_ID("1");
+            locationRequest.setUser_ID(gUserId_FromLogin);
+            locationRequest.setCategory_ID(gCategoryId_FromLogin);
             locationRequest.setDocket(Constants.TOKEN);
 
 
@@ -378,9 +443,83 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
         }
     }
 
+//Submit For Approval
+
+    public  void submitFor_Approval(){
+        try{
+            progress.show();
+            System.out.println("In User Login Method 1");
+            progress.show();
+            OkHttpClient.Builder client = new OkHttpClient.Builder();
+            HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
+            registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            client.addInterceptor(registrationInterceptor);
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(Constants.BASE_URL)
+                    .client(client.build())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            System.out.println("In User Login Method 2");
+            ApiInterface request = retrofit.create(ApiInterface.class);
+            SubmitForApproval_Request lservice_request = new SubmitForApproval_Request();
+
+
+            lservice_request.setUser_ID("70");
+            lservice_request.setService_Mapping_ID("16,17,18");
+            lservice_request.setLocation_ID("1,4,5");
+            lservice_request.setDocket(Constants.TOKEN);
+
+
+            Call<SubmitForApproval_Response> call = request.submitFor_Approval(lservice_request);
+            call.enqueue(new Callback<SubmitForApproval_Response>() {
+                @Override
+                public void onResponse(Call<SubmitForApproval_Response> call, Response<SubmitForApproval_Response> response) {
+                    if(response.isSuccessful()){
+
+                        SubmitForApproval_Response lservice_response = response.body();
+
+                      if(lservice_response.getSubmit_services_for_approval_response().equals("valid")){
+                          Toast.makeText(ServicesAdd_Activity.this, "Submitted Successfully", Toast.LENGTH_SHORT).show();
+                          subService_List(gServiceId_FromService);
+
+                          gWaitingforapproval_button.setVisibility(View.VISIBLE);
+                          gSubmitforapproval_button.setVisibility(View.GONE);
+
+                          startActivity(new Intent(ServicesAdd_Activity.this,ServicePersonHome_Activity.class));
+                          finish();
+                      }
+              else{
+                          subService_List(gServiceId_FromService);
+
+                      }
 
 
 
+
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<SubmitForApproval_Response> call, Throwable t) {
+                    Toast.makeText(ServicesAdd_Activity.this, getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
+
+                    progress.dismiss();
+                }
+            });
+
+
+
+        }
+
+        catch (Exception e) {
+            System.out.println("In User Login Method 8");
+            e.printStackTrace();
+            progress.dismiss();
+
+        }
+    }
 
     @Override
     public void servicesslist(String serviceid) {

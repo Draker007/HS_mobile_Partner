@@ -102,7 +102,7 @@ String gUserId_FromLogin;
 
             ApiInterface request = retrofit.create(ApiInterface.class);
             UpcomingRequestList_Request lNewRequestList_Request = new UpcomingRequestList_Request();
-            lNewRequestList_Request.setUser_ID("12");
+            lNewRequestList_Request.setUser_ID(gUserId_FromLogin);
 
             lNewRequestList_Request.setDocket(Constants.TOKEN);
 

@@ -36,6 +36,7 @@ import service.com.surebot.info.serviceperson.RequestClass.Select_service_partne
 
 import service.com.surebot.info.serviceperson.RequestClass.SendQuotetoUser_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Send_otp_mail_Request;
+import service.com.surebot.info.serviceperson.RequestClass.SubmitForApproval_Request;
 import service.com.surebot.info.serviceperson.RequestClass.UpcomingRequestList_Request;
 
 
@@ -85,6 +86,7 @@ import service.com.surebot.info.serviceperson.ResponseClass.Select_service_partn
 import service.com.surebot.info.serviceperson.ResponseClass.SendQuotetoUser_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Send_otp_mail_Response;
 
+import service.com.surebot.info.serviceperson.ResponseClass.SubmitForApproval_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.UpcomingRequestList_Response;
 
 
@@ -94,25 +96,36 @@ import service.com.surebot.info.serviceperson.ResponseClass.UpcomingRequestList_
 
 public interface ApiInterface {
 
-    //User List Of Services
+    //Category List in Signup
+    @POST("list_category")
+    Call<Category_List_Response> categoryList(@Body Category_List_Request request);
 
-    @POST("list_services")
-    Call<ListOfServices_Response> Services_list(@Body ListOfServices_Request request);
-
-
-    @POST("list_sub_services")
-    Call<ListOfSubServices_Response> SubServices_list(@Body ListOfSubServices_Request request);
-
-    //Log in And Sign UP
-    @POST("partner_login")
-    Call<Partnerlogin_Response> partnerlogin(@Body Partnerlogin_Request request);
-
+        //SignUp
     @POST("partner_signup")
     Call<PartnerSignup_Response> partnerSignup (@Body PartnerSigup_Request request);
 
+    //Log in
+    @POST("partner_login")
+    Call<Partnerlogin_Response> partnerlogin(@Body Partnerlogin_Request request);
 
-    @POST("list_category")
-    Call<Category_List_Response> categoryList(@Body Category_List_Request request);
+    //Add Service Partner And Location
+    @POST("select_service_partner")
+    Call<Select_service_partner_Response> SelectSeviceAndLocation (@Body Select_service_partner_Request request);
+
+    //User List Of Services
+    @POST("list_services")
+    Call<ListOfServices_Response> Services_list(@Body ListOfServices_Request request);
+
+   //Get List Of Sub Services List
+    @POST("list_sub_service_for_partner")
+    Call<ListOfSubServices_Response> SubServices_list(@Body ListOfSubServices_Request request);
+
+//Submit For Approval
+
+    @POST("submit_services_for_approval")
+    Call<SubmitForApproval_Response> submitFor_Approval(@Body SubmitForApproval_Request request);
+
+
 
 
     //Profile
@@ -165,13 +178,6 @@ public interface ApiInterface {
 
     @POST("notification_request")
     Call<Notification_Response> NotificationCall (@Body Notification_Request request);
-
-
-    //Add Service Partner And Location
-    @POST("select_service_partner")
-    Call<Select_service_partner_Response> SelectSeviceAndLocation (@Body Select_service_partner_Request request);
-
-
 
 
     //Payment
