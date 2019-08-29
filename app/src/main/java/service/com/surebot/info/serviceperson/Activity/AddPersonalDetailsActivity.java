@@ -177,7 +177,7 @@ public class AddPersonalDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Glide.with(AddPersonalDetailsActivity.this).load(R.drawable.image_border).into(editImageProf);
-                //callAPI for removing image
+                deleteProfilePic();
             }
         });
         cameraImg.setOnClickListener(new View.OnClickListener() {
@@ -438,7 +438,7 @@ public class AddPersonalDetailsActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<Add_partner_personal_details_Response> call, Throwable t) {
-                    Log.e("Draker", "failed: 1" +t);
+                  Toast.makeText(AddPersonalDetailsActivity.this, getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
                     progress.dismiss();
                 }
             });
@@ -518,7 +518,8 @@ public class AddPersonalDetailsActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(Call<EditPersonalPhotoResponse> call, Throwable t) {
                         Log.e("draker", "failed: 1" );
-                        //   progress.dismiss();
+                        Toast.makeText(AddPersonalDetailsActivity.this, getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
+                          progress.dismiss();
                     }
                 });
 
@@ -591,7 +592,7 @@ public class AddPersonalDetailsActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<DeleteProfilePicResponse> call, Throwable t) {
-                    System.out.println("In User Login Method 7");
+                    Toast.makeText(AddPersonalDetailsActivity.this, getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
                     progress.dismiss();
                 }
             });

@@ -29,9 +29,9 @@ public class AddSubServicesList_Adapter extends RecyclerView.Adapter<AddSubServi
     ArrayList<ListOfSubServices_Response.ListOfSubServices_Records> gSubServicesList_Arraylist;
     ArrayList<String> SubServiceData = new ArrayList<>();
 
-    ArrayList<String> addedSubService;
+    ArrayList<String> addedSubService = new ArrayList<>();
 
-   String gPremiumPartner_Id = AppicationClass.getPremium_PartenerId();
+   //String gPremiumPartner_Id = AppicationClass.getPremium_PartenerId();
 
     public AddSubServicesList_Adapter(Context context,  ArrayList<ListOfSubServices_Response.ListOfSubServices_Records> gSubServicesList_Arraylist) {
         this.context=context;
@@ -49,18 +49,18 @@ public class AddSubServicesList_Adapter extends RecyclerView.Adapter<AddSubServi
     @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, final int position) {
-System.out.println("Premium partner Id is " + gPremiumPartner_Id);
+//System.out.println("Premium partner Id is " + gPremiumPartner_Id);
 
-        if(gPremiumPartner_Id.equals("1")){
-            myViewHolder.lPrice.setVisibility(View.VISIBLE);
-            myViewHolder.lQuantityCheckBox.setVisibility(View.GONE);
-        }
-
-        if(gPremiumPartner_Id.equals("0")){
-            myViewHolder.lQuantityCheckBox.setVisibility(View.VISIBLE);
-            myViewHolder.lPrice.setVisibility(View.GONE);
-
-        }
+//        if(gPremiumPartner_Id.equals("1")){
+//            myViewHolder.lPrice.setVisibility(View.VISIBLE);
+//            myViewHolder.lQuantityCheckBox.setVisibility(View.GONE);
+//        }
+//
+//        if(gPremiumPartner_Id.equals("0")){
+//            myViewHolder.lQuantityCheckBox.setVisibility(View.VISIBLE);
+//            myViewHolder.lPrice.setVisibility(View.GONE);
+//
+//        }
 
         myViewHolder.lSubServicesName_Text.setText(gSubServicesList_Arraylist.get(position).getService_Name());
         myViewHolder.lPrice.addTextChangedListener(new TextWatcher() {
@@ -117,7 +117,7 @@ System.out.println("Premium partner Id is " + gPremiumPartner_Id);
 
             lSubServicesName_Text=itemView.findViewById(R.id.subservicename_text);
             lQuantityCheckBox=itemView.findViewById(R.id.selectquantity_checkbox);
-            lPrice = itemView.findViewById(R.id.addSubServiceMoney);
+           lPrice = itemView.findViewById(R.id.addSubServiceMoney);
         }
     }
 
