@@ -175,10 +175,12 @@ public class Login_Activity extends AppCompatActivity {
                                 AppicationClass.setUserId_FromLogin(partnerlogin_response.getUser_ID());
                                 AppicationClass.setUserName_FromLogin(partnerlogin_response.getUserName());
                                 AppicationClass.setPremium_PartenerId(partnerlogin_response.getUser_Premium());
+                                AppicationClass.setCategoryId_FromLogin(partnerlogin_response.getCategory_ID());
 
                                 editer.putString("User_Id", partnerlogin_response.getUser_ID());
                                 editer.putString("User_Name", partnerlogin_response.getUserName());
                                 editer.putString("Premium_PartnerId", partnerlogin_response.getUser_Premium());
+                                editer.putString("Category_Id", partnerlogin_response.getCategory_ID());
                                 editer.commit();
 
                                 mCacheManager.setFirstTimeLaunch(false);
@@ -200,7 +202,8 @@ public class Login_Activity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<Partnerlogin_Response> call, Throwable t) {
-                    System.out.println("In User Login Method 7");
+                    Toast.makeText(Login_Activity.this, getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
+                    progress.dismiss();
                 }
             });
         }catch (Exception e) {

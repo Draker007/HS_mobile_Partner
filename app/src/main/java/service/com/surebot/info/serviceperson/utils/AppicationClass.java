@@ -6,9 +6,20 @@ public class AppicationClass {
 
     public static String UserId_FromLogin;
     public static String UserName_FromLogin;
+    public static  String CategoryId_FromLogin;
     public static ArrayList<String> test1 =new ArrayList<>();
     public static ArrayList<String> test2 = new ArrayList<>();
+    public static ArrayList<String> addservicemapingid =new ArrayList<>();
+    public static ArrayList<String> addserviceammount =new ArrayList<>();
+    public static ArrayList<String> addLocation =new ArrayList<>();
 
+    public static String getCategoryId_FromLogin() {
+        return CategoryId_FromLogin;
+    }
+
+    public static void setCategoryId_FromLogin(String categoryId_FromLogin) {
+        CategoryId_FromLogin = categoryId_FromLogin;
+    }
 
     public static ArrayList<String> getTest1() {
         return test1;
@@ -25,6 +36,25 @@ public class AppicationClass {
     public static void setTest2(ArrayList<String> test2) {
         AppicationClass.test2 = test2;
     }
+
+
+    public static ArrayList<String> getAddservicemapingid() {
+        return addservicemapingid;
+    }
+
+    public static void setAddservicemapingid(ArrayList<String> addservicemapingid) {
+        AppicationClass.addservicemapingid = addservicemapingid;
+    }
+
+    public static ArrayList<String> getAddserviceammount() {
+        return addserviceammount;
+    }
+
+    public static void setAddserviceammount(ArrayList<String> addserviceammount) {
+        AppicationClass.addserviceammount = addserviceammount;
+    }
+
+
 
     public static String Premium_PartenerId;
 

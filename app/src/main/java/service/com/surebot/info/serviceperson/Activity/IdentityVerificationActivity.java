@@ -198,7 +198,7 @@ public class IdentityVerificationActivity extends AppCompatActivity {
                             Log.e("Draker", "onResponse: 1" );
                             System.out.println("Place order entering into method valid");
                             Toast.makeText(IdentityVerificationActivity.this, "Documents  updated successfully", Toast.LENGTH_SHORT).show();
-
+                            onBackPressed();
                         }
                         progress.dismiss();
                     }

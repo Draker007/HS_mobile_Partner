@@ -4,10 +4,12 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -31,7 +33,7 @@ public class AddSubServicesList_Adapter extends RecyclerView.Adapter<AddSubServi
 
     ArrayList<String> addedSubService = new ArrayList<>();
 
-   //String gPremiumPartner_Id = AppicationClass.getPremium_PartenerId();
+   String gPremiumPartner_Id = AppicationClass.getPremium_PartenerId();
 
     public AddSubServicesList_Adapter(Context context,  ArrayList<ListOfSubServices_Response.ListOfSubServices_Records> gSubServicesList_Arraylist) {
         this.context=context;
@@ -49,6 +51,20 @@ public class AddSubServicesList_Adapter extends RecyclerView.Adapter<AddSubServi
     @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, final int position) {
+
+      System.out.println("Premium partner Id is " + gPremiumPartner_Id);
+
+        if(gPremiumPartner_Id.equals("1")){
+            myViewHolder.lPrice.setVisibility(View.VISIBLE);
+            myViewHolder.lQuantityCheckBox.setVisibility(View.GONE);
+        }
+
+        if(gPremiumPartner_Id.equals("0")){
+            myViewHolder.lQuantityCheckBox.setVisibility(View.VISIBLE);
+            myViewHolder.lPrice.setVisibility(View.GONE);
+
+        }
+
 //System.out.println("Premium partner Id is " + gPremiumPartner_Id);
 
 //        if(gPremiumPartner_Id.equals("1")){
@@ -62,6 +78,7 @@ public class AddSubServicesList_Adapter extends RecyclerView.Adapter<AddSubServi
 //
 //        }
 
+
         myViewHolder.lSubServicesName_Text.setText(gSubServicesList_Arraylist.get(position).getService_Name());
         myViewHolder.lPrice.addTextChangedListener(new TextWatcher() {
             @Override
@@ -73,7 +90,11 @@ public class AddSubServicesList_Adapter extends RecyclerView.Adapter<AddSubServi
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (charSequence!=null) {
 
-                    SubServiceData.add(position,charSequence.toString());
+                //    SubServiceData.add(position,charSequence.toString());
+
+                    if(charSequence.length() >0) {
+                        AppicationClass.addservicemapingid.add(gSubServicesList_Arraylist.get(position).getService_Mapping_ID()+","+ charSequence.toString());
+                    }
 
                 }}
 
@@ -82,18 +103,39 @@ public class AddSubServicesList_Adapter extends RecyclerView.Adapter<AddSubServi
 
             }
         });
+
         myViewHolder.lQuantityCheckBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            addedSubService.add(gSubServicesList_Arraylist.get(position).getService_ID());
-
+               if(AppicationClass.addserviceammount.contains(gSubServicesList_Arraylist.get(position).getService_Mapping_ID())){
+                AppicationClass.addserviceammount.remove(gSubServicesList_Arraylist.get(position).getService_Mapping_ID());
+                }else
+                    AppicationClass.addserviceammount.add(gSubServicesList_Arraylist.get(position).getService_Mapping_ID());
             }
         });
+
+//        myViewHolder.lQuantityCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+//                if (b==true){
+//                    Log.e("lol", "onCheckedChanged: "+b );
+////                    addedSubService.add(gSubServicesList_Arraylist.get(position).getService_Mapping_ID());
+////                    AppicationClass.addservicemapingid.add(gSubServicesList_Arraylist.get(position).getService_Mapping_ID());
+//                }else {
+////                    AppicationClass.addservicemapingid.add(gSubServicesList_Arraylist.);
+//                }
+//            }
+//        });
+
 
 
     }
 
-    public ArrayList getPrimeData(){return SubServiceData;}
+    public ArrayList getPrimeData(){
+
+        return SubServiceData;
+
+    }
     public ArrayList getDataCheckBox(){
         return addedSubService;
     }

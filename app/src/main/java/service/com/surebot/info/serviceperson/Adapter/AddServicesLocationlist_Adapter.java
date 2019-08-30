@@ -25,7 +25,7 @@ public class AddServicesLocationlist_Adapter extends RecyclerView.Adapter<AddSer
 
     Context context;
     ArrayList<String> gAreaName_List;
-    ArrayList<String> gAreaName_List1;
+
     ArrayList<Select_service_partner_Response.Location_Records> location_response=new ArrayList<>();
 
     public AddServicesLocationlist_Adapter(Context context, ArrayList<String> gAreaName_List, ArrayList<Select_service_partner_Response.Location_Records> location_response) {
@@ -50,16 +50,18 @@ public class AddServicesLocationlist_Adapter extends RecyclerView.Adapter<AddSer
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         myViewHolder.locationRecycler.setLayoutManager(llm);
         ArrayList<String> location_area = new ArrayList<>();
+        ArrayList<String> gAreaName_List1 = new ArrayList<>();
         for (int i=0;i<location_response.size();i++){
            if(location_response.get(i).getCity_Name().equals(gAreaName_List.get(position))){
                location_area.add(location_response.get(i).getLocation_Name());
+               gAreaName_List1.add(location_response.get(i).getLocation_ID());
            }
         }
 
 
 
 
-        Service_city_locationAdapter lAddServicesLocationlist_Adapter = new Service_city_locationAdapter(context,location_area);
+        Service_city_locationAdapter lAddServicesLocationlist_Adapter = new Service_city_locationAdapter(context,location_area,gAreaName_List1);
         myViewHolder.locationRecycler.setAdapter(lAddServicesLocationlist_Adapter);
 
 

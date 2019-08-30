@@ -106,7 +106,7 @@ public class NewRequest_Fragment  extends Fragment implements NewRequests_Adapte
             ApiInterface request = retrofit.create(ApiInterface.class);
             NewRequestList_Request lNewRequestList_Request = new NewRequestList_Request();
 
-            lNewRequestList_Request.setUser_ID("11");
+            lNewRequestList_Request.setUser_ID(gUserId_FromLogin);
             lNewRequestList_Request.setDocket(Constants.TOKEN);
 
             Call<NewRequestList_Response> call = request.get_NewServiceRequestList(lNewRequestList_Request);
@@ -119,7 +119,7 @@ public class NewRequest_Fragment  extends Fragment implements NewRequests_Adapte
                         NewRequestList_Response lNewRequestList_Response = response.body();
 
                         gNewRequestList_Arraylist = new ArrayList<>(Arrays.asList(lNewRequestList_Response.getPartner_my_task_details_response()));
-                        if(gNewRequestList_Arraylist.get(0).getUser_ID()!=null){
+                        if(!gNewRequestList_Arraylist.get(0).getUser_ID().equals("No Results Found")){
 
                             gNewrequestlist_recyclerview.setVisibility(View.VISIBLE);
                             gNorequest_text.setVisibility(View.GONE);
@@ -140,7 +140,7 @@ public class NewRequest_Fragment  extends Fragment implements NewRequests_Adapte
 
                 @Override
                 public void onFailure(Call<NewRequestList_Response> call, Throwable t) {
-                    Toast.makeText(getActivity(), getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "new"+getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
                     progress.dismiss();
                 }
             });

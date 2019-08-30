@@ -28,7 +28,11 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -54,6 +58,7 @@ public class TodaysTask_Adapter extends RecyclerView.Adapter<TodaysTask_Adapter.
     double latitude, longitude;
 
     startservicelist_Communicator communicator;
+    String gTimeForUI;
 
     ArrayList<Partner_my_task_today_response.Partner_my_task_today_Records> lTodaysTask_Arraylist ;
 
@@ -93,21 +98,33 @@ public class TodaysTask_Adapter extends RecyclerView.Adapter<TodaysTask_Adapter.
     @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder,  int position) {
-      /*  Log.e(TAG, "onBindViewHolder: "+items.size() +position);
-        String item = items.get(position);
-        System.out.println("Position inside onBind is " + position + item);
 
-        String s = item;
-        String[] split = s.split(",");*/
         latitude =Double.parseDouble(lTodaysTask_Arraylist.get(position).getLatitude_val()); //Double.parseDouble(split[0]);
         longitude = Double.parseDouble(lTodaysTask_Arraylist.get(position).getLongitude_val());
 
         myViewHolder.username_text.setText(lTodaysTask_Arraylist.get(position).getUser_Name());
         myViewHolder.date_text.setText(lTodaysTask_Arraylist.get(position).getBooking_Date());
-        myViewHolder.time_text.setText(lTodaysTask_Arraylist.get(position).getBooking_Start_Time());
+
         myViewHolder.useraddress_text.setText(lTodaysTask_Arraylist.get(position).getUser_Full_Address());
         myViewHolder.userphonenumber_text.setText(lTodaysTask_Arraylist.get(position).getUser_Contact_Number());
         myViewHolder.requestID_text.setText(lTodaysTask_Arraylist.get(position).getServices());
+
+
+        //Time Conversion
+
+        try {
+            DateFormat f = new SimpleDateFormat("HH:mm:ss");
+            Date d = f.parse(lTodaysTask_Arraylist.get(position).getBooking_Start_Time());
+            DateFormat date = new SimpleDateFormat("hh:ss a");
+
+            gTimeForUI=date.format(d);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        myViewHolder.time_text.setText(gTimeForUI);
+
+
 
 
         myViewHolder.more.setOnClickListener(new View.OnClickListener() {
@@ -129,7 +146,7 @@ public class TodaysTask_Adapter extends RecyclerView.Adapter<TodaysTask_Adapter.
             @Override
             public void onClick(View view) {
 
-                communicator.startservice("1");
+                communicator.startservice(lTodaysTask_Arraylist.get(position).getTransaction_ID());
             }
         });
 
@@ -248,7 +265,7 @@ public class TodaysTask_Adapter extends RecyclerView.Adapter<TodaysTask_Adapter.
         }
     }
     public interface startservicelist_Communicator {
-        void startservice(String serviceid);
+        void startservice(String transactionid);
 
     }
 

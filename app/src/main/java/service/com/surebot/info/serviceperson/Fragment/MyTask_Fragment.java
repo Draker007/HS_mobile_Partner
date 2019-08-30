@@ -61,6 +61,7 @@ import service.com.surebot.info.serviceperson.RequestClass.PartnerStartService_R
 import service.com.surebot.info.serviceperson.RequestClass.Partner_my_task_today_Request;
 import service.com.surebot.info.serviceperson.ResponseClass.PartnerStartService_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Partner_my_task_today_response;
+import service.com.surebot.info.serviceperson.utils.AppicationClass;
 import service.com.surebot.info.serviceperson.utils.UserAddress_Location;
 
 import service.com.surebot.info.serviceperson.RequestClass.Partner_package_Request;
@@ -101,6 +102,8 @@ public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.st
     private Dialog progress;
 
 
+    String gUserId_FromLogin,gCategoryId_FromLogin,gPremiumPartner_Id;
+
     @SuppressLint("WrongConstant")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -114,6 +117,11 @@ public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.st
         //here we set layout of progress dialog
         progress.setContentView(R.layout.progressbar_background);
         progress.setCancelable(true);
+
+        gUserId_FromLogin= AppicationClass.getUserId_FromLogin();
+        gCategoryId_FromLogin=AppicationClass.getCategoryId_FromLogin();
+        gPremiumPartner_Id = AppicationClass.getPremium_PartenerId();
+
 
         notification.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -242,23 +250,23 @@ public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.st
                     if (response.isSuccessful()) {
                         System.out.println("asd1");
                         Partner_package_Response ListPackage = response.body();
-
                         partner_package_response =new ArrayList<>(Arrays.asList(ListPackage.getPartner_package_response()));
-                        HomePackage_Adapter lHomePackage_Adapter = new HomePackage_Adapter(getActivity(),partner_package_response);
-                      gPackage_recyclerview.setAdapter(lHomePackage_Adapter);
-
+                        if(!partner_package_response.get(0).getPackage_ID().equals("No Results Found")) {
+                        HomePackage_Adapter lHomePackage_Adapter = new HomePackage_Adapter(getActivity(), partner_package_response);
+                        gPackage_recyclerview.setAdapter(lHomePackage_Adapter);
+                        }
                     }
 
 
-                    // progress.dismiss();
+                     progress.dismiss();
                 }
 
 
 
                 @Override
                 public void onFailure(Call<Partner_package_Response> call, Throwable t) {
-                    System.out.println("In User Login Method 7");
-                    //   progress.dismiss();
+                    Toast.makeText(getActivity(), getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
+                       progress.dismiss();
                 }
             });
         }
@@ -271,9 +279,9 @@ public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.st
     }
 
     @Override
-    public void startservice(String serviceid) {
+    public void startservice(String transactionid) {
 
-        Get_partner_start_servicecode();
+        Get_partner_start_servicecode(transactionid);
 
 
 
@@ -362,20 +370,20 @@ public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.st
             ApiInterface request = retrofit.create(ApiInterface.class);
             Partner_my_task_today_Request lservice_request = new Partner_my_task_today_Request();
             lservice_request.setDocket(Constants.TOKEN);
-            lservice_request.setUser_ID("2");
+            lservice_request.setUser_ID(gUserId_FromLogin);
 
-
+            System.out.println("In Todays task Api" + gUserId_FromLogin);
             Call<Partner_my_task_today_response> call = request.Get_TodaysTaskList(lservice_request);
             call.enqueue(new Callback<Partner_my_task_today_response>() {
                 @Override
                 public void onResponse(Call<Partner_my_task_today_response> call, Response<Partner_my_task_today_response> response) {
                     if (response.isSuccessful()) {
-                        System.out.println("asd1");
+                        System.out.println("asd12");
                         Partner_my_task_today_response ListPackage = response.body();
                         lTodaysTask_Arraylist = new ArrayList<>(Arrays.asList(ListPackage.getPartner_my_task_today_response()));
 
                         List<UserAddress_Location> items = new ArrayList<>();
-                       if( !lTodaysTask_Arraylist.get(0).getUser_ID().equals("No Results Found") && !lTodaysTask_Arraylist.get(0).getUser_ID().equals("User Does Not Exists")){
+                       if( !lTodaysTask_Arraylist.get(0).getTransaction_ID().equals("No Results Found") && !lTodaysTask_Arraylist.get(0).getUser_ID().equals("User Does Not Exists")){
                            gTodaytask_recyclerview.setVisibility(View.VISIBLE);
                            gNotask_header.setVisibility(View.GONE);
 
@@ -401,7 +409,7 @@ public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.st
 
                 @Override
                 public void onFailure(Call<Partner_my_task_today_response> call, Throwable t) {
-                    Toast.makeText(getActivity(), getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "12"+getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
                       progress.dismiss();
                 }
             });
@@ -416,7 +424,7 @@ public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.st
 
 
     //Get Code For Start Service
-    private void Get_partner_start_servicecode() {
+    private void Get_partner_start_servicecode(String transactionId) {
 
         try {
             System.out.println("In User Login Method 1");
@@ -435,10 +443,10 @@ public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.st
             ApiInterface request = retrofit.create(ApiInterface.class);
             PartnerStartService_Request lservice_request = new PartnerStartService_Request();
             lservice_request.setDocket(Constants.TOKEN);
-            lservice_request.setUser_ID("1");
-            lservice_request.setTransaction_ID("38");
+            lservice_request.setUser_ID(gUserId_FromLogin);
+            lservice_request.setTransaction_ID(transactionId);
 
-
+System.out.println("In Todays task Api Tart service" + gUserId_FromLogin + transactionId);
             Call<PartnerStartService_Response> call = request.Get_partner_start_servicecode(lservice_request);
             call.enqueue(new Callback<PartnerStartService_Response>() {
                 @Override

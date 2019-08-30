@@ -23,8 +23,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.maps.MapView;
 
 import java.lang.reflect.Array;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -65,6 +69,8 @@ public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapte
 
     NewTaskSubServicesList_Adapter adapter;
 
+    String gTimeForUI;
+
     public NewRequests_Adapter(Context context,   ArrayList<NewRequestList_Response.NewRequestList_Response_Records> gNewservicesRequest_List) {
         this.context=context;
         this.gNewservicesRequest_List=gNewservicesRequest_List;
@@ -84,6 +90,7 @@ public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapte
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, final int position) {
 
+if (gNewservicesRequest_List.get(position).getUser_Name()!=null){
 
         LinearLayoutManager llm = new LinearLayoutManager(context);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
@@ -97,7 +104,24 @@ public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapte
         myViewHolder.lDate_Text.setText(gNewservicesRequest_List.get(position).getBooking_Date());
         myViewHolder.lUserAddress_Text.setText(gNewservicesRequest_List.get(position).getUser_Full_Address());
         myViewHolder.lUserPhonenumber_Text.setText(gNewservicesRequest_List.get(position).getPhone_location());
-        myViewHolder.lTime_Text.setText(gNewservicesRequest_List.get(position).getBooking_Start_Time());
+       // myViewHolder.lTime_Text.setText(gNewservicesRequest_List.get(position).getBooking_Start_Time());
+
+        //Time Conversion
+
+        try {
+            DateFormat f = new SimpleDateFormat("HH:mm:ss");
+            Date d = f.parse(gNewservicesRequest_List.get(position).getBooking_Start_Time());
+            DateFormat date = new SimpleDateFormat("hh:ss a");
+
+            gTimeForUI=date.format(d);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        myViewHolder.lTime_Text.setText(gTimeForUI);
+
+
+
         myViewHolder.lSend_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -285,6 +309,7 @@ public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapte
 
             }
         });
+    }
     }
     public void setServiceList_Communicator(ServiceList_Communicator communicator) {
         this.communicator = communicator;

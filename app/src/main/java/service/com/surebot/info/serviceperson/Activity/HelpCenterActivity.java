@@ -135,7 +135,7 @@ public class HelpCenterActivity extends AppCompatActivity {
 
             ApiInterface request = retrofit.create(ApiInterface.class);
             ListofFaqs_Request lListofFaqs_Request = new ListofFaqs_Request();
-            lListofFaqs_Request.setUser_ID("1");
+            lListofFaqs_Request.setUser_ID(gUserId_FromLogin);
             lListofFaqs_Request.setDocket(Constants.TOKEN);
 
             Call<ListofFaqs_Response> call = request.get_FaqList(lListofFaqs_Request);

@@ -95,7 +95,7 @@ String gUserId_FromLogin;
 
             ApiInterface request = retrofit.create(ApiInterface.class);
             UpcomingRequestList_Request lNewRequestList_Request = new UpcomingRequestList_Request();
-            lNewRequestList_Request.setUser_ID("12");
+            lNewRequestList_Request.setUser_ID(gUserId_FromLogin);
 
             lNewRequestList_Request.setDocket(Constants.TOKEN);
 
@@ -130,7 +130,7 @@ String gUserId_FromLogin;
                 @Override
                 public void onFailure(Call<CompletedRequestList_Response> call, Throwable t) {
 
-                    Toast.makeText(getActivity(), getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "completed"+getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
                     progress.dismiss();
                 }
             });

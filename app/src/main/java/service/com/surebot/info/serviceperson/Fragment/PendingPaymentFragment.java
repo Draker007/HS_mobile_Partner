@@ -92,7 +92,7 @@ public class PendingPaymentFragment extends Fragment {
             Partner_payment_Request lservice_request = new Partner_payment_Request();
 
 
-            lservice_request.setUser_ID("2");
+            lservice_request.setUser_ID(AppicationClass.getUserId_FromLogin());
             lservice_request.setDocket(Constants.TOKEN);
             Log.e(TAG, "completedPaymentAPI: " );
 
