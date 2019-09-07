@@ -29,6 +29,7 @@ import service.com.surebot.info.serviceperson.Constants.Constants;
 import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.RequestClass.PaymentReceived_Request;
 import service.com.surebot.info.serviceperson.ResponseClass.PaymentReceived_Response;
+import service.com.surebot.info.serviceperson.utils.AppicationClass;
 
 public class serviceDetailsActivity extends AppCompatActivity {
     @BindView(R.id.endservice_button)
@@ -105,7 +106,7 @@ TextView gAmmountpaid_text,gServicelist_text,gService_date,gService_time;
 
             ApiInterface request = retrofit.create(ApiInterface.class);
             PaymentReceived_Request lNewRequestList_Request = new PaymentReceived_Request();
-            lNewRequestList_Request.setUser_ID("12");
+            lNewRequestList_Request.setUser_ID(AppicationClass.getUserId_FromLogin());
 
             lNewRequestList_Request.setDocket(Constants.TOKEN);
 

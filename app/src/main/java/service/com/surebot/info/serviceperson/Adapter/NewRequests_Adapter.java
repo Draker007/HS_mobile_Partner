@@ -231,8 +231,8 @@ if (gNewservicesRequest_List.get(position).getUser_Name()!=null){
 
                     ApiInterface request = retrofit.create(ApiInterface.class);
                     NewRequestListDetails_Request lNewRequestListDetails_Request = new NewRequestListDetails_Request();
-                    lNewRequestListDetails_Request.setUser_ID("12");
-                    lNewRequestListDetails_Request.setTransaction_ID("1");
+                    lNewRequestListDetails_Request.setUser_ID(AppicationClass.getUserId_FromLogin());
+                    lNewRequestListDetails_Request.setTransaction_ID(gNewservicesRequest_List.get(position).getTransaction_ID());
                     lNewRequestListDetails_Request.setDocket(Constants.TOKEN);
 
                     Call<NewRequestListDetails_Response> call = request.get_NewServiceRequestDetails(lNewRequestListDetails_Request);
@@ -381,7 +381,7 @@ if (gNewservicesRequest_List.get(position).getUser_Name()!=null){
             ApiInterface request = retrofit.create(ApiInterface.class);
             SendQuotetoUser_Request lNewRequestList_Request = new SendQuotetoUser_Request();
 
-            lNewRequestList_Request.setUser_ID("11");
+            lNewRequestList_Request.setUser_ID(AppicationClass.getUserId_FromLogin());
             lNewRequestList_Request.setQuote_amount(amnt);
             lNewRequestList_Request.setTransaction_Partner_Quote_ID(quote);
             lNewRequestList_Request.setStatus_ID(AppicationClass.getUserId_FromLogin());

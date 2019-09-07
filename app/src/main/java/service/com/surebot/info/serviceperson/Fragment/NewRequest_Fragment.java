@@ -106,7 +106,7 @@ public class NewRequest_Fragment  extends Fragment implements NewRequests_Adapte
             ApiInterface request = retrofit.create(ApiInterface.class);
             NewRequestList_Request lNewRequestList_Request = new NewRequestList_Request();
 
-            lNewRequestList_Request.setUser_ID("12");
+            lNewRequestList_Request.setUser_ID(AppicationClass.getUserId_FromLogin());
             lNewRequestList_Request.setDocket(Constants.TOKEN);
 
             Call<NewRequestList_Response> call = request.get_NewServiceRequestList(lNewRequestList_Request);

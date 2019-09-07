@@ -103,7 +103,7 @@
                 app:srcCompat="@drawable/premium" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/asdd"
                 android:layout_width="60dp"
                 android:layout_height="25dp"
                 android:layout_marginStart="8dp"

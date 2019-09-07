@@ -353,6 +353,7 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
             lsubservice_request.setCategory_ID(gCategoryId_FromLogin);
             lsubservice_request.setDocket(Constants.TOKEN);
             lsubservice_request.setService_ID(serviceId);
+            Log.e("hihi", "subService_List: "+gCategoryId_FromLogin );
 
 
 

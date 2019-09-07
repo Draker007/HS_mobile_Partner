@@ -94,7 +94,7 @@ public class PendingPaymentFragment extends Fragment {
 
             lservice_request.setUser_ID(AppicationClass.getUserId_FromLogin());
             lservice_request.setDocket(Constants.TOKEN);
-            Log.e(TAG, "completedPaymentAPI: " );
+            Log.e(TAG, "completedPaymentAPI: ");
 
             Call<Partner_payment_Response> call = request.PendingPayment(lservice_request);
             call.enqueue(new Callback<Partner_payment_Response>() {
@@ -103,8 +103,10 @@ public class PendingPaymentFragment extends Fragment {
                     if (response.isSuccessful()) {
 
                         Partner_payment_Response aboutme_response = response.body();
-                        Log.e(TAG, "onResponse: "+aboutme_response);
-                        if (aboutme_response.getPending_transaction_response()!=null) {
+                        ArrayList<Partner_payment_Response.Complete_transaction_record> pendingTrans = new ArrayList<>(Arrays.asList(aboutme_response.getPending_transaction_response()));
+                        Log.e(TAG, "onResponse: "+pendingTrans.get(0).getTransaction_ID());
+
+                        if (!pendingTrans.get(0).getTransaction_ID().equals("No Results Found")) {
                             r1.setVisibility(View.VISIBLE);
                             paymentText.setVisibility(View.GONE);
                             ArrayList<Partner_payment_Response.Complete_transaction_record> PendingPaymentResponse = new ArrayList<>(Arrays.asList(aboutme_response.getPending_transaction_response()));

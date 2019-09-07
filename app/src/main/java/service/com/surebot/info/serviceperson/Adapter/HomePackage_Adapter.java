@@ -79,12 +79,7 @@ public class HomePackage_Adapter extends RecyclerView.Adapter<HomePackage_Adapte
         }else{
             myViewHolder.packageBG.setCardBackgroundColor(Color.parseColor("#E1710F"));
         }
-        myViewHolder.buyPackage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CallAPIforPackage();
-            }
-        });
+
 //        myViewHolder.lMain_Layout.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -110,7 +105,7 @@ public class HomePackage_Adapter extends RecyclerView.Adapter<HomePackage_Adapte
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            buyPackage = itemView.findViewById(R.id.packageBG);
+
             gHPCost= itemView.findViewById(R.id.HPCost);
             gHPService=itemView.findViewById(R.id.HPServices);
            packageBG=itemView.findViewById(R.id.packageBG);
