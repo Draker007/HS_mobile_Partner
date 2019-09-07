@@ -95,6 +95,9 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                             }else{
                                 Toast.makeText(ForgotPasswordActivity.this, response.body().getNotification_status_response(), Toast.LENGTH_SHORT).show();
                                 progress.dismiss();
+                                Intent intent = new Intent(ForgotPasswordActivity.this,SetNewPasswordActivity.class);
+                                intent.putExtra("email",gEmailORNumber.getText().toString());
+                                startActivity(intent);
                             }
                         }
 
@@ -108,12 +111,18 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
                     Toast.makeText(ForgotPasswordActivity.this, getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
                     progress.dismiss();
+                    Intent intent = new Intent(ForgotPasswordActivity.this,SetNewPasswordActivity.class);
+                    intent.putExtra("email",gEmailORNumber.getText().toString());
+                    startActivity(intent);
                 }
             });
         }
         catch (Exception e) {
             System.out.println("In User Login Method 8");
             e.printStackTrace();
+            Intent intent = new Intent(ForgotPasswordActivity.this,SetNewPasswordActivity.class);
+            intent.putExtra("email",gEmailORNumber.getText().toString());
+            startActivity(intent);
             progress.dismiss();
 
         }

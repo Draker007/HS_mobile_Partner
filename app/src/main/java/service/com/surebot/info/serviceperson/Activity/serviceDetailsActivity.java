@@ -69,8 +69,9 @@ TextView gAmmountpaid_text,gServicelist_text,gService_date,gService_time;
 
                     @Override
                     public void onClick(View view) {
-                        paymentsuccessfull_dialog.dismiss();
+
                         startActivity(new Intent(serviceDetailsActivity.this,ServicePersonHome_Activity.class));
+                       // paymentsuccessfull_dialog.dismiss();
                         finish();
                     }
                 });

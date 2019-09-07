@@ -3,12 +3,14 @@ package service.com.surebot.info.serviceperson.Adapter;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.provider.SyncStateContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -70,7 +72,19 @@ public class HomePackage_Adapter extends RecyclerView.Adapter<HomePackage_Adapte
         Log.e("darker", "onBindViewHolder: "+position );
         myViewHolder.gHPService.setText(partner_package_response.get(position).getServices());
         myViewHolder.gHPCost.setText(partner_package_response.get(position).getCost());
-
+        if (position%2==0){
+            myViewHolder.packageBG.setCardBackgroundColor(Color.parseColor("#673AB7"));
+        }else if(position%3==0){
+            myViewHolder.packageBG.setCardBackgroundColor(Color.parseColor("#38A1F4"));
+        }else{
+            myViewHolder.packageBG.setCardBackgroundColor(Color.parseColor("#E1710F"));
+        }
+        myViewHolder.buyPackage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CallAPIforPackage();
+            }
+        });
 //        myViewHolder.lMain_Layout.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -80,6 +94,10 @@ public class HomePackage_Adapter extends RecyclerView.Adapter<HomePackage_Adapte
 //        });
     }
 
+    private void CallAPIforPackage() {
+
+    }
+
     @Override
     public int getItemCount() {
         return partner_package_response.size();
@@ -87,15 +105,15 @@ public class HomePackage_Adapter extends RecyclerView.Adapter<HomePackage_Adapte
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView gHPCost,gHPService;
-
-        RelativeLayout lMain_Layout;
+        CardView packageBG;
+        Button buyPackage;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            buyPackage = itemView.findViewById(R.id.packageBG);
             gHPCost= itemView.findViewById(R.id.HPCost);
             gHPService=itemView.findViewById(R.id.HPServices);
-           // lMain_Layout=itemView.findViewById(R.id.main_layout);
+           packageBG=itemView.findViewById(R.id.packageBG);
 
         }
     }

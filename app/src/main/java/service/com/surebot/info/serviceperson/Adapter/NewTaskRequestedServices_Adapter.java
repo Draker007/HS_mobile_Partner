@@ -69,7 +69,7 @@ public class NewTaskRequestedServices_Adapter extends RecyclerView.Adapter<NewTa
         for (int i=0;i<gNewRequestList_Arraylist.size();i++){
             if(gNewRequestList_Arraylist.get(i).getService_Name().equals(gServiceName_List.get(position))){
                 lSub_ServicesList.add(gNewRequestList_Arraylist.get(i).getSub_Service_Name());
-                lSub_ServicesListid.add(gNewRequestList_Arraylist.get(i).getService_Mapping_ID());
+                lSub_ServicesListid.add(gNewRequestList_Arraylist.get(i).getTransaction_Partner_Quote_ID());
             }
         }
         lNewTaskSubServicesList_Adapter = new NewTaskSubServicesList_Adapter(context,lSub_ServicesList,lSub_ServicesListid);

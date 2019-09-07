@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,20 +65,25 @@ public class NewTaskSubServicesList_Adapter extends RecyclerView.Adapter<NewTask
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                if (charSequence!=null) {
-                    // gSendquotetoUserList.get(position).setQuantity(charSequence.toString());
-                    gSendquotetoUserList_New.add(charSequence.toString());
-                    if(charSequence.length() >0) {
-                        AppicationClass.test1.add(MapppingID.get(position)+","+ charSequence.toString());
-                    }
-                    System.out.println("Chare Sequesnce Value Are " + charSequence.toString() + gSendquotetoUserList_New.size());
-                }
+
 
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-
+                if (editable!=null) {
+                    // gSendquotetoUserList.get(position).setQuantity(charSequence.toString());
+                    gSendquotetoUserList_New.add(editable.toString());
+                    Log.e("lol1", "afterTextChanged: "+editable.toString() );
+                    if(editable.length() >0) {
+                        AppicationClass.test1.add(MapppingID.get(position)+","+ editable.toString());
+                    }else{
+                        AppicationClass.test1.add(MapppingID.get(position)+","+"0");
+                    }
+                    System.out.println("Chare Sequesnce Value Are " + editable.toString() + gSendquotetoUserList_New.size());
+                }else if (editable.toString()==""){
+                    Log.e("lol1", "afterTextChanged: was here" );
+                }
             }
         });
 

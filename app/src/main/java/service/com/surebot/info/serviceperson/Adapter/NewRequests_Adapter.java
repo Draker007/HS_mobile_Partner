@@ -45,8 +45,10 @@ import service.com.surebot.info.serviceperson.ApiClient.ApiInterface;
 import service.com.surebot.info.serviceperson.Constants.Constants;
 import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.RequestClass.NewRequestListDetails_Request;
+import service.com.surebot.info.serviceperson.RequestClass.SendQuotetoUser_Request;
 import service.com.surebot.info.serviceperson.ResponseClass.NewRequestListDetails_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.NewRequestList_Response;
+import service.com.surebot.info.serviceperson.ResponseClass.SendQuotetoUser_Response;
 import service.com.surebot.info.serviceperson.utils.AppicationClass;
 import service.com.surebot.info.serviceperson.utils.SendquotetoUser;
 
@@ -68,7 +70,8 @@ public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapte
     List<String> MappingIds = new ArrayList<>();
 
     NewTaskSubServicesList_Adapter adapter;
-
+    String quote = "";
+    String amnt = "";
     String gTimeForUI;
 
     public NewRequests_Adapter(Context context,   ArrayList<NewRequestList_Response.NewRequestList_Response_Records> gNewservicesRequest_List) {
@@ -165,38 +168,29 @@ if (gNewservicesRequest_List.get(position).getUser_Name()!=null){
                     }
 
                 }
-                Log.e("lol1", "onClick: "+finalmapingIdList+finalPriceList );
-                if(finalmapingIdList.size()== MappingIds.size()){
+                if(finalPriceList.contains("0")){
+                    Toast.makeText(context, "Fill all services", Toast.LENGTH_SHORT).show();
+                }else if(finalmapingIdList.size()== MappingIds.size()){
+                    for (int i = 0; i < finalmapingIdList.size(); i++) {
+                        if (i == finalmapingIdList.size() - 1) {
+                            quote = quote + finalmapingIdList.get(i);
+                        } else {
+                            quote = quote + finalmapingIdList.get(i) + ",";
+                        }
+                    }
+                    for (int i = 0; i < finalPriceList.size(); i++) {
+                        if (i == finalPriceList.size() - 1) {
+                            amnt = amnt + finalPriceList.get(i);
+                        } else {
+                            amnt = amnt + finalPriceList.get(i) + ",";
+                        }
+                    }
+                    sendQuote_toUser();
                     AppicationClass.test1.clear();
-
                     communicator.addquotationlist(finalmapingIdList,finalPriceList,"1");
 
                 }else{
-                    Toast.makeText(context, "Please Fill Price For All Services", Toast.LENGTH_SHORT).show();
-//                    int[] arr = new int[MappingIds.size()];
-//                    for(int i=0; i<MappingIds.size(); i++) {
-//                        arr[i] = Integer.parseInt(MappingIds.get(i));
-//                    }
-//                    int[] arr1 = new int[finalmapingIdList.size()];
-//
-//                    for(int i=0; i<finalmapingIdList.size(); i++) {
-//                        arr[i] = Integer.parseInt(finalmapingIdList.get(i));
-//                    }
-//                    Arrays.sort(arr1);
-//                    Arrays.sort(arr);
-//                    String temp = null;
-//                    for (int i = 0; i < MappingIds.size(); i++){
-//                        if (arr1[i] != arr[i]) {
-//                            temp = String.valueOf(arr[i]);
-//                            break ;
-//                        }
-//                    }
-//
-//
-//
-//                    Toast.makeText(context, "Enter Price for " +MappingSubService.get(MappingIds.indexOf(temp)), Toast.LENGTH_SHORT).show();
-//
-
+                    Toast.makeText(context, "Please Fill Price For All Services Before Sending", Toast.LENGTH_SHORT).show();
 
                 }
                  System.out.println("In Send Button " + finalmapingIdList + finalPriceList);
@@ -237,8 +231,8 @@ if (gNewservicesRequest_List.get(position).getUser_Name()!=null){
 
                     ApiInterface request = retrofit.create(ApiInterface.class);
                     NewRequestListDetails_Request lNewRequestListDetails_Request = new NewRequestListDetails_Request();
-                    lNewRequestListDetails_Request.setUser_ID("11");
-                    lNewRequestListDetails_Request.setTransaction_ID("5");
+                    lNewRequestListDetails_Request.setUser_ID("12");
+                    lNewRequestListDetails_Request.setTransaction_ID("1");
                     lNewRequestListDetails_Request.setDocket(Constants.TOKEN);
 
                     Call<NewRequestListDetails_Response> call = request.get_NewServiceRequestDetails(lNewRequestListDetails_Request);
@@ -249,6 +243,7 @@ if (gNewservicesRequest_List.get(position).getUser_Name()!=null){
                         public void onResponse(Call<NewRequestListDetails_Response> call, Response<NewRequestListDetails_Response> response) {
                             if (response.isSuccessful()) {
                                 NewRequestListDetails_Response lNewRequestList_Response = response.body();
+
                                 ArrayList<NewRequestListDetails_Response.NewRequestserviceDetails_Records> gNewRequestList_Arraylist =  new ArrayList<>(Arrays.asList(lNewRequestList_Response.getPartner_service_details_response()));
 
                                 for(int i=0;i<gNewRequestList_Arraylist.size();i++){
@@ -367,6 +362,61 @@ if (gNewservicesRequest_List.get(position).getUser_Name()!=null){
 
 
     }
+    private void sendQuote_toUser()  {
+        try {
 
+            progress.show();
+
+            OkHttpClient.Builder client = new OkHttpClient.Builder();
+            HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
+            registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            client.addInterceptor(registrationInterceptor);
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(Constants.BASE_URL)
+                    .client(client.build())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+
+            ApiInterface request = retrofit.create(ApiInterface.class);
+            SendQuotetoUser_Request lNewRequestList_Request = new SendQuotetoUser_Request();
+
+            lNewRequestList_Request.setUser_ID("11");
+            lNewRequestList_Request.setQuote_amount(amnt);
+            lNewRequestList_Request.setTransaction_Partner_Quote_ID(quote);
+            lNewRequestList_Request.setStatus_ID(AppicationClass.getUserId_FromLogin());
+            lNewRequestList_Request.setDocket(Constants.TOKEN);
+
+            Call<SendQuotetoUser_Response> call = request.sendQuote_toUser(lNewRequestList_Request);
+            call.enqueue(new Callback<SendQuotetoUser_Response>() {
+
+
+                @Override
+                public void onResponse(Call<SendQuotetoUser_Response> call, Response<SendQuotetoUser_Response> response) {
+                    if (response.isSuccessful()) {
+                        SendQuotetoUser_Response lSendQuotetoUser_Response = response.body();
+                        if(lSendQuotetoUser_Response.getRequest_partner_quote().equals("valid")){
+                            Toast.makeText(context,"Quote Send Successfully",Toast.LENGTH_SHORT).show();
+                        }
+
+                        progress.dismiss();
+                    }
+                    progress.dismiss();
+                }
+
+                @Override
+                public void onFailure(Call<SendQuotetoUser_Response> call, Throwable t) {
+                    Toast.makeText(context, context.getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
+                    progress.dismiss();
+                }
+            });
+        }catch (Exception e) {
+
+            e.printStackTrace();
+            progress.dismiss();
+
+        }
+
+    }
 
 }
