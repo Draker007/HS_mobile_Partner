@@ -48,7 +48,9 @@
         <activity android:name=".Activity.NotificationActivity" />
         <activity android:name=".Activity.IdentityVerificationActivity" >
         </activity>
-        <activity android:name=".Activity.SplashActivity"><intent-filter>
+        <activity android:name=".Activity.SplashActivity"
+            android:theme="@style/SplashTheme"
+            ><intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
             <category android:name="android.intent.category.LAUNCHER" />
