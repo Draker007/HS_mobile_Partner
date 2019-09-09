@@ -3,6 +3,7 @@ package service.com.surebot.info.serviceperson.Fragment;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -116,7 +117,7 @@ public class UpcomingRequest_Fragment  extends Fragment {
                            gUpcomingrequestlist_recyclerview.setAdapter(lUpcomingRequest_Adapter);
                        }
                        else {
-
+                           Log.e("lol1", "onResponse: was here" );
                            gNorequest_text.setVisibility(View.VISIBLE);
                            gUpcomingrequestlist_recyclerview.setVisibility(View.GONE);
                        }
@@ -128,7 +129,8 @@ public class UpcomingRequest_Fragment  extends Fragment {
 
                 @Override
                 public void onFailure(Call<UpcomingRequestList_Response> call, Throwable t) {
-                    Toast.makeText(getActivity(), getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "hihi"+getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
+                    Log.e("lol1", "onFailure: "+t );
                     progress.dismiss();
                 }
             });

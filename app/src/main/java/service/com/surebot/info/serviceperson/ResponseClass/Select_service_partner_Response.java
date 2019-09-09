@@ -2,9 +2,17 @@ package service.com.surebot.info.serviceperson.ResponseClass;
 
 public class Select_service_partner_Response {
 
-
-    Category_Records[] category_response;
+    Service_Records[]  services_response;
+     Category_Records[] category_response;
     Location_Records[] location_reponse;
+
+    public Service_Records[] getServices_response() {
+        return services_response;
+    }
+
+    public void setServices_response(Service_Records[] services_response) {
+        this.services_response = services_response;
+    }
 
 
     public Category_Records[] getCategory_response() {
@@ -21,6 +29,18 @@ public class Select_service_partner_Response {
 
     public void setLocation_reponse(Location_Records[] location_reponse) {
         this.location_reponse = location_reponse;
+    }
+
+    public class Service_Records{
+        String Service_Mapping_ID;
+
+        public String getService_Mapping_ID() {
+            return Service_Mapping_ID;
+        }
+
+        public void setService_Mapping_ID(String service_Mapping_ID) {
+            Service_Mapping_ID = service_Mapping_ID;
+        }
     }
 
     public class Location_Records{

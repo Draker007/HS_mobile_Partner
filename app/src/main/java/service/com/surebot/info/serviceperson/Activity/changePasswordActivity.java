@@ -132,6 +132,8 @@ public class changePasswordActivity extends AppCompatActivity {
 
                             if(aboutme_response.getPartner_change_password_response().equals("valid")){
                                 Toast.makeText(changePasswordActivity.this, "Password Changed", Toast.LENGTH_SHORT).show();
+                            }else {
+                                Toast.makeText(changePasswordActivity.this, response.body().getPartner_change_password_response(), Toast.LENGTH_SHORT).show();
                             }
 
 
@@ -146,7 +148,7 @@ public class changePasswordActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<ChangePasswordResponse> call, Throwable t) {
-                    System.out.println("In User Login Method 7");
+                    Toast.makeText(changePasswordActivity.this, getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
                     progress.dismiss();
                 }
             });

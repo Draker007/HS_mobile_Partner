@@ -337,8 +337,8 @@
 
         <ImageView
             android:id="@+id/moreCLose"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:background="@color/color_red"
             app:layout_constraintBottom_toTopOf="@+id/constraintLayout17"
             app:layout_constraintEnd_toEndOf="parent"

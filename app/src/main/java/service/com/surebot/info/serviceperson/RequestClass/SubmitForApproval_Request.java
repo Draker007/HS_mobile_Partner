@@ -10,6 +10,16 @@ public class SubmitForApproval_Request {
 
     private String docket;
 
+    private String Service_Amount;
+
+    public String getService_Amount() {
+        return Service_Amount;
+    }
+
+    public void setService_Amount(String service_Amount) {
+        Service_Amount = service_Amount;
+    }
+
     public String getUser_ID() {
         return User_ID;
     }

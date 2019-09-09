@@ -130,7 +130,7 @@ String gUserId_FromLogin;
                 @Override
                 public void onFailure(Call<CompletedRequestList_Response> call, Throwable t) {
 
-                    Toast.makeText(getActivity(), getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "completed"+getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
                     progress.dismiss();
                 }
             });

@@ -202,7 +202,8 @@ public class Login_Activity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<Partnerlogin_Response> call, Throwable t) {
-                    System.out.println("In User Login Method 7");
+                    Toast.makeText(Login_Activity.this, getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
+                    progress.dismiss();
                 }
             });
         }catch (Exception e) {

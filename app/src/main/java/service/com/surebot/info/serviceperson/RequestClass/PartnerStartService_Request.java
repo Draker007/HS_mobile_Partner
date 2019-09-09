@@ -1,6 +1,6 @@
 package service.com.surebot.info.serviceperson.RequestClass;
 
-public class PartnerStartService_Request {
+public class    PartnerStartService_Request {
 
     private String User_ID;
     private String docket;

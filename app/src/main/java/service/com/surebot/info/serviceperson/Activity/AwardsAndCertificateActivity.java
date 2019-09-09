@@ -171,7 +171,7 @@ if(awardsDatas2.get(o).getText()==null){
                             Log.e("Draker", "onResponse: 1" );
                             System.out.println("Place order entering into method valid");
                             Toast.makeText(AwardsAndCertificateActivity.this, "Awards and Certificate updated successfully", Toast.LENGTH_SHORT).show();
-
+                            onBackPressed();
                         }
                        progress.dismiss();
                     }

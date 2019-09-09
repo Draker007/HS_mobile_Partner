@@ -137,7 +137,7 @@ String gUserId_FromLogin;
                 @Override
                 public void onFailure(Call<CancelledRequestList_Response> call, Throwable t) {
 
-                    Toast.makeText(getActivity(), getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "cancel"+getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
                     progress.dismiss();
                 }
             });

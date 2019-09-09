@@ -19,10 +19,20 @@ public class ListOfSubServices_Response {
 
         private String Service_Name;
 
+        private String Service_Is_There;
+
         private String Service_Description;
 
         private String Service_Amount;
 
+
+        public String getService_Is_There() {
+            return Service_Is_There;
+        }
+
+        public void setService_Is_There(String service_Is_There) {
+            Service_Is_There = service_Is_There;
+        }
 
         public String getService_Mapping_ID() {
             return Service_Mapping_ID;

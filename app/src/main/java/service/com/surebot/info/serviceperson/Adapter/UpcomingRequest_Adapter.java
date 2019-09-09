@@ -44,30 +44,30 @@ String gTimeForUI;
     @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, final int position) {
+if(gUpcomingRequestList_Arraylist.get(position).getUser_Name()!=null) {
+
+    myViewHolder.lUserName_Text.setText(gUpcomingRequestList_Arraylist.get(position).getUser_Name());
+    myViewHolder.lUserAddress_text.setText(gUpcomingRequestList_Arraylist.get(position).getUser_Full_Address());
+    myViewHolder.lDate_text.setText(gUpcomingRequestList_Arraylist.get(position).getBooking_Date());
+    // myViewHolder.lTime_text.setText(gUpcomingRequestList_Arraylist.get(position).getBooking_Start_Time());
+    myViewHolder.lUserphonenumber_text.setText(gUpcomingRequestList_Arraylist.get(position).getPhone_location());
+    myViewHolder.lRequestID_text.setText(gUpcomingRequestList_Arraylist.get(position).getBooking_Id());
 
 
-        myViewHolder.lUserName_Text.setText(gUpcomingRequestList_Arraylist.get(position).getUser_Name());
-        myViewHolder.lUserAddress_text.setText(gUpcomingRequestList_Arraylist.get(position).getUser_Full_Address());
-        myViewHolder.lDate_text.setText(gUpcomingRequestList_Arraylist.get(position).getBooking_Date());
-       // myViewHolder.lTime_text.setText(gUpcomingRequestList_Arraylist.get(position).getBooking_Start_Time());
-        myViewHolder.lUserphonenumber_text.setText(gUpcomingRequestList_Arraylist.get(position).getPhone_location());
-        myViewHolder.lRequestID_text.setText(gUpcomingRequestList_Arraylist.get(position).getBooking_Id());
+    //Time Conversion
 
+    try {
+        DateFormat f = new SimpleDateFormat("HH:mm:ss");
+        Date d = f.parse(gUpcomingRequestList_Arraylist.get(position).getBooking_Start_Time());
+        DateFormat date = new SimpleDateFormat("hh:ss a");
 
-        //Time Conversion
+        gTimeForUI = date.format(d);
 
-        try {
-            DateFormat f = new SimpleDateFormat("HH:mm:ss");
-            Date d = f.parse(gUpcomingRequestList_Arraylist.get(position).getBooking_Start_Time());
-            DateFormat date = new SimpleDateFormat("hh:ss a");
-
-            gTimeForUI=date.format(d);
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        myViewHolder.lTime_text.setText(gTimeForUI);
-
+    } catch (ParseException e) {
+        e.printStackTrace();
+    }
+    myViewHolder.lTime_text.setText(gTimeForUI);
+}
 
     }
 

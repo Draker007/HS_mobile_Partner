@@ -139,6 +139,7 @@ public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.st
         gPackages_List.add(R.mipmap.package3);
 
 
+
         gUserName_List = new ArrayList<String>();
         gUserName_List.add("Aditi");
         gUserName_List.add("Sahana");
@@ -250,23 +251,23 @@ public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.st
                     if (response.isSuccessful()) {
                         System.out.println("asd1");
                         Partner_package_Response ListPackage = response.body();
-
                         partner_package_response =new ArrayList<>(Arrays.asList(ListPackage.getPartner_package_response()));
-                        HomePackage_Adapter lHomePackage_Adapter = new HomePackage_Adapter(getActivity(),partner_package_response);
-                      gPackage_recyclerview.setAdapter(lHomePackage_Adapter);
-
+                        if(!partner_package_response.get(0).getPackage_ID().equals("No Results Found")) {
+                        HomePackage_Adapter lHomePackage_Adapter = new HomePackage_Adapter(getActivity(), partner_package_response);
+                        gPackage_recyclerview.setAdapter(lHomePackage_Adapter);
+                        }
                     }
 
 
-                    // progress.dismiss();
+                     progress.dismiss();
                 }
 
 
 
                 @Override
                 public void onFailure(Call<Partner_package_Response> call, Throwable t) {
-                    System.out.println("In User Login Method 7");
-                    //   progress.dismiss();
+                    Toast.makeText(getActivity(), getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
+                       progress.dismiss();
                 }
             });
         }
@@ -378,12 +379,12 @@ public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.st
                 @Override
                 public void onResponse(Call<Partner_my_task_today_response> call, Response<Partner_my_task_today_response> response) {
                     if (response.isSuccessful()) {
-                        System.out.println("asd1");
+                        System.out.println("asd12");
                         Partner_my_task_today_response ListPackage = response.body();
                         lTodaysTask_Arraylist = new ArrayList<>(Arrays.asList(ListPackage.getPartner_my_task_today_response()));
 
                         List<UserAddress_Location> items = new ArrayList<>();
-                       if( !lTodaysTask_Arraylist.get(0).getUser_ID().equals("No Results Found") && !lTodaysTask_Arraylist.get(0).getUser_ID().equals("User Does Not Exists")){
+                       if( !lTodaysTask_Arraylist.get(0).getTransaction_ID().equals("No Results Found") && !lTodaysTask_Arraylist.get(0).getUser_ID().equals("User Does Not Exists")){
                            gTodaytask_recyclerview.setVisibility(View.VISIBLE);
                            gNotask_header.setVisibility(View.GONE);
 
@@ -409,7 +410,7 @@ public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.st
 
                 @Override
                 public void onFailure(Call<Partner_my_task_today_response> call, Throwable t) {
-                    Toast.makeText(getActivity(), getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "12"+getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
                       progress.dismiss();
                 }
             });

@@ -11,6 +11,7 @@ public class AppicationClass {
     public static ArrayList<String> test2 = new ArrayList<>();
     public static ArrayList<String> addservicemapingid =new ArrayList<>();
     public static ArrayList<String> addserviceammount =new ArrayList<>();
+    public static ArrayList<String> addLocation =new ArrayList<>();
 
     public static String getCategoryId_FromLogin() {
         return CategoryId_FromLogin;

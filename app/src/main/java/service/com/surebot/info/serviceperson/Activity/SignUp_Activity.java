@@ -71,8 +71,7 @@ public class SignUp_Activity extends AppCompatActivity {
     @BindView(R.id.password_text)
     EditText gUserPassword_text;
 
-    @BindView(R.id.spin)
-    ImageView gSpin;
+
 
     @BindView(R.id.alreadyAccount_text)
     TextView gAlreadyaccount_text;
@@ -120,7 +119,6 @@ public class SignUp_Activity extends AppCompatActivity {
 
 
 
-        get_CategoryList();
 
         // here checking for fioled details
 
@@ -130,20 +128,14 @@ public class SignUp_Activity extends AppCompatActivity {
         progress.setContentView(R.layout.progressbar_background);
         progress.setCancelable(true);
         //SignUp Button CLickable
-        gSpin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                gSpinner_professionselection.setVisibility(View.VISIBLE);
-                gSpin.setVisibility(View.GONE);
-            }
-        });
+        get_CategoryList();
         gSpinner_professionselection.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                                                    @Override
                                                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                                                                        gProfession_text.setText(categoryList_Arraylist.get(gSpinner_professionselection.getSelectedItemPosition()).getCategory_Name());
                                                                        gProfession_text.setEnabled(false);
-                                                                       gSpinner_professionselection.setVisibility(View.GONE);
-                                                                       gSpin.setVisibility(View.VISIBLE);
+
+
                                                                    }
 
                                                                    @Override
@@ -167,7 +159,6 @@ public class SignUp_Activity extends AppCompatActivity {
                                 if (gUserEmail_text.getText().toString().trim().matches(EmailPattern)) {
                                     if (selectedId != -1) {
                                         if (!gUserPassword_text.getText().toString().trim().equals("")) {
-                                            if (gUserPassword_text.getText().length() >= 5) {
                                                 Log.e("lol", "onClick: " + "hihi");
                                                 if (!gUserConfirmPassword_text.getText().toString().trim().equals("")) {
                                                     if (gUserPassword_text.getText().toString().trim().equals(gUserConfirmPassword_text.getText().toString().trim())) {
@@ -192,10 +183,7 @@ public class SignUp_Activity extends AppCompatActivity {
                                                     gUserConfirmPassword_text.setError("Enter Confirm Password");
                                                     gUserConfirmPassword_text.requestFocus();
                                                 }
-                                            } else {
-                                                gUserPassword_text.setError("should contain atleast 5 character");
-                                                gUserPassword_text.requestFocus();
-                                            }
+
                                         }else {
                                             gUserPassword_text.setError("Enter Password");
                                             gUserPassword_text.requestFocus();
@@ -319,7 +307,7 @@ public class SignUp_Activity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<PartnerSignup_Response> call, Throwable t) {
-                    System.out.println("In User Login Method 7");
+                    Toast.makeText(SignUp_Activity.this, getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
                     progress.dismiss();
                 }
             });
@@ -361,6 +349,8 @@ public class SignUp_Activity extends AppCompatActivity {
     void get_CategoryList(){
 
         try {
+            progress.show();
+            Log.e("lols", "get_CategoryList: " );
             OkHttpClient.Builder client = new OkHttpClient.Builder();
             HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
             registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -376,7 +366,6 @@ public class SignUp_Activity extends AppCompatActivity {
             Category_List_Request partnerLandingPage = new Category_List_Request();
 
             partnerLandingPage.setDocket(Constants.TOKEN);
-            System.out.println("Signup entering into 22222");
             Call<Category_List_Response> call = request.categoryList(partnerLandingPage);
             call.enqueue(new Callback<Category_List_Response>() {
 
@@ -384,28 +373,27 @@ public class SignUp_Activity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<Category_List_Response> call, Response<Category_List_Response> response) {
                     if (response.isSuccessful()) {
-                        System.out.println("Signup entering into 3333333333");
 
                         Category_List_Response responseed = response.body();
                         categoryList_Arraylist=new ArrayList<>(Arrays.asList(responseed.getCategory_response()));
                         Log.e("lols", "onResponse: "+categoryList_Arraylist );
                         Spinner mySpinner = (Spinner) findViewById(R.id.spinner_professionselection);
                         mySpinner.setAdapter(new SignupProfessional_Adapter(SignUp_Activity.this, R.layout.professionselection_layout, categoryList_Arraylist));
-
+                        progress.dismiss();
                     }
                 }
 
 
                 @Override
                 public void onFailure(Call<Category_List_Response> call, Throwable t) {
-                    System.out.println("Signup entering into 444444");
+                    Toast.makeText(SignUp_Activity.this, getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
+                    progress.dismiss();
                 }
             });
         }catch (Exception e) {
-            System.out.println("Signup entering into 55555");
             e.printStackTrace();
-
-
+//            progress.dismiss();
+            Log.e("lols", "get_CategoryList: " );
         }
     }
 
