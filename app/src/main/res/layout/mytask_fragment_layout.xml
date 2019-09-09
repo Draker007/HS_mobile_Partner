@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginRight="10dp"
                 android:background="@color/color_transparen"
                 android:fontFamily="@font/montserrat"

@@ -114,8 +114,8 @@ public class IdentityVerificationActivity extends AppCompatActivity {
                 Log.e("lol", "onItemSelected: "+items[position] );
                 gidProofText.setText(items  [position]);
                 back1="";
-                Glide.with(IdentityVerificationActivity.this).load(R.drawable.plus_button).into(front);
-                Glide.with(IdentityVerificationActivity.this).load(R.drawable.plus_button).into(back);
+                Glide.with(IdentityVerificationActivity.this).load(R.drawable.emptyprofile_image).into(front);
+                Glide.with(IdentityVerificationActivity.this).load(R.drawable.emptyprofile_image).into(back);
                 front1="";
                 j=position;
             }
@@ -199,6 +199,9 @@ public class IdentityVerificationActivity extends AppCompatActivity {
                             System.out.println("Place order entering into method valid");
                             Toast.makeText(IdentityVerificationActivity.this, "Documents  updated successfully", Toast.LENGTH_SHORT).show();
                             onBackPressed();
+                        }else
+                        {
+                            Toast.makeText(IdentityVerificationActivity.this, lResponse.getRequest_response(), Toast.LENGTH_SHORT).show();
                         }
                         progress.dismiss();
                     }
@@ -209,6 +212,8 @@ public class IdentityVerificationActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(Call<Identity_verification_Response> call, Throwable t) {
                     Log.e("Draker", "onFailed: 1" +t);
+                    Toast.makeText(IdentityVerificationActivity.this, getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
+
 
                     //   progress.dismiss();
                 }

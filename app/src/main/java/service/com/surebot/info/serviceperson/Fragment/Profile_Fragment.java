@@ -128,7 +128,7 @@ View v;
 
                             name.setText(partnerProfileRecords.get(0).getUser_Name());
                             email.setText(partnerProfileRecords.get(0).getUser_Email());
-                            number.setText(partnerProfileRecords.get(0).getUser_ID());
+                            number.setText(partnerProfileRecords.get(0).getUser_Contact_Number());
                             if(!partnerProfileRecords.get(0).getUser_Image_Path().equals("")) {
                                 Glide.with(getActivity()).load(Constants.IMAGEBASE_URL+partnerProfileRecords.get(0).getUser_Image_Path()).into(profImge);
                             }progress.dismiss();

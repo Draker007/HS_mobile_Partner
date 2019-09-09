@@ -163,7 +163,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="2dp"
                     android:background="@drawable/image_border"
-                    android:scaleType="centerCrop" />
+                    android:scaleType="center" />
 
             </FrameLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -202,7 +202,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="2dp"
                     android:background="@drawable/image_border"
-                    android:scaleType="centerCrop" />
+                    android:scaleType="center" />
 
             </FrameLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
