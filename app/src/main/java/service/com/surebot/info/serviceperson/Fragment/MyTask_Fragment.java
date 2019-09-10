@@ -85,7 +85,8 @@ public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.st
     @BindView(R.id.notask_header)
     TextView gNotask_header;
 
-
+    @BindView(R.id.todyatask_header)
+            TextView gTodyatask_header;
 
     ArrayList<Integer> gPackages_List;
     ArrayList<String> gUserName_List;
@@ -488,9 +489,10 @@ if(statusid.equals("0")){
                         lTodaysTask_Arraylist = new ArrayList<>(Arrays.asList(ListPackage.getPartner_my_task_today_response()));
 
                         List<UserAddress_Location> items = new ArrayList<>();
-                       if( !lTodaysTask_Arraylist.get(0).getTransaction_ID().equals("No Results Found") && !lTodaysTask_Arraylist.get(0).getUser_ID().equals("User Does Not Exists")){
+                        if( !lTodaysTask_Arraylist.get(0).getTransaction_ID().equals("No Results Found") && !lTodaysTask_Arraylist.get(0).getUser_ID().equals("User Does Not Exists")){
                            gTodaytask_recyclerview.setVisibility(View.VISIBLE);
                            gNotask_header.setVisibility(View.GONE);
+                           gTodyatask_header.setVisibility(View.VISIBLE);
 
                            TodaysTask_Adapter lTodaysTask_Adapter = new TodaysTask_Adapter(getActivity(),lTodaysTask_Arraylist);
                            gTodaytask_recyclerview.setAdapter(lTodaysTask_Adapter);
@@ -498,7 +500,7 @@ if(statusid.equals("0")){
                            lTodaysTask_Adapter.notifyDataSetChanged();
                        }
                        else{
-
+                           gTodyatask_header.setVisibility(View.GONE);
                            gTodaytask_recyclerview.setVisibility(View.GONE);
                            gNotask_header.setVisibility(View.VISIBLE);
                        }
