@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -48,6 +49,8 @@ public class HomePackage_Adapter extends RecyclerView.Adapter<HomePackage_Adapte
     int i=0;
     ArrayList<Partner_package_Response.Partner_package_records> partner_package_response ;
 
+
+    Buypackage_Communicator communicator;
 
     public HomePackage_Adapter(Context context, ArrayList<Partner_package_Response.Partner_package_records> partner_package_response) {
         this.context = context;
@@ -87,6 +90,20 @@ public class HomePackage_Adapter extends RecyclerView.Adapter<HomePackage_Adapte
 //
 //            }
 //        });
+
+        myViewHolder.lBuyPackage_Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                communicator.buypackage(partner_package_response.get(position).getPackage_ID());
+            }
+        });
+    }
+
+
+
+    public void setBuypackage_Communicator(Buypackage_Communicator communicator) {
+        this.communicator = communicator;
     }
 
     private void CallAPIforPackage() {
@@ -101,7 +118,7 @@ public class HomePackage_Adapter extends RecyclerView.Adapter<HomePackage_Adapte
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView gHPCost,gHPService;
         CardView packageBG;
-        Button buyPackage;
+        Button lBuyPackage_Button;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -109,11 +126,15 @@ public class HomePackage_Adapter extends RecyclerView.Adapter<HomePackage_Adapte
             gHPCost= itemView.findViewById(R.id.HPCost);
             gHPService=itemView.findViewById(R.id.HPServices);
            packageBG=itemView.findViewById(R.id.packageBG);
+            lBuyPackage_Button=itemView.findViewById(R.id.buy_button);
 
         }
     }
 
 
+    public interface Buypackage_Communicator {
+        void  buypackage(String packageid);
 
+    }
 
 }

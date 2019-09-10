@@ -146,9 +146,19 @@ public class TodaysTask_Adapter extends RecyclerView.Adapter<TodaysTask_Adapter.
             @Override
             public void onClick(View view) {
 
-                communicator.startservice(lTodaysTask_Arraylist.get(position).getTransaction_ID());
+                communicator.startservice(lTodaysTask_Arraylist.get(position).getTransaction_ID(),"1");
             }
         });
+
+
+        myViewHolder.cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                communicator.startservice(lTodaysTask_Arraylist.get(position).getTransaction_ID(),"0");
+            }
+        });
+
 
     }
 
@@ -265,7 +275,7 @@ public class TodaysTask_Adapter extends RecyclerView.Adapter<TodaysTask_Adapter.
         }
     }
     public interface startservicelist_Communicator {
-        void startservice(String transactionid);
+        void startservice(String transactionid,String statusid);
 
     }
 

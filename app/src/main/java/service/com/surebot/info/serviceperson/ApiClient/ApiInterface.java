@@ -7,6 +7,7 @@ import retrofit2.http.POST;
 import service.com.surebot.info.serviceperson.RequestClass.Account_details_Request;
 import service.com.surebot.info.serviceperson.RequestClass.AddAboutme_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Add_account_details_Request;
+import service.com.surebot.info.serviceperson.RequestClass.BuyPackage_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Category_List_Request;
 import service.com.surebot.info.serviceperson.RequestClass.ChangePasswordRequest;
 import service.com.surebot.info.serviceperson.RequestClass.CustomerSupport_Request;
@@ -51,6 +52,7 @@ import service.com.surebot.info.serviceperson.ResponseClass.AddAboutme_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Add_account_details_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Add_partner_personal_details_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Awards_and_CertificateResponse;
+import service.com.surebot.info.serviceperson.ResponseClass.BuyPackage_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.CancelledRequestList_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Category_List_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.ChangePasswordResponse;
@@ -193,6 +195,11 @@ public interface ApiInterface {
     //Premium Pacakge
     @POST("List_packages")
     Call<Partner_package_Response> List_packages (@Body Partner_package_Request request);
+
+    //To Buy Package
+
+    @POST("partner_buy_package")
+    Call<BuyPackage_Response> buy_Package (@Body BuyPackage_Request request);
 
     //For Getting List OfTodays Task
     @POST("partner_my_task_today")

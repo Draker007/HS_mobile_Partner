@@ -57,8 +57,10 @@ import service.com.surebot.info.serviceperson.ApiClient.ApiInterface;
 import service.com.surebot.info.serviceperson.Constants.Constants;
 import service.com.surebot.info.serviceperson.R;
 
+import service.com.surebot.info.serviceperson.RequestClass.BuyPackage_Request;
 import service.com.surebot.info.serviceperson.RequestClass.PartnerStartService_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Partner_my_task_today_Request;
+import service.com.surebot.info.serviceperson.ResponseClass.BuyPackage_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.PartnerStartService_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Partner_my_task_today_response;
 import service.com.surebot.info.serviceperson.utils.AppicationClass;
@@ -68,7 +70,7 @@ import service.com.surebot.info.serviceperson.RequestClass.Partner_package_Reque
 import service.com.surebot.info.serviceperson.ResponseClass.Partner_package_Response;
 
 
-public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.startservicelist_Communicator {
+public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.startservicelist_Communicator,HomePackage_Adapter.Buypackage_Communicator{
 
 
     @BindView(R.id.package_recyclerview)
@@ -103,6 +105,9 @@ public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.st
 
 
     String gUserId_FromLogin,gCategoryId_FromLogin,gPremiumPartner_Id;
+
+
+    Dialog gCancel_Dialog;
 
     @SuppressLint("WrongConstant")
     @Override
@@ -255,6 +260,9 @@ public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.st
                         if(!partner_package_response.get(0).getPackage_ID().equals("No Results Found")) {
                         HomePackage_Adapter lHomePackage_Adapter = new HomePackage_Adapter(getActivity(), partner_package_response);
                         gPackage_recyclerview.setAdapter(lHomePackage_Adapter);
+
+                            lHomePackage_Adapter.setBuypackage_Communicator(MyTask_Fragment.this);
+                            lHomePackage_Adapter.notifyDataSetChanged();
                         }
                     }
 
@@ -279,14 +287,110 @@ public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.st
         }
     }
 
+    //Buy a package
+
+    private void buy_Package(String packageid) {
+
+        try {
+            System.out.println("In User Login Method 1");
+            // progress.show();
+            OkHttpClient.Builder client = new OkHttpClient.Builder();
+            HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
+            registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            client.addInterceptor(registrationInterceptor);
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(Constants.BASE_URL)
+                    .client(client.build())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            System.out.println("asd1");
+            ApiInterface request = retrofit.create(ApiInterface.class);
+            BuyPackage_Request lBuyPackage_Request = new BuyPackage_Request();
+            lBuyPackage_Request.setDocket(Constants.TOKEN);
+            lBuyPackage_Request.setUser_ID(gUserId_FromLogin);
+            lBuyPackage_Request.setPackage_ID(packageid);
+
+            Call<BuyPackage_Response> call = request.buy_Package(lBuyPackage_Request);
+            call.enqueue(new Callback<BuyPackage_Response>() {
+                @Override
+                public void onResponse(Call<BuyPackage_Response> call, Response<BuyPackage_Response> response) {
+                    if (response.isSuccessful()) {
+                        System.out.println("asd1");
+                        BuyPackage_Response ListPackage = response.body();
+
+
+
+                    }
+
+
+                    progress.dismiss();
+                }
+
+
+
+                @Override
+                public void onFailure(Call<BuyPackage_Response> call, Throwable t) {
+                    Toast.makeText(getActivity(), getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
+                    progress.dismiss();
+                }
+            });
+        }
+        catch (Exception e) {
+            System.out.println("In User Login Method 8");
+            e.printStackTrace();
+//            progress.dismiss();
+
+        }
+    }
+
     @Override
-    public void startservice(String transactionid) {
-
-        Get_partner_start_servicecode(transactionid);
+    public void startservice(String transactionid,String statusid) {
 
 
+if(statusid.equals("1")){
+
+    Get_partner_start_servicecode(transactionid,statusid);
+}
+
+if(statusid.equals("0")){
+            gCancel_Dialog = new Dialog(getActivity(), R.style.dailogboxtheme);
+            gCancel_Dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            gCancel_Dialog.getWindow().setBackgroundDrawableResource(R.color.color_transparen);
+            gCancel_Dialog.setContentView(R.layout.canceltodayrequest_popup);
 
 
+            TextView lYes_text = gCancel_Dialog.findViewById(R.id.yes_text);
+            TextView lNo_text = gCancel_Dialog.findViewById(R.id.no_text);
+
+            lYes_text.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Get_partner_start_servicecode(transactionid,statusid);
+
+                }
+            });
+
+            lNo_text.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    gCancel_Dialog.dismiss();
+
+                }
+            });
+
+            gCancel_Dialog.setCancelable(false);
+            gCancel_Dialog.show();
+
+
+        }
+    }
+
+    @Override
+    public void buypackage(String packageid) {
+        Toast.makeText(getActivity(),packageid,Toast.LENGTH_SHORT).show();
+
+        buy_Package(packageid);
 
     }
 
@@ -425,7 +529,7 @@ public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.st
 
 
     //Get Code For Start Service
-    private void Get_partner_start_servicecode(String transactionId) {
+    private void Get_partner_start_servicecode(String transactionId,String statusid) {
 
         try {
             System.out.println("In User Login Method 1");
@@ -446,8 +550,9 @@ public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.st
             lservice_request.setDocket(Constants.TOKEN);
             lservice_request.setUser_ID(gUserId_FromLogin);
             lservice_request.setTransaction_ID(transactionId);
+            lservice_request.setStatus_ID(statusid);
 
-System.out.println("In Todays task Api Tart service" + gUserId_FromLogin + transactionId);
+                  System.out.println("In Todays task Api Tart service" + gUserId_FromLogin + transactionId);
             Call<PartnerStartService_Response> call = request.Get_partner_start_servicecode(lservice_request);
             call.enqueue(new Callback<PartnerStartService_Response>() {
                 @Override
@@ -455,7 +560,8 @@ System.out.println("In Todays task Api Tart service" + gUserId_FromLogin + trans
                     if (response.isSuccessful()) {
 
                         PartnerStartService_Response lPartnerStartService_Response = response.body();
-                        if(!lPartnerStartService_Response.equals("Invalid")){
+                        if(!lPartnerStartService_Response.getPartner_start_service_get_otp_response().equals("Invalid")) {
+                            if(!lPartnerStartService_Response.getPartner_start_service_get_otp_response().equals("valid")){
                             Toast.makeText(getActivity(), lPartnerStartService_Response.getPartner_start_service_get_otp_response(), Toast.LENGTH_SHORT).show();
                             gEnterCode_Dialog = new Dialog(getActivity(), R.style.dailogboxtheme);
                             gEnterCode_Dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -475,26 +581,23 @@ System.out.println("In Todays task Api Tart service" + gUserId_FromLogin + trans
                             lOtp_text4.addTextChangedListener(new SampleTextWatcherClass(lOtp_text4));
 
 
-
                             lOkay_text.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
 
 
-                                    if (lOtp_text1.getText().toString().isEmpty()||lOtp_text2.getText().toString().isEmpty()||lOtp_text3.getText().toString().isEmpty()||lOtp_text4.getText().toString().isEmpty()){
+                                    if (lOtp_text1.getText().toString().isEmpty() || lOtp_text2.getText().toString().isEmpty() || lOtp_text3.getText().toString().isEmpty() || lOtp_text4.getText().toString().isEmpty()) {
                                         Toast.makeText(getActivity(), "Enter 4 Digit Code Sent To User", Toast.LENGTH_LONG).show();
 
-                                    }
-                                    else{
-                                        otp = otp1+otp2+otp3+otp4;
+                                    } else {
+                                        otp = otp1 + otp2 + otp3 + otp4;
                                         System.out.println("Entered Otp " + otp);
 
-                                        if(otp.equals(lPartnerStartService_Response.getPartner_start_service_get_otp_response())){
+                                        if (otp.equals(lPartnerStartService_Response.getPartner_start_service_get_otp_response())) {
                                             startActivity(new Intent(getActivity(), serviceDetailsActivity.class));
                                             gEnterCode_Dialog.dismiss();
-                                        }
-                                       else{
-                                            Toast.makeText(getActivity(),"Invalid Otp", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            Toast.makeText(getActivity(), "Invalid Otp", Toast.LENGTH_SHORT).show();
 
                                         }
                                     }
@@ -503,11 +606,16 @@ System.out.println("In Todays task Api Tart service" + gUserId_FromLogin + trans
 
                             gEnterCode_Dialog.setCancelable(false);
                             gEnterCode_Dialog.show();
+                        }
 
-
+                            if( lPartnerStartService_Response.getPartner_start_service_get_otp_response().equals("Valid")){
+                                   Toast.makeText(getActivity(),"Cancelled Successfully",Toast.LENGTH_SHORT).show();
+                            }
 
 
                         }
+
+
 
                         progress.dismiss();
                     }
