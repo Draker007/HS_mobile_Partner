@@ -385,7 +385,7 @@ public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.st
                         lTodaysTask_Arraylist = new ArrayList<>(Arrays.asList(ListPackage.getPartner_my_task_today_response()));
 
                         List<UserAddress_Location> items = new ArrayList<>();
-                       if( !lTodaysTask_Arraylist.get(0).getTransaction_ID().equals("No Results Found") && !lTodaysTask_Arraylist.get(0).getUser_ID().equals("User Does Not Exists")){
+                        if( !lTodaysTask_Arraylist.get(0).getTransaction_ID().equals("No Results Found") && !lTodaysTask_Arraylist.get(0).getUser_ID().equals("User Does Not Exists")){
                            gTodaytask_recyclerview.setVisibility(View.VISIBLE);
                            gNotask_header.setVisibility(View.GONE);
                            gTodyatask_header.setVisibility(View.VISIBLE);

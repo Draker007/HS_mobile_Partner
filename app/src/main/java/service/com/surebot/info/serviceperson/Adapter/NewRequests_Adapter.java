@@ -121,9 +121,11 @@ if (gNewservicesRequest_List.get(position).getUser_Name()!=null){
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        myViewHolder.lTime_Text.setText(gTimeForUI);
+       // myViewHolder.lTime_Text.setText(gTimeForUI);
 
+    myViewHolder.lTime_Text.setText(gNewservicesRequest_List.get(position).getBooking_Start_Time());
 
+System.out.println("Converted Time is " +gNewservicesRequest_List.get(position).getBooking_Start_Time() + "and "+ gTimeForUI );
 
         myViewHolder.lSend_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -185,7 +187,9 @@ if (gNewservicesRequest_List.get(position).getUser_Name()!=null){
                             amnt = amnt + finalPriceList.get(i) + ",";
                         }
                     }
-                    sendQuote_toUser();
+                    sendQuote_toUser("1");
+                    myViewHolder.lServicedetails_Layout.setVisibility(View.GONE);
+                    myViewHolder.lMore_Textview.setVisibility(View.GONE);
                     AppicationClass.test1.clear();
                     communicator.addquotationlist(finalmapingIdList,finalPriceList,"1");
 
@@ -362,7 +366,7 @@ if (gNewservicesRequest_List.get(position).getUser_Name()!=null){
 
 
     }
-    private void sendQuote_toUser()  {
+    private void sendQuote_toUser(String Statusid)  {
         try {
 
             progress.show();
@@ -384,7 +388,7 @@ if (gNewservicesRequest_List.get(position).getUser_Name()!=null){
             lNewRequestList_Request.setUser_ID(AppicationClass.getUserId_FromLogin());
             lNewRequestList_Request.setQuote_amount(amnt);
             lNewRequestList_Request.setTransaction_Partner_Quote_ID(quote);
-            lNewRequestList_Request.setStatus_ID(AppicationClass.getUserId_FromLogin());
+            lNewRequestList_Request.setStatus_ID(Statusid);
             lNewRequestList_Request.setDocket(Constants.TOKEN);
 
             Call<SendQuotetoUser_Response> call = request.sendQuote_toUser(lNewRequestList_Request);

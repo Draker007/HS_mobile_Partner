@@ -429,6 +429,8 @@ public class AddPersonalDetailsActivity extends AppCompatActivity {
                             System.out.println("Place order entering into method valid");
                             Toast.makeText(AddPersonalDetailsActivity.this, "Address Updated Successfully ", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(AddPersonalDetailsActivity.this,PersonalDetailView.class));
+                        }else{
+                            Toast.makeText(AddPersonalDetailsActivity.this, lResponse.getRequest_response(), Toast.LENGTH_SHORT).show();
                         }
                       progress.dismiss();
                     }
