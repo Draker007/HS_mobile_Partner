@@ -183,6 +183,7 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
 
                     for (int p = 0; p < AppicationClass.addservicemapingid.size(); p++) {
                         String[] list = AppicationClass.addservicemapingid.get(p).split(",");
+                        Log.e("hihi", "onClick: "+price +id);
                         id.add(list[0]);
                         price.add(list[1]);
                     }
@@ -371,10 +372,7 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
                         gSubServicesList_Arraylist= new ArrayList<>(Arrays.asList(lsubservice_response.getSub_services_response()));
                         if(!gSubServicesList_Arraylist.get(0).getService_Mapping_ID().equals("No Results Found")){
                             gSubserviceslist_recyclerview.setVisibility(View.VISIBLE);
-                            if(gSubServicesList_Arraylist.get(0).getService_Is_There().equals("Exists")){
-                                AppicationClass.setPremium_PartenerId("1");
-                            }else
-                                AppicationClass.setPremium_PartenerId("0");
+
 
                             // gSubServiceList_Adapter = new SubServiceList_Adapter(UserServiceListActivity.this,gSubServicesList_Arraylist);
 
@@ -525,8 +523,10 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
             lservice_request.setService_Mapping_ID(SelectedSubServiceID);
             lservice_request.setLocation_ID(SelectedLocationID);
             lservice_request.setDocket(Constants.TOKEN);
+            Log.e("hihi", "submitFor_Approval: "+SelectedSubServiceID );
             if (AppicationClass.getPremium_PartenerId().equals("1")){
                 lservice_request.setService_Amount(SelectedSubServiceAmmout);
+                lservice_request.setService_Mapping_ID(SelectedSubServiceID);
             }
 
             Call<SubmitForApproval_Response> call = request.submitFor_Approval(lservice_request);
@@ -551,7 +551,12 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
                       }
               else{
                           subService_List(gServiceId_FromService);
-
+                          AppicationClass.addLocation.clear();
+                          AppicationClass.addserviceammount.clear();
+                          AppicationClass.addservicemapingid.clear();
+                          SelectedSubServiceID = "";
+                          SelectedSubServiceAmmout = "";
+                          SelectedLocationID = "";
                       }
 
 

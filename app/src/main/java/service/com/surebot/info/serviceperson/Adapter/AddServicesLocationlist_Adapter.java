@@ -2,6 +2,7 @@ package service.com.surebot.info.serviceperson.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,6 +56,7 @@ public class AddServicesLocationlist_Adapter extends RecyclerView.Adapter<AddSer
            if(location_response.get(i).getCity_Name().equals(gAreaName_List.get(position))){
                location_area.add(location_response.get(i).getLocation_Name());
                gAreaName_List1.add(location_response.get(i).getLocation_ID());
+               Log.e("hihi", "onBindViewHolder: "+location_response.get(i).getLocation_Status() );
            }
         }
 

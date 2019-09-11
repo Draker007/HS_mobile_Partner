@@ -57,11 +57,22 @@ public class AddSubServicesList_Adapter extends RecyclerView.Adapter<AddSubServi
         if(gPremiumPartner_Id.equals("1")){
             myViewHolder.lPrice.setVisibility(View.VISIBLE);
             myViewHolder.lQuantityCheckBox.setVisibility(View.GONE);
+            if(gSubServicesList_Arraylist.get(position).getService_Is_There().equals("Exists")){
+                myViewHolder.lPrice.setText(gSubServicesList_Arraylist.get(position).getService_Amount());
+                if(!gSubServicesList_Arraylist.get(position).getService_Amount().equals(""))
+                AppicationClass.addservicemapingid.add(gSubServicesList_Arraylist.get(position).getService_Mapping_ID()+","+ gSubServicesList_Arraylist.get(position).getService_Amount());
+            }
+
         }
 
         if(gPremiumPartner_Id.equals("0")){
             myViewHolder.lQuantityCheckBox.setVisibility(View.VISIBLE);
             myViewHolder.lPrice.setVisibility(View.GONE);
+            if(gSubServicesList_Arraylist.get(position).getService_Is_There().equals("Exists")){
+                myViewHolder.lQuantityCheckBox.setChecked(true);
+
+                AppicationClass.addserviceammount.add(gSubServicesList_Arraylist.get(position).getService_Mapping_ID());
+            }
 
         }
 
