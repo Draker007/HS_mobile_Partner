@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.ServicesAdd_Activity">
+
     <LinearLayout
         android:id="@+id/header_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:background="@color/color_blackforheader"
-        >
+        android:orientation="horizontal">
 
 
         <TextView
@@ -33,80 +33,301 @@
         android:id="@+id/scrollview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:fillViewport="true"
         android:layout_below="@+id/header_layout"
         android:layout_marginTop="20dp"
-        >
+        android:layout_marginBottom="10dp"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:orientation="horizontal">
+                app:layout_constraintEnd_toEndOf="parent">
 
                 <TextView
+                    android:id="@+id/textView43"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:text="@string/primaryservices"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="@font/montserrat"
+                    android:text="My Primary Services"
                     android:textColor="@color/color_black"
-                    android:textSize="@dimen/regulartextsize"
-
-                    />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/PrimaryService"
+                    android:id="@+id/addServiceCategory"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="@font/montserrat"
+                    android:text="TextView"
+                    android:textColor="@color/color_blue"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView43"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView43"
+                    app:layout_constraintTop_toTopOf="@+id/textView43" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:fontFamily="@font/montserrat"
-                    android:text="@string/primaryservices"
-                    android:textColor="@color/color_blue"
-                    android:textSize="@dimen/regulartextsize" />
-            </LinearLayout>
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/addServiceCategory">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/montserrat"
-                android:text="@string/selectservices"
-                android:textSize="@dimen/regulartextsize" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:orientation="horizontal">
+                        <Spinner
+                            android:id="@+id/spinner1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginEnd="2dp"
+                            android:layout_marginBottom="2dp"
+                            android:background="@drawable/custom_spinnerbg"
+                            android:spinnerMode="dropdown"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
 
                 <TextView
+                    android:id="@+id/textView48"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="16dp"
                     android:fontFamily="@font/montserrat"
-                    android:text="@string/location"
+                    android:text="Ready to give service within"
                     android:textColor="@color/color_black"
-                    android:textSize="@dimen/regulartextsize" />
+                    app:layout_constraintStart_toStartOf="@+id/cardView"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/locationlist_recyclerview"
-                    android:layout_width="wrap_content"
+                <Button
+                    android:id="@+id/radiusBtn"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp">
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/buttonblue_background"
+                    android:text="Radius"
+                    android:textColor="@color/color_white"
+                    app:layout_constraintBottom_toBottomOf="@+id/cityBtn"
+                    app:layout_constraintEnd_toStartOf="@+id/cityBtn"
+                    app:layout_constraintStart_toStartOf="@+id/textView48"
+                    app:layout_constraintTop_toTopOf="@+id/cityBtn" />
 
-                </androidx.recyclerview.widget.RecyclerView>
+                <Button
+                    android:id="@+id/cityBtn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/round_btn_gray"
+                    android:text="City"
+                    android:textColor="@color/color_black"
+                    app:layout_constraintEnd_toStartOf="@+id/statebtn"
+                    app:layout_constraintStart_toEndOf="@+id/radiusBtn"
+                    app:layout_constraintTop_toBottomOf="@+id/textView48" />
 
-            </LinearLayout>
+                <Button
+                    android:id="@+id/statebtn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/round_btn_gray"
+                    android:text="State"
+                    android:textColor="@color/color_black"
+                    app:layout_constraintBottom_toBottomOf="@+id/cityBtn"
+                    app:layout_constraintEnd_toEndOf="@+id/cardView"
+                    app:layout_constraintStart_toEndOf="@+id/cityBtn"
+                    app:layout_constraintTop_toTopOf="@+id/cityBtn" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/RadiusLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/radiusBtn">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/autoZipRadius"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/round_edittxt_gray"
+                        android:hint="Enter Zip Code"
+                        android:padding="5dp"
+                        app:layout_constraintEnd_toStartOf="@+id/radiusSpinner"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView39" />
+
+                    <Spinner
+                        android:id="@+id/radiusSpinner"
+                        android:layout_width="165dp"
+                        android:layout_height="36dp"
+                        android:layout_marginStart="8dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/autoZipRadius"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/autoZipRadius"
+                        app:layout_constraintTop_toTopOf="@+id/autoZipRadius" />
+
+                    <TextView
+                        android:id="@+id/textView39"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/montserrat"
+                        android:text="Select zipcodes and Kms :"
+                        android:textColor="@color/color_black"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/addmoreRadiustxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="Add more"
+                        android:textColor="@color/color_green"
+                        app:layout_constraintEnd_toEndOf="@+id/radiusRecycler"
+                        app:layout_constraintTop_toBottomOf="@+id/radiusSpinner" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/radiusRecycler"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/addmoreRadiustxt" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/Citylayout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/radiusBtn">
+
+                    <Spinner
+                        android:id="@+id/spinnerStates"
+                        android:layout_width="0dp "
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="4dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/spinnerCities"
+                        app:layout_constraintEnd_toStartOf="@+id/spinnerCities"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/spinnerCities"
+                        app:layout_constraintVertical_bias="1.0" />
+
+                    <Spinner
+                        android:id="@+id/spinnerCities"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/spinnerStates"
+                        app:layout_constraintTop_toBottomOf="@+id/textView50" />
+
+                    <TextView
+                        android:id="@+id/textView50"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:text="Select state and cities"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/addmoreCity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:text="Add more"
+                        android:textColor="@color/color_green"
+                        app:layout_constraintEnd_toEndOf="@+id/cityRecycler"
+                        app:layout_constraintTop_toBottomOf="@+id/spinnerCities" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/cityRecycler"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/addmoreCity" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/StateLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cityBtn">
+
+                    <TextView
+                        android:id="@+id/textView62"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/montserrat"
+                        android:text="Select States "
+                        android:textColor="@color/color_black"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Spinner
+                        android:id="@+id/StateSpinnerCheck"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView62" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

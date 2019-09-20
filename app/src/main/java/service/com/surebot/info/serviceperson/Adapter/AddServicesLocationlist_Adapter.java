@@ -40,7 +40,7 @@ public class AddServicesLocationlist_Adapter extends RecyclerView.Adapter<AddSer
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.service_city_locationadapter_list, viewGroup, false);
         return new AddServicesLocationlist_Adapter.MyViewHolder(view);
-        // return null;
+
     }
 
     @SuppressLint({"ResourceAsColor", "WrongConstant"})
