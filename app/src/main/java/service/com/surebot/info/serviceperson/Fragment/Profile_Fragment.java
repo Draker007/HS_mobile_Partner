@@ -125,13 +125,29 @@ View v;
                         partnerProfileRecords = new ArrayList<>(Arrays.asList(partnerProfileResponse.getPartner_profile_details()));
                      //   Log.e("lola", "onResponse: "+partnerUserDetails  );
                         //Log.e("lol", "onResponse: " +response.body().getUser_Contact_Number());
-
+                        if(partnerProfileResponse.getStatus_Response().equals("200")){
                             name.setText(partnerProfileRecords.get(0).getUser_Name());
                             email.setText(partnerProfileRecords.get(0).getUser_Email());
                             number.setText(partnerProfileRecords.get(0).getUser_Contact_Number());
-                            if(!partnerProfileRecords.get(0).getUser_Image_Path().equals("")) {
-                                Glide.with(getActivity()).load(Constants.IMAGEBASE_URL+partnerProfileRecords.get(0).getUser_Image_Path()).into(profImge);
-                            }progress.dismiss();
+                            if(!partnerProfileRecords.get(0).getUser_Image_Path().equals("") || partnerProfileRecords.get(0).getUser_Image_Path()!=null) {
+                             if(partnerProfileRecords.get(0).getUser_Image_Path().equals("")){
+
+                                 profImge.setImageResource(R.drawable.emptyprofile_image);
+                             }
+                             else{
+                                 Glide.with(getActivity()).load(Constants.IMAGEBASE_URL+partnerProfileRecords.get(0).getUser_Image_Path()).into(profImge);
+
+                             }
+
+                           System.out.println(" In Profile Fragment entering into iff");
+                            }
+
+                            else{
+                                System.out.println(" In Profile Fragment entering into elseee");
+                            }
+                            progress.dismiss();
+                        }
+                        progress.dismiss();
 
                     }
 

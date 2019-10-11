@@ -35,10 +35,10 @@
     <string name="no_task">Your task is empty, Please fill your profile details to get your task</string>
 
     <!-- create your profile-->
-    <string name="tobefilled1">* Enter your Service details</string>
-    <string name="tobefilled2">* Complete your profile</string>
+    <string name="tobefilled1">* Complete your profile </string>
+    <string name="tobefilled2">* Profile verification and approval </string>
     <string name="tobefilled3">* Profile verification and approval</string>
-    <string name="tobefilled4">  Buy premium partner package</string>
+    <string name="tobefilled4">  Enter your Service details </string>
 
 
     <!-- New Request List-->
@@ -65,4 +65,17 @@
     <string name="SetNewPass">Enter OTP which have sent to your Emial-ID or Phone Number</string>
     <string name="onfailure">Something went wrong</string>
     <string name="supportnumber">9886106330</string>
+
+   <!-- Select Country-->
+
+    <string name="selectcountry">Select Country</string>
+    <string name="selectcountryid">Country Id</string>
+
+    <string name="selectstate">Select State</string>
+    <string name="selectstateid">State Id</string>
+
+    <string name="selectcity">Select Cities</string>
+    <string name="selectcityid">City Id</string>
+
+    <string name="nocities">Cities not found</string>
 </resources>

@@ -45,6 +45,8 @@ public class awardsAdapter extends RecyclerView.Adapter<awardsAdapter.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         awardsData data = awardsDataList.get(position);
+
+        System.out.println("Arraylistsize in Adapter " + data.getImagefile().size());
         RequestOptions myOptions = new RequestOptions()
                 .override(150, 150);
         Glide.with(context)
@@ -52,6 +54,7 @@ public class awardsAdapter extends RecyclerView.Adapter<awardsAdapter.MyViewHold
                 .apply(myOptions)
                 .load(data.getImage())
                 .into(holder.Image);
+
         holder.Text.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -62,6 +65,7 @@ public class awardsAdapter extends RecyclerView.Adapter<awardsAdapter.MyViewHold
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
            if (charSequence!=null) {
                awardsDataList.get(position).setText(charSequence.toString());
+
            }}
 
             @Override
@@ -69,6 +73,8 @@ public class awardsAdapter extends RecyclerView.Adapter<awardsAdapter.MyViewHold
 
             }
         });
+
+
     }
     public List<awardsData> retrieveData()
     {

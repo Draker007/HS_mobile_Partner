@@ -13,6 +13,11 @@ public class AppicationClass {
     public static ArrayList<String> addserviceammount =new ArrayList<>();
     public static ArrayList<String> addLocation =new ArrayList<>();
 
+
+    public static ArrayList<String> addAwardsDetails =new ArrayList<>();
+
+    public static ArrayList<String> getAwardsDetails =new ArrayList<>();
+
     public static String getCategoryId_FromLogin() {
         return CategoryId_FromLogin;
     }
@@ -94,5 +99,21 @@ public class AppicationClass {
 
     public static void setPremium_PartenerId(String premium_PartenerId) {
         Premium_PartenerId = premium_PartenerId;
+    }
+
+    public static ArrayList<String> getAddAwardsDetails() {
+        return addAwardsDetails;
+    }
+
+    public static void setAddAwardsDetails(ArrayList<String> addAwardsDetails) {
+        AppicationClass.addAwardsDetails = addAwardsDetails;
+    }
+
+    public static ArrayList<String> getGetAwardsDetails() {
+        return getAwardsDetails;
+    }
+
+    public static void setGetAwardsDetails(ArrayList<String> getAwardsDetails) {
+        AppicationClass.getAwardsDetails = getAwardsDetails;
     }
 }

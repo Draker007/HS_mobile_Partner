@@ -89,6 +89,8 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                         if(response.isSuccessful()){
 
                             if(response.body().getNotification_status_response().equals("valid")){
+                                Toast.makeText(ForgotPasswordActivity.this, response.body().getNotification_code_response(), Toast.LENGTH_SHORT).show();
+
                                 Intent intent = new Intent(ForgotPasswordActivity.this,SetNewPasswordActivity.class);
                                 intent.putExtra("email",gEmailORNumber.getText().toString());
                                 startActivity(intent);

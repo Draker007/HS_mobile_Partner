@@ -150,7 +150,7 @@ public class SetNewPasswordActivity extends AppCompatActivity  {
             client.addInterceptor(registrationInterceptor);
 
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("http://192.168.0.82/services_at_home_test/Api/")
+                    .baseUrl("Constants.BASE_URL")
                     .client(client.build())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
@@ -218,7 +218,7 @@ public class SetNewPasswordActivity extends AppCompatActivity  {
             client.addInterceptor(registrationInterceptor);
 
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("http://192.168.0.82/services_at_home_test/Api/")
+                    .baseUrl("Constants.BASE_URL")
                     .client(client.build())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();

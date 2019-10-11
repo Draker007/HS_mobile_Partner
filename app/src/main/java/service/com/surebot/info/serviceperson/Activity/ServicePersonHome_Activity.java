@@ -69,6 +69,8 @@ public class ServicePersonHome_Activity extends AppCompatActivity {
 
     int back = 0;
 
+    String HomeScreen_Flow;
+
     String gUserId_FromLogin,gUserName_FromLogin,gPremium_PartnerId,gCategoryId_FromLogin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +78,8 @@ public class ServicePersonHome_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_service_person_home);
 
         ButterKnife.bind(this);
-
+        Intent lintent = this.getIntent();
+        HomeScreen_Flow = lintent.getStringExtra("HomeScreenFlow");
 
         SharedPreferences sp1 =ServicePersonHome_Activity.this.getSharedPreferences("User_Info", 0);
         gUserId_FromLogin = sp1.getString("User_Id", null);
@@ -88,6 +91,16 @@ public class ServicePersonHome_Activity extends AppCompatActivity {
         AppicationClass.setUserName_FromLogin(gUserName_FromLogin);
         AppicationClass.setPremium_PartenerId(gPremium_PartnerId);
         AppicationClass.setCategoryId_FromLogin(gCategoryId_FromLogin);
+
+        if(HomeScreen_Flow.equals("fromlogin")){
+
+            System.out.println("In Homesceen entering into fromlogin");
+            fragment = new MyTask_Fragment();
+        }
+        if(HomeScreen_Flow.equals("fromcreateprofile")){
+            System.out.println("In Homesceen entering into fromcreateprofile");
+            fragment = new Profile_Fragment();
+        }
 
 
         check = getIntent().getStringExtra("status");
@@ -105,8 +118,12 @@ public class ServicePersonHome_Activity extends AppCompatActivity {
         navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setItemIconTintList(null);
-        fragment = new MyTask_Fragment();
+
+
+
+
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
         transaction.add(R.id.fragment_container, fragment);
         transaction.commit();
        Listners();

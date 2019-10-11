@@ -70,16 +70,21 @@ public class changePasswordActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (!gCurrentPass.getText().toString().trim().isEmpty()){
-                    if (!gNewPass.getText().toString().trim().isEmpty()){
-                        if(!gConfirmPass.getText().toString().toString().isEmpty()) {
+                    if (!gNewPass.getText().toString().trim().isEmpty()) {
+                        if (gNewPass.length() >= 5) {
+                        if (!gConfirmPass.getText().toString().toString().isEmpty()) {
                             if (gConfirmPass.getText().toString().equals(gNewPass.getText().toString())) {
                                 changePasswrdAPI();
                             } else {
                                 Toast.makeText(changePasswordActivity.this, "Confirm Password and New Password should be same", Toast.LENGTH_SHORT).show();
                             }
-                        }else{
+                        } else {
                             gConfirmPass.setError("Confirm Password");
                             gConfirmPass.requestFocus();
+                        }
+                    } else {
+                            gNewPass.setError("Password should be more than 5 characters");
+                            gNewPass.requestFocus();
                         }
                     }else{
                         gNewPass.setError("NewPasswrd");

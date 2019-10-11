@@ -44,11 +44,17 @@ import service.com.surebot.info.serviceperson.Adapter.SpinnerWithCheckBoxAdapter
 import service.com.surebot.info.serviceperson.ApiClient.ApiInterface;
 import service.com.surebot.info.serviceperson.Constants.Constants;
 import service.com.surebot.info.serviceperson.R;
+import service.com.surebot.info.serviceperson.RequestClass.GetCityList_Request;
+import service.com.surebot.info.serviceperson.RequestClass.GetListofCountry_Request;
+import service.com.surebot.info.serviceperson.RequestClass.GetStateList_Request;
 import service.com.surebot.info.serviceperson.RequestClass.ListOfServices_Request;
 import service.com.surebot.info.serviceperson.RequestClass.ListOfSubServices_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Partner_package_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Select_service_partner_Request;
 import service.com.surebot.info.serviceperson.RequestClass.SubmitForApproval_Request;
+import service.com.surebot.info.serviceperson.ResponseClass.GetCityList_Response;
+import service.com.surebot.info.serviceperson.ResponseClass.GetListofCountry_Response;
+import service.com.surebot.info.serviceperson.ResponseClass.GetStateList_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.ListOfServices_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.ListOfSubServices_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Partner_package_Response;
@@ -110,9 +116,18 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
     Button gWaitingforapproval_button;
 
     @BindView(R.id.spinner1)
-    Spinner dropdown ;
+    Spinner gCountry_Spinner ;
+
+   /* @BindView(R.id.nocitiesfound)
+    TextView gCities_NotFound ;*/
+
+
+
     Spinner Spinnerstates ;
     Spinner Spinnercities;
+
+
+
 
     @BindView(R.id.StateSpinnerCheck)
     Spinner states ;
@@ -131,6 +146,23 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
     ArrayList<ListOfServices_Response.ListOfServices_Records> gServicesList_Arraylist;
 
     ArrayList<ListOfSubServices_Response.ListOfSubServices_Records> gSubServicesList_Arraylist;
+//For Country
+    ArrayList<GetListofCountry_Response.GetListofCountry_List> gGetCountry_ArrayList;
+    ArrayList<String>  gCountryArrayList;
+    ArrayList<String> gCountryID_ArrayList = new ArrayList<>();
+    //For States
+    ArrayList<GetStateList_Response.GetStateList_Details> gGetStates_ArrayList;
+    ArrayList<String>  gStateArrayList;
+    ArrayList<String> gStateID_ArrayList = new ArrayList<>();
+
+    //For Cities
+    ArrayList<GetCityList_Response.GetCityList_Details> gGetCities_ArrayList;
+    ArrayList<String>  gCityArrayList;
+    ArrayList<String> gCityID_ArrayList = new ArrayList<>();
+
+    SpinnerWithCheckBoxAdapter myAdapter;
+
+
     String kms , Citywisestate;
     String gServiceId_FromService ;
     String SelectedLocationID ="";
@@ -141,6 +173,9 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
     ArrayList<String > noofCoties= new ArrayList<>();
     ArrayList<String > Statelist= new ArrayList<>();
     Spinner lRadiusKms;
+
+    ArrayList<String> gCountryName_Arraylist;
+
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,15 +194,13 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
         String[] items = new String[]{"Select Your Country", "India", "Japan", "Canada","Brazil","Russia"};
 //create an adapter to describe how the items are displayed, adapters are used in several places in android.
 //There are multiple variations of this, but this is the basic variant.
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
-//set the spinners adapter to the previously created one.
-        dropdown.setAdapter(adapter);
+
+
+
         String data[]={"560064", "560063", "560062", "560061", "560060", "560065", "650064", "520064", "510064", "500064"};
 
         ArrayAdapter<String> adapter12 = new ArrayAdapter<String>
                 (this, android.R.layout.select_dialog_item, data);
-
-
 
 
 
@@ -181,6 +214,13 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
         gAreaName_List = new ArrayList<String>();
         //Calling API for Location City
         location_list();
+
+        //Calling Api for Country List
+        getCountry_List();
+
+       // getStates_List();
+
+
 
         //for Location Radius
         LinearLayoutManager lm = new LinearLayoutManager(ServicesAdd_Activity.this);
@@ -212,27 +252,27 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
         gCityRecycler.setLayoutManager(lm1);
 
 
-
+        String[] cityitems = new String[]{"Select cities", "Benglore", "Mysore", "Chitradurga","Davanagere","Chikkamangalore"};
 
         Spinnercities = findViewById(R.id.spinnerCities);
         Spinnerstates = findViewById(R.id.spinnerStates);
 
-        ArrayList<spinnerData> listVOs = new ArrayList<>();
-        for (int i = 0; i < items.length; i++) {
+       /* ArrayList<spinnerData> listVOs = new ArrayList<>();
+        for (int i = 0; i < cityitems.length; i++) {
             spinnerData stateVO = new spinnerData();
-            stateVO.setTitle(items[i]);
+            stateVO.setTitle(cityitems[i]);
             stateVO.setSelected(false);
             listVOs.add(stateVO);
-        }
+        }*/
         String[] items1 = new String[]{"Select State", "Karnatka", "Uttrakhand", "Tamil Nadu","Book Of Zeref"};
-        SpinnerWithCheckBoxAdapter myAdapter = new SpinnerWithCheckBoxAdapter(ServicesAdd_Activity.this, 0,
+      /*  SpinnerWithCheckBoxAdapter myAdapter = new SpinnerWithCheckBoxAdapter(ServicesAdd_Activity.this, 0,
                 listVOs);
-        Spinnercities.setAdapter(myAdapter);
+        Spinnercities.setAdapter(myAdapter);*/
 
 
-        ArrayAdapter cityadapter = new ArrayAdapter<>(ServicesAdd_Activity.this, android.R.layout.simple_spinner_dropdown_item, items1);
-        Spinnerstates.setAdapter(cityadapter);
-        Spinnerstates.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+      /*  ArrayAdapter cityadapter = new ArrayAdapter<>(ServicesAdd_Activity.this, android.R.layout.simple_spinner_dropdown_item, items1);
+        Spinnerstates.setAdapter(cityadapter);*/
+       /* Spinnerstates.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Citywisestate = items1[i];
@@ -242,7 +282,7 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
             public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
-        });
+        });*/
 
 
 
@@ -346,6 +386,10 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
                 gStateLayout.setVisibility(View.GONE);
                 gCitylayout.setVisibility(View.VISIBLE);
                 gRadiusLayout.setVisibility(View.GONE);
+
+
+
+                getStates_List();
 
             }
         });
@@ -472,6 +516,21 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
                // startActivity(new Intent(ServicesAdd_Activity.this,ServicePersonHome_Activity.class));
             }}
         });
+
+
+              /*gCountry_Spinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                                int item = gCountry_Spinner.getSelectedItemPosition();
+                                if (!gCountry_Spinner.getSelectedItem().toString().equals("Select Category")) {
+                                    String gCountry_Id= gGetCountry_ArrayList.get(item).getCountry_ID();
+
+                                    Toast.makeText(ServicesAdd_Activity.this,gCountry_Id,Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });*/
+
     }  //On Create close
 
 
@@ -820,4 +879,355 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
         subService_List(serviceid);
 
     }
+
+//Getting Country List
+    private void getCountry_List() {
+
+        try {
+            progress.show();
+            OkHttpClient.Builder client = new OkHttpClient.Builder();
+            HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
+            registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            client.addInterceptor(registrationInterceptor);
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(Constants.BASE_URL)
+                    .client(client.build())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+
+            ApiInterface request = retrofit.create(ApiInterface.class);
+            GetListofCountry_Request lGetListofCountry_Request= new GetListofCountry_Request();
+
+            lGetListofCountry_Request.setDocket(Constants.TOKEN);
+            lGetListofCountry_Request.setUser_ID("1");
+
+            Call<GetListofCountry_Response> call = request.Get_CountryList(lGetListofCountry_Request);
+            call.enqueue(new Callback<GetListofCountry_Response>() {
+                @Override
+                public void onResponse(Call<GetListofCountry_Response> call, Response<GetListofCountry_Response> response) {
+                    if (response.isSuccessful()) {
+
+
+                        GetListofCountry_Response lGetListofCountry_Response = response.body();
+                        gCountry_Spinner.setVisibility(View.VISIBLE);
+                        gGetCountry_ArrayList = new ArrayList<>(Arrays.asList(lGetListofCountry_Response.getGet_country_list_response()));
+                        System.out.println("Arrayfrom Db Size is  " + gGetCountry_ArrayList.size());
+                        gCountryArrayList=new ArrayList<>();
+                        gCountryArrayList.add(0,getResources().getString(R.string.selectcountry));
+                        gCountryID_ArrayList.add(0,getResources().getString(R.string.selectcountryid));
+                        for(int i=0;i<gGetCountry_ArrayList.size();i++){
+
+
+                            gCountryArrayList.add(1,gGetCountry_ArrayList.get(i).getCountry_Name());
+                            gCountryID_ArrayList.add(1,gGetCountry_ArrayList.get(i).getCountry_ID());
+
+                        }
+                        System.out.println("Country arraylist size is " + gGetCountry_ArrayList.get(0).getCountry_Name());
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(ServicesAdd_Activity.this, android.R.layout.simple_spinner_dropdown_item, gCountryArrayList);
+                        //set the spinners adapter to the previously created one.
+                        gCountry_Spinner.setAdapter(adapter);
+
+
+                        gCountry_Spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                                int item = gCountry_Spinner.getSelectedItemPosition();
+                                gCountry_Spinner.setSelection(item, false);
+                                if (!gCountry_Spinner.getSelectedItem().toString().equals(getResources().getString(R.string.selectcountry))) {
+                                  String  gSelectedCategoryId = gCountryID_ArrayList.get(item);
+
+                                    Toast.makeText(ServicesAdd_Activity.this,gSelectedCategoryId,Toast.LENGTH_SHORT).show();
+                                }
+
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> adapterView) {
+
+                            }
+                        });
+
+
+
+             //With Hint
+               /*         for(int i=0;i<gGetCountry_ArrayList.size();i++) {
+
+                            //     System.out.println("From DB Country arraylist size is " + gGetCountry_ArrayList.size());
+
+
+                            gCountryArrayList.add(0, gGetCountry_ArrayList.get(0).getSelectcountryhint());
+                          //  gCountryID_ArrayList.add(0, gGetCountry_ArrayList.get(0).getCountry_ID());
+
+
+                            for (int j = 0; j <= i; j++) {
+
+                                gCountryArrayList.add(1, gGetCountry_ArrayList.get(j).getCountry_Name());
+                                //gCountryID_ArrayList.add(1, gGetCountry_ArrayList.get(j).getCountry_ID());
+
+
+                            }
+                        }
+                            System.out.println("Country arraylist size is " + gCountryArrayList.size());
+                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(ServicesAdd_Activity.this, android.R.layout.simple_spinner_dropdown_item, gCountryArrayList);
+                            //set the spinners adapter to the previously created one.
+                            gCountry_Spinner.setAdapter(adapter);
+*/
+
+
+
+
+
+
+
+
+
+
+
+                        progress.dismiss();
+
+                    }
+
+                    progress.dismiss();
+                }
+
+                @Override
+                public void onFailure(Call<GetListofCountry_Response> call, Throwable t) {
+                    System.out.println("In User Login Method 7");
+                    progress.dismiss();
+                }
+            });
+        }catch (Exception e) {
+            progress.dismiss();
+            e.printStackTrace();
+
+
+        }
+
+    }
+
+    //Getting State List
+
+    private void getStates_List() {
+
+        try {
+            progress.show();
+            OkHttpClient.Builder client = new OkHttpClient.Builder();
+            HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
+            registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            client.addInterceptor(registrationInterceptor);
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(Constants.BASE_URL)
+                    .client(client.build())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+
+            ApiInterface request = retrofit.create(ApiInterface.class);
+            GetStateList_Request lGetStateList_Request= new GetStateList_Request();
+
+            lGetStateList_Request.setDocket(Constants.TOKEN);
+            lGetStateList_Request.setUser_ID("1");
+            lGetStateList_Request.setCountry_ID("1");
+
+            Call<GetStateList_Response> call = request.Get_StatesList(lGetStateList_Request);
+            call.enqueue(new Callback<GetStateList_Response>() {
+                @Override
+                public void onResponse(Call<GetStateList_Response> call, Response<GetStateList_Response> response) {
+                    if (response.isSuccessful()) {
+
+
+                        GetStateList_Response lGetStateList_Response = response.body();
+
+                        gGetStates_ArrayList = new ArrayList<>(Arrays.asList(lGetStateList_Response.getGet_states_list_response()));
+
+
+                        gStateArrayList=new ArrayList<>();
+                        gStateArrayList.add(0,getResources().getString(R.string.selectstate));
+                        gStateID_ArrayList.add(0,getResources().getString(R.string.selectstateid));
+                        for(int i=0;i<gGetStates_ArrayList.size();i++){
+
+
+                            gStateArrayList.add(1,gGetStates_ArrayList.get(i).getState_Name());
+                            gStateID_ArrayList.add(1,gGetStates_ArrayList.get(i).getState_ID());
+
+                        }
+
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(ServicesAdd_Activity.this, android.R.layout.simple_spinner_dropdown_item, gStateArrayList);
+                        //set the spinners adapter to the previously created one.
+                        Spinnerstates.setAdapter(adapter);
+
+
+                        Spinnerstates.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                                int item = Spinnerstates.getSelectedItemPosition();
+                                Spinnerstates.setSelection(item, false);
+                                if (!Spinnerstates.getSelectedItem().toString().equals(getResources().getString(R.string.selectstate))) {
+                                    String  gSelectedStatesId = gStateID_ArrayList.get(item);
+
+                                    Toast.makeText(ServicesAdd_Activity.this,gSelectedStatesId,Toast.LENGTH_SHORT).show();
+
+                                    getCities_List(gSelectedStatesId);
+                                }
+
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> adapterView) {
+
+                            }
+                        });
+
+
+
+                        progress.dismiss();
+
+                    }
+
+                    progress.dismiss();
+                }
+
+                @Override
+                public void onFailure(Call<GetStateList_Response> call, Throwable t) {
+                    System.out.println("In User Login Method 7");
+                    progress.dismiss();
+                }
+            });
+        }catch (Exception e) {
+            progress.dismiss();
+            e.printStackTrace();
+
+
+        }
+
+    }
+
+    //Get City List
+    private void getCities_List(String StateId) {
+
+        try {
+            progress.show();
+            OkHttpClient.Builder client = new OkHttpClient.Builder();
+            HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
+            registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            client.addInterceptor(registrationInterceptor);
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(Constants.BASE_URL)
+                    .client(client.build())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+
+            ApiInterface request = retrofit.create(ApiInterface.class);
+            GetCityList_Request lGetStateList_Request= new GetCityList_Request();
+
+            lGetStateList_Request.setDocket(Constants.TOKEN);
+            lGetStateList_Request.setUser_ID("1");
+            lGetStateList_Request.setState_ID(StateId);
+
+            Call<GetCityList_Response> call = request.Get_CityList(lGetStateList_Request);
+            call.enqueue(new Callback<GetCityList_Response>() {
+                @Override
+                public void onResponse(Call<GetCityList_Response> call, Response<GetCityList_Response> response) {
+                    if (response.isSuccessful()) {
+
+
+                        GetCityList_Response lGetCityList_Response = response.body();
+
+                        gGetCities_ArrayList = new ArrayList<>(Arrays.asList(lGetCityList_Response.getGet_cities_list_response()));
+if(!gGetCities_ArrayList.get(0).getCity_ID().equals("No Results Found")){
+
+    Spinnercities.setVisibility(View.VISIBLE);
+  //  gCities_NotFound.setVisibility(View.GONE);
+    gCityArrayList=new ArrayList<>();
+    gCityArrayList.add(0,getResources().getString(R.string.selectcity));
+    gCityID_ArrayList.add(0,getResources().getString(R.string.selectcityid));
+    for(int i=0;i<gGetCities_ArrayList.size();i++){
+
+
+        gCityArrayList.add(1,gGetCities_ArrayList.get(i).getCity_Name());
+        gCityID_ArrayList.add(1,gGetCities_ArrayList.get(i).getState_ID());
+
+    }
+
+
+
+    ArrayList<spinnerData> listVOs = new ArrayList<>();
+    for (int i = 0; i < gCityArrayList.size(); i++) {
+        spinnerData stateVO = new spinnerData();
+        stateVO.setTitle(gCityArrayList.get(i).toString());
+
+        System.out.println("City Name is " + gCityArrayList.get(i).toString());
+        stateVO.setSelected(false);
+        listVOs.add(stateVO);
+    }
+
+
+    myAdapter = new SpinnerWithCheckBoxAdapter(ServicesAdd_Activity.this, 0,
+            listVOs);
+    Spinnercities.setAdapter(myAdapter);
+
+
+
+    Spinnercities.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+            int item = Spinnercities.getSelectedItemPosition();
+            Spinnercities.setSelection(item, false);
+            if (!Spinnercities.getSelectedItem().toString().equals(getResources().getString(R.string.selectcity))) {
+                String  gSelectedCitiesId = gCityID_ArrayList.get(item);
+
+                Toast.makeText(ServicesAdd_Activity.this,gSelectedCitiesId,Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> adapterView) {
+
+        }
+    });
+
+
+
+
+}
+
+else {
+  //  Spinnercities.setVisibility(View.GONE);
+   // gCities_NotFound.setVisibility(View.VISIBLE);
+    Toast.makeText(ServicesAdd_Activity.this,"No Cities Found",Toast.LENGTH_SHORT).show();
+
+
+}
+
+
+
+
+                        progress.dismiss();
+
+                    }
+
+                    progress.dismiss();
+                }
+
+                @Override
+                public void onFailure(Call<GetCityList_Response> call, Throwable t) {
+                    System.out.println("In User Login Method 7");
+                    progress.dismiss();
+                }
+            });
+        }catch (Exception e) {
+            progress.dismiss();
+            e.printStackTrace();
+
+
+        }
+
+    }
+
 }

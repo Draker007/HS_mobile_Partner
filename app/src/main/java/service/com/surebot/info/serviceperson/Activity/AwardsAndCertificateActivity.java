@@ -21,6 +21,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -28,6 +30,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import okhttp3.MediaType;
@@ -40,12 +43,16 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import service.com.surebot.info.serviceperson.Adapter.AddAwardsAdapter;
+import service.com.surebot.info.serviceperson.Adapter.GetAwardsDettailsAdapter;
 import service.com.surebot.info.serviceperson.Adapter.awardsAdapter;
 import service.com.surebot.info.serviceperson.ApiClient.ApiInterface;
 import service.com.surebot.info.serviceperson.Constants.Constants;
 import service.com.surebot.info.serviceperson.DataFiles.awardsData;
 import service.com.surebot.info.serviceperson.R;
+import service.com.surebot.info.serviceperson.RequestClass.GetAwardsDetails_Request;
 import service.com.surebot.info.serviceperson.ResponseClass.Awards_and_CertificateResponse;
+import service.com.surebot.info.serviceperson.ResponseClass.GetAwardsDetails_Response;
 import service.com.surebot.info.serviceperson.utils.AppicationClass;
 
 public class AwardsAndCertificateActivity extends AppCompatActivity implements awardsAdapter.onAwardsListner {
@@ -58,9 +65,27 @@ public class AwardsAndCertificateActivity extends AppCompatActivity implements a
     int i=0;
     List<awardsData> awardsDatas2 = new ArrayList<>();
     List<awardsData> awardsDatas = new ArrayList<>();
+    List<awardsData> newAwardList = new ArrayList<>();
     List<String> Awards = new ArrayList<>();
     ArrayList<String>AwardsUP=new ArrayList<>();
     ConstraintLayout back;
+
+    ArrayList<GetAwardsDetails_Response.GetAwards_Details> gGetAwordsDetails_ImagesList;
+    public static final String CustomGalleryIntentKey = "ImageArray";
+
+    private int GALLERY = 1, CAMERA = 2;
+    String selectedImage_path=null;
+
+    private static final int REQUEST_WRITE_PERMISSION = 100;
+
+    private static final int CustomGallerySelectId = 1;
+
+    int PICK_IMAGE_MULTIPLE = 1;
+
+
+
+
+    ArrayList<String> imagesList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,41 +110,77 @@ public class AwardsAndCertificateActivity extends AppCompatActivity implements a
                 onBackPressed();
             }
         });
+
+
         camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent, 1);
+                AppicationClass.getAwardsDetails.clear();
+                takePhotoFromCamera();
 
             }
         });
         gallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent, 2);
+                AppicationClass.getAwardsDetails.clear();
+
+
+                choosePhotoFromGallary();
             }
         });
+
+
+
 
       save.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
-              awardsDatas2 = adapter.retrieveData();
-              if(Awards.isEmpty()){
-                  Toast.makeText(AwardsAndCertificateActivity.this, "Select Image or click picture", Toast.LENGTH_SHORT).show();
-              }else{
-                  Log.e("Draker", "onClick: "+Awards.size());
 
-              Log.e("lol", "onCreate: "+awardsDatas2.get(0).getText() );
-              //TODO have to clean Array List AwardUP after calling upload api
-              award_and_certificate_photos_API();
+
+              ArrayList<String> addAwardsDetails =new ArrayList<>();
+
+              addAwardsDetails= AppicationClass.getAddAwardsDetails();
+
+              System.out.println("Awards Details Arraylist size is " +AppicationClass.getAddAwardsDetails());
+              awardsDatas2 = adapter.retrieveData();
+
+              System.out.println("In Save Button arraylist sizes are " + imagesList.size() + AppicationClass.getAddAwardsDetails().size());
+              if(imagesList.size()>0){
+
+                  //TODO have to clean Array List AwardUP after calling upload api
+                 award_and_certificate_photos_API();
+
+              }
+              else{
+
+                  Toast.makeText(AwardsAndCertificateActivity.this, "Select Image or click picture", Toast.LENGTH_SHORT).show();
 
 
           }
           }
 
       });
+
+
+        getAwards_Images();
+
+    }  //On Create Close
+
+    public void choosePhotoFromGallary() {
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        // galleryIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+        startActivityForResult(galleryIntent, GALLERY);
     }
+
+    private void takePhotoFromCamera() {
+        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, CAMERA);
+
+    }
+
+
 
     private void award_and_certificate_photos_API() {
         try {
@@ -141,23 +202,70 @@ public class AwardsAndCertificateActivity extends AppCompatActivity implements a
 
             ApiInterface request = retrofit.create(ApiInterface.class);
 
-            builder.addFormDataPart("User_ID", AppicationClass.getUserId_FromLogin());
+            builder.addFormDataPart("User_ID","1");
 
             builder.addFormDataPart("docket",Constants.TOKEN);
 
-            Log.e("draker", "award_and_certificate_photos_API: "+awardsDatas2 );
-        for(int o = 0;o<Awards.size();o++){
+      /*  for(int o = 0;o<Awards.size();o++){
 
             File AddressFront = new File(Awards.get(o));
 //                AddressFront.getName().replace(" ", "s");
             //Log.e("Draker", "IdentityVeriafy: 1"+AddressFront );
-            Log.e("Draker", "IdentityVerify: 1"+awardsDatas2 );
+
+            System.out.println("Description array in Add  " + awardsDatas2.get(o).getText());
             builder.addFormDataPart("FirstImage[]", AddressFront.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), AddressFront));
-if(awardsDatas2.get(o).getText()==null){
-    builder.addFormDataPart("Document_Description[]","");
-}else {
-    builder.addFormDataPart("Document_Description[]", awardsDatas2.get(o).getText());
-}       }
+                if(awardsDatas2.get(o).getText()==null){
+
+                    System.out.println("In Awards Description entering into iffffffff");
+                    builder.addFormDataPart("Document_Description[]","");
+                }
+                else {
+                    System.out.println("In Awards Description entering into elseeeeeeeee");
+                   builder.addFormDataPart("Document_Description[]", awardsDatas2.get(o).getText());
+
+                }
+
+
+            System.out.println("In Awards Description entering into for");
+
+        }*/
+
+            if (AppicationClass.getAddAwardsDetails().size() > 0) {
+                for (int i = 0; i < AppicationClass.getAddAwardsDetails().size(); i++) {
+                    builder.addFormDataPart("Document_Description[]", AppicationClass.getAddAwardsDetails().get(i));
+
+                }
+            }
+
+      System.out.println("in Add Method Entrting into request " + imagesList.size() + " and " + AppicationClass.getAddAwardsDetails().size());
+//Awards Images
+            if (imagesList.size() > 0) {
+
+
+                for (int i = 0; i < imagesList.size(); i++) {
+                    System.out.println("in Add Method Entrting into first If " + imagesList.get(i));
+
+                    File AddAwardsList = new File(imagesList.get(i));
+                    builder.addFormDataPart("FirstImage[]", AddAwardsList.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), AddAwardsList));
+                }
+            }
+
+            //Award Details Text
+/*
+            if (AppicationClass.getAddAwardsDetails().size() > 0) {
+
+                for (int i = 0; i < AppicationClass.getAddAwardsDetails().size(); i++) {
+
+                    System.out.println("in Add Method Entrting into Second If " + AppicationClass.getAddAwardsDetails().get(i));
+
+                    File AddAwardsDetailsList = new File(AppicationClass.getAddAwardsDetails().get(i));
+
+                    System.out.println("Awards Details is " + AppicationClass.getAddAwardsDetails().get(i) );
+                    builder.addFormDataPart("Document_Description", AddAwardsDetailsList.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), AddAwardsDetailsList));
+
+                }
+            }*/
+
             MultipartBody requestBody = builder.build();
             Call<Awards_and_CertificateResponse> call = request.AwardsAndCertificate(requestBody);
             call.enqueue(new Callback<Awards_and_CertificateResponse>() {
@@ -223,7 +331,116 @@ if(awardsDatas2.get(o).getText()==null){
         return path;
     }
 
+
+
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == AwardsAndCertificateActivity.this.RESULT_CANCELED) {
+            return;
+        }
+        if (requestCode == GALLERY) {
+            if (data != null) {
+               /* Uri contentURI = data.getData();
+
+                String galaryiamge = String.valueOf(data.getData());
+                Glide.with(UserPlacerOrderforMedicine_Activity.this).load(galaryiamge).into(gSelected_image);
+                selectedImage_path= "/storage/emulated/0/DCIM/Camera/sub1.png";
+                System.out.println("Image path in Order by prescription is"+galaryiamge);
+                try {
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(UserPlacerOrderforMedicine_Activity.this.getContentResolver(), contentURI);
+                    // String path = saveImage(bitmap);
+
+                    //    Glide.with(getActivity()).load(path).into(gSelected_image);
+                    Toast.makeText(UserPlacerOrderforMedicine_Activity.this, "Image Saved!", Toast.LENGTH_SHORT).show();
+                    //gSelected_image.setImageBitmap(bitmap);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Toast.makeText(UserPlacerOrderforMedicine_Activity.this, "Failed!", Toast.LENGTH_SHORT).show();
+                }
+*/
+
+
+
+
+
+                Uri selectedImage = data.getData();
+                String[] filePathColumn = {MediaStore.Images.Media.DATA};
+
+                Cursor cursor = getContentResolver().query(selectedImage,
+                        filePathColumn, null, null, null);
+                cursor.moveToFirst();
+
+                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                selectedImage_path = cursor.getString(columnIndex);
+                imagesList.add(selectedImage_path);
+                AddAwardsAdapter imageListAdapter = new AddAwardsAdapter(AwardsAndCertificateActivity.this,imagesList,false);
+                // gImagefromGallery_Path =("/storage/emulated/0/DCIM/Camera/sub1.png");
+                r1.setVisibility(View.VISIBLE);
+                r1.setAdapter(imageListAdapter);
+
+
+                cursor.close();
+
+
+            }
+
+        }
+
+      /*  if (requestCode == GALLERY && resultCode == RESULT_OK && null != data) {
+            String imagesArray = data.getStringExtra(CustomGalleryIntentKey);
+            //   selectedImages = new ArrayList<>();
+
+            imagefile.addAll(Arrays.asList(imagesArray.replaceAll("-","_").substring(1, imagesArray.length() - 1).split(", ")));
+
+            System.out.println("Selected sub activities imagefile size is" + imagefile.size());
+            loadImage();
+
+
+          *//*  if(imagefile.size()>0) {
+                loadImage();
+            }
+            else {
+                gMultipleImage.setVisibility(View.VISIBLE);
+            }*//*
+
+        }*/
+        else if (requestCode == CAMERA) {
+            Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+           // Glide.with(AwardsAndCertificateActivity.this).load( data.getExtras().get("data")).into(gSelected_image);
+
+            //gSelected_image.setImageBitmap(thumbnail);
+            // saveImage(thumbnail);
+            Toast.makeText(AwardsAndCertificateActivity.this, "Image Saved!", Toast.LENGTH_SHORT).show();
+
+            Uri tempUri = getImageUri(getApplicationContext(), thumbnail);
+
+            // CALL THIS METHOD TO GET THE ACTUAL PATH
+            File finalFile = new File(getRealPathFromURI(tempUri));
+
+            selectedImage_path =finalFile.getPath();
+
+            imagesList.add(selectedImage_path);
+            AddAwardsAdapter imageListAdapter = new AddAwardsAdapter(AwardsAndCertificateActivity.this,imagesList,false);
+            // gImagefromGallery_Path =("/storage/emulated/0/DCIM/Camera/sub1.png");
+            r1.setVisibility(View.VISIBLE);
+            r1.setAdapter(imageListAdapter);
+
+        /*    gPreferences_layout.setVisibility(View.VISIBLE);
+            imagesList.add(selectedImage_path);
+            ImageListAdapter imageListAdapter = new ImageListAdapter(UserPlacerOrderforMedicine_Activity.this,imagesList);
+            // gImagefromGallery_Path =("/storage/emulated/0/DCIM/Camera/sub1.png");
+
+            grecyclerview_emptyimages.setAdapter(imageListAdapter);
+            System.out.println("Image Url From Camera is"+finalFile.getPath());*/
+        }
+    }
+
+
+
+    /*@Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
@@ -245,7 +462,9 @@ if(awardsDatas2.get(o).getText()==null){
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            } else if (requestCode == 2) {
+            }
+
+            else if (requestCode == 2) {
                 Log.e("image", "onActivityResult: " );
                 Uri selectedImage = data.getData();
                 String[] filePath = {MediaStore.Images.Media.DATA};
@@ -262,13 +481,104 @@ if(awardsDatas2.get(o).getText()==null){
                 awardsDatas.add(a);
                 r1.setAdapter(adapter);
 
+
+
+
             }
 
             }
-        }
+        }*/
 
     @Override
     public void onAwardsClick(int position) {
+
+    }
+
+
+
+
+    //Get Awards and Certificates
+
+    private void getAwards_Images() {
+
+        try {
+            progress.show();
+            OkHttpClient.Builder client = new OkHttpClient.Builder();
+            HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
+            registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            client.addInterceptor(registrationInterceptor);
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(Constants.BASE_URL)
+                    .client(client.build())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+
+            ApiInterface request = retrofit.create(ApiInterface.class);
+            GetAwardsDetails_Request lGetAwardsDetails_Request = new GetAwardsDetails_Request();
+
+            lGetAwardsDetails_Request.setDocket(Constants.TOKEN);
+            lGetAwardsDetails_Request.setUser_ID("1");
+
+            Call<GetAwardsDetails_Response> call = request.Get_AwardsDetails(lGetAwardsDetails_Request);
+            call.enqueue(new Callback<GetAwardsDetails_Response>() {
+                @Override
+                public void onResponse(Call<GetAwardsDetails_Response> call, Response<GetAwardsDetails_Response> response) {
+                    if (response.isSuccessful()) {
+
+
+                        GetAwardsDetails_Response lGetAwardsDetails_Response = response.body();
+
+                        gGetAwordsDetails_ImagesList = new ArrayList<>(Arrays.asList(lGetAwardsDetails_Response.getGet_award_and_certificate_photos_details_response()));
+
+                        if(!gGetAwordsDetails_ImagesList.get(0).getID().equals("No Results Found")){
+
+
+                            ArrayList<String> imagesList = new ArrayList<>();
+                            AppicationClass.getAwardsDetails.add("");
+                            AppicationClass.getAwardsDetails.clear();
+                            System.out.println("Award Details Description Size " + gGetAwordsDetails_ImagesList.size());
+
+                            for(int i=0;i<gGetAwordsDetails_ImagesList.size();i++){
+                                AppicationClass.getAwardsDetails.add("");
+                                imagesList.add(gGetAwordsDetails_ImagesList.get(i).getDocument_Name());
+                                System.out.println("Award Details Description Size "+ i + gGetAwordsDetails_ImagesList.get(i).getDocument_Description());
+
+                               AppicationClass.getAwardsDetails.set(i,gGetAwordsDetails_ImagesList.get(i).getDocument_Description());
+
+                            }
+
+
+                            GetAwardsDettailsAdapter lGetAwardsDettailsAdapter = new GetAwardsDettailsAdapter(AwardsAndCertificateActivity.this,imagesList,false);
+                            // gImagefromGallery_Path =("/storage/emulated/0/DCIM/Camera/sub1.png");
+                            r1.setVisibility(View.VISIBLE);
+                            r1.setAdapter(lGetAwardsDettailsAdapter);
+
+
+
+
+
+                            progress.dismiss();
+                        }
+                        progress.dismiss();
+
+                    }
+
+                    progress.dismiss();
+                }
+
+                @Override
+                public void onFailure(Call<GetAwardsDetails_Response> call, Throwable t) {
+                    System.out.println("In User Login Method 7");
+                    progress.dismiss();
+                }
+            });
+        }catch (Exception e) {
+            progress.dismiss();
+            e.printStackTrace();
+
+
+        }
 
     }
 }

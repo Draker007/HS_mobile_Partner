@@ -12,6 +12,12 @@ import service.com.surebot.info.serviceperson.RequestClass.Category_List_Request
 import service.com.surebot.info.serviceperson.RequestClass.ChangePasswordRequest;
 import service.com.surebot.info.serviceperson.RequestClass.CustomerSupport_Request;
 import service.com.surebot.info.serviceperson.RequestClass.DeleteProfilePicRequest;
+import service.com.surebot.info.serviceperson.RequestClass.GetAddressProof_Request;
+import service.com.surebot.info.serviceperson.RequestClass.GetAwardsDetails_Request;
+import service.com.surebot.info.serviceperson.RequestClass.GetCityList_Request;
+import service.com.surebot.info.serviceperson.RequestClass.GetIdentityVerifications_Request;
+import service.com.surebot.info.serviceperson.RequestClass.GetListofCountry_Request;
+import service.com.surebot.info.serviceperson.RequestClass.GetStateList_Request;
 import service.com.surebot.info.serviceperson.RequestClass.ListOfServices_Request;
 import service.com.surebot.info.serviceperson.RequestClass.ListOfSubServices_Request;
 
@@ -41,11 +47,6 @@ import service.com.surebot.info.serviceperson.RequestClass.SubmitForApproval_Req
 import service.com.surebot.info.serviceperson.RequestClass.UpcomingRequestList_Request;
 
 
-import service.com.surebot.info.serviceperson.RequestClass.Send_otp_mail_Request;
-
-import service.com.surebot.info.serviceperson.RequestClass.UpcomingRequestList_Request;
-
-
 import service.com.surebot.info.serviceperson.ResponseClass.AboutUs_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Account_details_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.AddAboutme_Response;
@@ -60,6 +61,12 @@ import service.com.surebot.info.serviceperson.ResponseClass.CompletedRequestList
 import service.com.surebot.info.serviceperson.ResponseClass.CustomerSupport_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.DeleteProfilePicResponse;
 import service.com.surebot.info.serviceperson.ResponseClass.EditPersonalPhotoResponse;
+import service.com.surebot.info.serviceperson.ResponseClass.GetAddressProof_Response;
+import service.com.surebot.info.serviceperson.ResponseClass.GetAwardsDetails_Response;
+import service.com.surebot.info.serviceperson.ResponseClass.GetCityList_Response;
+import service.com.surebot.info.serviceperson.ResponseClass.GetStateList_Response;
+import service.com.surebot.info.serviceperson.ResponseClass.GetIdentityVerifications_Response;
+import service.com.surebot.info.serviceperson.ResponseClass.GetListofCountry_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Identity_verification_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.ListOfServices_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.ListOfSubServices_Response;
@@ -89,11 +96,6 @@ import service.com.surebot.info.serviceperson.ResponseClass.SendQuotetoUser_Resp
 import service.com.surebot.info.serviceperson.ResponseClass.Send_otp_mail_Response;
 
 import service.com.surebot.info.serviceperson.ResponseClass.SubmitForApproval_Response;
-import service.com.surebot.info.serviceperson.ResponseClass.UpcomingRequestList_Response;
-
-
-
-import service.com.surebot.info.serviceperson.ResponseClass.Send_otp_mail_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.UpcomingRequestList_Response;
 
 public interface ApiInterface {
@@ -277,5 +279,33 @@ public interface ApiInterface {
     // Add About Us
     @POST("about_us")
     Call<AboutUs_Response> Get_AboutUs (@Body About_me_Request request);
+
+    //Getting Address Proof
+    @POST("get_address_proof_details")
+    Call<GetAddressProof_Response> Get_AddressProofImages (@Body GetAddressProof_Request request);
+
+//Getting Awards Details
+@POST("get_award_and_certificate_photos_details")
+Call<GetAwardsDetails_Response> Get_AwardsDetails (@Body GetAwardsDetails_Request request);
+
+//Getting Identity Verification Details
+@POST("get_identity_verification_details")
+Call<GetIdentityVerifications_Response> Get_IdentityVerifications (@Body GetIdentityVerifications_Request request);
+
+//Location Things
+
+    //Get List Of Country
+    @POST("get_country_list")
+    Call<GetListofCountry_Response> Get_CountryList (@Body GetListofCountry_Request request);
+
+    //Get List Of States
+    @POST("get_states_list")
+    Call<GetStateList_Response> Get_StatesList (@Body GetStateList_Request request);
+
+
+    //Get List Of Cities
+
+    @POST("get_cities_list")
+    Call<GetCityList_Response> Get_CityList (@Body GetCityList_Request request);
 
 }

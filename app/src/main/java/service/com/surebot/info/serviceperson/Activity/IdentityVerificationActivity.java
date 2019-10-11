@@ -33,6 +33,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -49,6 +51,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import service.com.surebot.info.serviceperson.ApiClient.ApiInterface;
 import service.com.surebot.info.serviceperson.Constants.Constants;
 import service.com.surebot.info.serviceperson.R;
+import service.com.surebot.info.serviceperson.RequestClass.GetIdentityVerifications_Request;
+import service.com.surebot.info.serviceperson.ResponseClass.GetAwardsDetails_Response;
+import service.com.surebot.info.serviceperson.ResponseClass.GetIdentityVerifications_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Identity_verification_Response;
 import service.com.surebot.info.serviceperson.utils.AppicationClass;
 
@@ -66,6 +71,9 @@ public class IdentityVerificationActivity extends AppCompatActivity {
     String front1="" ,back1="";
     int i,j;
     private Dialog progress;
+
+    ArrayList<GetIdentityVerifications_Response.GetIdentityVerifications_Details> gGetIdentityVerifications_ImagesList;
+    ArrayAdapter<String> adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,13 +87,18 @@ public class IdentityVerificationActivity extends AppCompatActivity {
         progress.setCancelable(true);
          items = new String[]{"* Select your ID Proof ","Adhar Card", "Driving License", "Registration Certificate","Voter_ID"};
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+      adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
 
         dropdown.setAdapter(adapter);
       //  android.widget.ListPopupWindow popupWindow = (android.widget.ListPopupWindow) popup.get(spinner);
         Initialize();
         listner();
-    }
+
+
+        getAwards_Images();
+
+
+    }  //OnCreate Close
 
     private void listner() {
         goback.setOnClickListener(new View.OnClickListener() {
@@ -118,6 +131,8 @@ public class IdentityVerificationActivity extends AppCompatActivity {
                 Glide.with(IdentityVerificationActivity.this).load(R.drawable.emptyprofile_image).into(back);
                 front1="";
                 j=position;
+
+
             }
 
             @Override
@@ -166,8 +181,8 @@ public class IdentityVerificationActivity extends AppCompatActivity {
                     .build();
 
             ApiInterface request = retrofit.create(ApiInterface.class);
-
-            builder.addFormDataPart("User_ID", AppicationClass.getUserId_FromLogin());
+//AppicationClass.getUserId_FromLogin()
+            builder.addFormDataPart("User_ID", "1");
             builder.addFormDataPart("Document_Category_ID", String.valueOf(j));
             builder.addFormDataPart("docket",Constants.TOKEN);
             Log.e("Draker", "IdentityVerify: 0"+String.valueOf(j) );
@@ -343,6 +358,76 @@ public class IdentityVerificationActivity extends AppCompatActivity {
 
             }
         }
+    }
+
+    //Get Added Identity Details
+
+    private void getAwards_Images() {
+
+        try {
+            progress.show();
+            OkHttpClient.Builder client = new OkHttpClient.Builder();
+            HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
+            registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            client.addInterceptor(registrationInterceptor);
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(Constants.BASE_URL)
+                    .client(client.build())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+
+            ApiInterface request = retrofit.create(ApiInterface.class);
+            GetIdentityVerifications_Request lGetIdentityVerifications_Request = new GetIdentityVerifications_Request();
+
+            lGetIdentityVerifications_Request.setDocket(Constants.TOKEN);
+            lGetIdentityVerifications_Request.setUser_ID("1");
+
+            Call<GetIdentityVerifications_Response> call = request.Get_IdentityVerifications(lGetIdentityVerifications_Request);
+            call.enqueue(new Callback<GetIdentityVerifications_Response>() {
+                @Override
+                public void onResponse(Call<GetIdentityVerifications_Response> call, Response<GetIdentityVerifications_Response> response) {
+                    if (response.isSuccessful()) {
+
+
+                        GetIdentityVerifications_Response lGetIdentityVerifications_Response = response.body();
+
+                        gGetIdentityVerifications_ImagesList = new ArrayList<>(Arrays.asList(lGetIdentityVerifications_Response.getGet_identity_verification_details_response()));
+
+                        if(!gGetIdentityVerifications_ImagesList.get(0).getID().equals("No Results Found")){
+
+
+                            Glide.with(IdentityVerificationActivity.this).load(Constants.IMAGEBASE_URL+gGetIdentityVerifications_ImagesList.get(0).getDocument_Name()).into(front);
+                            Glide.with(IdentityVerificationActivity.this).load(Constants.IMAGEBASE_URL+gGetIdentityVerifications_ImagesList.get(1).getDocument_Name()).into(back);
+
+
+                            System.out.println("Identity Proofs are " + Constants.IMAGEBASE_URL+gGetIdentityVerifications_ImagesList.get(0).getDocument_Name() +"and" + Constants.IMAGEBASE_URL+gGetIdentityVerifications_ImagesList.get(1).getDocument_Name());
+
+                            dropdown.setSelection(Integer.parseInt(gGetIdentityVerifications_ImagesList.get(0).getDocument_Category_ID()));
+
+                            progress.dismiss();
+
+                        }
+                        progress.dismiss();
+
+                    }
+
+                    progress.dismiss();
+                }
+
+                @Override
+                public void onFailure(Call<GetIdentityVerifications_Response> call, Throwable t) {
+                    System.out.println("In User Login Method 7");
+                    progress.dismiss();
+                }
+            });
+        }catch (Exception e) {
+            progress.dismiss();
+            e.printStackTrace();
+
+
+        }
+
     }
 
 }

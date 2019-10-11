@@ -1,6 +1,8 @@
 package service.com.surebot.info.serviceperson.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -29,6 +31,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import service.com.surebot.info.serviceperson.ApiClient.ApiInterface;
 import service.com.surebot.info.serviceperson.Constants.Constants;
+import service.com.surebot.info.serviceperson.Fragment.MyTask_Fragment;
 import service.com.surebot.info.serviceperson.Manager.CacheManager;
 import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.RequestClass.Partnerlogin_Request;
@@ -78,7 +81,9 @@ public class Login_Activity extends AppCompatActivity {
         gLogin_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              //  startActivity(new Intent(Login_Activity.this, ServicePersonHome_Activity.class));
+                /*startActivity(new Intent(Login_Activity.this, CreateProfileActivity.class));
+
+                finish();*/
 
                 if (!gUserName_Text.getText().toString().trim().equals("")) {
                     if (!gUserPassword_Text.getText().toString().trim().equals("")) {

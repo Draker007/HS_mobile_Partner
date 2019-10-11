@@ -63,6 +63,8 @@ public class PersonalDetailView extends AppCompatActivity {
     private Dialog progress;
 
     TextView address;
+
+    String gUser_Name,gUser_Address;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +90,8 @@ public class PersonalDetailView extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(PersonalDetailView.this,AddPersonalDetailsActivity.class);
                     intent.putExtra("image", imagePath);
+                    intent.putExtra("username",gUser_Name);
+                    intent.putExtra("useraddress",gUser_Address);
 
                 startActivity(intent);
 
@@ -100,7 +104,9 @@ public class PersonalDetailView extends AppCompatActivity {
         super.onBackPressed();
         Intent intent = new Intent(PersonalDetailView.this,ServicePersonHome_Activity.class);
         intent.putExtra("status","1");
-        startActivity(new Intent(PersonalDetailView.this,ServicePersonHome_Activity.class));
+        intent.putExtra("HomeScreenFlow","fromlogin");
+
+
         finish();
     }
 
@@ -137,6 +143,9 @@ public class PersonalDetailView extends AppCompatActivity {
 
                         ArrayList<PartnerProfileResponse.PartnerProfileRecords> partnerProfileRecords = new ArrayList<>(Arrays.asList(partnerProfileResponse.getPartner_profile_details()));
                         gName.setText(partnerProfileRecords.get(0).getUser_Name());
+
+                        gUser_Name = partnerProfileRecords.get(0).getUser_Name();
+
                         if(!partnerProfileRecords.get(0).getUser_Image_Path().equals("")) {
                             Glide.with(PersonalDetailView.this).load(partnerProfileRecords.get(0).getUser_Image_Path()).into(profileImage);
                         }
@@ -154,6 +163,7 @@ public class PersonalDetailView extends AppCompatActivity {
                             } else {
                                 gAddress.setTextColor(getResources().getColor(R.color.color_white));
                                 gAddress.setText(partnerProfileRecords.get(0).getUser_Full_Address());
+                                gUser_Address = partnerProfileRecords.get(0).getUser_Full_Address();
                             }
 
 

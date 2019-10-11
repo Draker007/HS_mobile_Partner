@@ -193,7 +193,10 @@ System.out.println("Converted Time is " +gNewservicesRequest_List.get(position).
                     AppicationClass.test1.clear();
                     communicator.addquotationlist(finalmapingIdList,finalPriceList,"1");
 
+
+
                 }else{
+                    System.out.println("Array list size in New " +finalmapingIdList.size() + finalPriceList.size());
                     Toast.makeText(context, "Please Fill Price For All Services Before Sending", Toast.LENGTH_SHORT).show();
 
                 }

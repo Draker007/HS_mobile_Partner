@@ -56,9 +56,11 @@ import service.com.surebot.info.serviceperson.ApiClient.ApiInterface;
 import service.com.surebot.info.serviceperson.Constants.Constants;
 import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.RequestClass.DeleteProfilePicRequest;
+import service.com.surebot.info.serviceperson.RequestClass.GetAddressProof_Request;
 import service.com.surebot.info.serviceperson.ResponseClass.Add_partner_personal_details_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.DeleteProfilePicResponse;
 import service.com.surebot.info.serviceperson.ResponseClass.EditPersonalPhotoResponse;
+import service.com.surebot.info.serviceperson.ResponseClass.GetAddressProof_Response;
 import service.com.surebot.info.serviceperson.utils.AppicationClass;
 
 public class AddPersonalDetailsActivity extends AppCompatActivity {
@@ -72,8 +74,8 @@ public class AddPersonalDetailsActivity extends AppCompatActivity {
     @BindView(R.id.AddDetailsBack)
     ConstraintLayout back;
 
-    @BindView(R.id.editName)
-    TextView name;
+    @BindView(R.id.username)
+    EditText gUsername;
 
     @BindView(R.id.editArea)
     TextView gArea;
@@ -101,6 +103,8 @@ public class AddPersonalDetailsActivity extends AppCompatActivity {
 
     private Dialog progress;
 
+    ArrayList<GetAddressProof_Response.GetAddressProof_Details> gGettAddressProof_ImagesList;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,7 +118,25 @@ public class AddPersonalDetailsActivity extends AppCompatActivity {
         images[1]=images[2]="0";
         initialize();
         listner();
+
+        getAddressProof_Images();
         String imagepath = getIntent().getStringExtra("image");
+
+        String UserName = getIntent().getStringExtra("username");
+
+        String UserAddress = getIntent().getStringExtra("useraddress");
+
+        if(UserAddress!=null){
+
+
+
+        }
+
+        System.out.println("In Add Address addres is " + UserAddress);
+
+
+        gUsername.setText(UserName);
+
         if (!imagepath.equals("")){
             Glide.with(AddPersonalDetailsActivity.this).load(Constants.IMAGEBASE_URL+imagepath).into(editImageProf);
         }
@@ -126,7 +148,7 @@ public class AddPersonalDetailsActivity extends AppCompatActivity {
         gSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!name.getText().toString().trim().isEmpty()) {
+                if (!gUsername.getText().toString().trim().isEmpty()) {
                     if (!gHouseno.getText().toString().trim().isEmpty()) {
                         if (!gStreet.getText().toString().trim().isEmpty()) {
                             if (!gArea.getText().toString().trim().isEmpty()) {
@@ -166,8 +188,8 @@ public class AddPersonalDetailsActivity extends AppCompatActivity {
                         gHouseno.requestFocus();
                     }
                 } else {
-                    name.setError("Enter Name");
-                    name.requestFocus();
+                    gUsername.setError("Enter Name");
+                    gUsername.requestFocus();
                 }
             }
 
@@ -369,8 +391,6 @@ public class AddPersonalDetailsActivity extends AppCompatActivity {
     }
 
 
-
-
     //Here Calling for API to Update Information
 
     public void addPersonaldetailsAPI(){
@@ -395,7 +415,7 @@ public class AddPersonalDetailsActivity extends AppCompatActivity {
             ApiInterface request = retrofit.create(ApiInterface.class);
 
             builder.addFormDataPart("User_ID", AppicationClass.getUserId_FromLogin());
-            builder.addFormDataPart("User_Name",name.getText().toString());
+            builder.addFormDataPart("User_Name",gUsername.getText().toString());
             builder.addFormDataPart("HouseNo", gHouseno.getText().toString());
             builder.addFormDataPart("Street", gStreet.getText().toString());
             builder.addFormDataPart("Area", gArea.getText().toString());
@@ -456,9 +476,6 @@ public class AddPersonalDetailsActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
-
-
 
     ////API for Profile image
         public void add_personal_photo(){
@@ -538,8 +555,7 @@ public class AddPersonalDetailsActivity extends AppCompatActivity {
 
         }
 
-
-// Delete Profile Pic API
+        // Delete Profile Pic API
 
     public void deleteProfilePic(){
 
@@ -607,5 +623,83 @@ public class AddPersonalDetailsActivity extends AppCompatActivity {
         }
 
     }
+
+    //Get Address Proof images
+    private void getAddressProof_Images() {
+
+        try {
+            progress.show();
+            OkHttpClient.Builder client = new OkHttpClient.Builder();
+            HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
+            registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            client.addInterceptor(registrationInterceptor);
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(Constants.BASE_URL)
+                    .client(client.build())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+
+            ApiInterface request = retrofit.create(ApiInterface.class);
+            GetAddressProof_Request lGetAddressProof_Request = new GetAddressProof_Request();
+
+            lGetAddressProof_Request.setDocket(Constants.TOKEN);
+            lGetAddressProof_Request.setUser_ID("1");
+
+            Call<GetAddressProof_Response> call = request.Get_AddressProofImages(lGetAddressProof_Request);
+            call.enqueue(new Callback<GetAddressProof_Response>() {
+                @Override
+                public void onResponse(Call<GetAddressProof_Response> call, Response<GetAddressProof_Response> response) {
+                    if (response.isSuccessful()) {
+
+
+                        GetAddressProof_Response lGetAddressProof_Response = response.body();
+
+                        gGettAddressProof_ImagesList = new ArrayList<>(Arrays.asList(lGetAddressProof_Response.getGet_address_proof_details_response()));
+
+                        if(!gGettAddressProof_ImagesList.get(0).getID().equals("No Results Found")){
+
+
+
+                if(gGettAddressProof_ImagesList.size()==1){
+                    System.out.println("Get Address Proof Images list iffffffffff " + gGettAddressProof_ImagesList.get(0).getDocument_Name() );
+                    Glide.with(AddPersonalDetailsActivity.this).load(Constants.IMAGEBASE_URL+gGettAddressProof_ImagesList.get(0).getDocument_Name()).into(frontproof);
+
+                }
+                else if(gGettAddressProof_ImagesList.size()==2){
+
+                    System.out.println("Get Address Proof Images list elseeeeee " + gGettAddressProof_ImagesList.get(1).getDocument_Name() );
+                    Glide.with(AddPersonalDetailsActivity.this).load(Constants.IMAGEBASE_URL+gGettAddressProof_ImagesList.get(0).getDocument_Name()).into(frontproof);
+                    Glide.with(AddPersonalDetailsActivity.this).load(Constants.IMAGEBASE_URL+gGettAddressProof_ImagesList.get(1).getDocument_Name()).into(backprof);
+
+                }
+
+
+
+
+                            progress.dismiss();
+                        }
+                        progress.dismiss();
+
+                    }
+
+                    progress.dismiss();
+                }
+
+                @Override
+                public void onFailure(Call<GetAddressProof_Response> call, Throwable t) {
+                    System.out.println("In User Login Method 7");
+                    progress.dismiss();
+                }
+            });
+        }catch (Exception e) {
+            progress.dismiss();
+            e.printStackTrace();
+
+
+        }
+
+    }
+
 
 }
