@@ -9,6 +9,7 @@ import android.media.Image;
 
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -109,6 +110,10 @@ public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.st
 
 
     Dialog gCancel_Dialog;
+
+
+    private static final String TAG = "MyTask_Fragment";
+    String gPackagebuyedIdResponse_FromApi;
 
     @SuppressLint("WrongConstant")
     @Override
@@ -318,7 +323,23 @@ public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.st
                 public void onResponse(Call<BuyPackage_Response> call, Response<BuyPackage_Response> response) {
                     if (response.isSuccessful()) {
                         System.out.println("asd1");
-                        BuyPackage_Response ListPackage = response.body();
+                        BuyPackage_Response ListPackageResponse = response.body();
+
+
+                        //For Success Full Response
+                        String text = ListPackageResponse.getBuy_partner_package_response();
+                        boolean digitsOnly = TextUtils.isDigitsOnly(text);
+                        if (digitsOnly) {
+                            if (text.length() == 0) {
+                                Log.e(TAG, "onResponse: was here length 0" );
+                            } else {
+                                gPackagebuyedIdResponse_FromApi = ListPackageResponse.getBuy_partner_package_response();
+                                Toast.makeText(getActivity(),"Package buyed successfuly",Toast.LENGTH_SHORT).show();
+
+
+                            }
+                        } else {
+                        }
 
 
 

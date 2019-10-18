@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import service.com.surebot.info.serviceperson.Activity.ServicesAdd_Activity;
 import service.com.surebot.info.serviceperson.R;
 
 public class RadiusAdapter extends RecyclerView.Adapter<RadiusAdapter.MyViewHolder> {
@@ -24,10 +25,13 @@ public class RadiusAdapter extends RecyclerView.Adapter<RadiusAdapter.MyViewHold
     ArrayList<String> km = new ArrayList<>();
     String TAG = "hihi";
 
-    public RadiusAdapter(Context context, ArrayList<String> zip, ArrayList<String> km) {
+    radiuslist_Communicator communicator;
+
+    public RadiusAdapter(ServicesAdd_Activity context, ArrayList<String> zip, ArrayList<String> km) {
         this.context = context;
         this.zip = zip;
         this.km = km;
+        this.communicator= context;
     }
 
     @NonNull
@@ -39,8 +43,15 @@ public class RadiusAdapter extends RecyclerView.Adapter<RadiusAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-holder.lRadiusKms.setText(km.get(position));
-holder.lZipCode.setText(zip.get(position));
+           holder.lRadiusKms.setText(km.get(position)+" Kms ");
+           holder.lZipCode.setText(zip.get(position));
+        holder.lRemoveText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                removeAt(position);
+            }
+        });
+
 
     }
 
@@ -50,14 +61,28 @@ holder.lZipCode.setText(zip.get(position));
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView lZipCode,lRadiusKms;
+        TextView lZipCode,lRadiusKms,lRemoveText;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             lZipCode = itemView.findViewById(R.id.zipCodetxt);
             lRadiusKms=itemView.findViewById(R.id.kmtxt);
-
+            lRemoveText=itemView.findViewById(R.id.removetxt);
 
         }
+    }
+
+
+    public interface radiuslist_Communicator {
+        void getradiuslist(String zipcode, String kms, int position);
+
+    }
+
+    public void removeAt(int position) {
+        zip.remove(position);
+        km.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, zip.size());
+        notifyItemRangeChanged(position, km.size());
     }
 }

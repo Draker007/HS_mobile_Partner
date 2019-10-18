@@ -78,4 +78,7 @@
     <string name="selectcityid">City Id</string>
 
     <string name="nocities">Cities not found</string>
+
+    <string name="zipcode_hint"><font size="14"> Enter Zip Code</font></string>
+
 </resources>

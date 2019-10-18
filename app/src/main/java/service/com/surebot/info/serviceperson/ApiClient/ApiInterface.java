@@ -6,6 +6,9 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 import service.com.surebot.info.serviceperson.RequestClass.Account_details_Request;
 import service.com.surebot.info.serviceperson.RequestClass.AddAboutme_Request;
+import service.com.surebot.info.serviceperson.RequestClass.AddLocationServicesbyCity_Request;
+import service.com.surebot.info.serviceperson.RequestClass.AddLocationServicesbyRadius_Request;
+import service.com.surebot.info.serviceperson.RequestClass.AddLocationServicesbyState_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Add_account_details_Request;
 import service.com.surebot.info.serviceperson.RequestClass.BuyPackage_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Category_List_Request;
@@ -13,11 +16,13 @@ import service.com.surebot.info.serviceperson.RequestClass.ChangePasswordRequest
 import service.com.surebot.info.serviceperson.RequestClass.CustomerSupport_Request;
 import service.com.surebot.info.serviceperson.RequestClass.DeleteProfilePicRequest;
 import service.com.surebot.info.serviceperson.RequestClass.GetAddressProof_Request;
+import service.com.surebot.info.serviceperson.RequestClass.GetAllZipCode_Request;
 import service.com.surebot.info.serviceperson.RequestClass.GetAwardsDetails_Request;
 import service.com.surebot.info.serviceperson.RequestClass.GetCityList_Request;
 import service.com.surebot.info.serviceperson.RequestClass.GetIdentityVerifications_Request;
 import service.com.surebot.info.serviceperson.RequestClass.GetListofCountry_Request;
 import service.com.surebot.info.serviceperson.RequestClass.GetStateList_Request;
+import service.com.surebot.info.serviceperson.RequestClass.GetZipcodeList_Request;
 import service.com.surebot.info.serviceperson.RequestClass.ListOfServices_Request;
 import service.com.surebot.info.serviceperson.RequestClass.ListOfSubServices_Request;
 
@@ -50,6 +55,9 @@ import service.com.surebot.info.serviceperson.RequestClass.UpcomingRequestList_R
 import service.com.surebot.info.serviceperson.ResponseClass.AboutUs_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Account_details_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.AddAboutme_Response;
+import service.com.surebot.info.serviceperson.ResponseClass.AddLocationServicesbyCity_Response;
+import service.com.surebot.info.serviceperson.ResponseClass.AddLocationServicesbyRadius_Response;
+import service.com.surebot.info.serviceperson.ResponseClass.AddLocationServicesbyState_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Add_account_details_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Add_partner_personal_details_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Awards_and_CertificateResponse;
@@ -62,11 +70,13 @@ import service.com.surebot.info.serviceperson.ResponseClass.CustomerSupport_Resp
 import service.com.surebot.info.serviceperson.ResponseClass.DeleteProfilePicResponse;
 import service.com.surebot.info.serviceperson.ResponseClass.EditPersonalPhotoResponse;
 import service.com.surebot.info.serviceperson.ResponseClass.GetAddressProof_Response;
+import service.com.surebot.info.serviceperson.ResponseClass.GetAllZipCode_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.GetAwardsDetails_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.GetCityList_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.GetStateList_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.GetIdentityVerifications_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.GetListofCountry_Response;
+import service.com.surebot.info.serviceperson.ResponseClass.GetZipcodeList_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Identity_verification_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.ListOfServices_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.ListOfSubServices_Response;
@@ -226,8 +236,6 @@ public interface ApiInterface {
 
 
 
-
-
     //4 Request Lists
 
       //New Request Lists
@@ -307,5 +315,31 @@ Call<GetIdentityVerifications_Response> Get_IdentityVerifications (@Body GetIden
 
     @POST("get_cities_list")
     Call<GetCityList_Response> Get_CityList (@Body GetCityList_Request request);
+
+    //Get List Of Zipcodes
+
+
+    @POST("get_zipcode")
+    Call<GetZipcodeList_Response> Get_ZipCodeList (@Body GetZipcodeList_Request request);
+
+    //Get All Zipcode According to Country
+    @POST("list_all_zipcode")
+    Call<GetAllZipCode_Response> Get_AllZipCodeList (@Body GetAllZipCode_Request request);
+
+
+    //Add Location and Services by Radius
+
+    @POST("partner_add_location_services_radius")
+    Call<AddLocationServicesbyRadius_Response> Add_LocationbyRadius (@Body AddLocationServicesbyRadius_Request request);
+
+    //Add Location and Services by City
+
+    @POST("partner_add_location_services_state_city")
+    Call<AddLocationServicesbyCity_Response> Add_LocationbyCity (@Body AddLocationServicesbyCity_Request request);
+
+    //Add Location and Services by City
+
+    @POST("partner_add_location_services_state")
+    Call<AddLocationServicesbyState_Response> Add_LocationbyState (@Body AddLocationServicesbyState_Request request);
 
 }

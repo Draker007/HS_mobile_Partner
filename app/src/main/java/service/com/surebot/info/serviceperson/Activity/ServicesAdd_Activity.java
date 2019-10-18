@@ -7,12 +7,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -41,20 +43,31 @@ import service.com.surebot.info.serviceperson.Adapter.AddSubServicesList_Adapter
 import service.com.surebot.info.serviceperson.Adapter.CityAdapter;
 import service.com.surebot.info.serviceperson.Adapter.RadiusAdapter;
 import service.com.surebot.info.serviceperson.Adapter.SpinnerWithCheckBoxAdapter;
+import service.com.surebot.info.serviceperson.Adapter.SpinnerWithCheckBoxStates_Adapter;
 import service.com.surebot.info.serviceperson.ApiClient.ApiInterface;
 import service.com.surebot.info.serviceperson.Constants.Constants;
 import service.com.surebot.info.serviceperson.R;
+import service.com.surebot.info.serviceperson.RequestClass.AddLocationServicesbyCity_Request;
+import service.com.surebot.info.serviceperson.RequestClass.AddLocationServicesbyRadius_Request;
+import service.com.surebot.info.serviceperson.RequestClass.AddLocationServicesbyState_Request;
+import service.com.surebot.info.serviceperson.RequestClass.GetAllZipCode_Request;
 import service.com.surebot.info.serviceperson.RequestClass.GetCityList_Request;
 import service.com.surebot.info.serviceperson.RequestClass.GetListofCountry_Request;
 import service.com.surebot.info.serviceperson.RequestClass.GetStateList_Request;
+import service.com.surebot.info.serviceperson.RequestClass.GetZipcodeList_Request;
 import service.com.surebot.info.serviceperson.RequestClass.ListOfServices_Request;
 import service.com.surebot.info.serviceperson.RequestClass.ListOfSubServices_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Partner_package_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Select_service_partner_Request;
 import service.com.surebot.info.serviceperson.RequestClass.SubmitForApproval_Request;
+import service.com.surebot.info.serviceperson.ResponseClass.AddLocationServicesbyCity_Response;
+import service.com.surebot.info.serviceperson.ResponseClass.AddLocationServicesbyRadius_Response;
+import service.com.surebot.info.serviceperson.ResponseClass.AddLocationServicesbyState_Response;
+import service.com.surebot.info.serviceperson.ResponseClass.GetAllZipCode_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.GetCityList_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.GetListofCountry_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.GetStateList_Response;
+import service.com.surebot.info.serviceperson.ResponseClass.GetZipcodeList_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.ListOfServices_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.ListOfSubServices_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Partner_package_Response;
@@ -63,7 +76,7 @@ import service.com.surebot.info.serviceperson.ResponseClass.SubmitForApproval_Re
 import service.com.surebot.info.serviceperson.utils.AppicationClass;
 import service.com.surebot.info.serviceperson.utils.spinnerData;
 
-public class ServicesAdd_Activity extends AppCompatActivity implements  AddServicesList_Adapter.serviceslist_Communicator {
+public class ServicesAdd_Activity extends AppCompatActivity implements  AddServicesList_Adapter.serviceslist_Communicator,RadiusAdapter.radiuslist_Communicator {
 
 
     @BindView(R.id.serviceslist_recyclerview)
@@ -109,14 +122,25 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
     TextView gPrimaryService;
 
 
-    @BindView(R.id.submitforapproval_button)
-    Button gSubmitforapproval_button;
+    @BindView(R.id.submitforapproval_button_radius)
+    Button gSubmitforapproval_button_Radius;
+
+    @BindView(R.id.submitforapproval_button_citywise)
+    Button gSubmitforapproval_button_Citywise;
+
+    @BindView(R.id.submitforapproval_button_statewise)
+    Button gSubmitforapproval_button_Statewise;
 
     @BindView(R.id.waitingforapproval_button)
     Button gWaitingforapproval_button;
 
     @BindView(R.id.spinner1)
     Spinner gCountry_Spinner ;
+
+    @BindView(R.id.selectionheadertext)
+    TextView gSelectionheadertext ;
+
+
 
    /* @BindView(R.id.nocitiesfound)
     TextView gCities_NotFound ;*/
@@ -128,9 +152,10 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
 
 
 
+    String  gSelectedCountryId;
 
     @BindView(R.id.StateSpinnerCheck)
-    Spinner states ;
+    Spinner gStates_withCheckbox ;
     ArrayList<String> gRadius = new ArrayList<>();
     ArrayList<String> gKms = new ArrayList<>();
     ArrayList<String> finalPriceList = new ArrayList<>();
@@ -160,10 +185,15 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
     ArrayList<String>  gCityArrayList;
     ArrayList<String> gCityID_ArrayList = new ArrayList<>();
 
+    //For ZipCodes
+    ArrayList<GetAllZipCode_Response.GetAllZipCode_Details> gGetZipcode_ArrayList;
+    ArrayList<String>  gZipCodeArrayList;
+    ArrayList<String> gZipCodeId_ArrayList = new ArrayList<>();
+
     SpinnerWithCheckBoxAdapter myAdapter;
 
 
-    String kms , Citywisestate;
+    String kms ="", gStatenamewith_Cities;
     String gServiceId_FromService ;
     String SelectedLocationID ="";
     String SelectedSubServiceID="";
@@ -175,6 +205,24 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
     Spinner lRadiusKms;
 
     ArrayList<String> gCountryName_Arraylist;
+
+
+    //For Radius
+    StringBuilder gZipcodeforRadius_builder = new StringBuilder();
+    StringBuilder gKmsforRadius_builder = new StringBuilder();
+    String gFinalZipcode_toApi;
+    String gFinalKms_toApi;
+
+    //For City
+
+    StringBuilder gCityId_builder= new StringBuilder();
+    String gCityId_toApi;
+
+
+    //For State
+    StringBuilder gStateId_builder= new StringBuilder();
+    String gStateId_toApi;
+
 
     @SuppressLint("WrongConstant")
     @Override
@@ -190,6 +238,11 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
 
         //get the spinner from the xml.
 
+
+        //SoftKeyboard Enabling
+        final InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+
+
 //create a list of items for the spinner.
         String[] items = new String[]{"Select Your Country", "India", "Japan", "Canada","Brazil","Russia"};
 //create an adapter to describe how the items are displayed, adapters are used in several places in android.
@@ -199,8 +252,8 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
 
         String data[]={"560064", "560063", "560062", "560061", "560060", "560065", "650064", "520064", "510064", "500064"};
 
-        ArrayAdapter<String> adapter12 = new ArrayAdapter<String>
-                (this, android.R.layout.select_dialog_item, data);
+      /*  ArrayAdapter<String> adapter12 = new ArrayAdapter<String>
+                (this, android.R.layout.select_dialog_item, data);*/
 
 
 
@@ -218,7 +271,11 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
         //Calling Api for Country List
         getCountry_List();
 
+        getZipCodes_List();
+
        // getStates_List();
+
+
 
 
 
@@ -229,16 +286,26 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
 
         lZipCode = findViewById(R.id.autoZipRadius);
         lRadiusKms=findViewById(R.id.radiusSpinner);
-        lZipCode.setThreshold(1);//will start working from first character
-        lZipCode.setAdapter(adapter12);
+       /* lZipCode.setThreshold(1);//will start working from first character
+        lZipCode.setAdapter(adapter12);*/
         String[] items2 = new String[]{"Kms", "5", "10", "15","20"};
 
         ArrayAdapter adapter2 = new ArrayAdapter<>(ServicesAdd_Activity.this, android.R.layout.simple_spinner_dropdown_item, items2);
         lRadiusKms.setAdapter(adapter2);
+
+
         lRadiusKms.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 kms = items2[i];
+                /*if (!lRadiusKms.getSelectedItem().toString().equals("Kms")) {
+                    kms = items2[i];
+                }
+                else{
+
+                }*/
+
             }
 
             @Override
@@ -275,7 +342,7 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
        /* Spinnerstates.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Citywisestate = items1[i];
+                gStatenamewith_Cities = items1[i];
             }
 
             @Override
@@ -288,7 +355,7 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
 
         //for Location
 
-        ArrayList<spinnerData> listVOs1 = new ArrayList<>();
+    /*    ArrayList<spinnerData> listVOs1 = new ArrayList<>();
         for (int i = 0; i < items1.length; i++) {
             spinnerData stateVO = new spinnerData();
             stateVO.setTitle(items1[i]);
@@ -298,7 +365,7 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
 
         SpinnerWithCheckBoxAdapter myAdapter1 = new SpinnerWithCheckBoxAdapter(ServicesAdd_Activity.this, 0,
                 listVOs1);
-        states.setAdapter(myAdapter1);
+        states.setAdapter(myAdapter1);*/
 
 
         //For Service List
@@ -314,42 +381,93 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
 
 
         service_List();
-
+        System.out.println("Km in Add more text " + kms);
         //Adding Listners for location buttons
+      //  if(!kms.equals("") || kms.equals("Kms")){
+
+
+          //Add More location by radius
 
         gAddmoreRadiustxt.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
+                  /*   gRadius.clear();
+                        gKms.clear();*/
                 if(!lZipCode.getText().toString().trim().equals("")){
-                    if(!kms.equals("")){
+
+                    if(!kms.equals("") || kms.equals("Kms")){
+
+
                         gKms.add(kms);
                         gRadius.add(lZipCode.getText().toString().trim());
                         RadiusAdapter radiusAdapter = new RadiusAdapter(ServicesAdd_Activity.this,gRadius,gKms);
                         gRadiusRecycler.setAdapter(radiusAdapter);
                         kms="";
                         lZipCode.getText().clear();
+                      /*  gRadius.clear();
+                        gKms.clear();*/
+
+
+System.out.println("Added Radius and kms arrays are " + gRadius.size() + " and " + gKms.size());
+
+
+
+                    }
+
+                    else{
+
+
                     }
                 }
 
+                else{
+
+                    Toast.makeText(ServicesAdd_Activity.this,"Enter Zip Code",Toast.LENGTH_SHORT).show();
+                }
             }
         });
+
+       /* }
+
+        else{
+            Toast.makeText(ServicesAdd_Activity.this,"Select Kms",Toast.LENGTH_SHORT).show();
+        }*/
+
 
 
 
         gAddmoreCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               int i= myAdapter.getCheckedItems().size();
-                Log.e("hmhm", "onClick: "+myAdapter.getCheckedItems() +Citywisestate);
-                if(i!=0 && !Citywisestate.equals("")){
-                noofCoties.add(String.valueOf(i));
-                Statelist.add(Citywisestate.trim());
-                CityAdapter cityAdapter = new CityAdapter(ServicesAdd_Activity.this,Statelist,noofCoties);
-                gCityRecycler.setAdapter(cityAdapter);
-                Citywisestate="";
+
+              if(myAdapter.getCheckedItems().size()>0){
+                System.out.println("Statename with city size is " + myAdapter.getCheckedItems().size());
+                int i = myAdapter.getCheckedItems().size();
+                Log.e("hmhm", "onClick: " + myAdapter.getCheckedItems() + gStatenamewith_Cities);
+
+                if (i != 0 && !gStatenamewith_Cities.equals("")) {
+                    noofCoties.add(String.valueOf(i));
+                    Statelist.add(gStatenamewith_Cities.trim());
+
+
+                    CityAdapter cityAdapter = new CityAdapter(ServicesAdd_Activity.this, Statelist, noofCoties);
+                    gCityRecycler.setAdapter(cityAdapter);
+                    gStatenamewith_Cities = "";
                     Spinnercities.setAdapter(myAdapter);
                     Spinnerstates.setSelection(0);
+
+                    System.out.println("Number of cities Added arrays are "  + noofCoties);
+                }
+
+
+
             }
+
+else{
+    Toast.makeText(ServicesAdd_Activity.this,"First Select Cities",Toast.LENGTH_SHORT).show();
+}
+
             }
         });
 
@@ -360,15 +478,34 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
 
             @Override
             public void onClick(View view) {
-                gStatebtn.setBackgroundResource(R.drawable.round_btn_gray);
-                gStatebtn.setTextColor(Color.BLACK);
-                gCityBtn.setBackgroundResource(R.drawable.round_btn_gray);
-                gCityBtn.setTextColor(Color.BLACK);
-                gRadiusBtn.setBackgroundResource(R.drawable.buttonblue_background);
-                gRadiusBtn.setTextColor(Color.WHITE);
-                gStateLayout.setVisibility(View.GONE);
-                gCitylayout.setVisibility(View.GONE);
-                gRadiusLayout.setVisibility(View.VISIBLE);
+
+                if (!gCountry_Spinner.getSelectedItem().toString().equals(getResources().getString(R.string.selectcountry))) {
+                   /* String  gSelectedCategoryId = gCountryID_ArrayList.get(item);
+
+                    Toast.makeText(ServicesAdd_Activity.this,gSelectedCategoryId,Toast.LENGTH_SHORT).show();*/
+                    gSubmitforapproval_button_Radius.setVisibility(View.VISIBLE);
+                    gSubmitforapproval_button_Citywise.setVisibility(View.GONE);
+                    gSubmitforapproval_button_Statewise.setVisibility(View.GONE);
+
+
+                    gSelectionheadertext.setText("Select zipcodes and Kms");
+
+                    gStatebtn.setBackgroundResource(R.drawable.round_btn_gray);
+                    gStatebtn.setTextColor(Color.BLACK);
+                    gCityBtn.setBackgroundResource(R.drawable.round_btn_gray);
+                    gCityBtn.setTextColor(Color.BLACK);
+                    gRadiusBtn.setBackgroundResource(R.drawable.buttonblue_background);
+                    gRadiusBtn.setTextColor(Color.WHITE);
+                    gStateLayout.setVisibility(View.GONE);
+                    gCitylayout.setVisibility(View.GONE);
+                    gRadiusLayout.setVisibility(View.VISIBLE);
+                }
+
+                else{
+                    Toast.makeText(ServicesAdd_Activity.this,getResources().getString(R.string.selectcountry),Toast.LENGTH_SHORT).show();
+
+                }
+
 
             }
         });
@@ -377,19 +514,35 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
 
             @Override
             public void onClick(View view) {
-                gStatebtn.setBackgroundResource(R.drawable.round_btn_gray);
-                gStatebtn.setTextColor(Color.BLACK);
-                gRadiusBtn.setBackgroundResource(R.drawable.round_btn_gray);
-                gRadiusBtn.setTextColor(Color.BLACK);
-                gCityBtn.setBackgroundResource(R.drawable.buttonblue_background);
-                gCityBtn.setTextColor(Color.WHITE);
-                gStateLayout.setVisibility(View.GONE);
-                gCitylayout.setVisibility(View.VISIBLE);
-                gRadiusLayout.setVisibility(View.GONE);
+
+                if (!gCountry_Spinner.getSelectedItem().toString().equals(getResources().getString(R.string.selectcountry))) {
+
+
+                    gSubmitforapproval_button_Citywise.setVisibility(View.VISIBLE);
+
+                    gSubmitforapproval_button_Radius.setVisibility(View.GONE);
+                    gSubmitforapproval_button_Statewise.setVisibility(View.GONE);
+
+
+                    gStatebtn.setBackgroundResource(R.drawable.round_btn_gray);
+                    gStatebtn.setTextColor(Color.BLACK);
+                    gRadiusBtn.setBackgroundResource(R.drawable.round_btn_gray);
+                    gRadiusBtn.setTextColor(Color.BLACK);
+                    gCityBtn.setBackgroundResource(R.drawable.buttonblue_background);
+                    gCityBtn.setTextColor(Color.WHITE);
+                    gStateLayout.setVisibility(View.GONE);
+                    gCitylayout.setVisibility(View.VISIBLE);
+                    gRadiusLayout.setVisibility(View.GONE);
+                    getStates_List();
+                }
+
+else{
+                    Toast.makeText(ServicesAdd_Activity.this,getResources().getString(R.string.selectcountry),Toast.LENGTH_SHORT).show();
+
+                }
 
 
 
-                getStates_List();
 
             }
         });
@@ -398,26 +551,214 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
 
             @Override
             public void onClick(View view) {
-                gRadiusBtn.setBackgroundResource(R.drawable.round_btn_gray);
-                gRadiusBtn.setTextColor(Color.BLACK);
-                gCityBtn.setBackgroundResource(R.drawable.round_btn_gray);
-                gCityBtn.setTextColor(Color.BLACK);
-                gStatebtn.setBackgroundResource(R.drawable.buttonblue_background);
-                gStatebtn.setTextColor(Color.WHITE);
-                gStateLayout.setVisibility(View.VISIBLE);
-                gCitylayout.setVisibility(View.GONE);
-                gRadiusLayout.setVisibility(View.GONE);
+                if (!gCountry_Spinner.getSelectedItem().toString().equals(getResources().getString(R.string.selectcountry))) {
+
+                    gSubmitforapproval_button_Citywise.setVisibility(View.GONE);
+                    gSubmitforapproval_button_Radius.setVisibility(View.GONE);
+
+                    gSubmitforapproval_button_Statewise.setVisibility(View.VISIBLE);
+
+
+                    gRadiusBtn.setBackgroundResource(R.drawable.round_btn_gray);
+                    gRadiusBtn.setTextColor(Color.BLACK);
+                    gCityBtn.setBackgroundResource(R.drawable.round_btn_gray);
+                    gCityBtn.setTextColor(Color.BLACK);
+                    gStatebtn.setBackgroundResource(R.drawable.buttonblue_background);
+                    gStatebtn.setTextColor(Color.WHITE);
+                    gStateLayout.setVisibility(View.VISIBLE);
+                    gCitylayout.setVisibility(View.GONE);
+                    gRadiusLayout.setVisibility(View.GONE);
+
+                    getStates_List();
+
+                }
+
+                else{
+                    Toast.makeText(ServicesAdd_Activity.this,getResources().getString(R.string.selectcountry),Toast.LENGTH_SHORT).show();
+
+                }
+
+
+            }
+        });
+
+
+//Radius wise
+        gSubmitforapproval_button_Radius.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(ServicesAdd_Activity.this,"Radius",Toast.LENGTH_SHORT).show();
+            System.out.println("In Radius submit array size is " + gRadius.size());
+
+            if(gRadius.size()>0){
+                addby_Radius();
+            }
+               else{
+                Toast.makeText(ServicesAdd_Activity.this,"Select Zipcode",Toast.LENGTH_SHORT).show();
+
+            }
+
+
+
+            }
+        });
+
+        //City Wise
+
+
+        gSubmitforapproval_button_Citywise.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                     System.out.println("Array size of cities are " + AppicationClass.addlocationservicecities.size());
+
+                Toast.makeText(ServicesAdd_Activity.this,"City",Toast.LENGTH_SHORT).show();
+               if( AppicationClass.addlocationservicecities.size()>0){
+                   addby_City();
+               }
+              else{
+                   Toast.makeText(ServicesAdd_Activity.this,"Select City",Toast.LENGTH_SHORT).show();
+               }
+
+            }
+        });
+
+        //State Wise
+
+
+        gSubmitforapproval_button_Statewise.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("Selected State Ids are on State Submit are " +  gStateId_toApi);
+                Toast.makeText(ServicesAdd_Activity.this,"State",Toast.LENGTH_SHORT).show();
+                if( AppicationClass.addlocationservicestates.size()>0){
+                    addby_States();
+                }
+                else{
+                    Toast.makeText(ServicesAdd_Activity.this,"Select State",Toast.LENGTH_SHORT).show();
+                }
+
+
 
             }
         });
 
 
 
-        gSubmitforapproval_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+    }  //On Create close
 
 
+    //Add Location and services by radius
+
+    public void addby_Radius(){
+        for(int i=0;i<gRadius.size();i++){
+            gZipcodeforRadius_builder.append(gRadius.get(i).toString()+",");
+            gKmsforRadius_builder.append(gKms.get(i).toString()+",");
+
+        }
+
+        gFinalZipcode_toApi= gZipcodeforRadius_builder.toString();
+        gFinalKms_toApi=gKmsforRadius_builder.toString();
+
+
+        if (gFinalZipcode_toApi.endsWith(",")) {
+            gFinalZipcode_toApi = gFinalZipcode_toApi.substring(0, gFinalZipcode_toApi.length() - 1);
+        }
+        if (gFinalKms_toApi.endsWith(",")) {
+            gFinalKms_toApi = gFinalKms_toApi.substring(0, gFinalKms_toApi.length() - 1);
+        }
+        System.out.println("Location by radius added thing " + gFinalZipcode_toApi + "and" + gFinalKms_toApi + "and" +  AppicationClass.getPremium_PartenerId());
+
+
+        if (AppicationClass.getPremium_PartenerId().equals("0")) {
+            if(AppicationClass.addserviceammount.isEmpty()){
+                Toast.makeText(ServicesAdd_Activity.this, "Fill Service before proceeding", Toast.LENGTH_SHORT).show();
+            }
+
+
+            for (int i = 0; i < AppicationClass.addserviceammount.size(); i++) {
+                if (i == AppicationClass.addserviceammount.size() - 1) {
+                    SelectedSubServiceID = SelectedSubServiceID + AppicationClass.addserviceammount.get(i);
+                } else {
+                    SelectedSubServiceID = SelectedSubServiceID + AppicationClass.addserviceammount.get(i) + ",";
+                }
+            }
+
+
+
+            submitFor_Approval_Radius();
+            System.out.println("In Submit  Button in Add Service List " + SelectedSubServiceID);
+
+
+        }
+
+        else {
+            if( AppicationClass.addservicemapingid.isEmpty()){
+                Toast.makeText(ServicesAdd_Activity.this, "Fill Service before proceeding", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(ServicesAdd_Activity.this, "", Toast.LENGTH_SHORT).show();
+                Log.e("lol1", "onClick: " + AppicationClass.addservicemapingid);
+                ArrayList<String> id = new ArrayList<>();
+                ArrayList<String> price = new ArrayList<>();
+
+                for (int p = 0; p < AppicationClass.addservicemapingid.size(); p++) {
+                    String[] list = AppicationClass.addservicemapingid.get(p).split(",");
+                    Log.e("hihi", "onClick: "+price +id);
+                    id.add(list[0]);
+                    price.add(list[1]);
+                }
+                Log.e("lola", "onClick: " + id + "  " + price);
+
+
+                int items = 0;
+                for (int j = 0; j < price.size(); j++) {
+                    int i = 1;
+                    for (int check = 0; check < finalmapingIdList.size(); check++) {
+                        if (!id.get(j).equals(finalmapingIdList.get(check))) {
+                            i = 1;
+                        } else {
+                            i = 0;
+                        }
+                    }
+                    if (i == 1) {
+                        for (int o = id.size() - 1; o >= 0; o--) {
+                            if (id.get(j).equals(id.get(o))) {
+
+                                Log.e("asdasd", "onClick: " + id.get(o));
+                                finalmapingIdList.add(items, id.get(o));
+                                finalPriceList.add(items, price.get(o));
+                                o = 0;
+
+                            }
+
+                        }
+                        items++;
+                    }
+
+                }
+                Log.e("lol1", "onClick: " + finalmapingIdList + finalPriceList);
+                for (int i = 0;i<finalmapingIdList.size();i++){
+                    if (i == finalmapingIdList.size() - 1){
+                        SelectedSubServiceID=finalmapingIdList.get(i);
+                    }else{
+                        SelectedSubServiceID=finalmapingIdList.get(i)+",";
+                    }}
+                for (int i = 0;i<finalPriceList.size();i++){
+                    if (i == finalPriceList.size() - 1){
+                        SelectedSubServiceAmmout=finalPriceList.get(i);
+                    }else{
+                        SelectedSubServiceAmmout=finalPriceList.get(i)+",";
+                    }}
+                AppicationClass.addservicemapingid.clear();
+                if( finalmapingIdList.isEmpty()){
+                    Toast.makeText(ServicesAdd_Activity.this, "Fill Service before proceeding", Toast.LENGTH_SHORT).show();
+                }
+                // communicator.addquotationlist(finalmapingIdList,finalPriceList,"1");
+                submitFor_Approval_Radius();
+            }
+        }
+
+
+/*
                     if(AppicationClass.addLocation.isEmpty()) {
                         Toast.makeText(ServicesAdd_Activity.this, "Please Select Location before procedding", Toast.LENGTH_SHORT).show();
                     }else {
@@ -514,25 +855,238 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
                         }
 
                // startActivity(new Intent(ServicesAdd_Activity.this,ServicePersonHome_Activity.class));
-            }}
-        });
+            }*/
+
+    }
+
+    //Add Location and services by city
 
 
-              /*gCountry_Spinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+    public void addby_City(){
 
-                                int item = gCountry_Spinner.getSelectedItemPosition();
-                                if (!gCountry_Spinner.getSelectedItem().toString().equals("Select Category")) {
-                                    String gCountry_Id= gGetCountry_ArrayList.get(item).getCountry_ID();
 
-                                    Toast.makeText(ServicesAdd_Activity.this,gCountry_Id,Toast.LENGTH_SHORT).show();
-                                }
+
+        System.out.println("Selected citiy Ids are on Submit are " +  AppicationClass.addlocationservicecities.size());
+        for(int i=0;i<AppicationClass.addlocationservicecities.size();i++){
+
+
+            gCityId_builder.append(AppicationClass.addlocationservicecities.get(i).toString()+",");
+
+        }
+
+        gCityId_toApi= gCityId_builder.toString();
+
+        if (gCityId_toApi.endsWith(",")) {
+            gCityId_toApi = gCityId_toApi.substring(0, gCityId_toApi.length() - 1);
+        }
+
+
+        System.out.println("Selected citiy Ids are on Submit are " +  gCityId_toApi);
+
+        if (AppicationClass.getPremium_PartenerId().equals("0")) {
+            if(AppicationClass.addserviceammount.isEmpty()){
+                Toast.makeText(ServicesAdd_Activity.this, "Fill Service before proceeding", Toast.LENGTH_SHORT).show();
+            }
+
+
+            for (int i = 0; i < AppicationClass.addserviceammount.size(); i++) {
+                if (i == AppicationClass.addserviceammount.size() - 1) {
+                    SelectedSubServiceID = SelectedSubServiceID + AppicationClass.addserviceammount.get(i);
+                } else {
+                    SelectedSubServiceID = SelectedSubServiceID + AppicationClass.addserviceammount.get(i) + ",";
+                }
+            }
+
+
+
+            submitFor_Approval_City();
+            System.out.println("In Submit  Button in Add Service List " + SelectedSubServiceID);
+
+
+        }
+
+        else {
+            if( AppicationClass.addservicemapingid.isEmpty()){
+                Toast.makeText(ServicesAdd_Activity.this, "Fill Service before proceeding", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(ServicesAdd_Activity.this, "", Toast.LENGTH_SHORT).show();
+                Log.e("lol1", "onClick: " + AppicationClass.addservicemapingid);
+                ArrayList<String> id = new ArrayList<>();
+                ArrayList<String> price = new ArrayList<>();
+
+                for (int p = 0; p < AppicationClass.addservicemapingid.size(); p++) {
+                    String[] list = AppicationClass.addservicemapingid.get(p).split(",");
+                    Log.e("hihi", "onClick: "+price +id);
+                    id.add(list[0]);
+                    price.add(list[1]);
+                }
+                Log.e("lola", "onClick: " + id + "  " + price);
+
+
+                int items = 0;
+                for (int j = 0; j < price.size(); j++) {
+                    int i = 1;
+                    for (int check = 0; check < finalmapingIdList.size(); check++) {
+                        if (!id.get(j).equals(finalmapingIdList.get(check))) {
+                            i = 1;
+                        } else {
+                            i = 0;
+                        }
+                    }
+                    if (i == 1) {
+                        for (int o = id.size() - 1; o >= 0; o--) {
+                            if (id.get(j).equals(id.get(o))) {
+
+                                Log.e("asdasd", "onClick: " + id.get(o));
+                                finalmapingIdList.add(items, id.get(o));
+                                finalPriceList.add(items, price.get(o));
+                                o = 0;
+
                             }
-                        });*/
 
-    }  //On Create close
+                        }
+                        items++;
+                    }
 
+                }
+                Log.e("lol1", "onClick: " + finalmapingIdList + finalPriceList);
+                for (int i = 0;i<finalmapingIdList.size();i++){
+                    if (i == finalmapingIdList.size() - 1){
+                        SelectedSubServiceID=finalmapingIdList.get(i);
+                    }else{
+                        SelectedSubServiceID=finalmapingIdList.get(i)+",";
+                    }}
+                for (int i = 0;i<finalPriceList.size();i++){
+                    if (i == finalPriceList.size() - 1){
+                        SelectedSubServiceAmmout=finalPriceList.get(i);
+                    }else{
+                        SelectedSubServiceAmmout=finalPriceList.get(i)+",";
+                    }}
+                AppicationClass.addservicemapingid.clear();
+                if( finalmapingIdList.isEmpty()){
+                    Toast.makeText(ServicesAdd_Activity.this, "Fill Service before proceeding", Toast.LENGTH_SHORT).show();
+                }
+                // communicator.addquotationlist(finalmapingIdList,finalPriceList,"1");
+                submitFor_Approval_City();
+            }
+        }
+
+
+
+    }
+
+    //Add Location and services by state
+
+
+    public void addby_States(){
+
+        for(int i=0;i<AppicationClass.addlocationservicestates.size();i++){
+
+
+            gStateId_builder.append(AppicationClass.addlocationservicestates.get(i).toString()+",");
+
+        }
+
+        gStateId_toApi= gStateId_builder.toString();
+
+        if (gStateId_toApi.endsWith(",")) {
+            gStateId_toApi = gStateId_toApi.substring(0, gStateId_toApi.length() - 1);
+        }
+
+
+        System.out.println("Selected citiy Ids are on Submit are " +  gCityId_toApi);
+
+        if (AppicationClass.getPremium_PartenerId().equals("0")) {
+            if(AppicationClass.addserviceammount.isEmpty()){
+                Toast.makeText(ServicesAdd_Activity.this, "Fill Service before proceeding", Toast.LENGTH_SHORT).show();
+            }
+
+
+            for (int i = 0; i < AppicationClass.addserviceammount.size(); i++) {
+                if (i == AppicationClass.addserviceammount.size() - 1) {
+                    SelectedSubServiceID = SelectedSubServiceID + AppicationClass.addserviceammount.get(i);
+                } else {
+                    SelectedSubServiceID = SelectedSubServiceID + AppicationClass.addserviceammount.get(i) + ",";
+                }
+            }
+
+
+
+            submitFor_Approval_State();
+            System.out.println("In Submit  Button in Add Service List " + SelectedSubServiceID);
+
+
+        }
+
+        else {
+            if( AppicationClass.addservicemapingid.isEmpty()){
+                Toast.makeText(ServicesAdd_Activity.this, "Fill Service before proceeding", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(ServicesAdd_Activity.this, "", Toast.LENGTH_SHORT).show();
+                Log.e("lol1", "onClick: " + AppicationClass.addservicemapingid);
+                ArrayList<String> id = new ArrayList<>();
+                ArrayList<String> price = new ArrayList<>();
+
+                for (int p = 0; p < AppicationClass.addservicemapingid.size(); p++) {
+                    String[] list = AppicationClass.addservicemapingid.get(p).split(",");
+                    Log.e("hihi", "onClick: "+price +id);
+                    id.add(list[0]);
+                    price.add(list[1]);
+                }
+                Log.e("lola", "onClick: " + id + "  " + price);
+
+
+                int items = 0;
+                for (int j = 0; j < price.size(); j++) {
+                    int i = 1;
+                    for (int check = 0; check < finalmapingIdList.size(); check++) {
+                        if (!id.get(j).equals(finalmapingIdList.get(check))) {
+                            i = 1;
+                        } else {
+                            i = 0;
+                        }
+                    }
+                    if (i == 1) {
+                        for (int o = id.size() - 1; o >= 0; o--) {
+                            if (id.get(j).equals(id.get(o))) {
+
+                                Log.e("asdasd", "onClick: " + id.get(o));
+                                finalmapingIdList.add(items, id.get(o));
+                                finalPriceList.add(items, price.get(o));
+                                o = 0;
+
+                            }
+
+                        }
+                        items++;
+                    }
+
+                }
+                Log.e("lol1", "onClick: " + finalmapingIdList + finalPriceList);
+                for (int i = 0;i<finalmapingIdList.size();i++){
+                    if (i == finalmapingIdList.size() - 1){
+                        SelectedSubServiceID=finalmapingIdList.get(i);
+                    }else{
+                        SelectedSubServiceID=finalmapingIdList.get(i)+",";
+                    }}
+                for (int i = 0;i<finalPriceList.size();i++){
+                    if (i == finalPriceList.size() - 1){
+                        SelectedSubServiceAmmout=finalPriceList.get(i);
+                    }else{
+                        SelectedSubServiceAmmout=finalPriceList.get(i)+",";
+                    }}
+                AppicationClass.addservicemapingid.clear();
+                if( finalmapingIdList.isEmpty()){
+                    Toast.makeText(ServicesAdd_Activity.this, "Fill Service before proceeding", Toast.LENGTH_SHORT).show();
+                }
+                // communicator.addquotationlist(finalmapingIdList,finalPriceList,"1");
+                submitFor_Approval_State();
+            }
+        }
+
+
+
+    }
 
     //List Of Services  c
     public  void service_List(){
@@ -661,13 +1215,13 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
                         gSubServicesList_Arraylist= new ArrayList<>(Arrays.asList(lsubservice_response.getSub_services_response()));
                         if(!gSubServicesList_Arraylist.get(0).getService_Mapping_ID().equals("No Results Found")){
                             gSubserviceslist_recyclerview.setVisibility(View.VISIBLE);
-
+                            gSubmitforapproval_button_Radius.setVisibility(View.GONE);
 
                             // gSubServiceList_Adapter = new SubServiceList_Adapter(UserServiceListActivity.this,gSubServicesList_Arraylist);
 
                             AddSubServicesList_Adapter lAddSubServicesList_Adapter = new AddSubServicesList_Adapter(ServicesAdd_Activity.this,gSubServicesList_Arraylist);
                             gSubserviceslist_recyclerview.setAdapter(lAddSubServicesList_Adapter);
-                                gSubmitforapproval_button.setVisibility(View.VISIBLE);
+                            gSubmitforapproval_button_Radius.setVisibility(View.VISIBLE);
 
                            progress.dismiss();
 
@@ -813,7 +1367,7 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
             Log.e("hihi", "submitFor_Approval: "+SelectedSubServiceID );
             if (AppicationClass.getPremium_PartenerId().equals("1")){
                 lservice_request.setService_Amount(SelectedSubServiceAmmout);
-                lservice_request.setService_Mapping_ID(SelectedSubServiceID);
+               // lservice_request.setService_Mapping_ID(SelectedSubServiceID);
             }
 
             Call<SubmitForApproval_Response> call = request.submitFor_Approval(lservice_request);
@@ -829,7 +1383,7 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
                           subService_List(gServiceId_FromService);
 
                           gWaitingforapproval_button.setVisibility(View.VISIBLE);
-                          gSubmitforapproval_button.setVisibility(View.GONE);
+                          gSubmitforapproval_button_Radius.setVisibility(View.GONE);
                           AppicationClass.addLocation.clear();
                           AppicationClass.addserviceammount.clear();
                           AppicationClass.addservicemapingid.clear();
@@ -900,7 +1454,7 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
             GetListofCountry_Request lGetListofCountry_Request= new GetListofCountry_Request();
 
             lGetListofCountry_Request.setDocket(Constants.TOKEN);
-            lGetListofCountry_Request.setUser_ID("1");
+            lGetListofCountry_Request.setUser_ID(gUserId_FromLogin);
 
             Call<GetListofCountry_Response> call = request.Get_CountryList(lGetListofCountry_Request);
             call.enqueue(new Callback<GetListofCountry_Response>() {
@@ -936,9 +1490,14 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
                                 int item = gCountry_Spinner.getSelectedItemPosition();
                                 gCountry_Spinner.setSelection(item, false);
                                 if (!gCountry_Spinner.getSelectedItem().toString().equals(getResources().getString(R.string.selectcountry))) {
-                                  String  gSelectedCategoryId = gCountryID_ArrayList.get(item);
+                                    gSelectedCountryId = gCountryID_ArrayList.get(item);
 
-                                    Toast.makeText(ServicesAdd_Activity.this,gSelectedCategoryId,Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ServicesAdd_Activity.this,gSelectedCountryId,Toast.LENGTH_SHORT).show();
+
+                                }
+
+                                else{
+
                                 }
 
                             }
@@ -1028,8 +1587,9 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
             GetStateList_Request lGetStateList_Request= new GetStateList_Request();
 
             lGetStateList_Request.setDocket(Constants.TOKEN);
-            lGetStateList_Request.setUser_ID("1");
-            lGetStateList_Request.setCountry_ID("1");
+            lGetStateList_Request.setUser_ID(gUserId_FromLogin);
+         //   lGetStateList_Request.setCountry_ID(gSelectedCountryId);
+            lGetStateList_Request.setCountry_ID("102");
 
             Call<GetStateList_Response> call = request.Get_StatesList(lGetStateList_Request);
             call.enqueue(new Callback<GetStateList_Response>() {
@@ -1042,44 +1602,71 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
 
                         gGetStates_ArrayList = new ArrayList<>(Arrays.asList(lGetStateList_Response.getGet_states_list_response()));
 
-
-                        gStateArrayList=new ArrayList<>();
-                        gStateArrayList.add(0,getResources().getString(R.string.selectstate));
-                        gStateID_ArrayList.add(0,getResources().getString(R.string.selectstateid));
-                        for(int i=0;i<gGetStates_ArrayList.size();i++){
-
-
-                            gStateArrayList.add(1,gGetStates_ArrayList.get(i).getState_Name());
-                            gStateID_ArrayList.add(1,gGetStates_ArrayList.get(i).getState_ID());
-
-                        }
-
-                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(ServicesAdd_Activity.this, android.R.layout.simple_spinner_dropdown_item, gStateArrayList);
-                        //set the spinners adapter to the previously created one.
-                        Spinnerstates.setAdapter(adapter);
+if(!gGetStates_ArrayList.get(0).getState_ID().equals("No Results Found")){
+    gStateArrayList=new ArrayList<>();
+    gStateArrayList.add(0,getResources().getString(R.string.selectstate));
+    gStateID_ArrayList.add(0,getResources().getString(R.string.selectstateid));
+    for(int i=0;i<gGetStates_ArrayList.size();i++){
 
 
-                        Spinnerstates.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                            @Override
-                            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        gStateArrayList.add(1,gGetStates_ArrayList.get(i).getState_Name());
+        gStateID_ArrayList.add(1,gGetStates_ArrayList.get(i).getState_ID());
 
-                                int item = Spinnerstates.getSelectedItemPosition();
-                                Spinnerstates.setSelection(item, false);
-                                if (!Spinnerstates.getSelectedItem().toString().equals(getResources().getString(R.string.selectstate))) {
-                                    String  gSelectedStatesId = gStateID_ArrayList.get(item);
+    }
 
-                                    Toast.makeText(ServicesAdd_Activity.this,gSelectedStatesId,Toast.LENGTH_SHORT).show();
+    ArrayAdapter<String> adapter = new ArrayAdapter<String>(ServicesAdd_Activity.this, android.R.layout.simple_spinner_dropdown_item, gStateArrayList);
+    //set the spinners adapter to the previously created one.
+    Spinnerstates.setAdapter(adapter);
 
-                                    getCities_List(gSelectedStatesId);
-                                }
 
-                            }
+    Spinnerstates.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                            @Override
-                            public void onNothingSelected(AdapterView<?> adapterView) {
+            int item = Spinnerstates.getSelectedItemPosition();
+            Spinnerstates.setSelection(item, false);
+            if (!Spinnerstates.getSelectedItem().toString().equals(getResources().getString(R.string.selectstate))) {
 
-                            }
-                        });
+                gStatenamewith_Cities = gStateArrayList.get(item);
+                String  gSelectedStatesId = gStateID_ArrayList.get(item);
+
+                Toast.makeText(ServicesAdd_Activity.this,gSelectedStatesId,Toast.LENGTH_SHORT).show();
+
+                getCities_List(gSelectedStatesId);
+            }
+
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> adapterView) {
+
+        }
+    });
+
+
+
+    //Add According to only States
+
+    ArrayList<spinnerData> listVOs1 = new ArrayList<>();
+    for (int i = 0; i < gStateArrayList.size(); i++) {
+        spinnerData stateVO = new spinnerData();
+        stateVO.setTitle(gStateArrayList.get(i).toString());
+        stateVO.setStateId(gStateID_ArrayList.get(i).toString());
+        stateVO.setSelected(false);
+        listVOs1.add(stateVO);
+    }
+
+    SpinnerWithCheckBoxStates_Adapter myAdapter1 = new SpinnerWithCheckBoxStates_Adapter(ServicesAdd_Activity.this, 0,
+            listVOs1);
+    gStates_withCheckbox.setAdapter(myAdapter1);
+}
+
+else{
+    Toast.makeText(ServicesAdd_Activity.this,"No States found",Toast.LENGTH_SHORT).show();
+
+
+}
+
 
 
 
@@ -1125,7 +1712,7 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
             GetCityList_Request lGetStateList_Request= new GetCityList_Request();
 
             lGetStateList_Request.setDocket(Constants.TOKEN);
-            lGetStateList_Request.setUser_ID("1");
+            lGetStateList_Request.setUser_ID(gUserId_FromLogin);
             lGetStateList_Request.setState_ID(StateId);
 
             Call<GetCityList_Response> call = request.Get_CityList(lGetStateList_Request);
@@ -1145,11 +1732,12 @@ if(!gGetCities_ArrayList.get(0).getCity_ID().equals("No Results Found")){
     gCityArrayList=new ArrayList<>();
     gCityArrayList.add(0,getResources().getString(R.string.selectcity));
     gCityID_ArrayList.add(0,getResources().getString(R.string.selectcityid));
+
     for(int i=0;i<gGetCities_ArrayList.size();i++){
 
 
         gCityArrayList.add(1,gGetCities_ArrayList.get(i).getCity_Name());
-        gCityID_ArrayList.add(1,gGetCities_ArrayList.get(i).getState_ID());
+        gCityID_ArrayList.add(1,gGetCities_ArrayList.get(i).getCity_ID());
 
     }
 
@@ -1159,8 +1747,8 @@ if(!gGetCities_ArrayList.get(0).getCity_ID().equals("No Results Found")){
     for (int i = 0; i < gCityArrayList.size(); i++) {
         spinnerData stateVO = new spinnerData();
         stateVO.setTitle(gCityArrayList.get(i).toString());
-
-        System.out.println("City Name is " + gCityArrayList.get(i).toString());
+        stateVO.setCityId(gCityID_ArrayList.get(i).toString());
+        System.out.println("City Name is " + gCityArrayList.get(i).toString() + gCityID_ArrayList.get(i).toString());
         stateVO.setSelected(false);
         listVOs.add(stateVO);
     }
@@ -1192,7 +1780,7 @@ if(!gGetCities_ArrayList.get(0).getCity_ID().equals("No Results Found")){
         }
     });
 
-
+    gAddmoreCity.setVisibility(View.VISIBLE);
 
 
 }
@@ -1229,5 +1817,422 @@ else {
         }
 
     }
+
+    //Get ZipCode List
+
+    private void getZipCodes_List() {
+
+        try {
+            progress.show();
+            OkHttpClient.Builder client = new OkHttpClient.Builder();
+            HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
+            registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            client.addInterceptor(registrationInterceptor);
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(Constants.BASE_URL)
+                    .client(client.build())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+
+            ApiInterface request = retrofit.create(ApiInterface.class);
+            GetAllZipCode_Request lGetStateList_Request= new GetAllZipCode_Request();
+
+            lGetStateList_Request.setDocket(Constants.TOKEN);
+            lGetStateList_Request.setUser_ID(gUserId_FromLogin);
+            lGetStateList_Request.setCountry_ID("102");
+
+            Call<GetAllZipCode_Response> call = request.Get_AllZipCodeList(lGetStateList_Request);
+            call.enqueue(new Callback<GetAllZipCode_Response>() {
+                @Override
+                public void onResponse(Call<GetAllZipCode_Response> call, Response<GetAllZipCode_Response> response) {
+                    if (response.isSuccessful()) {
+
+
+                        GetAllZipCode_Response lGetZipcodeList_Response = response.body();
+
+                        gGetZipcode_ArrayList = new ArrayList<>(Arrays.asList(lGetZipcodeList_Response.getList_zipcode_response()));
+                        if(!gGetZipcode_ArrayList.get(0).getZipcode_ID().equals("No Results Found")){
+
+
+                            gZipCodeArrayList=new ArrayList<>();
+                            gZipCodeArrayList.add(0,getResources().getString(R.string.selectcity));
+                            gZipCodeId_ArrayList.add(0,getResources().getString(R.string.selectcityid));
+                            for(int i=0;i<gGetZipcode_ArrayList.size();i++){
+
+
+                                gZipCodeArrayList.add(1,gGetZipcode_ArrayList.get(i).getZipcode());
+                                gZipCodeId_ArrayList.add(1,gGetZipcode_ArrayList.get(i).getZipcode_ID());
+
+                            }
+
+
+                           // if (!gCountry_Spinner.getSelectedItem().toString().equals(getResources().getString(R.string.selectcountry))) {
+                                ArrayAdapter<String> adapter12 = new ArrayAdapter<String>
+                                        (ServicesAdd_Activity.this, android.R.layout.select_dialog_item, gZipCodeArrayList);
+
+                                lZipCode.setThreshold(1);//will start working from first character
+                                lZipCode.setAdapter(adapter12);
+                         //   }
+
+                            /*else{
+                                Toast.makeText(ServicesAdd_Activity.this, getResources().getString(R.string.selectcountry), Toast.LENGTH_SHORT).show();
+                            }*/
+
+
+
+
+
+
+
+                        }
+
+                        else {
+                            //  Spinnercities.setVisibility(View.GONE);
+                            // gCities_NotFound.setVisibility(View.VISIBLE);
+                            Toast.makeText(ServicesAdd_Activity.this,"No Cities Found",Toast.LENGTH_SHORT).show();
+
+
+                        }
+
+
+
+
+                        progress.dismiss();
+
+                    }
+
+                    progress.dismiss();
+                }
+
+                @Override
+                public void onFailure(Call<GetAllZipCode_Response> call, Throwable t) {
+                    System.out.println("In User Login Method 7");
+                    progress.dismiss();
+                }
+            });
+        }catch (Exception e) {
+            progress.dismiss();
+            e.printStackTrace();
+
+
+        }
+
+    }
+
+    //Add Location and Services by Radius
+
+    public  void submitFor_Approval_Radius(){
+        try{
+            progress.show();
+            System.out.println("In User Login Method 1");
+            progress.show();
+            OkHttpClient.Builder client = new OkHttpClient.Builder();
+            HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
+            registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            client.addInterceptor(registrationInterceptor);
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(Constants.BASE_URL)
+                    .client(client.build())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            System.out.println("In User Login Method 2");
+            ApiInterface request = retrofit.create(ApiInterface.class);
+            AddLocationServicesbyRadius_Request lservice_request = new AddLocationServicesbyRadius_Request();
+
+
+            //lservice_request.setUser_ID(gUserId_FromLogin);
+            lservice_request.setUser_ID(gUserId_FromLogin);
+            lservice_request.setZipcode(gFinalZipcode_toApi);
+            lservice_request.setRadius_In_KMs(gFinalKms_toApi);
+            lservice_request.setService_ID(SelectedSubServiceID);
+
+            lservice_request.setDocket(Constants.TOKEN);
+            if (AppicationClass.getPremium_PartenerId().equals("1")){
+                lservice_request.setService_Amount(SelectedSubServiceAmmout);
+                // lservice_request.setService_Mapping_ID(SelectedSubServiceID);
+            }
+
+            Call<AddLocationServicesbyRadius_Response> call = request.Add_LocationbyRadius(lservice_request);
+            call.enqueue(new Callback<AddLocationServicesbyRadius_Response>() {
+                @Override
+                public void onResponse(Call<AddLocationServicesbyRadius_Response> call, Response<AddLocationServicesbyRadius_Response> response) {
+                    if(response.isSuccessful()){
+
+                        AddLocationServicesbyRadius_Response lservice_response = response.body();
+
+                        if(lservice_response.getPartner_add_location_services_approval_response().equals("Valid")){
+                            Toast.makeText(ServicesAdd_Activity.this, "Submitted Successfully", Toast.LENGTH_SHORT).show();
+                            subService_List(gServiceId_FromService);
+
+                            gWaitingforapproval_button.setVisibility(View.VISIBLE);
+
+                            gSubmitforapproval_button_Radius.setVisibility(View.GONE);
+                            gSubmitforapproval_button_Citywise.setVisibility(View.GONE);
+                            gSubmitforapproval_button_Statewise.setVisibility(View.GONE);
+                            AppicationClass.addLocation.clear();
+                            AppicationClass.addserviceammount.clear();
+                            AppicationClass.addservicemapingid.clear();
+
+                               gRadius.clear();
+                               gKms.clear();
+                            progress.dismiss();
+                            startActivity(new Intent(ServicesAdd_Activity.this,ServicePersonHome_Activity.class).putExtra("HomeScreenFlow","fromserviceadd"));
+                            finish();
+                        }
+                        else{
+                            Toast.makeText(ServicesAdd_Activity.this, lservice_response.getPartner_add_location_services_approval_response(), Toast.LENGTH_SHORT).show();
+
+                            subService_List(gServiceId_FromService);
+                            AppicationClass.addLocation.clear();
+                            AppicationClass.addserviceammount.clear();
+                            AppicationClass.addservicemapingid.clear();
+                            SelectedSubServiceID = "";
+                            SelectedSubServiceAmmout = "";
+                            SelectedLocationID = "";
+
+
+                            gRadius.clear();
+                            gKms.clear();
+                            progress.dismiss();
+                        }
+
+                        progress.dismiss();
+
+
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<AddLocationServicesbyRadius_Response> call, Throwable t) {
+                    Toast.makeText(ServicesAdd_Activity.this, getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
+
+                    progress.dismiss();
+                }
+            });
+
+
+
+        }
+
+        catch (Exception e) {
+            System.out.println("In User Login Method 8");
+            e.printStackTrace();
+            progress.dismiss();
+
+        }
+    }
+
+    //Add Location and Services by City
+    public  void submitFor_Approval_City(){
+        try{
+            progress.show();
+            System.out.println("In User Login Method 1");
+            progress.show();
+            OkHttpClient.Builder client = new OkHttpClient.Builder();
+            HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
+            registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            client.addInterceptor(registrationInterceptor);
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(Constants.BASE_URL)
+                    .client(client.build())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            System.out.println("In User Login Method 2");
+            ApiInterface request = retrofit.create(ApiInterface.class);
+            AddLocationServicesbyCity_Request lservice_request = new AddLocationServicesbyCity_Request();
+
+
+            //lservice_request.setUser_ID(gUserId_FromLogin);
+            lservice_request.setUser_ID(gUserId_FromLogin);
+            lservice_request.setCity_ID(gCityId_toApi);
+            lservice_request.setService_ID(SelectedSubServiceID);
+            lservice_request.setDocket(Constants.TOKEN);
+
+            if (AppicationClass.getPremium_PartenerId().equals("1")){
+                lservice_request.setService_Amount(SelectedSubServiceAmmout);
+                // lservice_request.setService_Mapping_ID(SelectedSubServiceID);
+            }
+
+            Call<AddLocationServicesbyCity_Response> call = request.Add_LocationbyCity(lservice_request);
+            call.enqueue(new Callback<AddLocationServicesbyCity_Response>() {
+                @Override
+                public void onResponse(Call<AddLocationServicesbyCity_Response> call, Response<AddLocationServicesbyCity_Response> response) {
+                    if(response.isSuccessful()){
+
+                        AddLocationServicesbyCity_Response lservice_response = response.body();
+
+                        if(lservice_response.getPartner_add_location_services_approval_response().equals("Valid")){
+                            Toast.makeText(ServicesAdd_Activity.this, "Submitted Successfully", Toast.LENGTH_SHORT).show();
+                            subService_List(gServiceId_FromService);
+
+                            gWaitingforapproval_button.setVisibility(View.VISIBLE);
+                            gSubmitforapproval_button_Radius.setVisibility(View.GONE);
+                            gSubmitforapproval_button_Citywise.setVisibility(View.GONE);
+                            gSubmitforapproval_button_Statewise.setVisibility(View.GONE);
+
+                            AppicationClass.addLocation.clear();
+                            AppicationClass.addserviceammount.clear();
+                            AppicationClass.addservicemapingid.clear();
+                            AppicationClass.addlocationservicecities.clear();;
+
+                            startActivity(new Intent
+                                    (ServicesAdd_Activity.this,ServicePersonHome_Activity.class).putExtra("HomeScreenFlow","fromserviceadd"));
+                            finish();
+                            progress.dismiss();
+                        }
+                        else{
+                            Toast.makeText(ServicesAdd_Activity.this, lservice_response.getPartner_add_location_services_approval_response(), Toast.LENGTH_SHORT).show();
+
+                            subService_List(gServiceId_FromService);
+                            AppicationClass.addLocation.clear();
+                            AppicationClass.addserviceammount.clear();
+                            AppicationClass.addservicemapingid.clear();
+                            SelectedSubServiceID = "";
+                            SelectedSubServiceAmmout = "";
+                            SelectedLocationID = "";
+
+                            progress.dismiss();
+
+                        }
+
+                        progress.dismiss();
+
+
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<AddLocationServicesbyCity_Response> call, Throwable t) {
+                    Toast.makeText(ServicesAdd_Activity.this, getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
+
+                    progress.dismiss();
+                }
+            });
+
+
+
+        }
+
+        catch (Exception e) {
+            System.out.println("In User Login Method 8");
+            e.printStackTrace();
+            progress.dismiss();
+
+        }
+    }
+
+    //Add Location and Services by State
+    public  void submitFor_Approval_State(){
+        try{
+            progress.show();
+            System.out.println("In User Login Method 1");
+            progress.show();
+            OkHttpClient.Builder client = new OkHttpClient.Builder();
+            HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
+            registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            client.addInterceptor(registrationInterceptor);
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(Constants.BASE_URL)
+                    .client(client.build())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            System.out.println("In User Login Method 2");
+            ApiInterface request = retrofit.create(ApiInterface.class);
+            AddLocationServicesbyState_Request lservice_request = new AddLocationServicesbyState_Request();
+
+
+            //lservice_request.setUser_ID(gUserId_FromLogin);
+            lservice_request.setUser_ID(gUserId_FromLogin);
+            lservice_request.setState_ID(gStateId_toApi);
+            lservice_request.setService_ID(SelectedSubServiceID);
+            lservice_request.setDocket(Constants.TOKEN);
+
+            if (AppicationClass.getPremium_PartenerId().equals("1")){
+                lservice_request.setService_Amount(SelectedSubServiceAmmout);
+                // lservice_request.setService_Mapping_ID(SelectedSubServiceID);
+            }
+
+            Call<AddLocationServicesbyState_Response> call = request.Add_LocationbyState(lservice_request);
+            call.enqueue(new Callback<AddLocationServicesbyState_Response>() {
+                @Override
+                public void onResponse(Call<AddLocationServicesbyState_Response> call, Response<AddLocationServicesbyState_Response> response) {
+                    if(response.isSuccessful()){
+
+                        AddLocationServicesbyState_Response lservice_response = response.body();
+
+                        if(lservice_response.getPartner_add_location_services_approval_response().equals("Valid")){
+                            Toast.makeText(ServicesAdd_Activity.this, "Submitted Successfully", Toast.LENGTH_SHORT).show();
+                            subService_List(gServiceId_FromService);
+
+                            gWaitingforapproval_button.setVisibility(View.VISIBLE);
+                            gSubmitforapproval_button_Radius.setVisibility(View.GONE);
+                            gSubmitforapproval_button_Citywise.setVisibility(View.GONE);
+                            gSubmitforapproval_button_Statewise.setVisibility(View.GONE);
+
+                            AppicationClass.addLocation.clear();
+                            AppicationClass.addserviceammount.clear();
+                            AppicationClass.addservicemapingid.clear();
+
+
+                            startActivity(new Intent(ServicesAdd_Activity.this,ServicePersonHome_Activity.class).putExtra("HomeScreenFlow","fromserviceadd"));
+                            finish();
+                            progress.dismiss();
+                        }
+                        else{
+                            Toast.makeText(ServicesAdd_Activity.this, lservice_response.getPartner_add_location_services_approval_response(), Toast.LENGTH_SHORT).show();
+
+                            subService_List(gServiceId_FromService);
+                            AppicationClass.addLocation.clear();
+                            AppicationClass.addserviceammount.clear();
+                            AppicationClass.addservicemapingid.clear();
+                            SelectedSubServiceID = "";
+                            SelectedSubServiceAmmout = "";
+                            SelectedLocationID = "";
+
+                            progress.dismiss();
+
+                        }
+
+
+                        progress.dismiss();
+
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<AddLocationServicesbyState_Response> call, Throwable t) {
+                    Toast.makeText(ServicesAdd_Activity.this, getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
+
+                    progress.dismiss();
+                }
+            });
+
+
+
+        }
+
+        catch (Exception e) {
+            System.out.println("In User Login Method 8");
+            e.printStackTrace();
+            progress.dismiss();
+
+        }
+    }
+
+
+
+    @Override
+    public void getradiuslist(String zipcode, String kms, int position) {
+
+    }
+
+
 
 }

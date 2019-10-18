@@ -43,9 +43,15 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.MyViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.cities.setText(noCity.get(position));
+        holder.cities.setText(noCity.get(position) + " Cities Selected ");
         holder.states.setText(state.get(position));
+        holder.RemoveText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                removeAt(position);
+            }
+        });
     }
 
 
@@ -57,13 +63,22 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.MyViewHolder>{
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView states ;
         TextView cities;
+        TextView RemoveText;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             cities = itemView.findViewById(R.id.noOfCities);
             states = itemView.findViewById(R.id.stateName);
-
+            RemoveText= itemView.findViewById(R.id.removetext);
 
         }
+    }
+
+    public void removeAt(int position) {
+        state.remove(position);
+        noCity.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, state.size());
+        notifyItemRangeChanged(position, noCity.size());
     }
 }

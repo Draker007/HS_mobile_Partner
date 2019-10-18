@@ -81,6 +81,8 @@ public class ServicePersonHome_Activity extends AppCompatActivity {
         Intent lintent = this.getIntent();
         HomeScreen_Flow = lintent.getStringExtra("HomeScreenFlow");
 
+        System.out.println("Service Person screen flow is " + HomeScreen_Flow);
+
         SharedPreferences sp1 =ServicePersonHome_Activity.this.getSharedPreferences("User_Info", 0);
         gUserId_FromLogin = sp1.getString("User_Id", null);
         gUserName_FromLogin= sp1.getString("User_Name", null);
@@ -100,6 +102,11 @@ public class ServicePersonHome_Activity extends AppCompatActivity {
         if(HomeScreen_Flow.equals("fromcreateprofile")){
             System.out.println("In Homesceen entering into fromcreateprofile");
             fragment = new Profile_Fragment();
+        }
+
+        if(HomeScreen_Flow.equals("fromserviceadd")){
+            System.out.println("In Homesceen entering into Service Add");
+            fragment = new MyTask_Fragment();
         }
 
 

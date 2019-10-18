@@ -4,7 +4,9 @@ public class spinnerData {
     private String title;
     private boolean selected;
 
+    private String StateId;
 
+    private String CityId;
     public String getTitle() {
         return title;
     }
@@ -19,5 +21,21 @@ public class spinnerData {
 
     public void setSelected(boolean selected) {
         this.selected = selected;
+    }
+
+    public String getStateId() {
+        return StateId;
+    }
+
+    public void setStateId(String stateId) {
+        StateId = stateId;
+    }
+
+    public String getCityId() {
+        return CityId;
+    }
+
+    public void setCityId(String cityId) {
+        CityId = cityId;
     }
 }

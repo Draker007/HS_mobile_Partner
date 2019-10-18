@@ -29,11 +29,13 @@
         app:layout_constraintTop_toTopOf="@+id/stateName" />
 
     <TextView
-        android:id="@+id/textView46"
+        android:id="@+id/removetext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Cities Selected"
+        android:text="remove"
+        android:textColor="@color/color_red"
+        android:layout_marginLeft="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/noOfCities"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

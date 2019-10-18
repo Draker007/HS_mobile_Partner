@@ -17,15 +17,17 @@ import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.utils.AppicationClass;
 import service.com.surebot.info.serviceperson.utils.spinnerData;
 
-public class SpinnerWithCheckBoxAdapter extends ArrayAdapter<spinnerData> {
+
+
+public class SpinnerWithCheckBoxStates_Adapter extends ArrayAdapter<spinnerData> {
 
     private Context mContext;
     private ArrayList<spinnerData> listState;
-    private SpinnerWithCheckBoxAdapter myAdapter;
+    private SpinnerWithCheckBoxStates_Adapter myAdapter;
     ArrayList<String> checkedItem = new ArrayList<>();
     private boolean isFromView = false;
 
-    public SpinnerWithCheckBoxAdapter(Context context, int resource, List<spinnerData> objects) {
+    public SpinnerWithCheckBoxStates_Adapter(Context context, int resource, List<spinnerData> objects) {
         super(context, resource, objects);
         this.mContext = context;
         this.listState = (ArrayList<spinnerData>) objects;
@@ -62,19 +64,12 @@ public class SpinnerWithCheckBoxAdapter extends ArrayAdapter<spinnerData> {
 
 
 
-       /* holder.mCheckBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AppicationClass.addlocationservicecities.add(listState.get(position).getCityId());
 
-
-            }
-        });*/
 
 
 
         holder.mTextView.setText(listState.get(position).getTitle());
-      //  AppicationClass.Constants.BASE_URL.add(listState.get(position).getCityId());
+        //  AppicationClass.addlocationservicecities.add(listState.get(position).getStateId());
         // To check weather checked event fire from getview() or user input
         isFromView = true;
         holder.mCheckBox.setChecked(listState.get(position).isSelected());
@@ -99,15 +94,15 @@ public class SpinnerWithCheckBoxAdapter extends ArrayAdapter<spinnerData> {
                         System.out.println("Checked States from States List " + String.valueOf(position));
 
 
-                        AppicationClass.addlocationservicecities.add(listState.get(position).getCityId());
+                        AppicationClass.addlocationservicestates.add(listState.get(position).getStateId());
 
-                        System.out.println("In Cities Adapter Checked Items addedd " +   AppicationClass.addlocationservicecities.size());
+                        System.out.println("In Cities Adapter Checked Items addedd " +   AppicationClass.addlocationservicestates.size());
 
                     }else if(checkedItem.contains(position))
                     {
-                        System.out.println("In Cities Adapter Checked Items removed " +   AppicationClass.addlocationservicecities.size());
+                        System.out.println("In Cities Adapter Checked Items removed " +   AppicationClass.addlocationservicestates.size());
                         checkedItem.remove(position);
-                        AppicationClass.addlocationservicecities.remove(listState.get(position).getCityId());
+                        AppicationClass.addlocationservicestates.remove(listState.get(position).getStateId());
                     }
                     Log.e("hihi", "onCheckedChanged: here"+position+isChecked );
 
@@ -120,15 +115,12 @@ public class SpinnerWithCheckBoxAdapter extends ArrayAdapter<spinnerData> {
     }
 
 
-public ArrayList getCheckedItems(){
+    public ArrayList getCheckedItems(){
         return checkedItem ;
-}
+    }
 
     private class ViewHolder {
         private TextView mTextView;
         private CheckBox mCheckBox;
     }
 }
-
-
-

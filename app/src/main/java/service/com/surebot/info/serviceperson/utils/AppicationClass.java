@@ -13,7 +13,9 @@ public class AppicationClass {
     public static ArrayList<String> addserviceammount =new ArrayList<>();
     public static ArrayList<String> addLocation =new ArrayList<>();
 
+    public static ArrayList<String> addlocationservicecities =new ArrayList<>();
 
+    public static ArrayList<String> addlocationservicestates =new ArrayList<>();
     public static ArrayList<String> addAwardsDetails =new ArrayList<>();
 
     public static ArrayList<String> getAwardsDetails =new ArrayList<>();
@@ -115,5 +117,21 @@ public class AppicationClass {
 
     public static void setGetAwardsDetails(ArrayList<String> getAwardsDetails) {
         AppicationClass.getAwardsDetails = getAwardsDetails;
+    }
+
+    public static ArrayList<String> getAddlocationservicecities() {
+        return addlocationservicecities;
+    }
+
+    public static void setAddlocationservicecities(ArrayList<String> addlocationservicecities) {
+        AppicationClass.addlocationservicecities = addlocationservicecities;
+    }
+
+    public static ArrayList<String> getAddlocationservicestates() {
+        return addlocationservicestates;
+    }
+
+    public static void setAddlocationservicestates(ArrayList<String> addlocationservicestates) {
+        AppicationClass.addlocationservicestates = addlocationservicestates;
     }
 }

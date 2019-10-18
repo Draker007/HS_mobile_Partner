@@ -120,8 +120,10 @@ public class AddSubServicesList_Adapter extends RecyclerView.Adapter<AddSubServi
             public void onClick(View view) {
                if(AppicationClass.addserviceammount.contains(gSubServicesList_Arraylist.get(position).getService_Mapping_ID())){
                 AppicationClass.addserviceammount.remove(gSubServicesList_Arraylist.get(position).getService_Mapping_ID());
-                }else
-                    AppicationClass.addserviceammount.add(gSubServicesList_Arraylist.get(position).getService_Mapping_ID());
+                }else{
+                   AppicationClass.addserviceammount.add(gSubServicesList_Arraylist.get(position).getService_Mapping_ID());
+               }
+
             }
         });
 
