@@ -1,13 +1,11 @@
 package service.com.surebot.info.serviceperson.Adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -17,15 +15,15 @@ import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.utils.AppicationClass;
 import service.com.surebot.info.serviceperson.utils.spinnerData;
 
-public class SpinnerWithCheckBoxAdapter extends ArrayAdapter<spinnerData> {
+public class SubServicessAdd_Adapter extends ArrayAdapter<spinnerData> {
 
     private Context mContext;
     private ArrayList<spinnerData> listState;
-    private SpinnerWithCheckBoxAdapter myAdapter;
+    private SubServicessAdd_Adapter myAdapter;
     ArrayList<String> checkedItem = new ArrayList<>();
     private boolean isFromView = false;
 
-    public SpinnerWithCheckBoxAdapter(Context context, int resource, List<spinnerData> objects) {
+    public SubServicessAdd_Adapter(Context context, int resource, List<spinnerData> objects) {
         super(context, resource, objects);
         this.mContext = context;
         this.listState = (ArrayList<spinnerData>) objects;
@@ -48,18 +46,18 @@ public class SpinnerWithCheckBoxAdapter extends ArrayAdapter<spinnerData> {
     public View getCustomView(final int position, View convertView,
                               ViewGroup parent) {
 
-        final ViewHolder holder;
+        final SubServicessAdd_Adapter.ViewHolder holder;
         if (convertView == null) {
             LayoutInflater layoutInflator = LayoutInflater.from(mContext);
             convertView = layoutInflator.inflate(R.layout.spinner_checkbox, null);
-            holder = new ViewHolder();
+            holder = new SubServicessAdd_Adapter.ViewHolder();
             holder.mTextView = (TextView) convertView
                     .findViewById(R.id.spinnerText);
             holder.mCheckBox = (CheckBox) convertView
                     .findViewById(R.id.spinnerCheckbox);
             convertView.setTag(holder);
         } else {
-            holder = (ViewHolder) convertView.getTag();
+            holder = (SubServicessAdd_Adapter.ViewHolder) convertView.getTag();
         }
 
 
@@ -76,7 +74,7 @@ public class SpinnerWithCheckBoxAdapter extends ArrayAdapter<spinnerData> {
 
 
         holder.mTextView.setText(listState.get(position).getTitle());
-      //  AppicationClass.Constants.BASE_URL.add(listState.get(position).getCityId());
+        //  AppicationClass.Constants.BASE_URL.add(listState.get(position).getCityId());
 
 
         // To check weather checked event fire from getview() or user input
@@ -167,15 +165,14 @@ public class SpinnerWithCheckBoxAdapter extends ArrayAdapter<spinnerData> {
     }
 
 
-public ArrayList getCheckedItems(){
+    public ArrayList getCheckedItems(){
         return checkedItem ;
-}
+    }
 
     private class ViewHolder {
         private TextView mTextView;
         private CheckBox mCheckBox;
     }
+
+
 }
-
-
-

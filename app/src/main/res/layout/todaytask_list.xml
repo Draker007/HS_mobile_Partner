@@ -127,7 +127,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <com.google.android.gms.maps.MapView
                 android:id="@+id/mapView"
@@ -150,9 +150,23 @@
                 android:layout_marginBottom="10dp"
                 />&ndash;&gt;
             </FrameLayout>-->
+
+            <Button
+                android:id="@+id/updatefinalprice_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/finalprice"
+                android:textColor="@color/color_blue"
+                android:fontFamily="@font/montserrat"
+                android:textAllCaps="false"
+                android:background="@drawable/updatefinalpricebuttonbackground"
+                android:layout_marginTop="10dp"
+                />
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                >
 
                 <Button
                     android:id="@+id/cancel_button"

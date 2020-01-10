@@ -7,6 +7,12 @@ public class spinnerData {
     private String StateId;
 
     private String CityId;
+
+    private String PartnerStatus;
+
+
+    private String State_status;
+
     public String getTitle() {
         return title;
     }
@@ -37,5 +43,21 @@ public class spinnerData {
 
     public void setCityId(String cityId) {
         CityId = cityId;
+    }
+
+    public String getState_status() {
+        return State_status;
+    }
+
+    public void setState_status(String state_status) {
+        State_status = state_status;
+    }
+
+    public String getPartnerStatus() {
+        return PartnerStatus;
+    }
+
+    public void setPartnerStatus(String partnerStatus) {
+        PartnerStatus = partnerStatus;
     }
 }

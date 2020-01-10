@@ -21,6 +21,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import service.com.surebot.info.serviceperson.R;
+import service.com.surebot.info.serviceperson.ResponseClass.GetSubServicesByZipcode_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.ListOfSubServices_Response;
 import service.com.surebot.info.serviceperson.utils.AppicationClass;
 
@@ -28,16 +29,25 @@ import service.com.surebot.info.serviceperson.utils.AppicationClass;
 public class AddSubServicesList_Adapter extends RecyclerView.Adapter<AddSubServicesList_Adapter.MyViewHolder> {
 
     Context context;
-    ArrayList<ListOfSubServices_Response.ListOfSubServices_Records> gSubServicesList_Arraylist;
+  //  ArrayList<ListOfSubServices_Response.ListOfSubServices_Records> gSubServicesList_Arraylist;
+
+ //   ArrayList<GetSubServicesByZipcode_Response.GetSubServicesByZipcode_Details> gSubServicesList_Arraylist;
     ArrayList<String> SubServiceData = new ArrayList<>();
 
     ArrayList<String> addedSubService = new ArrayList<>();
 
    String gPremiumPartner_Id = AppicationClass.getPremium_PartenerId();
 
-    public AddSubServicesList_Adapter(Context context,  ArrayList<ListOfSubServices_Response.ListOfSubServices_Records> gSubServicesList_Arraylist) {
+    ArrayList<ListOfSubServices_Response.ListOfSubServices_Records> gSubServicesList_Arraylist;
+
+    public AddSubServicesList_Adapter(Context context,   ArrayList<ListOfSubServices_Response.ListOfSubServices_Records> gSubServicesList_Arraylist) {
         this.context=context;
         this.gSubServicesList_Arraylist=gSubServicesList_Arraylist;
+
+        AppicationClass.addservicemapingid.clear();
+
+
+        AppicationClass.addserviceammount.clear();
     }
 
     @NonNull
@@ -45,33 +55,62 @@ public class AddSubServicesList_Adapter extends RecyclerView.Adapter<AddSubServi
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.addsubservicesadapter_list, viewGroup, false);
         return new AddSubServicesList_Adapter.MyViewHolder(view);
+
         // return null;
     }
 
     @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, final int position) {
+        ListOfSubServices_Response.ListOfSubServices_Records item = gSubServicesList_Arraylist.get(position);
+        System.out.println("Premium partner Id is " + gPremiumPartner_Id);
 
-      System.out.println("Premium partner Id is " + gPremiumPartner_Id);
+        if (gPremiumPartner_Id.equals("1")) {
 
-        if(gPremiumPartner_Id.equals("1")){
+            System.out.println("In Sub Adapter entering into 1");
             myViewHolder.lPrice.setVisibility(View.VISIBLE);
             myViewHolder.lQuantityCheckBox.setVisibility(View.GONE);
-            if(gSubServicesList_Arraylist.get(position).getService_Is_There().equals("Exists")){
-                myViewHolder.lPrice.setText(gSubServicesList_Arraylist.get(position).getService_Amount());
-                if(!gSubServicesList_Arraylist.get(position).getService_Amount().equals(""))
-                AppicationClass.addservicemapingid.add(gSubServicesList_Arraylist.get(position).getService_Mapping_ID()+","+ gSubServicesList_Arraylist.get(position).getService_Amount());
+            if (gSubServicesList_Arraylist.get(position).getService_Is_There().equals("Exists")) {
+                if (gSubServicesList_Arraylist.get(position).getService_Amount() != null) {
+                    myViewHolder.lQuantityCheckBox.setChecked(true);
+                    myViewHolder.lPrice.setText(gSubServicesList_Arraylist.get(position).getService_Amount());
+                }
+
+                if (!gSubServicesList_Arraylist.get(position).getService_Amount().equals("")) {
+
+                    System.out.println("In Adapter Service ammount is " + gSubServicesList_Arraylist.get(position).getService_Amount());
+                    AppicationClass.addserviceammount.add(gSubServicesList_Arraylist.get(position).getService_Amount());
+                    AppicationClass.addservicemapingid.add(gSubServicesList_Arraylist.get(position).getService_Mapping_ID());
+                }
+                //   AppicationClass.addservicemapingid.add(gSubServicesList_Arraylist.get(position).getService_Mapping_ID()+","+ gSubServicesList_Arraylist.get(position).getService_Amount());
             }
 
         }
 
-        if(gPremiumPartner_Id.equals("0")){
+        if (gPremiumPartner_Id.equals("0")) {
+            // System.out.println("In Sub Adapter entering into 0");
             myViewHolder.lQuantityCheckBox.setVisibility(View.VISIBLE);
             myViewHolder.lPrice.setVisibility(View.GONE);
-            if(gSubServicesList_Arraylist.get(position).getService_Is_There().equals("Exists")){
-                myViewHolder.lQuantityCheckBox.setChecked(true);
 
-                AppicationClass.addserviceammount.add(gSubServicesList_Arraylist.get(position).getService_Mapping_ID());
+            // if(gSubServicesList_Arraylist.get(position).getService_Is_There().equals("Exists")){
+            myViewHolder.lQuantityCheckBox.setChecked(false);
+            if (!AppicationClass.addservicemapingid.contains(gSubServicesList_Arraylist.get(position).getService_Mapping_ID())) {
+
+                if (gSubServicesList_Arraylist.get(position).getService_Is_There().equals("Exists")) {
+                    myViewHolder.lQuantityCheckBox.setChecked(true);
+                    AppicationClass.addservicemapingid.add(gSubServicesList_Arraylist.get(position).getService_Mapping_ID());
+
+                }
+                System.out.println("In Sub Adapter entering into 0 if exists");
+
+            }
+
+
+            //// }
+
+            else {
+
+                myViewHolder.lQuantityCheckBox.setChecked(false);
             }
 
         }
@@ -91,38 +130,88 @@ public class AddSubServicesList_Adapter extends RecyclerView.Adapter<AddSubServi
 
 
         myViewHolder.lSubServicesName_Text.setText(gSubServicesList_Arraylist.get(position).getService_Name());
+
+
         myViewHolder.lPrice.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+                System.out.println("Service ammount inside beforeTextChanged " + charSequence.toString());
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (charSequence!=null) {
+
+              /*  if (charSequence!=null) {
 
                 //    SubServiceData.add(position,charSequence.toString());
 
                     if(charSequence.length() >0) {
-                        AppicationClass.addservicemapingid.add(gSubServicesList_Arraylist.get(position).getService_Mapping_ID()+","+ charSequence.toString());
+                      //  AppicationClass.addserviceammount.add(charSequence.toString());
+                        AppicationClass.addnewserviceammount.add(gSubServicesList_Arraylist.get(position).getService_Mapping_ID()+","+charSequence.toString());
+                        System.out.println("Service ammount inside onTextChanged " + charSequence.toString());
                     }
 
-                }}
+                }*/
+
+            }
 
             @Override
             public void afterTextChanged(Editable editable) {
 
+
+
+                if (editable!=null) {
+                    System.out.println("In service add adapter entering in first if");
+                    if(editable.length() >0) {
+
+
+                        String enteredamount = editable.toString();
+
+
+
+                      System.out.println("In service add adapter entering in second if" + enteredamount);
+
+
+
+                        AppicationClass.addnewserviceammount.add(gSubServicesList_Arraylist.get(position).getService_Mapping_ID()+","+editable.toString());
+                    }
+
+                    System.out.println("In service add adapter entering in second else");
+                }
+                System.out.println("In service add adapter entering in second else");
+                System.out.println("Service ammount inside afterTextChanged " + editable.toString());
             }
-        });
+    });
+
+
+
+
+
 
         myViewHolder.lQuantityCheckBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               if(AppicationClass.addserviceammount.contains(gSubServicesList_Arraylist.get(position).getService_Mapping_ID())){
-                AppicationClass.addserviceammount.remove(gSubServicesList_Arraylist.get(position).getService_Mapping_ID());
+
+                if(myViewHolder.lQuantityCheckBox.isChecked()){
+                    AppicationClass.addservicemapingid.add(gSubServicesList_Arraylist.get(position).getService_Mapping_ID());
+                    myViewHolder.lQuantityCheckBox.setChecked(true);
+
+
+                }
+else{
+                    if(AppicationClass.addservicemapingid.contains(gSubServicesList_Arraylist.get(position).getService_Mapping_ID())){
+                        AppicationClass.addservicemapingid.remove(gSubServicesList_Arraylist.get(position).getService_Mapping_ID());
+                        myViewHolder.lQuantityCheckBox.setChecked(false);
+                    }
+
+                 //   AppicationClass.addservicemapingid.remove(gSubServicesList_Arraylist.get(position).getService_Mapping_ID());
+                }
+/*
+               if(AppicationClass.addservicemapingid.contains(gSubServicesList_Arraylist.get(position).getService_Mapping_ID())){
+                AppicationClass.addservicemapingid.remove(gSubServicesList_Arraylist.get(position).getService_Mapping_ID());
                 }else{
-                   AppicationClass.addserviceammount.add(gSubServicesList_Arraylist.get(position).getService_Mapping_ID());
-               }
+                   AppicationClass.addservicemapingid.add(gSubServicesList_Arraylist.get(position).getService_Mapping_ID());
+               }*/
 
             }
         });

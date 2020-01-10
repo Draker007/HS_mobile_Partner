@@ -154,8 +154,8 @@ public class Login_Activity extends AppCompatActivity {
 
             ApiInterface request = retrofit.create(ApiInterface.class);
             Partnerlogin_Request partnerLandingPage = new Partnerlogin_Request();
-            partnerLandingPage.setEmail(gUserName_Text.getText().toString());
-            partnerLandingPage.setPassword(gUserPassword_Text.getText().toString());
+            partnerLandingPage.setEmail(gUserName_Text.getText().toString().trim());
+            partnerLandingPage.setPassword(gUserPassword_Text.getText().toString().trim());
             partnerLandingPage.setDocket(Constants.TOKEN);
 
             Call<Partnerlogin_Response> call = request.partnerlogin(partnerLandingPage);

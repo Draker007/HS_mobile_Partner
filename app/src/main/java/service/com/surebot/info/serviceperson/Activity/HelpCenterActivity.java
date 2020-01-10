@@ -46,14 +46,14 @@ public class HelpCenterActivity extends AppCompatActivity {
 
     faqAdapter adapter;
 
-    private Dialog progress;
+    private Dialog progress;    String gUserId_FromLogin;
+
 
 
     ArrayList<ListofFaqs_Response.ListofFaqs_Records> gListofFaqs_Arraylist;
 
     LinearLayoutManager llm;
 
-    String gUserId_FromLogin;
 
     @SuppressLint("WrongConstant")
     @Override
@@ -148,11 +148,13 @@ public class HelpCenterActivity extends AppCompatActivity {
                         ListofFaqs_Response lListofFaqs_Response = response.body();
 
                         gListofFaqs_Arraylist = new ArrayList<>(Arrays.asList(lListofFaqs_Response.getFaqs_response()));
+if(!gListofFaqs_Arraylist.get(0).getQuestion_ID().equals("No Results Found")){
+    System.out.println("Faq Array Size is " + gListofFaqs_Arraylist.size());
+    adapter = new faqAdapter(HelpCenterActivity.this,gListofFaqs_Arraylist);
+    recyclerView.setAdapter(adapter);
+    recyclerView.setHasFixedSize(true);
+}
 
-                        System.out.println("Faq Array Size is " + gListofFaqs_Arraylist.size());
-                        adapter = new faqAdapter(HelpCenterActivity.this,gListofFaqs_Arraylist);
-                        recyclerView.setAdapter(adapter);
-                        recyclerView.setHasFixedSize(true);
 
                         progress.dismiss();
                     }

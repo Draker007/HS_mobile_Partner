@@ -1,12 +1,15 @@
 package service.com.surebot.info.serviceperson.Adapter;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -146,7 +149,45 @@ public class TodaysTask_Adapter extends RecyclerView.Adapter<TodaysTask_Adapter.
             @Override
             public void onClick(View view) {
 
-                communicator.startservice(lTodaysTask_Arraylist.get(position).getTransaction_ID(),"1");
+               // communicator.startservice(lTodaysTask_Arraylist.get(position).getTransaction_ID(),"1");
+
+
+
+                //startservice_popup
+
+                Dialog gStartService_Dialog;
+                gStartService_Dialog = new Dialog(context, R.style.dailogboxtheme);
+                gStartService_Dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                gStartService_Dialog.getWindow().setBackgroundDrawableResource(R.color.color_transparen);
+                gStartService_Dialog.setContentView(R.layout.startservice_popup);
+
+                TextView lSend_text = gStartService_Dialog.findViewById(R.id.send_text);
+
+                Button lStartservicebyissueprice_button = gStartService_Dialog.findViewById(R.id.startservicebyissueprice_button);
+
+                Button lStartservicebyfinalprice_button = gStartService_Dialog.findViewById(R.id.startservicebyfinalprice_button);
+
+
+                lStartservicebyissueprice_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        lStartservicebyfinalprice_button.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.updatefinalpricebuttonbackground));
+                        lStartservicebyissueprice_button.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.buttonblue_background));
+                        communicator.startservice(lTodaysTask_Arraylist.get(position).getTransaction_ID(),"1");
+                    }
+                });
+
+                lStartservicebyfinalprice_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        lStartservicebyissueprice_button.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.updatefinalpricebuttonbackground));
+                        lStartservicebyfinalprice_button.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.buttonblue_background));
+                        communicator.startservice(lTodaysTask_Arraylist.get(position).getTransaction_ID(),"1");
+                    }
+                });
+
+                gStartService_Dialog.show();
+
             }
         });
 
@@ -156,6 +197,34 @@ public class TodaysTask_Adapter extends RecyclerView.Adapter<TodaysTask_Adapter.
             public void onClick(View view) {
 
                 communicator.startservice(lTodaysTask_Arraylist.get(position).getTransaction_ID(),"0");
+            }
+        });
+
+
+        //Update final price popup
+        myViewHolder.updatefinalprice_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Dialog gUpdateFinalPrice_Dialog;
+                gUpdateFinalPrice_Dialog = new Dialog(context, R.style.dailogboxtheme);
+                gUpdateFinalPrice_Dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                gUpdateFinalPrice_Dialog.getWindow().setBackgroundDrawableResource(R.color.color_transparen);
+                gUpdateFinalPrice_Dialog.setContentView(R.layout.updatefinalprice_popup);
+
+                TextView lSend_text = gUpdateFinalPrice_Dialog.findViewById(R.id.send_text);
+                EditText lEnterfinalprice_text= gUpdateFinalPrice_Dialog.findViewById(R.id.enterfinalprice_text);
+                EditText lEnterreason= gUpdateFinalPrice_Dialog.findViewById(R.id.enterreason);
+
+
+                lSend_text.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                });
+                gUpdateFinalPrice_Dialog.show();
+
+
             }
         });
 
@@ -190,7 +259,7 @@ public class TodaysTask_Adapter extends RecyclerView.Adapter<TodaysTask_Adapter.
         public TextView username_text,date_text,time_text,useraddress_text,userphonenumber_text,requestID_text,moreheader_text,more;
         public MapView map;
         public LinearLayout map_layout;
-        Button cancel,start;
+        Button cancel,start,updatefinalprice_button;
         ImageView hide;
         public GoogleMap mapCurrnet;
         public  UserAddress_Location item;
@@ -205,6 +274,7 @@ public class TodaysTask_Adapter extends RecyclerView.Adapter<TodaysTask_Adapter.
             userphonenumber_text = (TextView) itemView.findViewById(R.id.userphonenumber_text);
             requestID_text = (TextView) itemView.findViewById(R.id.requestID_text);
             moreheader_text = (TextView) itemView.findViewById(R.id.moreheader_text);
+            updatefinalprice_button = (Button) itemView.findViewById(R.id.updatefinalprice_button);
             cancel = (Button) itemView.findViewById(R.id.cancel_button);
             start = (Button) itemView.findViewById(R.id.startservice_button);
             map_layout = itemView.findViewById(R.id.map_layout);

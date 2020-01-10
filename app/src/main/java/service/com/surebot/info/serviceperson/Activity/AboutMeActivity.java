@@ -78,7 +78,7 @@ public class AboutMeActivity extends AppCompatActivity {
 
                 if(!gIntoroduction_text.getText().toString().trim().equals("")){
 
-                    if(!gExperience_Text.getText().toString().trim().equals("")){
+                    if( !gExperience_Text.getText().toString().trim().equals("")){
 
                         add_AboutmeData();
                     }

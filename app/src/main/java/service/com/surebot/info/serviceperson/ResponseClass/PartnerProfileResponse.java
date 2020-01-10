@@ -3,6 +3,15 @@ package service.com.surebot.info.serviceperson.ResponseClass;
 public class PartnerProfileResponse {
     private PartnerProfileRecords [] partner_profile_details;
     private String Status_Response;
+    private String partner_profile_status;
+
+    public String getPartner_profile_status() {
+        return partner_profile_status;
+    }
+
+    public void setPartner_profile_status(String partner_profile_status) {
+        this.partner_profile_status = partner_profile_status;
+    }
 
     public String getStatus_Response() {
         return Status_Response;

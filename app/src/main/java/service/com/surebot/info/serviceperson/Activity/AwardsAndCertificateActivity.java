@@ -202,7 +202,7 @@ public class AwardsAndCertificateActivity extends AppCompatActivity implements a
 
             ApiInterface request = retrofit.create(ApiInterface.class);
 
-            builder.addFormDataPart("User_ID","1");
+            builder.addFormDataPart("User_ID",AppicationClass.getUserId_FromLogin());
 
             builder.addFormDataPart("docket",Constants.TOKEN);
 
@@ -518,7 +518,7 @@ public class AwardsAndCertificateActivity extends AppCompatActivity implements a
             GetAwardsDetails_Request lGetAwardsDetails_Request = new GetAwardsDetails_Request();
 
             lGetAwardsDetails_Request.setDocket(Constants.TOKEN);
-            lGetAwardsDetails_Request.setUser_ID("1");
+            lGetAwardsDetails_Request.setUser_ID(AppicationClass.getUserId_FromLogin());
 
             Call<GetAwardsDetails_Response> call = request.Get_AwardsDetails(lGetAwardsDetails_Request);
             call.enqueue(new Callback<GetAwardsDetails_Response>() {

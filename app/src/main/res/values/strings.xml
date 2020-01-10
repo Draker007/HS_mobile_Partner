@@ -2,7 +2,7 @@
     <string name="app_name">HS12ServicePerson</string>
 
     <!--Login-->
-    <string name="login">Login</string>
+    <string name="login">Service Peroson Login</string>
     <string name="forgot">Forgot Password ?</string>
     <string name="username_hint"><font size="14">Email_id/Phone number</font></string>
 
@@ -25,7 +25,7 @@
     <string name="radiofemale"><font size="14">Female</font></string>
     <string name="radioothers"><font size="14">Others</font></string>
 
-    <!-- Bottom navigation-->
+    <!-- Bottom navigation-->'
     <string name="home_menu">My Task</string>
     <string name="profile_menu">Profile</string>
     <string name="request_menu">Requests</string>
@@ -33,6 +33,16 @@
 
     <!-- Home My Task Screen-->
     <string name="no_task">Your task is empty, Please fill your profile details to get your task</string>
+    <string name="finalprice">Update final price</string>
+
+    <string name="reasonforfinalprice"><font size="14">Reason for  extra charge..</font></string>
+    <string name="sendbutton"> Send </string>
+    <string name="enterprice">Enter your final price</string>
+
+
+    <string name="startserviceheader">Start your service by</string>
+    <string name="startservice1">Issue Description</string>
+    <string name="startservice2">Final price</string>
 
     <!-- create your profile-->
     <string name="tobefilled1">* Complete your profile </string>
@@ -45,6 +55,13 @@
 
     <string name="qoutewillsend">Your Qutotation will be sent to the requested user</string>
     <string name="rupies">\u20B9</string>
+    <string name="admincharge">\u20B9 100</string>
+    @string/rupies
+    <string name="quotecoustomer">Note to coustomers</string>
+    <string name="adminfee">Admin fee</string>
+    <string name="convcharge">"Convenience Charge"</string>
+    <string name="enterammount">"Enter ammount"</string>
+    <string name="enterpartnerquote"><font size="14"> Type here..."</font></string>
 
 
     <!-- Add Services-->
@@ -73,12 +90,19 @@
 
     <string name="selectstate">Select State</string>
     <string name="selectstateid">State Id</string>
+    <string name="selectstatestatus">State status</string>
 
     <string name="selectcity">Select Cities</string>
     <string name="selectcityid">City Id</string>
+    <string name="selectcityidpartnerstatus">Parnter Status</string>
 
     <string name="nocities">Cities not found</string>
 
     <string name="zipcode_hint"><font size="14"> Enter Zip Code</font></string>
+
+    <!--Profile verification status wise-->
+    <string name="profilestatusnote">Please get approval for your profile details to add location and services</string>
+
+    <string name="waitingforapproval">Waiting for approval</string>
 
 </resources>

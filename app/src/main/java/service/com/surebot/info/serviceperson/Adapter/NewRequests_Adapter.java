@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -73,11 +74,15 @@ public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapte
     String quote = "";
     String amnt = "";
     String gTimeForUI;
-
+    String gPremiumPartner_Id = AppicationClass.getPremium_PartenerId();
     public NewRequests_Adapter(Context context,   ArrayList<NewRequestList_Response.NewRequestList_Response_Records> gNewservicesRequest_List) {
         this.context=context;
         this.gNewservicesRequest_List=gNewservicesRequest_List;
 
+        AppicationClass.newrequestservicesid.clear();
+
+
+        AppicationClass.newrequestservicesammount.clear();
 
     }
 
@@ -134,14 +139,36 @@ System.out.println("Converted Time is " +gNewservicesRequest_List.get(position).
                 ArrayList<String > id =new ArrayList<>();
                 ArrayList<String > price =new ArrayList<>();
 
+
+
                 for (int p = 0 ; p<AppicationClass.test1.size();p++){
                     String[] list = AppicationClass.test1.get(p).split(",");
                     id.add(list[0]);
                     price.add(list[1]);
+
+
                 }
                 Log.e("lola", "onClick: "+id+"  "+price );
+
+
+                       //New Try
+
+
+
+
+
+
+                           //New Try
                 ArrayList<String> finalPriceList = new ArrayList<>();
                 ArrayList<String>finalmapingIdList = new ArrayList<>();
+
+
+           if (gPremiumPartner_Id.equals("1")) {
+
+
+
+
+
 
                 int items=0;
                 for ( int j = 0; j<price.size();j++)
@@ -170,50 +197,160 @@ System.out.println("Converted Time is " +gNewservicesRequest_List.get(position).
                     }
 
                 }
-                if(finalPriceList.contains("0")){
-                    Toast.makeText(context, "Fill all services", Toast.LENGTH_SHORT).show();
-                }else if(finalmapingIdList.size()== MappingIds.size()){
-                    for (int i = 0; i < finalmapingIdList.size(); i++) {
-                        if (i == finalmapingIdList.size() - 1) {
-                            quote = quote + finalmapingIdList.get(i);
+
+
+                    //New Try
+
+                    for (int i = 0; i < AppicationClass.newrequestservicesammount.size(); i++) {
+
+                        //  if(!finalPriceList.contains(AppicationClass.newrequestservicesammount.get(i).toString())){
+                        System.out.println("In Submit method entering into not contains !!!!!");
+                        finalPriceList.add(AppicationClass.newrequestservicesammount.get(i).toString());
+
+                        //   }
+
+/*else{
+                            System.out.println("In Submit method entering into not contains @@@@@@@@");
+                        }*/
+
+                    }
+
+                    for (int i = 0; i < AppicationClass.newrequestservicesid.size(); i++) {
+
+                        if (!finalmapingIdList.contains(AppicationClass.newrequestservicesid.get(i).toString())) {
+                            finalmapingIdList.add(AppicationClass.newrequestservicesid.get(i).toString());
+
                         } else {
-                            quote = quote + finalmapingIdList.get(i) + ",";
+
+                            finalPriceList.remove(AppicationClass.newrequestservicesammount.get(i).toString());
+                        }
+
+
+                    }
+
+              }
+
+
+                if (gPremiumPartner_Id.equals("0")) {
+
+
+                    int items=0;
+                    for ( int j = 0; j<price.size();j++)
+                    {
+                        int i =1;
+                        for (int check = 0 ; check<finalmapingIdList.size();check++){
+                            if (!id.get(j).equals(finalmapingIdList.get(check))){
+                                i = 1;
+                            }else{
+                                i = 0;
+                            }
+                        }
+                        if (i == 1){
+                            for (int o = id.size()-1 ; o>=0;o--){
+                                if(id.get(j).equals(id.get(o))){
+
+                                    Log.e("asdasd", "onClick: "+ id.get(o) );
+                                    finalmapingIdList.add(items,id.get(o));
+                                    finalPriceList.add(items,price.get(o));
+                                    o=0;
+
+                                }
+
+                            }
+                            items++;
+                        }
+
+                    }
+
+
+
+                }
+
+
+                //New Try
+
+                for(int i=0;i<finalmapingIdList.size();i++){
+
+                    System.out.println("Final mapping  Id and price in first adapter is "+ finalmapingIdList.get(i).toString() +"  and  " + finalPriceList.get(i).toString() );
+                }
+
+              System.out.println("Final mapping  Id and price in first adapter is " +finalmapingIdList.size() + "and" + finalPriceList.size() + "and" + MappingIds.size());
+
+                if(finalPriceList.contains("0") || finalPriceList.contains("00") || finalPriceList.contains("000")){
+                    Toast.makeText(context, "Fill amount for all services", Toast.LENGTH_SHORT).show();
+                }
+
+//System.out.println("in adapter id value is " + finalmapingIdList.size() +" and " +MappingIds.size() );
+              else if(finalmapingIdList.size()== MappingIds.size()){
+
+               // else if(finalmapingIdList.size()== finalPriceList.size()){
+
+                    if(!myViewHolder.lConvenienceCharge_text.getText().toString().trim().equals("")  ) {
+
+                        if(!myViewHolder.lPartnerQuote_Text.getText().toString().trim().equals("")) {
+
+
+
+
+                            for (int i = 0; i < finalmapingIdList.size(); i++) {
+                            if (i == finalmapingIdList.size() - 1) {
+                                quote = quote + finalmapingIdList.get(i);
+                            } else {
+                                quote = quote + finalmapingIdList.get(i) + ",";
+                            }
+                        }
+                        for (int i = 0; i < finalPriceList.size(); i++) {
+                            if (i == finalPriceList.size() - 1) {
+                                amnt = amnt + finalPriceList.get(i);
+                            } else {
+                                amnt = amnt + finalPriceList.get(i) + ",";
+                            }
+                        }
+
+                        System.out.println("Final mapping id and amount is " + quote + " and " + amnt );
+                            String lConveniencecharge = myViewHolder.lConvenienceCharge_text.getText().toString().trim();
+                            String  lPartnerquote = myViewHolder.lPartnerQuote_Text.getText().toString().trim();
+                      sendQuote_toUser("1",lConveniencecharge,lPartnerquote);
+
+                        myViewHolder.lServicedetails_Layout.setVisibility(View.GONE);
+                        myViewHolder.lMore_Textview.setVisibility(View.GONE);
+                        AppicationClass.test1.clear();
+                        communicator.addquotationlist(finalmapingIdList, finalPriceList, "1");
+
+                    }
+
+                        else{
+                            Toast.makeText(context, "Please enter note to coustomer", Toast.LENGTH_SHORT).show();
                         }
                     }
-                    for (int i = 0; i < finalPriceList.size(); i++) {
-                        if (i == finalPriceList.size() - 1) {
-                            amnt = amnt + finalPriceList.get(i);
-                        } else {
-                            amnt = amnt + finalPriceList.get(i) + ",";
-                        }
+                    else{
+                        Toast.makeText(context, "Please enter convenience charge", Toast.LENGTH_SHORT).show();
+
                     }
-                    sendQuote_toUser("1");
-                    myViewHolder.lServicedetails_Layout.setVisibility(View.GONE);
-                    myViewHolder.lMore_Textview.setVisibility(View.GONE);
-                    AppicationClass.test1.clear();
-                    communicator.addquotationlist(finalmapingIdList,finalPriceList,"1");
+                }
 
+                else{
 
-
-                }else{
-                    System.out.println("Array list size in New " +finalmapingIdList.size() + finalPriceList.size());
                     Toast.makeText(context, "Please Fill Price For All Services Before Sending", Toast.LENGTH_SHORT).show();
 
                 }
-                 System.out.println("In Send Button " + finalmapingIdList + finalPriceList);
+
 
 
             }
         });
 
-        System.out.println("Request Adapter value is " + gNewservicesRequest_List.get(position).getUser_Name() +gNewservicesRequest_List.get(position).getBooking_Date() );
+
+
+
+
 
         //Clicks on More text
         myViewHolder.lMore_Textview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                myViewHolder.lServicedetails_Layout.setVisibility(View.VISIBLE);
-                myViewHolder.lMore_Textview.setVisibility(View.GONE);
+              /*  myViewHolder.lServicedetails_Layout.setVisibility(View.VISIBLE);
+                myViewHolder.lMore_Textview.setVisibility(View.GONE);*/
                 //For New Request Details
                 //Api method starts
 
@@ -251,24 +388,36 @@ System.out.println("Converted Time is " +gNewservicesRequest_List.get(position).
                             if (response.isSuccessful()) {
                                 NewRequestListDetails_Response lNewRequestList_Response = response.body();
 
-                                ArrayList<NewRequestListDetails_Response.NewRequestserviceDetails_Records> gNewRequestList_Arraylist =  new ArrayList<>(Arrays.asList(lNewRequestList_Response.getPartner_service_details_response()));
+                                ArrayList<NewRequestListDetails_Response.NewRequestpersonalDetails_Records> gNewRequestPersonalDetailsList_Arraylist =  new ArrayList<>(Arrays.asList(lNewRequestList_Response.getPartner_user_details_response()));
+                                if(!gNewRequestPersonalDetailsList_Arraylist.get(0).getTransaction_Partner_Quote_ID().equals("No Results Found")){
+                                    myViewHolder.lServicedetails_Layout.setVisibility(View.VISIBLE);
+                                    myViewHolder.lMore_Textview.setVisibility(View.GONE);
+                                    ArrayList<NewRequestListDetails_Response.NewRequestserviceDetails_Records> gNewRequestList_Arraylist =  new ArrayList<>(Arrays.asList(lNewRequestList_Response.getPartner_service_details_response()));
 
-                                for(int i=0;i<gNewRequestList_Arraylist.size();i++){
 
-                                    gServiceName_List.add(gNewRequestList_Arraylist.get(i).getService_Name());
-                                    MappingIds.add(gNewRequestList_Arraylist.get(i).getService_Mapping_ID());
-                                    MappingSubService.add(gNewRequestList_Arraylist.get(i).getSub_Service_Name());
+                                    for(int i=0;i<gNewRequestList_Arraylist.size();i++){
+
+                                        gServiceName_List.add(gNewRequestList_Arraylist.get(i).getService_Name());
+                                        MappingIds.add(gNewRequestList_Arraylist.get(i).getService_Mapping_ID());
+                                        MappingSubService.add(gNewRequestList_Arraylist.get(i).getSub_Service_Name());
+
+
+
+
+                                    }
+
+                                    Set<String> set = new HashSet<>(gServiceName_List);
+                                    gServiceName_List.clear();
+                                    gServiceName_List.addAll(set);
+
+                                    NewTaskRequestedServices_Adapter lNewTaskRequestedServices_Adapter = new NewTaskRequestedServices_Adapter(context,gServiceName_List,gNewRequestList_Arraylist);
+                                    myViewHolder.lRequestedservicelist_recyclerview.setAdapter(lNewTaskRequestedServices_Adapter);
+                                    myViewHolder.lButton_layout.setVisibility(View.VISIBLE);
+                                    myViewHolder.lQuotesend_text.setVisibility(View.VISIBLE);
+                                    progress.dismiss();
+
                                 }
 
-                                Set<String> set = new HashSet<>(gServiceName_List);
-                                gServiceName_List.clear();
-                                gServiceName_List.addAll(set);
-
-                                NewTaskRequestedServices_Adapter lNewTaskRequestedServices_Adapter = new NewTaskRequestedServices_Adapter(context,gServiceName_List,gNewRequestList_Arraylist);
-                                myViewHolder.lRequestedservicelist_recyclerview.setAdapter(lNewTaskRequestedServices_Adapter);
-                                myViewHolder.lButton_layout.setVisibility(View.VISIBLE);
-                                myViewHolder.lQuotesend_text.setVisibility(View.VISIBLE);
-                                progress.dismiss();
                             }
                             progress.dismiss();
                         }
@@ -338,6 +487,9 @@ System.out.println("Converted Time is " +gNewservicesRequest_List.get(position).
         TextView lQuotesend_text;
 
         CardView lMain_Layout;
+EditText lPartnerQuote_Text;
+EditText lConvenienceCharge_text;
+
 
 
 
@@ -359,6 +511,9 @@ System.out.println("Converted Time is " +gNewservicesRequest_List.get(position).
             lSend_button =itemView.findViewById(R.id.send_button);
             lReject_button =itemView.findViewById(R.id.reject_button);
             lQuotesend_text=itemView.findViewById(R.id.quotesend_text);
+
+            lPartnerQuote_Text=itemView.findViewById(R.id.partnerquote_text);
+            lConvenienceCharge_text=itemView.findViewById(R.id.conveniencecharge_text);
         }
     }
 
@@ -369,7 +524,7 @@ System.out.println("Converted Time is " +gNewservicesRequest_List.get(position).
 
 
     }
-    private void sendQuote_toUser(String Statusid)  {
+    private void sendQuote_toUser(String Statusid,String convienincecharge,String partnerquote)  {
         try {
 
             progress.show();
@@ -392,6 +547,8 @@ System.out.println("Converted Time is " +gNewservicesRequest_List.get(position).
             lNewRequestList_Request.setQuote_amount(amnt);
             lNewRequestList_Request.setTransaction_Partner_Quote_ID(quote);
             lNewRequestList_Request.setStatus_ID(Statusid);
+            lNewRequestList_Request.setConvenience_charge(convienincecharge);
+            lNewRequestList_Request.setPartner_Quote(partnerquote);
             lNewRequestList_Request.setDocket(Constants.TOKEN);
 
             Call<SendQuotetoUser_Response> call = request.sendQuote_toUser(lNewRequestList_Request);

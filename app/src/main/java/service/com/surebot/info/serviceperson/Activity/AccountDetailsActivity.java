@@ -40,12 +40,8 @@ public class AccountDetailsActivity extends AppCompatActivity {
     @BindView(R.id.bnkBranchName)
     EditText gbnkBranchName;
 
-    @BindView(R.id.accountDetailsBack)
-    ConstraintLayout gaccountDetailsBack;
-
     @BindView(R.id.AccHolderName)
     EditText gAccHolderName;
-
 
     @BindView(R.id.AccNumber)
     EditText gAccNumber;
@@ -55,12 +51,28 @@ public class AccountDetailsActivity extends AppCompatActivity {
     EditText gAccIFSCcode;
 
 
+
+    @BindView(R.id.accountDetailsBack)
+    ConstraintLayout gaccountDetailsBack;
+
+
+
+
+
+
+
     @BindView(R.id.AccConfirmBTN)
     Button btnConfirm;
+
+    @BindView(R.id.waitingforapproval)
+    Button gWaitingforAproval_Button;
+
 
     private Dialog progress;
 
     ArrayList<Account_details_Response.account_details_records> account_details_records;
+
+    String gPartner_Approval_Status;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +100,7 @@ public class AccountDetailsActivity extends AppCompatActivity {
                         if (!gAccHolderName.getText().toString().trim().isEmpty()){
                             if (!gAccNumber.getText().toString().trim().isEmpty()) {
                                 if (!gAccIFSCcode.getText().toString().trim().isEmpty()) {
-                                    setAccountDetails();
+                                    add_AccountDetails();
                                 }else {
                                     gAccIFSCcode.setError("Fill IFSC Code");
                                     gAccIFSCcode.requestFocus();
@@ -143,6 +155,19 @@ public class AccountDetailsActivity extends AppCompatActivity {
                         if (response.isSuccessful()) {
 
                             Account_details_Response account_details_response = response.body();
+                           /* gPartner_Approval_Status = account_details_response.g;
+
+
+                            if(gPartnerApproval_Status.equals("Newly_Registered")  ||gPartnerApproval_Status.equals("Rejected") || gPartnerApproval_Status.equals("Approved") ){
+                                onApprovedStatus();
+
+                            }
+                            if(gPartnerApproval_Status.equals("Waiting_For_Approval")){
+
+                                onWaitingStatus();
+                            }*/
+
+
 
                             account_details_records = new ArrayList<>(Arrays.asList(account_details_response.getAccount_details_records()));
                            if(account_details_records.get(0).getUser_ID().equals("No Results Found")){
@@ -202,7 +227,7 @@ public class AccountDetailsActivity extends AppCompatActivity {
         }
 
 
-    public void setAccountDetails(){
+    public void add_AccountDetails(){
         try {
             System.out.println("In User Login Method 1");
             progress.show();
@@ -262,6 +287,70 @@ public class AccountDetailsActivity extends AppCompatActivity {
             //progress.dismiss();
 
         }
+
+
+    }
+
+    private void onApprovedStatus(){
+
+        btnConfirm.setVisibility(View.VISIBLE);
+        gWaitingforAproval_Button.setVisibility(View.GONE);
+
+        gbnkName.setEnabled(true);
+        gbnkName.setFocusable(true);
+        gbnkName.setClickable(true);
+        gbnkName.setKeyListener(gbnkName.getKeyListener());
+
+        gbnkBranchName.setEnabled(true);
+        gbnkBranchName.setFocusable(true);
+        gbnkBranchName.setClickable(true);
+        gbnkBranchName.setKeyListener(gbnkBranchName.getKeyListener());
+
+        gAccHolderName.setEnabled(true);
+        gAccHolderName.setFocusable(true);
+        gAccHolderName.setClickable(true);
+        gAccHolderName.setKeyListener(gAccHolderName.getKeyListener());
+
+        gAccNumber.setEnabled(true);
+        gAccNumber.setFocusable(true);
+        gAccNumber.setClickable(true);
+        gAccNumber.setKeyListener(gAccNumber.getKeyListener());
+
+        gAccIFSCcode.setEnabled(true);
+        gAccIFSCcode.setFocusable(true);
+        gAccIFSCcode.setClickable(true);
+        gAccIFSCcode.setKeyListener(gAccIFSCcode.getKeyListener());
+
+    }
+
+    private  void  onWaitingStatus(){
+        gWaitingforAproval_Button.setVisibility(View.VISIBLE);
+        btnConfirm.setVisibility(View.GONE);
+
+        gbnkName.setEnabled(false);
+        gbnkName.setFocusable(false);
+        gbnkName.setClickable(false);
+        gbnkName.setKeyListener(gbnkName.getKeyListener());
+
+        gbnkBranchName.setEnabled(false);
+        gbnkBranchName.setFocusable(false);
+        gbnkBranchName.setClickable(false);
+        gbnkBranchName.setKeyListener(gbnkBranchName.getKeyListener());
+
+        gAccHolderName.setEnabled(false);
+        gAccHolderName.setFocusable(false);
+        gAccHolderName.setClickable(false);
+        gAccHolderName.setKeyListener(gAccHolderName.getKeyListener());
+
+        gAccNumber.setEnabled(false);
+        gAccNumber.setFocusable(false);
+        gAccNumber.setClickable(false);
+        gAccNumber.setKeyListener(gAccNumber.getKeyListener());
+
+        gAccIFSCcode.setEnabled(false);
+        gAccIFSCcode.setFocusable(false);
+        gAccIFSCcode.setClickable(false);
+        gAccIFSCcode.setKeyListener(gAccIFSCcode.getKeyListener());
 
 
     }

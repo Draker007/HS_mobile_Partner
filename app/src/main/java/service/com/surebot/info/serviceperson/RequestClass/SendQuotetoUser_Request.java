@@ -12,6 +12,10 @@ public class SendQuotetoUser_Request {
 
     private String Status_ID;
 
+    private  String Convenience_charge;
+
+    private  String Partner_Quote;
+
     public String getUser_ID() {
         return User_ID;
     }
@@ -50,6 +54,22 @@ public class SendQuotetoUser_Request {
 
     public void setStatus_ID(String status_ID) {
         Status_ID = status_ID;
+    }
+
+    public String getConvenience_charge() {
+        return Convenience_charge;
+    }
+
+    public void setConvenience_charge(String convenience_charge) {
+        Convenience_charge = convenience_charge;
+    }
+
+    public String getPartner_Quote() {
+        return Partner_Quote;
+    }
+
+    public void setPartner_Quote(String partner_Quote) {
+        Partner_Quote = partner_Quote;
     }
 }
 

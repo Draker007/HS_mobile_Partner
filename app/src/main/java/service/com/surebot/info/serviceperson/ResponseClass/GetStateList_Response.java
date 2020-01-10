@@ -2,6 +2,8 @@ package service.com.surebot.info.serviceperson.ResponseClass;
 
 public class GetStateList_Response {
 
+    //Old get_states_list_response []
+
     private  GetStateList_Details[] get_states_list_response;
 
     public GetStateList_Details[] getGet_states_list_response() {
@@ -22,9 +24,18 @@ public class GetStateList_Response {
 
         private String State_Name_Code;
 
+
         private String Country_Name;
 
+
         private String Country_ID;
+
+        private String Partner_ID;
+
+        private String Partner_name;
+
+        private String Partner_alloted;
+
 
         public String getState_ID() {
             return State_ID;
@@ -72,6 +83,30 @@ public class GetStateList_Response {
 
         public void setCountry_ID(String country_ID) {
             Country_ID = country_ID;
+        }
+
+        public String getPartner_ID() {
+            return Partner_ID;
+        }
+
+        public void setPartner_ID(String partner_ID) {
+            Partner_ID = partner_ID;
+        }
+
+        public String getPartner_name() {
+            return Partner_name;
+        }
+
+        public void setPartner_name(String partner_name) {
+            Partner_name = partner_name;
+        }
+
+        public String getPartner_alloted() {
+            return Partner_alloted;
+        }
+
+        public void setPartner_alloted(String partner_alloted) {
+            Partner_alloted = partner_alloted;
         }
     }
 }

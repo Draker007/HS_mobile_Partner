@@ -144,6 +144,8 @@ public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.st
 
 
         callListPackageAPI();
+
+
         gPackages_List = new ArrayList<Integer>();
         gPackages_List.add(R.mipmap.package1);
         gPackages_List.add(R.mipmap.package2);

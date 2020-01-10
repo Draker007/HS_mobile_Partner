@@ -51,17 +51,24 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import service.com.surebot.info.serviceperson.ApiClient.ApiInterface;
 import service.com.surebot.info.serviceperson.Constants.Constants;
 import service.com.surebot.info.serviceperson.R;
+import service.com.surebot.info.serviceperson.RequestClass.GetDocumentslist_Request;
 import service.com.surebot.info.serviceperson.RequestClass.GetIdentityVerifications_Request;
 import service.com.surebot.info.serviceperson.ResponseClass.GetAwardsDetails_Response;
+import service.com.surebot.info.serviceperson.ResponseClass.GetDocumentslist_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.GetIdentityVerifications_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Identity_verification_Response;
 import service.com.surebot.info.serviceperson.utils.AppicationClass;
 
 public class IdentityVerificationActivity extends AppCompatActivity {
-    String[] items;
+   // String[] items;
+
+    ArrayList<String> gDocuments_Arraylist;
+    ArrayList<String> gDocumentsID_Arraylist;
+    String gDocument_Id;
     Spinner dropdown;
     ImageView front,back;
     Button submit;
+    Button gWaitingforAproval_Button;
 
     @BindView(R.id.identityVerfBack)
     ConstraintLayout goback;
@@ -73,29 +80,43 @@ public class IdentityVerificationActivity extends AppCompatActivity {
     private Dialog progress;
 
     ArrayList<GetIdentityVerifications_Response.GetIdentityVerifications_Details> gGetIdentityVerifications_ImagesList;
+
+    ArrayList<GetDocumentslist_Response.GetDocumentslist_Records> gGetDocuments_List;
     ArrayAdapter<String> adapter;
+
+    String gUserId_FromLogin,gCategoryId_FromLogin,gPremiumPartner_Id;
+
+    String gFrontSide_Image_FromAPI , gBackSide_Image_FromAPI;
+
+    String gPartnerApproval_Status;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_identity_verification);
-         dropdown = findViewById(R.id.spinner1);
+        dropdown = findViewById(R.id.spinner1);
         ButterKnife.bind(this);
         progress = new Dialog(this, android.R.style.Theme_Translucent);
         progress.requestWindowFeature(Window.FEATURE_NO_TITLE);
         //here we set layout of progress dialog
         progress.setContentView(R.layout.progressbar_background);
         progress.setCancelable(true);
-         items = new String[]{"* Select your ID Proof ","Adhar Card", "Driving License", "Registration Certificate","Voter_ID"};
 
-      adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
 
-        dropdown.setAdapter(adapter);
+        gUserId_FromLogin= AppicationClass.getUserId_FromLogin();
+        gCategoryId_FromLogin=AppicationClass.getCategoryId_FromLogin();
+        gPremiumPartner_Id = AppicationClass.getPremium_PartenerId();
+
+
+         //items = new String[]{"* Select your ID Proof ","Adhar Card", "Driving License", "Registration Certificate","Voter_ID"};
+
+
       //  android.widget.ListPopupWindow popupWindow = (android.widget.ListPopupWindow) popup.get(spinner);
+
         Initialize();
         listner();
-
-
-        getAwards_Images();
+        get_DocumentList();
+        getdentityDocuments_Images();
 
 
     }  //OnCreate Close
@@ -124,11 +145,16 @@ public class IdentityVerificationActivity extends AppCompatActivity {
         dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                Log.e("lol", "onItemSelected: "+items[position] );
-                gidProofText.setText(items  [position]);
+
+
+                System.out.println("Document id is " + gDocumentsID_Arraylist.get(position));
+                gidProofText.setText(gDocuments_Arraylist.get(position).toString());
+
+                gDocument_Id=gDocumentsID_Arraylist.get(position).toString();
+
                 back1="";
-                Glide.with(IdentityVerificationActivity.this).load(R.drawable.emptyprofile_image).into(front);
-                Glide.with(IdentityVerificationActivity.this).load(R.drawable.emptyprofile_image).into(back);
+              //  Glide.with(IdentityVerificationActivity.this).load(R.drawable.emptyprofile_image).into(front);
+                //Glide.with(IdentityVerificationActivity.this).load(R.drawable.emptyprofile_image).into(back);
                 front1="";
                 j=position;
 
@@ -145,6 +171,9 @@ public class IdentityVerificationActivity extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+
                 if(j==0){
                     Toast.makeText(IdentityVerificationActivity.this, "Select ID Proof", Toast.LENGTH_SHORT).show();
                 }
@@ -153,8 +182,10 @@ public class IdentityVerificationActivity extends AppCompatActivity {
                 }
                 else if (back1.isEmpty()){
                     Toast.makeText(IdentityVerificationActivity.this, "Upload Reverse Side of Image", Toast.LENGTH_SHORT).show();
-                }else{
-                    IdentityVerify();
+                }
+
+                else{
+                    add_IdentityVerify();
 
                     }
             }
@@ -162,7 +193,7 @@ public class IdentityVerificationActivity extends AppCompatActivity {
 
     }
 //Calling API for uploading document
-    private void IdentityVerify() {
+    private void add_IdentityVerify() {
         try {
 
             progress.show();
@@ -182,22 +213,32 @@ public class IdentityVerificationActivity extends AppCompatActivity {
 
             ApiInterface request = retrofit.create(ApiInterface.class);
 //AppicationClass.getUserId_FromLogin()
-            builder.addFormDataPart("User_ID", "1");
-            builder.addFormDataPart("Document_Category_ID", String.valueOf(j));
+            builder.addFormDataPart("User_ID", gUserId_FromLogin);
+            builder.addFormDataPart("Document_Category_ID", gDocument_Id);
             builder.addFormDataPart("docket",Constants.TOKEN);
             Log.e("Draker", "IdentityVerify: 0"+String.valueOf(j) );
 
             if(front1!=null){
+                System.out.println("Enters In add Identity front if");
                 File AddressFront = new File(front1);
 //                AddressFront.getName().replace(" ", "s");
                 Log.e("Draker", "IdentityVerify: 1"+AddressFront );
                 builder.addFormDataPart("FrontSideImage", AddressFront.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), AddressFront));
             }
+            else {
+                System.out.println("Enters In add Identity front else");
+            }
+
             if(back1!=null){
+                System.out.println("Enters In add Identity back if");
                 File AddressBack = new File(back1);
 //                AddressBack.getName().replace(" ", "s");
                 Log.e("Draker", "IdentityVerify: 2" +AddressBack);
                 builder.addFormDataPart("ReverseSideImage", AddressBack.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), AddressBack));
+            }
+
+            else{
+                System.out.println("Enters In add Identity back else");
             }
             MultipartBody requestBody = builder.build();
             Call<Identity_verification_Response> call = request.IdentityVerif(requestBody);
@@ -213,6 +254,7 @@ public class IdentityVerificationActivity extends AppCompatActivity {
                             Log.e("Draker", "onResponse: 1" );
                             System.out.println("Place order entering into method valid");
                             Toast.makeText(IdentityVerificationActivity.this, "Documents  updated successfully", Toast.LENGTH_SHORT).show();
+                           // getdentityDocuments_Images();
                             onBackPressed();
                         }else
                         {
@@ -251,6 +293,7 @@ public class IdentityVerificationActivity extends AppCompatActivity {
         front = findViewById(R.id.verifyFront);
         back = findViewById(R.id.verifyBack);
         submit = findViewById(R.id.btnConfirmVerify);
+        gWaitingforAproval_Button = findViewById(R.id.waitingforapproval);
     }
 
 
@@ -333,7 +376,10 @@ public class IdentityVerificationActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            } else if (requestCode == 2) {
+            }
+
+
+            else if (requestCode == 2) {
                 Log.e("image", "onActivityResult: " );
                 Uri selectedImage = data.getData();
                 String[] filePath = {MediaStore.Images.Media.DATA};
@@ -362,7 +408,7 @@ public class IdentityVerificationActivity extends AppCompatActivity {
 
     //Get Added Identity Details
 
-    private void getAwards_Images() {
+    private void getdentityDocuments_Images() {
 
         try {
             progress.show();
@@ -381,7 +427,7 @@ public class IdentityVerificationActivity extends AppCompatActivity {
             GetIdentityVerifications_Request lGetIdentityVerifications_Request = new GetIdentityVerifications_Request();
 
             lGetIdentityVerifications_Request.setDocket(Constants.TOKEN);
-            lGetIdentityVerifications_Request.setUser_ID("1");
+            lGetIdentityVerifications_Request.setUser_ID(gUserId_FromLogin);
 
             Call<GetIdentityVerifications_Response> call = request.Get_IdentityVerifications(lGetIdentityVerifications_Request);
             call.enqueue(new Callback<GetIdentityVerifications_Response>() {
@@ -389,7 +435,7 @@ public class IdentityVerificationActivity extends AppCompatActivity {
                 public void onResponse(Call<GetIdentityVerifications_Response> call, Response<GetIdentityVerifications_Response> response) {
                     if (response.isSuccessful()) {
 
-
+  System.out.println(" GetIdentity Enters into is successfull method");
                         GetIdentityVerifications_Response lGetIdentityVerifications_Response = response.body();
 
                         gGetIdentityVerifications_ImagesList = new ArrayList<>(Arrays.asList(lGetIdentityVerifications_Response.getGet_identity_verification_details_response()));
@@ -397,17 +443,53 @@ public class IdentityVerificationActivity extends AppCompatActivity {
                         if(!gGetIdentityVerifications_ImagesList.get(0).getID().equals("No Results Found")){
 
 
-                            Glide.with(IdentityVerificationActivity.this).load(Constants.IMAGEBASE_URL+gGetIdentityVerifications_ImagesList.get(0).getDocument_Name()).into(front);
-                            Glide.with(IdentityVerificationActivity.this).load(Constants.IMAGEBASE_URL+gGetIdentityVerifications_ImagesList.get(1).getDocument_Name()).into(back);
+                            gPartnerApproval_Status = lGetIdentityVerifications_Response.getGet_identity_verification_details_status();
+
+                            if(gPartnerApproval_Status.equals("Newly_Registered")  ||gPartnerApproval_Status.equals("Rejected") || gPartnerApproval_Status.equals("Approved") ){
+                                onApprovedStatus();
+
+                            }
+                            if(gPartnerApproval_Status.equals("Waiting_For_Approval")){
+
+                                onWaitingStatus();
+                            }
+
+
+                            System.out.println(" GetIdentity Enters into is if Condition");
+
+                            if(gGetIdentityVerifications_ImagesList.size()==1){
+                                Glide.with(IdentityVerificationActivity.this).load(Constants.IMAGEBASE_URL+gGetIdentityVerifications_ImagesList.get(0).getDocument_Name()).into(front);
+                        gFrontSide_Image_FromAPI = gGetIdentityVerifications_ImagesList.get(0).getDocument_Name();
+
+                            }
+                            if(gGetIdentityVerifications_ImagesList.size()>=2){
+                                Glide.with(IdentityVerificationActivity.this).load(Constants.IMAGEBASE_URL+gGetIdentityVerifications_ImagesList.get(0).getDocument_Name()).into(front);
+                                Glide.with(IdentityVerificationActivity.this).load(Constants.IMAGEBASE_URL+gGetIdentityVerifications_ImagesList.get(1).getDocument_Name()).into(back);
+
+                                gBackSide_Image_FromAPI=gGetIdentityVerifications_ImagesList.get(1).getDocument_Name();
+                            }
+
+
 
 
                             System.out.println("Identity Proofs are " + Constants.IMAGEBASE_URL+gGetIdentityVerifications_ImagesList.get(0).getDocument_Name() +"and" + Constants.IMAGEBASE_URL+gGetIdentityVerifications_ImagesList.get(1).getDocument_Name());
 
-                            dropdown.setSelection(Integer.parseInt(gGetIdentityVerifications_ImagesList.get(0).getDocument_Category_ID()));
+                            adapter = new ArrayAdapter<String>(IdentityVerificationActivity.this, android.R.layout.simple_spinner_item, gDocuments_Arraylist);
+                            dropdown.setAdapter(adapter);
+                            dropdown.setSelection(((ArrayAdapter<String>) dropdown.getAdapter()).getPosition(gGetIdentityVerifications_ImagesList.get(i).getDocument_Category_ID()));
+                           // dropdown.setSelection(Integer.parseInt(gGetIdentityVerifications_ImagesList.get(0).getDocument_Category_ID()));
+                            gDocument_Id = gGetIdentityVerifications_ImagesList.get(0).getDocument_Category_ID();
 
                             progress.dismiss();
 
                         }
+
+                        else{
+
+                            Glide.with(IdentityVerificationActivity.this).load(R.drawable.emptyprofile_image).into(front);
+                            Glide.with(IdentityVerificationActivity.this).load(R.drawable.emptyprofile_image).into(back);
+                        }
+                        System.out.println(" GetIdentity Enters into is after if");
                         progress.dismiss();
 
                     }
@@ -417,17 +499,113 @@ public class IdentityVerificationActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<GetIdentityVerifications_Response> call, Throwable t) {
-                    System.out.println("In User Login Method 7");
+                    System.out.println(" GetIdentity Enters into  onFailure");
+
                     progress.dismiss();
                 }
             });
         }catch (Exception e) {
+            System.out.println(" GetIdentity Enters into  catch");
             progress.dismiss();
             e.printStackTrace();
 
 
         }
 
+    }
+
+
+    //Get Documents list
+
+
+    private void get_DocumentList() {
+
+        try {
+            progress.show();
+            OkHttpClient.Builder client = new OkHttpClient.Builder();
+            HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
+            registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            client.addInterceptor(registrationInterceptor);
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(Constants.BASE_URL)
+                    .client(client.build())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+
+            ApiInterface request = retrofit.create(ApiInterface.class);
+            GetDocumentslist_Request lGetIdentityVerifications_Request = new GetDocumentslist_Request();
+
+            lGetIdentityVerifications_Request.setDocket(Constants.TOKEN);
+            lGetIdentityVerifications_Request.setUser_ID(gUserId_FromLogin);
+
+            Call<GetDocumentslist_Response> call = request.Get_Documentslist(lGetIdentityVerifications_Request);
+            call.enqueue(new Callback<GetDocumentslist_Response>() {
+                @Override
+                public void onResponse(Call<GetDocumentslist_Response> call, Response<GetDocumentslist_Response> response) {
+                    if (response.isSuccessful()) {
+
+                        System.out.println(" GetIdentity Enters into is successfull method");
+                        GetDocumentslist_Response lGetDocuments_List = response.body();
+
+                        gGetDocuments_List = new ArrayList<>(Arrays.asList(lGetDocuments_List.getVerification_document_details_response()));
+                        gDocuments_Arraylist = new ArrayList<>();
+                        gDocumentsID_Arraylist = new ArrayList<>();
+                            for(int i=0;i<gGetDocuments_List.size();i++){
+
+                                gDocuments_Arraylist.add(gGetDocuments_List.get(i).getDocument_Category_Name());
+                                gDocumentsID_Arraylist.add(gGetDocuments_List.get(i).getDocument_Category_ID());
+                            }
+
+                        adapter = new ArrayAdapter<String>(IdentityVerificationActivity.this, android.R.layout.simple_spinner_dropdown_item, gDocuments_Arraylist);
+
+                        dropdown.setAdapter(adapter);
+                        progress.dismiss();
+
+                    }
+
+                    progress.dismiss();
+                }
+
+                @Override
+                public void onFailure(Call<GetDocumentslist_Response> call, Throwable t) {
+                    System.out.println(" GetIdentity Enters into  onFailure");
+
+                    progress.dismiss();
+                }
+            });
+        }catch (Exception e) {
+            System.out.println(" GetIdentity Enters into  catch");
+            progress.dismiss();
+            e.printStackTrace();
+
+
+        }
+
+    }
+
+
+
+    private void onApprovedStatus(){
+
+        submit.setVisibility(View.VISIBLE);
+        gWaitingforAproval_Button.setVisibility(View.GONE);
+
+        front.setClickable(true);
+        back.setClickable(true);
+        dropdown.setClickable(true);
+       // dropdown.setEnabled(true);
+    }
+
+    private  void  onWaitingStatus(){
+        gWaitingforAproval_Button.setVisibility(View.VISIBLE);
+        submit.setVisibility(View.GONE);
+
+        front.setClickable(false);
+        back.setClickable(false);
+        dropdown.setClickable(false);
+
+       // dropdown.setEnabled(false);
     }
 
 }

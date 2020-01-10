@@ -2,6 +2,15 @@ package service.com.surebot.info.serviceperson.ResponseClass;
 
 public class GetIdentityVerifications_Response {
     private GetIdentityVerifications_Details [] get_identity_verification_details_response;
+private  String get_identity_verification_details_status;
+
+    public String getGet_identity_verification_details_status() {
+        return get_identity_verification_details_status;
+    }
+
+    public void setGet_identity_verification_details_status(String get_identity_verification_details_status) {
+        this.get_identity_verification_details_status = get_identity_verification_details_status;
+    }
 
     public GetIdentityVerifications_Details[] getGet_identity_verification_details_response() {
         return get_identity_verification_details_response;

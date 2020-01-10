@@ -9,10 +9,13 @@ public class AppicationClass {
     public static  String CategoryId_FromLogin;
     public static ArrayList<String> test1 =new ArrayList<>();
     public static ArrayList<String> test2 = new ArrayList<>();
+    public static ArrayList<String> newrequestservicesammount = new ArrayList<>();
+    public static ArrayList<String> newrequestservicesid = new ArrayList<>();
+
     public static ArrayList<String> addservicemapingid =new ArrayList<>();
     public static ArrayList<String> addserviceammount =new ArrayList<>();
     public static ArrayList<String> addLocation =new ArrayList<>();
-
+    public static ArrayList<String> addnewserviceammount =new ArrayList<>();
     public static ArrayList<String> addlocationservicecities =new ArrayList<>();
 
     public static ArrayList<String> addlocationservicestates =new ArrayList<>();
@@ -44,6 +47,21 @@ public class AppicationClass {
         AppicationClass.test2 = test2;
     }
 
+    public static ArrayList<String> getNewrequestservicesammount() {
+        return newrequestservicesammount;
+    }
+
+    public static void setNewrequestservicesammount(ArrayList<String> newrequestservicesammount) {
+        AppicationClass.newrequestservicesammount = newrequestservicesammount;
+    }
+
+    public static ArrayList<String> getNewrequestservicesid() {
+        return newrequestservicesid;
+    }
+
+    public static void setNewrequestservicesid(ArrayList<String> newrequestservicesid) {
+        AppicationClass.newrequestservicesid = newrequestservicesid;
+    }
 
     public static ArrayList<String> getAddservicemapingid() {
         return addservicemapingid;
@@ -62,6 +80,13 @@ public class AppicationClass {
     }
 
 
+    public static ArrayList<String> getAddnewserviceammount() {
+        return addnewserviceammount;
+    }
+
+    public static void setAddnewserviceammount(ArrayList<String> addnewserviceammount) {
+        AppicationClass.addnewserviceammount = addnewserviceammount;
+    }
 
     public static String Premium_PartenerId;
 

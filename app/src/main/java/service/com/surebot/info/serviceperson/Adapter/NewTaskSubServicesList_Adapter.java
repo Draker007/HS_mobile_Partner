@@ -33,14 +33,18 @@ public class NewTaskSubServicesList_Adapter extends RecyclerView.Adapter<NewTask
     //ArrayList<SendquotetoUser> lSub_ServicesList;
     ArrayList<String> gSub_services_List;
     ArrayList<String> MapppingID;
+    ArrayList<String> gServiceamount;
 
     // private  ArrayList<SendquotetoUser> gSendquotetoUserList = new ArrayList<>();
     private ArrayList<String> gSendquotetoUserList_New = new ArrayList<String>();
 
-    public NewTaskSubServicesList_Adapter(Context context, ArrayList<String> gSub_services_List, ArrayList<String> mapppingID) {
+    String gPremiumPartner_Id = AppicationClass.getPremium_PartenerId();
+
+    public NewTaskSubServicesList_Adapter(Context context, ArrayList<String> gSub_services_List, ArrayList<String> mapppingID, ArrayList<String> gServiceamount) {
         this.context = context;
         this.gSub_services_List = gSub_services_List;
-        MapppingID = mapppingID;
+        this.MapppingID = mapppingID;
+        this.gServiceamount= gServiceamount;
     }
 
     @NonNull
@@ -55,6 +59,25 @@ public class NewTaskSubServicesList_Adapter extends RecyclerView.Adapter<NewTask
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, final int position) {
         myViewHolder.lSubservicename_text.setText(gSub_services_List.get(position).toString());
+
+
+        if (gPremiumPartner_Id.equals("1")) {
+            if(!gServiceamount.get(position).toString().equals("")){
+
+                myViewHolder.lQuantity_Text.setText(gServiceamount.get(position).toString());
+                AppicationClass.newrequestservicesammount.add(gServiceamount.get(position).toString());
+                AppicationClass.newrequestservicesid.add(MapppingID.get(position).toString());
+
+
+            }
+
+        }
+
+
+        if (gPremiumPartner_Id.equals("0")) {
+
+            AppicationClass.newrequestservicesid.add(MapppingID.get(position).toString());
+        }
 
         myViewHolder.lQuantity_Text.addTextChangedListener(new TextWatcher() {
             @Override
@@ -80,7 +103,11 @@ public class NewTaskSubServicesList_Adapter extends RecyclerView.Adapter<NewTask
                     }else{
                         AppicationClass.test1.add(MapppingID.get(position)+","+"0");
                     }
+
+                    System.out.println("Mapping Id In inside adpater" + MapppingID.get(position));
                     System.out.println("Chare Sequesnce Value Are " + editable.toString() + gSendquotetoUserList_New.size());
+
+                    System.out.println("Id and price in inside adapter is " +AppicationClass.test1.size());
                 }else if (editable.toString()==""){
                     Log.e("lol1", "afterTextChanged: was here" );
                 }

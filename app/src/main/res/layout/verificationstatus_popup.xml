@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/status_details_line_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/popupwhitebackground"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:visibility="visible"
+    android:layout_gravity="center"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Profile verification status"
+    android:gravity="center"
+    android:background="@color/color_white"
+    android:textColor="@color/color_black"
+    android:fontFamily="@font/montserrat"
+    android:textSize="@dimen/headertextsize"
+    />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/color_white"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_vertical"
+        >
+    <LinearLayout
+        android:id="@+id/statustextlayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="@color/color_white"
+        android:layout_marginTop="10dp"
+
+    >
+
+        <ImageView
+            android:id="@+id/status_one"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/circle_for_status" />
+        <TextView
+            android:id="@+id/addressprofftext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Address Proof"
+            android:layout_marginLeft="10dp"
+            android:background="@color/color_white"
+            android:fontFamily="@font/montserrat"
+            android:textSize="@dimen/regulartextsize"
+            />
+    </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/statuswiseimagelayout1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:background="@color/color_white"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            >
+
+            <View
+                android:id="@+id/line_one"
+                android:layout_width="1dp"
+                android:layout_height="130dp"
+                android:layout_below="@+id/status_one"
+                android:layout_centerInParent="true"
+                android:background="@color/color_gray" />
+
+            <TextView
+                android:id="@+id/addressproofpendingtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:textColor="@color/color_green"
+                android:background="@color/color_white"
+                android:fontFamily="@font/montserrat"
+                android:textSize="@dimen/regulartextsize"
+                />
+            <ImageView
+                android:id="@+id/statusimage_one"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="30dp"
+                android:background="@android:drawable/checkbox_on_background" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/statustextlayout2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:background="@color/color_white"
+            android:layout_marginTop="10dp"
+            >
+
+            <ImageView
+                android:id="@+id/status_two"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/circle_for_status" />
+            <TextView
+                android:id="@+id/bankdetailsftext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bank details"
+                android:layout_marginLeft="10dp"
+                android:background="@color/color_white"
+                android:fontFamily="@font/montserrat"
+                android:textSize="@dimen/regulartextsize"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/statuswiseimagelayout2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:background="@color/color_white"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            >
+
+            <View
+                android:id="@+id/line_two"
+                android:layout_width="1dp"
+                android:layout_height="130dp"
+                android:layout_below="@+id/status_one"
+                android:layout_centerInParent="true"
+                android:background="@color/color_gray" />
+
+            <TextView
+                android:id="@+id/bankdetailspendingtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_green"
+                android:background="@color/color_white"
+                android:fontFamily="@font/montserrat"
+                android:layout_marginLeft="30dp"
+                android:textSize="@dimen/regulartextsize"
+                />
+            <ImageView
+                android:id="@+id/statusimage_two"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="30dp"
+                android:background="@android:drawable/checkbox_on_background" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/statustextlayout3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:background="@color/color_white"
+            android:layout_marginTop="10dp"
+            >
+
+            <ImageView
+                android:id="@+id/status_three"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/circle_for_status" />
+            <TextView
+                android:id="@+id/documentstext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Documents"
+                android:layout_marginLeft="10dp"
+                android:background="@color/color_white"
+                android:fontFamily="@font/montserrat"
+                android:textSize="@dimen/regulartextsize"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/statuswiseimagelayout3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:background="@color/color_white"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            >
+
+            <View
+                android:id="@+id/line_three"
+                android:layout_width="1dp"
+                android:layout_height="130dp"
+                android:layout_below="@+id/status_one"
+                android:layout_centerInParent="true"
+                android:visibility="gone"
+                android:background="@color/color_gray" />
+
+            <TextView
+                android:id="@+id/documentspendingtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_green"
+                android:background="@color/color_white"
+                android:fontFamily="@font/montserrat"
+                android:layout_marginLeft="30dp"
+                android:textSize="@dimen/regulartextsize"
+                />
+            <ImageView
+                android:id="@+id/statusimage_three"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="30dp"
+                android:background="@android:drawable/checkbox_on_background" />
+        </LinearLayout>
+
+
+
+</LinearLayout>
+    <TextView
+        android:layout_marginTop="10dp"
+        android:id="@+id/profolestatusnote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/profilestatusnote"
+        android:layout_marginLeft="10dp"
+        android:background="@color/color_white"
+        android:fontFamily="@font/montserrat"
+        android:textSize="10sp"
+        android:layout_gravity="center"
+        />
+    <Button
+        android:layout_marginTop="10dp"
+        android:id="@+id/okbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/buttonblue_background"
+        android:text="OK"
+        android:padding="5dp"
+        android:textColor="@color/color_white"
+        android:fontFamily="@font/montserrat_bold"
+        android:textAllCaps="false"
+        android:layout_below="@+id/status_pending_layout"
+       android:layout_gravity="center"
+        />
+</LinearLayout>

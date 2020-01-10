@@ -151,6 +151,62 @@
 
         </androidx.recyclerview.widget.RecyclerView>
 
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/convcharge"
+                    android:fontFamily="@font/montserrat"
+                    android:textSize="@dimen/regulartextsize"
+
+                    />
+                <EditText
+                    android:id="@+id/conveniencecharge_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/newrequestedittextbackground"
+                    android:inputType="number"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:hint="@string/rupies"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="10dp"
+                    android:gravity="top"
+                    />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/notetocoustomerheader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/montserrat"
+                android:text="@string/quotecoustomer"
+                android:textColor="@color/color_blue"
+                android:textSize="@dimen/regulartextsize"
+                android:visibility="visible"
+                />
+
+            <EditText
+                android:id="@+id/partnerquote_text"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="@drawable/newrequestedittextbackground"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:hint="@string/enterpartnerquote"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:gravity="top"
+                />
+
+
         <TextView
             android:id="@+id/quotesend_text"
             android:layout_width="wrap_content"

@@ -25,7 +25,7 @@ public class RadiusAdapter extends RecyclerView.Adapter<RadiusAdapter.MyViewHold
     ArrayList<String> km = new ArrayList<>();
     String TAG = "hihi";
 
-    radiuslist_Communicator communicator;
+    radiuslistremove_Communicator communicator;
 
     public RadiusAdapter(ServicesAdd_Activity context, ArrayList<String> zip, ArrayList<String> km) {
         this.context = context;
@@ -48,7 +48,11 @@ public class RadiusAdapter extends RecyclerView.Adapter<RadiusAdapter.MyViewHold
         holder.lRemoveText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+communicator.removeradiuslist(km.get(position),zip.get(position),position);
                 removeAt(position);
+
             }
         });
 
@@ -73,8 +77,8 @@ public class RadiusAdapter extends RecyclerView.Adapter<RadiusAdapter.MyViewHold
     }
 
 
-    public interface radiuslist_Communicator {
-        void getradiuslist(String zipcode, String kms, int position);
+    public interface radiuslistremove_Communicator {
+        void removeradiuslist(String zipcode, String kms, int position);
 
     }
 

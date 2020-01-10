@@ -8,8 +8,15 @@ public class Constants {
 
     /*public static final String BASE_URL = "https://hsqa.surebotdev.com/index.php/Api/";
     public static final String IMAGEBASE_URL="https://hsqa.surebotdev.com/";*/
-   public static final String BASE_URL = "http://192.168.0.82/services_at_home/Api/";
-    public static final String IMAGEBASE_URL="http://192.168.0.82/services_at_home/";
+
+    //Haritha
+   /* public static final String BASE_URL = "http://192.168.0.82/services_at_home/Api/";
+    public static final String IMAGEBASE_URL="http://192.168.0.82/services_at_home/";*/
+
+
+    //Lekha
+    public static final String BASE_URL = "http://192.168.0.96/services_at_home/Api/";
+    public static final String IMAGEBASE_URL="http://192.168.0.96/services_at_home/";
 
 
   //  public static final String BASE_URL = "http://192.168.0.86/services_at_home/Api/";http://192.168.0.69/services_at_home

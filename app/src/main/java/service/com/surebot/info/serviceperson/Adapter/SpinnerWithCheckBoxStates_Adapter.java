@@ -32,11 +32,13 @@ public class SpinnerWithCheckBoxStates_Adapter extends ArrayAdapter<spinnerData>
         this.mContext = context;
         this.listState = (ArrayList<spinnerData>) objects;
         this.myAdapter = this;
+       // AppicationClass.addlocationservicestates.clear();
     }
 
     @Override
     public View getDropDownView(int position, View convertView,
                                 ViewGroup parent) {
+
         return getCustomView(position, convertView, parent);
     }
 
@@ -72,43 +74,98 @@ public class SpinnerWithCheckBoxStates_Adapter extends ArrayAdapter<spinnerData>
         //  AppicationClass.addlocationservicecities.add(listState.get(position).getStateId());
         // To check weather checked event fire from getview() or user input
         isFromView = true;
-        holder.mCheckBox.setChecked(listState.get(position).isSelected());
+       holder.mCheckBox.setChecked(listState.get(position).isSelected());
+
+        System.out.println("In states from adapter status " + listState.get(position).isSelected());
         isFromView = false;
 
         if ((position == 0)) {
             holder.mCheckBox.setVisibility(View.INVISIBLE);
         } else {
             holder.mCheckBox.setVisibility(View.VISIBLE);
+
+if(listState.get(position).getState_status().equals("1")){
+    holder.mCheckBox.setChecked(true);
+    if(!AppicationClass.addlocationservicestates.contains(listState.get(position).getStateId())) {
+        AppicationClass.addlocationservicestates.add(listState.get(position).getStateId());
+    }
+    System.out.println("In State adapter State status size is " +listState.get(position).getStateId()+" "+position);
+}
+
+
         }
         holder.mCheckBox.setTag(position);
-        holder.mCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
+        holder.mCheckBox.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                int getPosition = (Integer) buttonView.getTag();
+            public void onClick(View view) {
+                if(holder.mCheckBox.isChecked()){
+                    checkedItem.add(String.valueOf(position));
+                    System.out.println("Checked States from States List " + String.valueOf(position));
 
-                if (!isFromView) {
-                    listState.get(position).setSelected(isChecked);
-                    if(isChecked == true){
-                        checkedItem.add(String.valueOf(position));
-                        System.out.println("Checked States from States List " + String.valueOf(position));
+                    listState.get(position).setState_status("1");
+                    AppicationClass.addlocationservicestates.add(listState.get(position).getStateId());
 
+                    System.out.println("In Cities Adapter Checked Items addedd " +   AppicationClass.addlocationservicestates.size());
 
-                        AppicationClass.addlocationservicestates.add(listState.get(position).getStateId());
-
-                        System.out.println("In Cities Adapter Checked Items addedd " +   AppicationClass.addlocationservicestates.size());
-
-                    }else if(checkedItem.contains(position))
-                    {
-                        System.out.println("In Cities Adapter Checked Items removed " +   AppicationClass.addlocationservicestates.size());
-                        checkedItem.remove(position);
-                        AppicationClass.addlocationservicestates.remove(listState.get(position).getStateId());
-                    }
-                    Log.e("hihi", "onCheckedChanged: here"+position+isChecked );
-
+                }else{
+                    listState.get(position).setState_status("");
+                    System.out.println("In Cities Adapter Checked Items removed " +   AppicationClass.addlocationservicestates.size());
+                    checkedItem.remove(listState.get(position).getStateId());
+                    AppicationClass.addlocationservicestates.remove(listState.get(position).getStateId());
                 }
             }
         });
+
+//        holder.mCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                int getPosition = (Integer) buttonView.getTag();
+//
+//               if (!isFromView) {
+//                   // listState.get(position).setSelected(isChecked);
+//                    System.out.println("In States adapter Entering into if");
+//                 /*   if(holder.mCheckBox.isChecked()){
+//                        System.out.println("In States adapter enters into checked true");
+//                    }
+//                   else{
+//
+//                        System.out.println("In States adapter enters into checked false");
+//                    }*/
+//                    if(isChecked == true){
+//                        checkedItem.add(String.valueOf(position));
+//                        System.out.println("Checked States from States List " + String.valueOf(position));
+//
+//                        listState.get(position).setState_status("1");
+//                        AppicationClass.addlocationservicestates.add(listState.get(position).getStateId());
+//
+//                        System.out.println("In Cities Adapter Checked Items addedd " +   AppicationClass.addlocationservicestates.size());
+//
+//                    }
+//                    else if(checkedItem.contains(position))
+//                    {
+//                        listState.get(position).setState_status("");
+//                        System.out.println("In Cities Adapter Checked Items removed " +   AppicationClass.addlocationservicestates.size());
+//                        checkedItem.remove(position);
+//                        AppicationClass.addlocationservicestates.remove(listState.get(position).getStateId());
+//                    }else{
+//
+//                        listState.get(position).setState_status("");
+//                        System.out.println("In Cities Adapter Checked Items removed " +   AppicationClass.addlocationservicestates.size());
+//                        checkedItem.remove(position);
+//                        AppicationClass.addlocationservicestates.remove(listState.get(position).getStateId());
+//                    }
+//                    Log.e("hihi", "onCheckedChanged: here"+position+isChecked );
+//
+//               }
+//
+//
+//              else{
+//
+//                    System.out.println("In States adapter Entering into else");
+//                }
+//            }
+//        });
 
 
         return convertView;

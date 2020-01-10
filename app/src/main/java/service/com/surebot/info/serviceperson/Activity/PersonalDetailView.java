@@ -65,6 +65,7 @@ public class PersonalDetailView extends AppCompatActivity {
     TextView address;
 
     String gUser_Name,gUser_Address;
+    String gProfileStatus;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,6 +93,7 @@ public class PersonalDetailView extends AppCompatActivity {
                     intent.putExtra("image", imagePath);
                     intent.putExtra("username",gUser_Name);
                     intent.putExtra("useraddress",gUser_Address);
+                    intent.putExtra("profilestatus",gProfileStatus);
 
                 startActivity(intent);
 
@@ -141,7 +143,14 @@ public class PersonalDetailView extends AppCompatActivity {
 
                         PartnerProfileResponse partnerProfileResponse = response.body();
 
+
+
                         ArrayList<PartnerProfileResponse.PartnerProfileRecords> partnerProfileRecords = new ArrayList<>(Arrays.asList(partnerProfileResponse.getPartner_profile_details()));
+                     if(!partnerProfileRecords.get(0).getUser_ID().equals("No Results Found")){
+
+
+                         gProfileStatus = partnerProfileResponse.getPartner_profile_status();
+
                         gName.setText(partnerProfileRecords.get(0).getUser_Name());
 
                         gUser_Name = partnerProfileRecords.get(0).getUser_Name();
@@ -166,7 +175,7 @@ public class PersonalDetailView extends AppCompatActivity {
                                 gUser_Address = partnerProfileRecords.get(0).getUser_Full_Address();
                             }
 
-
+                     }
 
                     }
                     progress.dismiss();

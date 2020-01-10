@@ -65,14 +65,16 @@ public class NewTaskRequestedServices_Adapter extends RecyclerView.Adapter<NewTa
 
         ArrayList<String> lSub_ServicesListid = new ArrayList<>();
         ArrayList<String> lSub_ServicesList = new ArrayList<>();
+        ArrayList<String> lSub_ServicesamountList = new ArrayList<>();
 
         for (int i=0;i<gNewRequestList_Arraylist.size();i++){
             if(gNewRequestList_Arraylist.get(i).getService_Name().equals(gServiceName_List.get(position))){
                 lSub_ServicesList.add(gNewRequestList_Arraylist.get(i).getSub_Service_Name());
                 lSub_ServicesListid.add(gNewRequestList_Arraylist.get(i).getTransaction_Partner_Quote_ID());
+                lSub_ServicesamountList.add(gNewRequestList_Arraylist.get(i).getQuantity_Amount());
             }
         }
-        lNewTaskSubServicesList_Adapter = new NewTaskSubServicesList_Adapter(context,lSub_ServicesList,lSub_ServicesListid);
+        lNewTaskSubServicesList_Adapter = new NewTaskSubServicesList_Adapter(context,lSub_ServicesList,lSub_ServicesListid,lSub_ServicesamountList);
         myViewHolder.lSubservice_Recycler.setAdapter(lNewTaskSubServicesList_Adapter);
         gservices_List = lNewTaskSubServicesList_Adapter.retrieveData();
         Log.e("lol123", "onFling: "+gservices_List );

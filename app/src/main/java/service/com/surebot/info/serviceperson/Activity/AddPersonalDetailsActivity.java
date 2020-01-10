@@ -77,35 +77,49 @@ public class AddPersonalDetailsActivity extends AppCompatActivity {
     @BindView(R.id.username)
     EditText gUsername;
 
-    @BindView(R.id.editArea)
-    TextView gArea;
 
+
+    @BindView(R.id.editHouseNo)
+    EditText gHouseno;
 
     @BindView(R.id.edditStreet)
-    TextView gStreet;
+    EditText gStreet;
 
+    @BindView(R.id.editArea)
+    EditText gArea;
 
     @BindView(R.id.editCity)
-    TextView gCity;
+    EditText gCity;
+
+    @BindView(R.id.editState)
+    EditText gState;
+
+    @BindView(R.id.editPinCode)
+    EditText gPin;
 
     @BindView(R.id.savebtn)
     Button gSave;
 
-    @BindView(R.id.editHouseNo)
-    TextView gHouseno;
+    @BindView(R.id.waitingforapprval)
+    Button gWaitingforapprval;
 
 
-    @BindView(R.id.editPinCode)
-    TextView gPin;
 
-    @BindView(R.id.editState)
-    TextView gState;
+
+
+
+
+
 
     private Dialog progress;
 
     ArrayList<GetAddressProof_Response.GetAddressProof_Details> gGettAddressProof_ImagesList;
+    String gUserId_FromLogin,gCategoryId_FromLogin,gPremiumPartner_Id;
+    String[] gaddresslist;
 
+    String gProfileStatus;
 
+    String gFrontSideImage_FromURL,gBackSideImage_FromURL;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_personal_details);
@@ -114,6 +128,12 @@ public class AddPersonalDetailsActivity extends AppCompatActivity {
         progress.requestWindowFeature(Window.FEATURE_NO_TITLE);
         //here we set layout of progress dialog
         progress.setContentView(R.layout.progressbar_background);
+
+        gUserId_FromLogin= AppicationClass.getUserId_FromLogin();
+        gCategoryId_FromLogin=AppicationClass.getCategoryId_FromLogin();
+        gPremiumPartner_Id = AppicationClass.getPremium_PartenerId();
+
+
         progress.setCancelable(true);
         images[1]=images[2]="0";
         initialize();
@@ -125,17 +145,44 @@ public class AddPersonalDetailsActivity extends AppCompatActivity {
         String UserName = getIntent().getStringExtra("username");
 
         String UserAddress = getIntent().getStringExtra("useraddress");
+        gProfileStatus= getIntent().getStringExtra("profilestatus");
+
+
+
+        if(gProfileStatus.equals("Newly_Registered")  ||gProfileStatus.equals("Rejected") || gProfileStatus.equals("Approved") ){
+            onApprovedStatus();
+
+        }
+        if(gProfileStatus.equals("Waiting_For_Approval")){
+
+            onWaitingStatus();
+        }
+
 
         if(UserAddress!=null){
 
+           gaddresslist = UserAddress.split(",");
 
+            gUsername.setText(UserName);
+            gHouseno .setText(gaddresslist[0].toString());
+            gStreet .setText(gaddresslist[1].toString());
+            gArea .setText(gaddresslist[2].toString());
+            gCity .setText(gaddresslist[3].toString());
+            gState .setText(gaddresslist[4].toString());
+            gPin .setText(gaddresslist[5].toString());
 
         }
+     /*   for(int i = 0;i<gaddresslist.length;i++){
 
-        System.out.println("In Add Address addres is " + UserAddress);
 
 
-        gUsername.setText(UserName);
+        }*/
+
+
+
+
+
+
 
         if (!imagepath.equals("")){
             Glide.with(AddPersonalDetailsActivity.this).load(Constants.IMAGEBASE_URL+imagepath).into(editImageProf);
@@ -143,6 +190,104 @@ public class AddPersonalDetailsActivity extends AppCompatActivity {
 
     }
 
+    private void onApprovedStatus(){
+        gSave.setVisibility(View.VISIBLE);
+        gWaitingforapprval.setVisibility(View.GONE);
+
+        gUsername.setEnabled(true);
+        gUsername.setFocusable(true);
+        gUsername.setClickable(true);
+        gUsername.setKeyListener(gUsername.getKeyListener());
+
+
+
+        gHouseno.setEnabled(true);
+        gHouseno.setFocusable(true);
+        gHouseno.setClickable(true);
+        gHouseno.setKeyListener(gHouseno.getKeyListener());
+
+        gStreet.setEnabled(true);
+        gStreet.setFocusable(true);
+        gStreet.setClickable(true);
+        gStreet.setKeyListener(gStreet.getKeyListener());
+
+        gArea.setEnabled(true);
+        gArea.setFocusable(true);
+        gArea.setClickable(true);
+        gArea.setKeyListener(gArea.getKeyListener());
+
+        gCity.setEnabled(true);
+        gCity.setFocusable(true);
+        gCity.setClickable(true);
+        gCity.setKeyListener(gCity.getKeyListener());
+
+        gState.setEnabled(true);
+        gState.setFocusable(true);
+        gState.setClickable(true);
+        gState.setKeyListener(gState.getKeyListener());
+
+        gPin.setEnabled(true);
+        gPin.setFocusable(true);
+        gPin.setClickable(true);
+        gPin.setKeyListener(gPin.getKeyListener());
+
+        camera.setClickable(true);
+        gallery.setClickable(true);
+
+        galleryImg.setClickable(true);
+        cameraImg.setClickable(true);
+        deleteImg.setClickable(true);
+    }
+    private void onWaitingStatus(){
+
+        gWaitingforapprval.setVisibility(View.VISIBLE);
+        gSave.setVisibility(View.GONE);
+
+        gUsername.setEnabled(false);
+        gUsername.setFocusable(false);
+        gUsername.setClickable(false);
+        gUsername.setKeyListener(gUsername.getKeyListener());
+
+
+        gHouseno.setEnabled(false);
+        gHouseno.setFocusable(false);
+        gHouseno.setClickable(false);
+        gHouseno.setKeyListener(gHouseno.getKeyListener());
+
+
+        gStreet.setEnabled(false);
+        gStreet.setFocusable(false);
+        gStreet.setClickable(false);
+        gStreet.setKeyListener(gStreet.getKeyListener());
+
+
+        gArea.setEnabled(false);
+        gArea.setFocusable(false);
+        gArea.setClickable(false);
+        gArea.setKeyListener(gArea.getKeyListener());
+
+        gCity.setEnabled(false);
+        gCity.setFocusable(false);
+        gCity.setClickable(false);
+        gCity.setKeyListener(gCity.getKeyListener());
+
+        gState.setEnabled(false);
+        gState.setFocusable(false);
+        gState.setClickable(false);
+        gState.setKeyListener(gState.getKeyListener());
+
+        gPin.setEnabled(false);
+        gPin.setFocusable(false);
+        gPin.setClickable(false);
+        gPin.setKeyListener(gPin.getKeyListener());
+
+        camera.setClickable(false);
+        gallery.setClickable(false);
+
+        galleryImg.setClickable(false);
+        cameraImg.setClickable(false);
+        deleteImg.setClickable(false);
+    }
     private void listner() {
 
         gSave.setOnClickListener(new View.OnClickListener() {
@@ -155,14 +300,58 @@ public class AddPersonalDetailsActivity extends AppCompatActivity {
                                 if (!gCity.getText().toString().trim().isEmpty()) {
                                     if (!gState.getText().toString().trim().isEmpty()) {
                                         if (!gPin.getText().toString().trim().isEmpty()) {
-                                           if(images[1].equals("0")){
-                                               Toast.makeText(AddPersonalDetailsActivity.this, "Upload Front Side of Your Address Proof to Continue", Toast.LENGTH_SHORT).show();
-                                           }else{if (images[2].equals(null)){
-                                               Toast.makeText(AddPersonalDetailsActivity.this, "Upload Back Side of Your Address Proof to Continue", Toast.LENGTH_SHORT).show();
 
-                                           }else
-                                            addPersonaldetailsAPI();
-                                           }
+
+
+
+
+
+                                            if(gProfileStatus.equals("Newly_Registered")){
+                                            if (images[1].equals("0")) {
+                                                Toast.makeText(AddPersonalDetailsActivity.this, "Upload Front Side of Your Address Proof to Continue", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                if (images[2].equals(null)) {
+                                                    Toast.makeText(AddPersonalDetailsActivity.this, "Upload Back Side of Your Address Proof to Continue", Toast.LENGTH_SHORT).show();
+
+                                                } else
+                                                    addPersonaldetailsAPI();
+                                            }
+
+
+                                        }
+
+                                            else if(!gProfileStatus.equals("Newly_Registered")){
+
+
+                                                if (!images[1].equals("0") ) {
+System.out.println("In save button entering into 11111111 if " +   images[1]);
+                                                }
+
+                                                else {
+                                                    System.out.println("In save button entering into 11111111 else " + gFrontSideImage_FromURL);
+                                                    images[1] = gFrontSideImage_FromURL.replaceAll("-", "_");
+                                                }
+
+                                                if (!images[2].equals("0")) {
+                                                    System.out.println("In save button entering into 22222 if " +   images[2]);
+                                                }
+
+                                                else {
+                                                    System.out.println("In save button entering into 22222 else " + gBackSideImage_FromURL);
+                                                    images[2] = gBackSideImage_FromURL.replaceAll("-", "_");
+                                                }
+
+
+
+
+                                                if(gGettAddressProof_ImagesList.size()==1 || gGettAddressProof_ImagesList.size()==2 ){
+
+                                                    addPersonaldetailsAPI();
+                                                }
+
+
+
+                                            }
                                         } else {
                                             gPin.setError("Enter PinCode");
                                             gPin.requestFocus();
@@ -414,7 +603,7 @@ public class AddPersonalDetailsActivity extends AppCompatActivity {
 
             ApiInterface request = retrofit.create(ApiInterface.class);
 
-            builder.addFormDataPart("User_ID", AppicationClass.getUserId_FromLogin());
+            builder.addFormDataPart("User_ID", gUserId_FromLogin);
             builder.addFormDataPart("User_Name",gUsername.getText().toString());
             builder.addFormDataPart("HouseNo", gHouseno.getText().toString());
             builder.addFormDataPart("Street", gStreet.getText().toString());
@@ -423,17 +612,139 @@ public class AddPersonalDetailsActivity extends AppCompatActivity {
             builder.addFormDataPart("State", gState.getText().toString());
             builder.addFormDataPart("Pincode", gPin.getText().toString());
             builder.addFormDataPart("docket", Constants.TOKEN);
+            File s1 = new File(images[1]);
+            File s2 = new File(images[2]);
 
-            if(images[1]!=null){
+            System.out.println(" images value is    " +  images[1] +  " and " + gFrontSideImage_FromURL + images[2] + " and " + gBackSideImage_FromURL);
+
+          //  if(images[1]!=null){
+            if (images[1].equals(gFrontSideImage_FromURL) && images[2].equals(gBackSideImage_FromURL)) {
+
+                System.out.println("In add personal details 0000  if ");
+            }
+
+            else{
+
+                System.out.println("In add personal details 0000  else ");
+
+
+                if(images[1].equals(gFrontSideImage_FromURL) || !images[2].equals(gBackSideImage_FromURL)){
+
+                    System.out.println("In add personal details 111111  if ");
+
+                    File AddressFront = new File(gFrontSideImage_FromURL);
+                    AddressFront.getName().replace(" ", "s");
+                    builder.addFormDataPart("FrontSideImage", AddressFront.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), AddressFront));
+                    System.out.println("In add personal details 11111111111  else ");
+
+
+                    File AddressBack = new File(images[1]);
+                    AddressBack.getName().replace(" ", "s");
+                    builder.addFormDataPart("ReverseSideImage", AddressBack.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), AddressBack));
+
+
+
+                }
+
+              else{
+                    System.out.println("In add personal details 11111  else ");
+
+                }
+                if(images[2].equals(gBackSideImage_FromURL) || !images[1].equals(gFrontSideImage_FromURL)){
+
+
+                    File AddressFront = new File(images[1]);
+                    AddressFront.getName().replace(" ", "s");
+                    builder.addFormDataPart("FrontSideImage", AddressFront.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), AddressFront));
+                    System.out.println("In add personal details 11111111111  else ");
+
+
+                    File AddressBack = new File(gBackSideImage_FromURL);
+                    AddressBack.getName().replace(" ", "s");
+                    builder.addFormDataPart("ReverseSideImage", AddressBack.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), AddressBack));
+
+
+                }
+
+                else{
+                    System.out.println("In add personal details 2222222222  else ");
+
+                }
+
+                if(!images[2].equals(gBackSideImage_FromURL) && !images[1].equals(gFrontSideImage_FromURL)){
+
+                    System.out.println("In add personal details 3333  if ");
+
+
+                    File AddressFront = new File(images[1]);
+                    AddressFront.getName().replace(" ", "s");
+                    builder.addFormDataPart("FrontSideImage", AddressFront.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), AddressFront));
+                    System.out.println("In add personal details 11111111111  else ");
+
+
+                    File AddressBack = new File(images[2]);
+                    AddressBack.getName().replace(" ", "s");
+                    builder.addFormDataPart("ReverseSideImage", AddressBack.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), AddressBack));
+
+
+
+                }
+
+                else {
+
+                    System.out.println("In add personal details 33333  else ");
+                }
+
+            }
+       /*     if (!images[1].equals(gFrontSideImage_FromURL) && images[2].equals(gBackSideImage_FromURL)) {
                 File AddressFront = new File(images[1]);
                 AddressFront.getName().replace(" ", "s");
                 builder.addFormDataPart("FrontSideImage", AddressFront.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), AddressFront));
+
+            System.out.println("In add personal details 11111111111  if ");
             }
-            if(images[2]!=null){
+
+            else{
+                File AddressFront = new File(gFrontSideImage_FromURL);
+                AddressFront.getName().replace(" ", "s");
+                builder.addFormDataPart("FrontSideImage", AddressFront.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), AddressFront));
+                System.out.println("In add personal details 11111111111  else ");
+
+
+                File AddressBack = new File(gBackSideImage_FromURL);
+                AddressBack.getName().replace(" ", "s");
+                builder.addFormDataPart("ReverseSideImage", AddressBack.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), AddressBack));
+
+            }*/
+          //  if(images[2]!=null){
+
+           /* if(!images[2].equals(gBackSideImage_FromURL) &&  images[1].equals(gFrontSideImage_FromURL)){
                 File AddressBack = new File(images[2]);
                 AddressBack.getName().replace(" ", "s");
                 builder.addFormDataPart("ReverseSideImage", AddressBack.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), AddressBack));
+
+                System.out.println("In add personal details 222222222  if ");
             }
+            else{
+
+                File AddressFront = new File(gFrontSideImage_FromURL);
+                AddressFront.getName().replace(" ", "s");
+                builder.addFormDataPart("FrontSideImage", AddressFront.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), AddressFront));
+
+
+
+                File AddressBack = new File(gBackSideImage_FromURL);
+                AddressBack.getName().replace(" ", "s");
+                builder.addFormDataPart("ReverseSideImage", AddressBack.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), AddressBack));
+                System.out.println("In add personal details 222222222  else ");
+
+            }*/
+
+            //If Two is also not changed
+
+
+
+            System.out.println("Personal details add apis " +  gUserId_FromLogin +" and " + gUsername.getText().toString() +" and " + gHouseno.getText().toString() +" and " + gStreet.getText().toString() +" and " + gCity.getText().toString() +" and " + gState.getText().toString() + gPin.getText().toString() + " and " + s1.getName() +" and " + s2.getName() + " and " +gBackSideImage_FromURL);
             MultipartBody requestBody = builder.build();
             Call<Add_partner_personal_details_Response> call = request.add_personal_details(requestBody);
             call.enqueue(new Callback<Add_partner_personal_details_Response>() {
@@ -499,7 +810,7 @@ public class AddPersonalDetailsActivity extends AppCompatActivity {
 
                 ApiInterface request = retrofit.create(ApiInterface.class);
 
-                builder.addFormDataPart("User_ID", AppicationClass.getUserId_FromLogin());
+                builder.addFormDataPart("User_ID",gUserId_FromLogin);
 
                 builder.addFormDataPart("docket", Constants.TOKEN);
 
@@ -577,7 +888,7 @@ public class AddPersonalDetailsActivity extends AppCompatActivity {
             DeleteProfilePicRequest lservice_request = new DeleteProfilePicRequest();
 
 
-            lservice_request.setUser_ID(AppicationClass.getUserId_FromLogin());
+            lservice_request.setUser_ID(gUserId_FromLogin);
             lservice_request.setDocket(Constants.TOKEN);
 
 
@@ -644,7 +955,7 @@ public class AddPersonalDetailsActivity extends AppCompatActivity {
             GetAddressProof_Request lGetAddressProof_Request = new GetAddressProof_Request();
 
             lGetAddressProof_Request.setDocket(Constants.TOKEN);
-            lGetAddressProof_Request.setUser_ID("1");
+            lGetAddressProof_Request.setUser_ID(gUserId_FromLogin);
 
             Call<GetAddressProof_Response> call = request.Get_AddressProofImages(lGetAddressProof_Request);
             call.enqueue(new Callback<GetAddressProof_Response>() {
@@ -657,17 +968,20 @@ public class AddPersonalDetailsActivity extends AppCompatActivity {
 
                         gGettAddressProof_ImagesList = new ArrayList<>(Arrays.asList(lGetAddressProof_Response.getGet_address_proof_details_response()));
 
+                        System.out.println("address Images size is  " + gGettAddressProof_ImagesList.size());
                         if(!gGettAddressProof_ImagesList.get(0).getID().equals("No Results Found")){
 
 
 
                 if(gGettAddressProof_ImagesList.size()==1){
+                     gFrontSideImage_FromURL = gGettAddressProof_ImagesList.get(0).getDocument_Name();
                     System.out.println("Get Address Proof Images list iffffffffff " + gGettAddressProof_ImagesList.get(0).getDocument_Name() );
                     Glide.with(AddPersonalDetailsActivity.this).load(Constants.IMAGEBASE_URL+gGettAddressProof_ImagesList.get(0).getDocument_Name()).into(frontproof);
-
+                    System.out.println("first Image url is " + Constants.IMAGEBASE_URL+gGettAddressProof_ImagesList.get(0).getDocument_Name());
                 }
-                else if(gGettAddressProof_ImagesList.size()==2){
-
+                else if(gGettAddressProof_ImagesList.size()>=2){
+                    gFrontSideImage_FromURL = gGettAddressProof_ImagesList.get(0).getDocument_Name();
+                    gBackSideImage_FromURL= gGettAddressProof_ImagesList.get(1).getDocument_Name();
                     System.out.println("Get Address Proof Images list elseeeeee " + gGettAddressProof_ImagesList.get(1).getDocument_Name() );
                     Glide.with(AddPersonalDetailsActivity.this).load(Constants.IMAGEBASE_URL+gGettAddressProof_ImagesList.get(0).getDocument_Name()).into(frontproof);
                     Glide.with(AddPersonalDetailsActivity.this).load(Constants.IMAGEBASE_URL+gGettAddressProof_ImagesList.get(1).getDocument_Name()).into(backprof);
