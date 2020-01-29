@@ -29,6 +29,8 @@ private  String get_identity_verification_details_status;
 
         private String Document_Name;
 
+        private String Document_Category_Name;
+
         public String getID() {
             return ID;
         }
@@ -59,6 +61,14 @@ private  String get_identity_verification_details_status;
 
         public void setDocument_Name(String document_Name) {
             Document_Name = document_Name;
+        }
+
+        public String getDocument_Category_Name() {
+            return Document_Category_Name;
+        }
+
+        public void setDocument_Category_Name(String document_Category_Name) {
+            Document_Category_Name = document_Category_Name;
         }
     }
 

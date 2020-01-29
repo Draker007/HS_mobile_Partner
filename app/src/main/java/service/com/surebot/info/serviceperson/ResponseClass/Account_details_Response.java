@@ -4,6 +4,8 @@ public class Account_details_Response {
 
     private account_details_records[] partner_account_details_response;
 
+    private String partner_account_details_status;
+
     public account_details_records[] getAccount_details_records() {
         return partner_account_details_response;
     }
@@ -12,11 +14,18 @@ public class Account_details_Response {
         this.partner_account_details_response = account_details_records;
     }
 
+    public String getPartner_account_details_status() {
+        return partner_account_details_status;
+    }
+
+    public void setPartner_account_details_status(String partner_account_details_status) {
+        this.partner_account_details_status = partner_account_details_status;
+    }
 
     //2nd Class
     public class account_details_records{
 
-        String Bank_Name,Bank_Branch_Name,Account_Holder_Name,Account_Number,IFSC_Code,User_ID,Approval_Status;
+        String Bank_Name,Bank_Branch_Name,Account_Holder_Name,Account_Number,IFSC_Code,User_ID;
 
         public String getUser_ID() {
             return User_ID;
@@ -26,13 +35,7 @@ public class Account_details_Response {
             User_ID = user_ID;
         }
 
-        public String getApproval_Status() {
-            return Approval_Status;
-        }
 
-        public void setApproval_Status(String approval_Status) {
-            Approval_Status = approval_Status;
-        }
 
         public String getBank_Name() {
             return Bank_Name;

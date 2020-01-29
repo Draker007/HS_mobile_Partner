@@ -3,6 +3,16 @@ package service.com.surebot.info.serviceperson.ResponseClass;
 public class GetDocumentslist_Response {
     GetDocumentslist_Records[]  verification_document_details_response;
 
+    private  String DocumentHint= "Select documents";
+
+    public String getDocumentHint() {
+        return DocumentHint;
+    }
+
+    public void setDocumentHint(String documentHint) {
+        DocumentHint = documentHint;
+    }
+
     public GetDocumentslist_Records[] getVerification_document_details_response() {
         return verification_document_details_response;
     }
@@ -15,6 +25,8 @@ public class GetDocumentslist_Response {
         private String Document_Category_ID;
 
         private String Document_Category_Name;
+
+
 
         public String getDocument_Category_ID() {
             return Document_Category_ID;

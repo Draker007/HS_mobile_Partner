@@ -155,49 +155,32 @@ public class AccountDetailsActivity extends AppCompatActivity {
                         if (response.isSuccessful()) {
 
                             Account_details_Response account_details_response = response.body();
-                           /* gPartner_Approval_Status = account_details_response.g;
+                            gPartner_Approval_Status = account_details_response.getPartner_account_details_status();
 
 
-                            if(gPartnerApproval_Status.equals("Newly_Registered")  ||gPartnerApproval_Status.equals("Rejected") || gPartnerApproval_Status.equals("Approved") ){
+                            if(gPartner_Approval_Status.equals("Newly_Registered")  ||gPartner_Approval_Status.equals("Rejected") || gPartner_Approval_Status.equals("Approved") ){
                                 onApprovedStatus();
 
                             }
-                            if(gPartnerApproval_Status.equals("Waiting_For_Approval")){
+                            if(gPartner_Approval_Status.equals("Waiting_For_Approval")){
 
                                 onWaitingStatus();
-                            }*/
+                            }
 
 
 
                             account_details_records = new ArrayList<>(Arrays.asList(account_details_response.getAccount_details_records()));
-                           if(account_details_records.get(0).getUser_ID().equals("No Results Found")){
-                               Toast.makeText(AccountDetailsActivity.this, "Please Enter Account Detials", Toast.LENGTH_SHORT).show();
-                           }else if(account_details_records.get(0).getApproval_Status().equals("Reject"))
-                           {
-                               Toast.makeText(AccountDetailsActivity.this, "Your Account Detials Has been Rejected Please Enter New Detials", Toast.LENGTH_LONG).show();
-                           }else if (account_details_records.get(0).getApproval_Status().equals("Waiting")){
-                               Toast.makeText(AccountDetailsActivity.this, "Waiting For Approval", Toast.LENGTH_SHORT).show();
+                            if(!account_details_records.get(0).getUser_ID().equals("No Results Found")) {
 
-                               gbnkName.setText(account_details_records.get(0).getBank_Name());
-                               gAccHolderName.setText(account_details_records.get(0).getAccount_Holder_Name());
-                               gAccIFSCcode.setText(account_details_records.get(0).getIFSC_Code());
-                               gAccNumber.setText(account_details_records.get(0).getAccount_Number());
-                               gbnkBranchName.setText(account_details_records.get(0).getBank_Branch_Name());
-                            gbnkName.setEnabled(false);
-                               gAccHolderName.setEnabled(false);
-                               gAccIFSCcode.setEnabled(false);
-                               gAccNumber.setEnabled(false);
-                               gbnkBranchName.setEnabled(false);
-                               btnConfirm.setEnabled(false);
+                                gbnkName.setText(account_details_records.get(0).getBank_Name());
+                                gAccHolderName.setText(account_details_records.get(0).getAccount_Holder_Name());
+                                gAccIFSCcode.setText(account_details_records.get(0).getIFSC_Code());
+                                gAccNumber.setText(account_details_records.get(0).getAccount_Number());
+                                gbnkBranchName.setText(account_details_records.get(0).getBank_Branch_Name());
 
-                           }else {
-                               gbnkName.setText(account_details_records.get(0).getBank_Name());
-                               gAccHolderName.setText(account_details_records.get(0).getAccount_Holder_Name());
-                               gAccIFSCcode.setText(account_details_records.get(0).getIFSC_Code());
-                               gAccNumber.setText(account_details_records.get(0).getAccount_Number());
-                               gbnkBranchName.setText(account_details_records.get(0).getBank_Branch_Name());
-                               Toast.makeText(AccountDetailsActivity.this, "Detials Apprved By Admin", Toast.LENGTH_SHORT).show();
-                           }
+                            }
+
+
 
                         }
 
@@ -261,10 +244,10 @@ public class AccountDetailsActivity extends AppCompatActivity {
                     if (response.isSuccessful()) {
 
                         Add_account_details_Response account_details_response = response.body();
-                        if (account_details_response.getAccount_details_response().equals("true")) {
+                        if (account_details_response.getStatus_Response().equals("200")) {
                             Toast.makeText(AccountDetailsActivity.this, "Updated Account Details ", Toast.LENGTH_SHORT).show();
                             //TODO setup response
-
+                            getAccountDetails();
                         }
                     }
 

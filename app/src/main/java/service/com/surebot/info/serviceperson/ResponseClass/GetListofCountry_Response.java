@@ -4,6 +4,16 @@ public class GetListofCountry_Response {
 
     private GetListofCountry_List[] get_country_list_response;
 
+    private String service_status;
+
+    public String getService_status() {
+        return service_status;
+    }
+
+    public void setService_status(String service_status) {
+        this.service_status = service_status;
+    }
+
     public GetListofCountry_List[] getGet_country_list_response() {
         return get_country_list_response;
     }

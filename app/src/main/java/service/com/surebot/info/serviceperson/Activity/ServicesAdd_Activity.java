@@ -260,7 +260,7 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
     Boolean gStateClicked_values=false;
 
     Boolean gPartner_Status=false;
-
+    String gAdminApproval_Status;
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -274,9 +274,14 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
         progress.setCancelable(true);
         System.out.println("Cities arraylist size in ocreate 11111111 is "+  AppicationClass.addlocationservicecities.size());
 
+
+
+
         AppicationClass.addlocationservicecities.clear();
         System.out.println("Cities arraylist size in ocreate 222 is "+  AppicationClass.addlocationservicecities.size());
-
+        gUserId_FromLogin= AppicationClass.getUserId_FromLogin();
+        gCategoryId_FromLogin=AppicationClass.getCategoryId_FromLogin();
+        gPremiumPartner_Id = AppicationClass.getPremium_PartenerId();
 
         getPartnerApproval_Status();
 
@@ -334,15 +339,6 @@ public class ServicesAdd_Activity extends AppCompatActivity implements  AddServi
 
 
 
-
-
-
-
-
-
-        gUserId_FromLogin= AppicationClass.getUserId_FromLogin();
-        gCategoryId_FromLogin=AppicationClass.getCategoryId_FromLogin();
-        gPremiumPartner_Id = AppicationClass.getPremium_PartenerId();
 
 
         System.out.println("User id and Category id in Add Service " + gUserId_FromLogin + gCategoryId_FromLogin );
@@ -1139,7 +1135,7 @@ System.out.println("Final mapping id and ammount is " + SelectedSubServiceAmmout
           /*  lservice_request.setUser_ID(gUserId_FromLogin);
             lservice_request.setCategory_ID(gCategoryId_FromLogin);*/
 
-            lservice_request.setUser_ID("1");
+            lservice_request.setUser_ID(gUserId_FromLogin);
             lservice_request.setCategory_ID(gCategoryId_FromLogin);
             lservice_request.setDocket(Constants.TOKEN);
 
@@ -1222,10 +1218,10 @@ System.out.println("Final mapping id and ammount is " + SelectedSubServiceAmmout
             ListOfSubServices_Request lsubservice_request = new ListOfSubServices_Request();
 
 
-            lsubservice_request.setUser_ID("1");
+            lsubservice_request.setUser_ID(gUserId_FromLogin);
             lsubservice_request.setCategory_ID(gCategoryId_FromLogin);
             lsubservice_request.setDocket(Constants.TOKEN);
-            lsubservice_request.setService_ID("2");
+            lsubservice_request.setService_ID(serviceId);
             Log.e("hihi", "subService_List: "+gCategoryId_FromLogin );
 
 
@@ -1599,7 +1595,9 @@ System.out.println("Final mapping id and ammount is " + SelectedSubServiceAmmout
             PartnerApprovalStatus_Request lGetListofCountry_Request= new PartnerApprovalStatus_Request();
 
             lGetListofCountry_Request.setDocket(Constants.TOKEN);
-            lGetListofCountry_Request.setUser_ID("1");
+            lGetListofCountry_Request.setUser_ID(gUserId_FromLogin);
+
+            System.out.println("Values of userid is " + gUserId_FromLogin);
 
             Call<PartnerApprovalStatus_Response> call = request.Get_PartnerApprovalStatus(lGetListofCountry_Request);
             call.enqueue(new Callback<PartnerApprovalStatus_Response>() {
@@ -1727,6 +1725,19 @@ private void getCountry_List() {
                     gCountry_Spinner.setVisibility(View.VISIBLE);
                     gGetCountry_ArrayList = new ArrayList<>(Arrays.asList(lGetListofCountry_Response.getGet_country_list_response()));
                     System.out.println("Arrayfrom Db Size is  " + gGetCountry_ArrayList.size());
+                    gAdminApproval_Status = lGetListofCountry_Response.getService_status();
+
+                    if(gAdminApproval_Status.equals("Newly_Registered")  ||gAdminApproval_Status.equals("Rejected") || gAdminApproval_Status.equals("Approved") ){
+                      //  onApprovedStatus();
+                    }
+
+
+                    if(gAdminApproval_Status.equals("Waiting_For_Approval")){
+
+                  //      onWaitingStatus();
+                    }
+
+
                     gCountryArrayList=new ArrayList<>();
                     gCountryArrayList.add(0,getResources().getString(R.string.selectcountry));
                     gCountryID_ArrayList.add(0,getResources().getString(R.string.selectcountryid));
@@ -2252,7 +2263,10 @@ else {
 
     }
 
+    private void onApprovedStatus(){
 
+
+    }
     @Override
     public void removeradiuslist(String zipcode, String kms, int position) {
 

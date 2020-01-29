@@ -517,7 +517,7 @@ if(statusid.equals("0")){
                            gNotask_header.setVisibility(View.GONE);
                            gTodyatask_header.setVisibility(View.VISIBLE);
 
-                           TodaysTask_Adapter lTodaysTask_Adapter = new TodaysTask_Adapter(getActivity(),lTodaysTask_Arraylist);
+                            TodaysTask_Adapter lTodaysTask_Adapter = new TodaysTask_Adapter(getActivity(),lTodaysTask_Arraylist);
                            gTodaytask_recyclerview.setAdapter(lTodaysTask_Adapter);
                            lTodaysTask_Adapter.setstartservicelist_Communicator(MyTask_Fragment.this);
                            lTodaysTask_Adapter.notifyDataSetChanged();

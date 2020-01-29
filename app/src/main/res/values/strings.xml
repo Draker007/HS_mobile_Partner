@@ -47,8 +47,8 @@
     <!-- create your profile-->
     <string name="tobefilled1">* Complete your profile </string>
     <string name="tobefilled2">* Profile verification and approval </string>
-    <string name="tobefilled3">* Profile verification and approval</string>
-    <string name="tobefilled4">  Enter your Service details </string>
+    <string name="tobefilled3">* Enter your Service details</string>
+    <string name="tobefilled4">  Buy premium partner package </string>
 
 
     <!-- New Request List-->

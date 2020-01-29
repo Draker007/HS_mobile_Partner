@@ -173,9 +173,9 @@ public interface ApiInterface {
     @POST("identity_verification_upload_image")
     Call<Identity_verification_Response>  IdentityVerif  (@Body RequestBody Identity);
 
-//5. Getting documents list
-@POST("list_verification_document_category_details")
-Call<GetDocumentslist_Response> Get_Documentslist (@Body GetDocumentslist_Request request);
+    //5. Getting documents list
+    @POST("list_verification_document_category_details")
+    Call<GetDocumentslist_Response> Get_Documentslist (@Body GetDocumentslist_Request request);
 
     // 6. Getting Identity Verification Details
     @POST("get_identity_verification_details")
@@ -277,8 +277,8 @@ Call<GetDocumentslist_Response> Get_Documentslist (@Body GetDocumentslist_Reques
 
       //Send Quote to use
 
-    @POST("add_request_quotation")
-    Call<SendQuotetoUser_Response> sendQuote_toUser (@Body SendQuotetoUser_Request request);
+      @POST("add_request_quotation")
+      Call<SendQuotetoUser_Response> sendQuote_toUser (@Body SendQuotetoUser_Request request);
 
 
         //Get Upcoming Service Request List
@@ -325,7 +325,7 @@ Call<GetDocumentslist_Response> Get_Documentslist (@Body GetDocumentslist_Reques
          //Location and Services APIS
 
     //Get List Of Country
-    @POST("get_country_list")
+    @POST("partner_get_country_list")
     Call<GetListofCountry_Response> Get_CountryList (@Body GetListofCountry_Request request);
 
     //Get All Zipcode by Country

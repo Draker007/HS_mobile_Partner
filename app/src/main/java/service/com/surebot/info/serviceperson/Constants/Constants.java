@@ -15,8 +15,8 @@ public class Constants {
 
 
     //Lekha
-    public static final String BASE_URL = "http://192.168.0.96/services_at_home/Api/";
-    public static final String IMAGEBASE_URL="http://192.168.0.96/services_at_home/";
+    public static final String BASE_URL = "http://192.168.1.16/services_at_home/Api/";
+    public static final String IMAGEBASE_URL="http://192.168.1.16/services_at_home/";
 
 
   //  public static final String BASE_URL = "http://192.168.0.86/services_at_home/Api/";http://192.168.0.69/services_at_home

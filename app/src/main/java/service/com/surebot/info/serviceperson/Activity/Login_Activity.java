@@ -10,8 +10,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,6 +21,8 @@ import android.widget.Toast;
 
 import java.text.NumberFormat;
 import java.text.ParsePosition;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,7 +38,9 @@ import service.com.surebot.info.serviceperson.Constants.Constants;
 import service.com.surebot.info.serviceperson.Fragment.MyTask_Fragment;
 import service.com.surebot.info.serviceperson.Manager.CacheManager;
 import service.com.surebot.info.serviceperson.R;
+import service.com.surebot.info.serviceperson.RequestClass.PartnerApprovalStatus_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Partnerlogin_Request;
+import service.com.surebot.info.serviceperson.ResponseClass.PartnerApprovalStatus_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Partnerlogin_Response;
 import service.com.surebot.info.serviceperson.utils.AppicationClass;
 import service.com.surebot.info.serviceperson.utils.NetworkUtil;
@@ -66,6 +72,24 @@ public class Login_Activity extends AppCompatActivity {
     private Dialog progress;
 
     AlertDialog.Builder builder;
+
+    String gPartnerIdOnLogin;
+    ArrayList<PartnerApprovalStatus_Response.PartnerApprovalStatus> gGet_PartnerApprovalStatus;
+    Boolean gPartner_Status=false;
+
+
+
+   /* Dialog gConfirmation_Dialog;
+
+    TextView laddressproofpendingtext ;
+    TextView lbankdetailspendingtext;
+    TextView ldocumentspendingtext;
+
+
+    ImageView laddressproof_Image ;
+    ImageView lbankdetails_Image ;
+    ImageView ldocuments_Image ;*/
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -176,7 +200,7 @@ public class Login_Activity extends AppCompatActivity {
                             {
                             if (partnerlogin_response.getUser_Role().equals("2")) {
                                 System.out.println("In User Login Method 6");
-
+                              gPartnerIdOnLogin= partnerlogin_response.getUser_ID();
                                 AppicationClass.setUserId_FromLogin(partnerlogin_response.getUser_ID());
                                 AppicationClass.setUserName_FromLogin(partnerlogin_response.getUserName());
                                 AppicationClass.setPremium_PartenerId(partnerlogin_response.getUser_Premium());
@@ -193,8 +217,14 @@ public class Login_Activity extends AppCompatActivity {
                                 mCacheManager.setUserRole(partnerlogin_response.getUser_Role());
                                 mCacheManager.setUserId(partnerlogin_response.getUser_ID());
 
-                                startActivity(new Intent(Login_Activity.this, SplashActivity.class));
-                                finish();
+                                //Get Partner Profile status
+                                // If Profile got approved aaaaaaopen home screen or show stating create profile screen CreateProfileActivity
+
+                                getPartnerApproval_Status(partnerlogin_response.getUser_ID());
+
+
+                                /*startActivity(new Intent(Login_Activity.this, SplashActivity.class));
+                                finish();*/
                             }
                         }
                         } else{
@@ -248,5 +278,125 @@ public class Login_Activity extends AppCompatActivity {
 
     }
 
+
+
+    //Get Partner approval status
+    private void getPartnerApproval_Status(String UserID) {
+
+        try {
+            //      progress.show();
+            OkHttpClient.Builder client = new OkHttpClient.Builder();
+            HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
+            registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            client.addInterceptor(registrationInterceptor);
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(Constants.BASE_URL)
+                    .client(client.build())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+
+            ApiInterface request = retrofit.create(ApiInterface.class);
+            PartnerApprovalStatus_Request lGetListofCountry_Request= new PartnerApprovalStatus_Request();
+
+            lGetListofCountry_Request.setDocket(Constants.TOKEN);
+            lGetListofCountry_Request.setUser_ID(UserID);
+
+            Call<PartnerApprovalStatus_Response> call = request.Get_PartnerApprovalStatus(lGetListofCountry_Request);
+            call.enqueue(new Callback<PartnerApprovalStatus_Response>() {
+                @Override
+                public void onResponse(Call<PartnerApprovalStatus_Response> call, Response<PartnerApprovalStatus_Response> response) {
+                    if (response.isSuccessful()) {
+
+
+                        PartnerApprovalStatus_Response lPartnerApprovalStatus_Response = response.body();
+
+                        gGet_PartnerApprovalStatus = new ArrayList<>(Arrays.asList(lPartnerApprovalStatus_Response.getPartner_approval_status()));
+
+
+
+
+
+                        if(!gGet_PartnerApprovalStatus.get(0).getAddress_proof_details().equals("Approved") || !gGet_PartnerApprovalStatus.get(0).getIdentity_proof_details().equals("Approved") || !gGet_PartnerApprovalStatus.get(0).getAdmin_partner_bank_account_status().equals("Approved")){
+
+                            // Toast.makeText(ServicesAdd_Activity.this,"Need to take approval for bank details",Toast.LENGTH_SHORT).show();
+
+                            if(gGet_PartnerApprovalStatus.get(0).getAddress_proof_details().equals("Waiting_For_Approval")){
+
+
+                                //  Toast.makeText(ServicesAdd_Activity.this,"Need to take approval for personal details",Toast.LENGTH_SHORT).show();
+                            }
+                            if(gGet_PartnerApprovalStatus.get(0).getIdentity_proof_details().equals("Waiting_For_Approval")){
+
+
+                                //  Toast.makeText(ServicesAdd_Activity.this,"Need to take approval for documents",Toast.LENGTH_SHORT).show();
+                            }
+                            if(gGet_PartnerApprovalStatus.get(0).getAdmin_partner_bank_account_status().equals("Waiting_For_Approval")){
+
+                                //  Toast.makeText(ServicesAdd_Activity.this,"Need to take approval for bank details",Toast.LENGTH_SHORT).show();
+                            }
+                            gPartner_Status=false;
+                            System.out.println("In partner approval status in if");
+
+
+
+                            startActivity(new Intent(Login_Activity.this, CreateProfileActivity.class));
+                            finish();
+
+
+                        }
+
+                        else{
+
+                            System.out.println("In partner approval status in else");
+
+
+                            gPartner_Status=true;
+                            // gConfirmation_Dialog.dismiss();
+
+
+                            startActivity(new Intent(Login_Activity.this, SplashActivity.class));
+                            finish();
+
+
+
+                        }
+
+                        if(gGet_PartnerApprovalStatus.get(0).getAddress_proof_details().equals("Approved") && gGet_PartnerApprovalStatus.get(0).getIdentity_proof_details().equals("Approved") && gGet_PartnerApprovalStatus.get(0).getAdmin_partner_bank_account_status().equals("Approved")){
+
+                            System.out.println("In partner approval status in second if");
+                            gPartner_Status=true;
+
+                            startActivity(new Intent(Login_Activity.this, SplashActivity.class));
+                            finish();
+
+
+                        }
+
+
+
+
+
+                        //     progress.dismiss();
+
+                    }
+
+                    // progress.dismiss();
+                }
+
+                @Override
+                public void onFailure(Call<PartnerApprovalStatus_Response> call, Throwable t) {
+                    System.out.println("In User Login Method 7");
+                    //  progress.dismiss();
+                }
+            });
+        }catch (Exception e) {
+            // progress.dismiss();
+            e.printStackTrace();
+
+
+        }
+
+    }
 
 }

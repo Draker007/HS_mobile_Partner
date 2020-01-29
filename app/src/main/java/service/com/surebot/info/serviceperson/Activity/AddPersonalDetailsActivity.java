@@ -120,6 +120,10 @@ public class AddPersonalDetailsActivity extends AppCompatActivity {
     String gProfileStatus;
 
     String gFrontSideImage_FromURL,gBackSideImage_FromURL;
+
+    String picturePath;
+    Bitmap thumbnail;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_personal_details);
@@ -145,6 +149,7 @@ public class AddPersonalDetailsActivity extends AppCompatActivity {
         String UserName = getIntent().getStringExtra("username");
 
         String UserAddress = getIntent().getStringExtra("useraddress");
+
         gProfileStatus= getIntent().getStringExtra("profilestatus");
 
 
@@ -324,7 +329,7 @@ public class AddPersonalDetailsActivity extends AppCompatActivity {
 
 
                                                 if (!images[1].equals("0") ) {
-System.out.println("In save button entering into 11111111 if " +   images[1]);
+                                                      System.out.println("In save button entering into 11111111 if " +   images[1]);
                                                 }
 
                                                 else {
@@ -540,7 +545,7 @@ System.out.println("In save button entering into 11111111 if " +   images[1]);
                     e.printStackTrace();
                 }
             } else if (requestCode == 2) {
-                Log.e("image", "onActivityResult: " );
+              /*  Log.e("image", "onActivityResult: " );
                 Uri selectedImage = data.getData();
                 String[] filePath = {MediaStore.Images.Media.DATA};
                 Cursor c = getContentResolver().query(selectedImage, filePath, null, null, null);
@@ -549,7 +554,33 @@ System.out.println("In save button entering into 11111111 if " +   images[1]);
                 String picturePath = c.getString(columnIndex);
                 c.close();
                 Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
-                Log.w("path of image from ", picturePath + "");
+                Log.w("path of image from ", picturePath + "");*/
+
+                //New For Repalcing path name and send
+
+
+                Uri uri = data.getData();
+
+                Bitmap bitmap = null;
+                try {
+                    bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
+
+                    //   Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+
+                    Uri tempUri = getImageUri(AddPersonalDetailsActivity.this.getApplicationContext(), bitmap);
+                    // CALL THIS METHOD TO GET THE ACTUAL PATH
+                    File f = new File(getRealPathFromURI(tempUri));
+
+                    picturePath = f.getPath();
+                     thumbnail = (BitmapFactory.decodeFile(picturePath));
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+
+
                 switch (i) {
                     case 1:
                         editImageProf.setImageBitmap(thumbnail);
@@ -621,6 +652,30 @@ System.out.println("In save button entering into 11111111 if " +   images[1]);
             if (images[1].equals(gFrontSideImage_FromURL) && images[2].equals(gBackSideImage_FromURL)) {
 
                 System.out.println("In add personal details 0000  if ");
+
+                File AddressFront = new File(gFrontSideImage_FromURL);
+                String front_path = AddressFront.getPath();
+
+                String[] front_path_split = front_path.split("/");
+
+                String lfront = front_path_split[front_path_split.length-1];
+
+                builder.addFormDataPart("FrontSideImage", lfront);
+
+
+
+
+                File AddressBack = new File(gBackSideImage_FromURL);
+                String reverse_path = AddressBack.getPath();
+
+                String[] reverse_path_split = reverse_path.split("/");
+
+                String lreverse = reverse_path_split[reverse_path_split.length-1];
+
+
+                System.out.println("Reverse side image is " + lreverse);
+                builder.addFormDataPart("ReverseSideImage",lreverse);
+
             }
 
             else{
@@ -628,17 +683,27 @@ System.out.println("In save button entering into 11111111 if " +   images[1]);
                 System.out.println("In add personal details 0000  else ");
 
 
-                if(images[1].equals(gFrontSideImage_FromURL) || !images[2].equals(gBackSideImage_FromURL)){
+                if(images[1].equals(gFrontSideImage_FromURL) && !images[2].equals(gBackSideImage_FromURL)){
 
                     System.out.println("In add personal details 111111  if ");
 
+
+
                     File AddressFront = new File(gFrontSideImage_FromURL);
-                    AddressFront.getName().replace(" ", "s");
-                    builder.addFormDataPart("FrontSideImage", AddressFront.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), AddressFront));
-                    System.out.println("In add personal details 11111111111  else ");
+                    String front_path = AddressFront.getPath();
+
+                    String[] front_path_split = front_path.split("/");
+
+                    String lfront = front_path_split[front_path_split.length-1];
+
+                    builder.addFormDataPart("FrontSideImage", lfront);
+                    System.out.println("Front side image is " + lfront);
 
 
-                    File AddressBack = new File(images[1]);
+
+
+
+                    File AddressBack = new File(images[2]);
                     AddressBack.getName().replace(" ", "s");
                     builder.addFormDataPart("ReverseSideImage", AddressBack.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), AddressBack));
 
@@ -650,20 +715,34 @@ System.out.println("In save button entering into 11111111 if " +   images[1]);
                     System.out.println("In add personal details 11111  else ");
 
                 }
-                if(images[2].equals(gBackSideImage_FromURL) || !images[1].equals(gFrontSideImage_FromURL)){
+                if(images[2].equals(gBackSideImage_FromURL) && !images[1].equals(gFrontSideImage_FromURL)){
 
 
                     File AddressFront = new File(images[1]);
                     AddressFront.getName().replace(" ", "s");
                     builder.addFormDataPart("FrontSideImage", AddressFront.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), AddressFront));
-                    System.out.println("In add personal details 11111111111  else ");
+                    System.out.println("c 22222222  if ");
+
+
 
 
                     File AddressBack = new File(gBackSideImage_FromURL);
+                    String reverse_path = AddressBack.getPath();
+
+                    String[] reverse_path_split = reverse_path.split("/");
+
+                    String lreverse = reverse_path_split[reverse_path_split.length-1];
+
+
+                    System.out.println("Reverse side image is " + lreverse);
+                    builder.addFormDataPart("ReverseSideImage",lreverse);
+
+
+                  /*  File AddressBack = new File(Constants.IMAGEBASE_URL+gBackSideImage_FromURL);
                     AddressBack.getName().replace(" ", "s");
-                    builder.addFormDataPart("ReverseSideImage", AddressBack.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), AddressBack));
-
-
+                    builder.addFormDataPart("ReverseSideImage", AddressBack.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), AddressBack));*/
+                         //System.out.println("Image path in 2nd if is " + images[1] + " and " + gBackSideImage_FromURL);
+                  //  System.out.println("Image path in 2nd if is @@@@@@ " + AddressFront.getName() + " and " + AddressBack.getName());
                 }
 
                 else{
@@ -673,17 +752,17 @@ System.out.println("In save button entering into 11111111 if " +   images[1]);
 
                 if(!images[2].equals(gBackSideImage_FromURL) && !images[1].equals(gFrontSideImage_FromURL)){
 
-                    System.out.println("In add personal details 3333  if ");
+
 
 
                     File AddressFront = new File(images[1]);
-                    AddressFront.getName().replace(" ", "s");
+            //        AddressFront.getName().replace(" ", "s");
                     builder.addFormDataPart("FrontSideImage", AddressFront.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), AddressFront));
-                    System.out.println("In add personal details 11111111111  else ");
+                    System.out.println("In add personal details 3333333  if ");
 
 
                     File AddressBack = new File(images[2]);
-                    AddressBack.getName().replace(" ", "s");
+                 //   AddressBack.getName().replace(" ", "s");
                     builder.addFormDataPart("ReverseSideImage", AddressBack.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), AddressBack));
 
 
@@ -760,6 +839,8 @@ System.out.println("In save button entering into 11111111 if " +   images[1]);
                             System.out.println("Place order entering into method valid");
                             Toast.makeText(AddPersonalDetailsActivity.this, "Address Updated Successfully ", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(AddPersonalDetailsActivity.this,PersonalDetailView.class));
+
+
                         }else{
                             Toast.makeText(AddPersonalDetailsActivity.this, lResponse.getRequest_response(), Toast.LENGTH_SHORT).show();
                         }

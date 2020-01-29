@@ -224,7 +224,9 @@
         app:layout_constraintEnd_toEndOf="@+id/cardView5"
         app:layout_constraintStart_toStartOf="@+id/cardView6"
         app:layout_constraintTop_toBottomOf="@+id/cardView5"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        android:visibility="gone"
+        />
 
 
     <Button
