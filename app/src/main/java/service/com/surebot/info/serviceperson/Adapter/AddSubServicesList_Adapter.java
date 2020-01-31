@@ -37,17 +37,27 @@ public class AddSubServicesList_Adapter extends RecyclerView.Adapter<AddSubServi
     ArrayList<String> addedSubService = new ArrayList<>();
 
    String gPremiumPartner_Id = AppicationClass.getPremium_PartenerId();
+    String gUserTypeFrom_CountryList = AppicationClass.getUserType_FromCountryList();
 
     ArrayList<ListOfSubServices_Response.ListOfSubServices_Records> gSubServicesList_Arraylist;
 
-    public AddSubServicesList_Adapter(Context context,   ArrayList<ListOfSubServices_Response.ListOfSubServices_Records> gSubServicesList_Arraylist) {
+    String gAdminApproval_Status;
+
+public static  int multiple = 0;
+    public AddSubServicesList_Adapter(Context context,   ArrayList<ListOfSubServices_Response.ListOfSubServices_Records> gSubServicesList_Arraylist, String gAdminApproval_Status) {
         this.context=context;
         this.gSubServicesList_Arraylist=gSubServicesList_Arraylist;
 
-        AppicationClass.addservicemapingid.clear();
+        if(multiple==0){
+            AppicationClass.addservicemapingid.clear();
+
+            AppicationClass.addserviceammount.clear();
+
+            System.out.println("multiple services flow entering into 11111");
+        }
 
 
-        AppicationClass.addserviceammount.clear();
+        this.gAdminApproval_Status= gAdminApproval_Status;
     }
 
     @NonNull
@@ -63,9 +73,32 @@ public class AddSubServicesList_Adapter extends RecyclerView.Adapter<AddSubServi
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, final int position) {
         ListOfSubServices_Response.ListOfSubServices_Records item = gSubServicesList_Arraylist.get(position);
-        System.out.println("Premium partner Id is " + gPremiumPartner_Id);
+        System.out.println("Premium partner Id is " + gUserTypeFrom_CountryList);
 
-        if (gPremiumPartner_Id.equals("1")) {
+
+        if(gAdminApproval_Status.equals("Newly_Registered")  ||gAdminApproval_Status.equals("Rejected") || gAdminApproval_Status.equals("Approved") ){
+            myViewHolder.lQuantityCheckBox.setEnabled(true);
+
+            myViewHolder.lPrice.setEnabled(true);
+            myViewHolder.lPrice.setFocusable(true);
+            myViewHolder.lPrice.setClickable(true);
+            myViewHolder.lPrice.setKeyListener( myViewHolder.lPrice.getKeyListener());
+
+        }
+
+        if(gAdminApproval_Status.equals("Waiting_For_Approval")){
+
+            myViewHolder.lQuantityCheckBox.setEnabled(false);
+
+
+            myViewHolder.lPrice.setEnabled(false);
+            myViewHolder.lPrice.setFocusable(false);
+            myViewHolder.lPrice.setClickable(false);
+            myViewHolder.lPrice.setKeyListener( myViewHolder.lPrice.getKeyListener());
+        }
+
+
+        if (gUserTypeFrom_CountryList.equals("1")) {
 
             System.out.println("In Sub Adapter entering into 1");
             myViewHolder.lPrice.setVisibility(View.VISIBLE);
@@ -87,42 +120,51 @@ public class AddSubServicesList_Adapter extends RecyclerView.Adapter<AddSubServi
 
         }
 
-        if (gPremiumPartner_Id.equals("0")) {
+        if (gUserTypeFrom_CountryList.equals("0")) {
             // System.out.println("In Sub Adapter entering into 0");
             myViewHolder.lQuantityCheckBox.setVisibility(View.VISIBLE);
             myViewHolder.lPrice.setVisibility(View.GONE);
 
             // if(gSubServicesList_Arraylist.get(position).getService_Is_There().equals("Exists")){
             myViewHolder.lQuantityCheckBox.setChecked(false);
-            if (!AppicationClass.addservicemapingid.contains(gSubServicesList_Arraylist.get(position).getService_Mapping_ID())) {
 
+                System.out.println("In Adapter Entering into 1111111111"  + AppicationClass.addservicemapingid.size());
+            if (!AppicationClass.addservicemapingid.contains(gSubServicesList_Arraylist.get(position).getService_Mapping_ID())) {
+                System.out.println("Array value is "  + AppicationClass.addservicemapingid + " and " + gSubServicesList_Arraylist.get(position).getService_Mapping_ID());
+                System.out.println("In Adapter Entering into 2222222");
                 if (gSubServicesList_Arraylist.get(position).getService_Is_There().equals("Exists")) {
+                    System.out.println("In Adapter Entering into 3333333");
                     myViewHolder.lQuantityCheckBox.setChecked(true);
                     AppicationClass.addservicemapingid.add(gSubServicesList_Arraylist.get(position).getService_Mapping_ID());
 
                 }
-                System.out.println("In Sub Adapter entering into 0 if exists");
 
+                System.out.println("In Adapter Entering into 4444444");
             }
 
 
             //// }
 
             else {
-
+                System.out.println("In Adapter Entering into 5555555");
                 myViewHolder.lQuantityCheckBox.setChecked(false);
+            }
+
+            if(multiple==1){
+                myViewHolder.lQuantityCheckBox.setChecked(true);
+                AppicationClass.addservicemapingid.add(gSubServicesList_Arraylist.get(position).getService_Mapping_ID());
             }
 
         }
 
-//System.out.println("Premium partner Id is " + gPremiumPartner_Id);
+//System.out.println("Premium partner Id is " + gUserTypeFrom_CountryList);
 
-//        if(gPremiumPartner_Id.equals("1")){
+//        if(gUserTypeFrom_CountryList.equals("1")){
 //            myViewHolder.lPrice.setVisibility(View.VISIBLE);
 //            myViewHolder.lQuantityCheckBox.setVisibility(View.GONE);
 //        }
 //
-//        if(gPremiumPartner_Id.equals("0")){
+//        if(gUserTypeFrom_CountryList.equals("0")){
 //            myViewHolder.lQuantityCheckBox.setVisibility(View.VISIBLE);
 //            myViewHolder.lPrice.setVisibility(View.GONE);
 //
@@ -194,14 +236,20 @@ public class AddSubServicesList_Adapter extends RecyclerView.Adapter<AddSubServi
 
                 if(myViewHolder.lQuantityCheckBox.isChecked()){
                     AppicationClass.addservicemapingid.add(gSubServicesList_Arraylist.get(position).getService_Mapping_ID());
+                    AppicationClass.multipleaddservicemapingid.add(gSubServicesList_Arraylist.get(position).getService_Mapping_ID());
+
                     myViewHolder.lQuantityCheckBox.setChecked(true);
-
-
+System.out.println("Checkbox entering in to the true");
+                    multiple=1;
                 }
-else{
+                   else{
                     if(AppicationClass.addservicemapingid.contains(gSubServicesList_Arraylist.get(position).getService_Mapping_ID())){
                         AppicationClass.addservicemapingid.remove(gSubServicesList_Arraylist.get(position).getService_Mapping_ID());
+                        AppicationClass.multipleaddservicemapingid.remove(gSubServicesList_Arraylist.get(position).getService_Mapping_ID());
+
                         myViewHolder.lQuantityCheckBox.setChecked(false);
+                        multiple=2;
+                        System.out.println("Checkbox entering in to the false");
                     }
 
                  //   AppicationClass.addservicemapingid.remove(gSubServicesList_Arraylist.get(position).getService_Mapping_ID());

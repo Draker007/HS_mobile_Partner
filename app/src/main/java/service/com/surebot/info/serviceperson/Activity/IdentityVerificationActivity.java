@@ -210,8 +210,11 @@ public class IdentityVerificationActivity extends AppCompatActivity {
                 if(j!=0){
 
                     if(gPartnerApproval_Status.equals("Newly_Registered")){
-                        if(front1.isEmpty()){
-                            if(back1.isEmpty()){
+
+                        System.out.println("Document iamage of front side" + front1);
+                        System.out.println("Document iamage of reverse side" + back1);
+                        if(!front1.isEmpty()){
+                            if(!back1.isEmpty()){
 
                                 add_IdentityVerify();
 
@@ -233,7 +236,7 @@ public class IdentityVerificationActivity extends AppCompatActivity {
 
                         System.out.println("Api method checking 111111111");
 
-                        if(front1.isEmpty()){
+                        if(!front1.isEmpty()){
                             System.out.println("Api method checking 222222");
                             front1 = gFrontSide_Image_FromAPI.replaceAll("-", "_");
                         }
@@ -241,7 +244,7 @@ public class IdentityVerificationActivity extends AppCompatActivity {
 
                         }
 
-                        if(back1.isEmpty()){
+                        if(!back1.isEmpty()){
                             System.out.println("Api method checking 33333333333");
                             back1 = gBackSide_Image_FromAPI.replaceAll("-", "_");
                         }
@@ -732,7 +735,7 @@ System.out.println("In confirm buttom back end url is " + gFrontSide_Image_FromA
 
                            // dropdown.setSelection(((ArrayAdapter<String>) dropdown.getAdapter()).getPosition(gGetIdentityVerifications_ImagesList.get(i).getActivity_Category_Name()));
 
-System.out.println("Position of drop down is " +(((ArrayAdapter<String>) dropdown.getAdapter()).getPosition(gGetIdentityVerifications_ImagesList.get(i).getDocument_Category_ID())) + " and "+gGetIdentityVerifications_ImagesList.get(i).getDocument_Category_ID() );
+
 
                             dropdown.setSelection(((ArrayAdapter<String>) dropdown.getAdapter()).getPosition(gGetIdentityVerifications_ImagesList.get(i).getDocument_Category_Name()));
                            // dropdown.setSelection(Integer.parseInt(gGetIdentityVerifications_ImagesList.get(0).getDocument_Category_ID()));
@@ -873,7 +876,7 @@ System.out.println("Position of drop down is " +(((ArrayAdapter<String>) dropdow
         front.setClickable(true);
         back.setClickable(true);
         dropdown.setClickable(true);
-       // dropdown.setEnabled(true);
+        dropdown.setEnabled(true);
     }
 
     private  void  onWaitingStatus(){
@@ -884,7 +887,7 @@ System.out.println("Position of drop down is " +(((ArrayAdapter<String>) dropdow
         back.setClickable(false);
         dropdown.setClickable(false);
 
-       // dropdown.setEnabled(false);
+        dropdown.setEnabled(false);
     }
 
 }

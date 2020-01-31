@@ -30,12 +30,14 @@ public class AddServicesList_Adapter extends RecyclerView.Adapter<AddServicesLis
 
     serviceslist_Communicator Communicator;
 
+
     public AddServicesList_Adapter(ServicesAdd_Activity context, ArrayList<ListOfServices_Response.ListOfServices_Records> gServicesList_Arraylist) {
         this.context=context;
         this.gServicesList_Arraylist=gServicesList_Arraylist;
         this.Communicator=context;
 
-        System.out.println("In service list adapter array size is " +gServicesList_Arraylist.size());
+
+
     }
 
     @NonNull

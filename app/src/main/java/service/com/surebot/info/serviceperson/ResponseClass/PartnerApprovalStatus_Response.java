@@ -16,9 +16,11 @@ public class PartnerApprovalStatus_Response {
 
         private String  User_ID;
         private String  User_Name;
-        private String  Address_proof_details;
-        private String  Identity_proof_details;
-        private String  admin_partner_bank_account_status;
+
+
+        private String  Address_proof_status;
+        private String  Identity_Verfication_proof_status;
+        private String  Bank_account_status;
 
         public String getUser_ID() {
             return User_ID;
@@ -36,28 +38,29 @@ public class PartnerApprovalStatus_Response {
             User_Name = user_Name;
         }
 
-        public String getAddress_proof_details() {
-            return Address_proof_details;
+
+        public String getAddress_proof_status() {
+            return Address_proof_status;
         }
 
-        public void setAddress_proof_details(String address_proof_details) {
-            Address_proof_details = address_proof_details;
+        public void setAddress_proof_status(String address_proof_status) {
+            Address_proof_status = address_proof_status;
         }
 
-        public String getIdentity_proof_details() {
-            return Identity_proof_details;
+        public String getIdentity_Verfication_proof_status() {
+            return Identity_Verfication_proof_status;
         }
 
-        public void setIdentity_proof_details(String identity_proof_details) {
-            Identity_proof_details = identity_proof_details;
+        public void setIdentity_Verfication_proof_status(String identity_Verfication_proof_status) {
+            Identity_Verfication_proof_status = identity_Verfication_proof_status;
         }
 
-        public String getAdmin_partner_bank_account_status() {
-            return admin_partner_bank_account_status;
+        public String getBank_account_status() {
+            return Bank_account_status;
         }
 
-        public void setAdmin_partner_bank_account_status(String admin_partner_bank_account_status) {
-            this.admin_partner_bank_account_status = admin_partner_bank_account_status;
+        public void setBank_account_status(String bank_account_status) {
+            Bank_account_status = bank_account_status;
         }
     }
 

@@ -6,6 +6,8 @@ public class GetListofCountry_Response {
 
     private String service_status;
 
+    private String user_type;
+
     public String getService_status() {
         return service_status;
     }
@@ -75,4 +77,12 @@ public class GetListofCountry_Response {
         }
     }
 
+
+    public String getUser_type() {
+        return user_type;
+    }
+
+    public void setUser_type(String user_type) {
+        this.user_type = user_type;
+    }
 }

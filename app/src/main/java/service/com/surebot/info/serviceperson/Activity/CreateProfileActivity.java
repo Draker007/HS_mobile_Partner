@@ -48,8 +48,7 @@ public class CreateProfileActivity extends AppCompatActivity {
     Fragment fragment = null;
 
 
-    //For Getting Partner status
-    ArrayList<PartnerApprovalStatus_Response.PartnerApprovalStatus> gGet_PartnerApprovalStatus;
+
 
     String gUserId_FromLogin;
 

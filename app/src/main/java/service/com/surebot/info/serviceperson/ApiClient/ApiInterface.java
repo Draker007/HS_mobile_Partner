@@ -133,7 +133,7 @@ public interface ApiInterface {
 
 
 
-    //In Todays Task Fragment In Home Screen
+    // Home Screen
 
     ////List of Packages Premium
     @POST("List_packages")
@@ -152,7 +152,10 @@ public interface ApiInterface {
     @POST("partner_start_service")
     Call<PartnerStartService_Response> Get_partner_start_servicecode (@Body PartnerStartService_Request request);
 
+    //Notification API
 
+    @POST("notification_request")
+    Call<Notification_Response> NotificationCall (@Body Notification_Request request);
 
 
     //Profile
@@ -224,19 +227,6 @@ public interface ApiInterface {
 
 
 
-
-
-
-
-
-
-
-
-
-    //Notification API
-
-    @POST("notification_request")
-    Call<Notification_Response> NotificationCall (@Body Notification_Request request);
 
 
     //Payment
@@ -315,10 +305,6 @@ public interface ApiInterface {
     // Add About Us
     @POST("about_us")
     Call<AboutUs_Response> Get_AboutUs (@Body About_me_Request request);
-
-
-
-
 
 
 

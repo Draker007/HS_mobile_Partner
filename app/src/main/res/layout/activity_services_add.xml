@@ -414,7 +414,25 @@
                 android:textAllCaps="false"
                 android:textColor="@color/color_white"
                 android:textSize="@dimen/regulartextsize"
-                android:visibility="visible" />
+                android:visibility="gone" />
+
+
+            <Button
+                android:id="@+id/waitingfor_approval_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/waitingforapprovalgray"
+                android:fontFamily="@font/montserrat"
+                android:padding="8dp"
+                android:text="@string/waitingforapproval"
+                android:textAllCaps="false"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/regulartextsize"
+                android:visibility="gone" />
+
 
             <Button
                 android:id="@+id/submitforapproval_button_citywise"

@@ -89,6 +89,10 @@ public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.st
     @BindView(R.id.todyatask_header)
             TextView gTodyatask_header;
 
+    @BindView(R.id.becomember_header)
+    TextView gBecomember_header;
+
+
     ArrayList<Integer> gPackages_List;
     ArrayList<String> gUserName_List;
 
@@ -143,7 +147,7 @@ public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.st
 
 
 
-        callListPackageAPI();
+        Package_Lists();
 
 
         gPackages_List = new ArrayList<Integer>();
@@ -236,7 +240,7 @@ public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.st
 
 
     // // Get Packages Detials
-    private void callListPackageAPI() {
+    private void Package_Lists() {
 
         try {
             System.out.println("In User Login Method 1");
@@ -256,7 +260,6 @@ public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.st
             Partner_package_Request lservice_request = new Partner_package_Request();
             lservice_request.setDocket(Constants.TOKEN);
 
-
             Call<Partner_package_Response> call = request.List_packages(lservice_request);
             call.enqueue(new Callback<Partner_package_Response>() {
                 @Override
@@ -268,6 +271,9 @@ public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.st
                         if(!partner_package_response.get(0).getPackage_ID().equals("No Results Found")) {
                         HomePackage_Adapter lHomePackage_Adapter = new HomePackage_Adapter(getActivity(), partner_package_response);
                         gPackage_recyclerview.setAdapter(lHomePackage_Adapter);
+
+                            gBecomember_header.setVisibility(View.VISIBLE);
+
 
                             lHomePackage_Adapter.setBuypackage_Communicator(MyTask_Fragment.this);
                             lHomePackage_Adapter.notifyDataSetChanged();
@@ -516,6 +522,7 @@ if(statusid.equals("0")){
                            gTodaytask_recyclerview.setVisibility(View.VISIBLE);
                            gNotask_header.setVisibility(View.GONE);
                            gTodyatask_header.setVisibility(View.VISIBLE);
+
 
                             TodaysTask_Adapter lTodaysTask_Adapter = new TodaysTask_Adapter(getActivity(),lTodaysTask_Arraylist);
                            gTodaytask_recyclerview.setAdapter(lTodaysTask_Adapter);

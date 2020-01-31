@@ -7,8 +7,12 @@ public class AppicationClass {
     public static String UserId_FromLogin;
     public static String UserName_FromLogin;
     public static  String CategoryId_FromLogin;
+    public static  String UserType_FromCountryList;
+
     public static ArrayList<String> test1 =new ArrayList<>();
     public static ArrayList<String> test2 = new ArrayList<>();
+
+
     public static ArrayList<String> newrequestservicesammount = new ArrayList<>();
     public static ArrayList<String> newrequestservicesid = new ArrayList<>();
 
@@ -22,6 +26,10 @@ public class AppicationClass {
     public static ArrayList<String> addAwardsDetails =new ArrayList<>();
 
     public static ArrayList<String> getAwardsDetails =new ArrayList<>();
+
+
+    public static ArrayList<String> multipleaddservicemapingid =new ArrayList<>();
+
 
     public static String getCategoryId_FromLogin() {
         return CategoryId_FromLogin;
@@ -158,5 +166,21 @@ public class AppicationClass {
 
     public static void setAddlocationservicestates(ArrayList<String> addlocationservicestates) {
         AppicationClass.addlocationservicestates = addlocationservicestates;
+    }
+
+    public static String getUserType_FromCountryList() {
+        return UserType_FromCountryList;
+    }
+
+    public static void setUserType_FromCountryList(String userType_FromCountryList) {
+        UserType_FromCountryList = userType_FromCountryList;
+    }
+
+    public static ArrayList<String> getMultipleaddservicemapingid() {
+        return multipleaddservicemapingid;
+    }
+
+    public static void setMultipleaddservicemapingid(ArrayList<String> multipleaddservicemapingid) {
+        AppicationClass.multipleaddservicemapingid = multipleaddservicemapingid;
     }
 }

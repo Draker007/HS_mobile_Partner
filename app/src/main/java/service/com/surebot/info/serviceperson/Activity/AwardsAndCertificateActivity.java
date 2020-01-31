@@ -149,7 +149,7 @@ public class AwardsAndCertificateActivity extends AppCompatActivity implements a
               if(imagesList.size()>0){
 
                   //TODO have to clean Array List AwardUP after calling upload api
-                 award_and_certificate_photos_API();
+                  addAward_and_certificate_photos();
 
               }
               else{
@@ -182,130 +182,6 @@ public class AwardsAndCertificateActivity extends AppCompatActivity implements a
 
 
 
-    private void award_and_certificate_photos_API() {
-        try {
-
-           progress.show();
-            MultipartBody.Builder builder = new MultipartBody.Builder();
-            builder.setType(MultipartBody.FORM);
-
-            OkHttpClient.Builder client = new OkHttpClient.Builder();
-            HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
-            registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-            client.addInterceptor(registrationInterceptor);
-
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(Constants.BASE_URL)
-                    .client(client.build())
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-
-            ApiInterface request = retrofit.create(ApiInterface.class);
-
-            builder.addFormDataPart("User_ID",AppicationClass.getUserId_FromLogin());
-
-            builder.addFormDataPart("docket",Constants.TOKEN);
-
-      /*  for(int o = 0;o<Awards.size();o++){
-
-            File AddressFront = new File(Awards.get(o));
-//                AddressFront.getName().replace(" ", "s");
-            //Log.e("Draker", "IdentityVeriafy: 1"+AddressFront );
-
-            System.out.println("Description array in Add  " + awardsDatas2.get(o).getText());
-            builder.addFormDataPart("FirstImage[]", AddressFront.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), AddressFront));
-                if(awardsDatas2.get(o).getText()==null){
-
-                    System.out.println("In Awards Description entering into iffffffff");
-                    builder.addFormDataPart("Document_Description[]","");
-                }
-                else {
-                    System.out.println("In Awards Description entering into elseeeeeeeee");
-                   builder.addFormDataPart("Document_Description[]", awardsDatas2.get(o).getText());
-
-                }
-
-
-            System.out.println("In Awards Description entering into for");
-
-        }*/
-
-            if (AppicationClass.getAddAwardsDetails().size() > 0) {
-                for (int i = 0; i < AppicationClass.getAddAwardsDetails().size(); i++) {
-                    builder.addFormDataPart("Document_Description[]", AppicationClass.getAddAwardsDetails().get(i));
-
-                }
-            }
-
-      System.out.println("in Add Method Entrting into request " + imagesList.size() + " and " + AppicationClass.getAddAwardsDetails().size());
-//Awards Images
-            if (imagesList.size() > 0) {
-
-
-                for (int i = 0; i < imagesList.size(); i++) {
-                    System.out.println("in Add Method Entrting into first If " + imagesList.get(i));
-
-                    File AddAwardsList = new File(imagesList.get(i));
-                    builder.addFormDataPart("FirstImage[]", AddAwardsList.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), AddAwardsList));
-                }
-            }
-
-            //Award Details Text
-/*
-            if (AppicationClass.getAddAwardsDetails().size() > 0) {
-
-                for (int i = 0; i < AppicationClass.getAddAwardsDetails().size(); i++) {
-
-                    System.out.println("in Add Method Entrting into Second If " + AppicationClass.getAddAwardsDetails().get(i));
-
-                    File AddAwardsDetailsList = new File(AppicationClass.getAddAwardsDetails().get(i));
-
-                    System.out.println("Awards Details is " + AppicationClass.getAddAwardsDetails().get(i) );
-                    builder.addFormDataPart("Document_Description", AddAwardsDetailsList.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), AddAwardsDetailsList));
-
-                }
-            }*/
-
-            MultipartBody requestBody = builder.build();
-            Call<Awards_and_CertificateResponse> call = request.AwardsAndCertificate(requestBody);
-            call.enqueue(new Callback<Awards_and_CertificateResponse>() {
-                @Override
-                public void onResponse(Call<Awards_and_CertificateResponse> call, Response<Awards_and_CertificateResponse> response) {
-
-                    if (response.isSuccessful()) {
-                        Log.e("Draker", "onResponse: 1" );
-                        Awards_and_CertificateResponse lResponse = response.body();
-                   if(lResponse.getAward_cerificate_photo_response().equals("valid")){
-                            Log.e("Draker", "onResponse: 1" );
-                            System.out.println("Place order entering into method valid");
-                            Toast.makeText(AwardsAndCertificateActivity.this, "Awards and Certificate updated successfully", Toast.LENGTH_SHORT).show();
-                            onBackPressed();
-                        }
-                       progress.dismiss();
-                    }
-
-                    progress.dismiss();
-                }
-
-                @Override
-                public void onFailure(Call<Awards_and_CertificateResponse> call, Throwable t) {
-                    Toast.makeText(AwardsAndCertificateActivity.this, getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
-                      progress.dismiss();
-                }
-            });
-
-
-
-        }
-
-        catch (Exception e){
-
-            progress.dismiss();
-            Log.e("draker", "addPersonaldetailsAPI: "+e );
-            e.printStackTrace();
-        }
-
-    }
 
 
     public Uri getImageUri(Context inContext, Bitmap inImage) {
@@ -373,8 +249,20 @@ public class AwardsAndCertificateActivity extends AppCompatActivity implements a
                         filePathColumn, null, null, null);
                 cursor.moveToFirst();
 
+
+
                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                 selectedImage_path = cursor.getString(columnIndex);
+                cursor.close();
+
+
+                BitmapFactory.Options bitMapOption = new BitmapFactory.Options();
+                bitMapOption.inJustDecodeBounds = true;
+                BitmapFactory.decodeFile(selectedImage_path, bitMapOption);
+
+
+
+
                 imagesList.add(selectedImage_path);
                 AddAwardsAdapter imageListAdapter = new AddAwardsAdapter(AwardsAndCertificateActivity.this,imagesList,false);
                 // gImagefromGallery_Path =("/storage/emulated/0/DCIM/Camera/sub1.png");
@@ -382,7 +270,7 @@ public class AwardsAndCertificateActivity extends AppCompatActivity implements a
                 r1.setAdapter(imageListAdapter);
 
 
-                cursor.close();
+
 
 
             }
@@ -495,7 +383,131 @@ public class AwardsAndCertificateActivity extends AppCompatActivity implements a
     }
 
 
+    //Add Awards and Certificates
+    private void addAward_and_certificate_photos() {
+        try {
 
+            progress.show();
+            MultipartBody.Builder builder = new MultipartBody.Builder();
+            builder.setType(MultipartBody.FORM);
+
+            OkHttpClient.Builder client = new OkHttpClient.Builder();
+            HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
+            registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            client.addInterceptor(registrationInterceptor);
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(Constants.BASE_URL)
+                    .client(client.build())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+
+            ApiInterface request = retrofit.create(ApiInterface.class);
+
+            builder.addFormDataPart("User_ID",AppicationClass.getUserId_FromLogin());
+
+            builder.addFormDataPart("docket",Constants.TOKEN);
+
+      /*  for(int o = 0;o<Awards.size();o++){
+
+            File AddressFront = new File(Awards.get(o));
+//                AddressFront.getName().replace(" ", "s");
+            //Log.e("Draker", "IdentityVeriafy: 1"+AddressFront );
+
+            System.out.println("Description array in Add  " + awardsDatas2.get(o).getText());
+            builder.addFormDataPart("FirstImage[]", AddressFront.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), AddressFront));
+                if(awardsDatas2.get(o).getText()==null){
+
+                    System.out.println("In Awards Description entering into iffffffff");
+                    builder.addFormDataPart("Document_Description[]","");
+                }
+                else {
+                    System.out.println("In Awards Description entering into elseeeeeeeee");
+                   builder.addFormDataPart("Document_Description[]", awardsDatas2.get(o).getText());
+
+                }
+
+
+            System.out.println("In Awards Description entering into for");
+
+        }*/
+
+            if (AppicationClass.getAddAwardsDetails().size() > 0) {
+                for (int i = 0; i < AppicationClass.getAddAwardsDetails().size(); i++) {
+                    builder.addFormDataPart("Document_Description[]", AppicationClass.getAddAwardsDetails().get(i));
+
+                }
+            }
+
+            System.out.println("in Add Method Entrting into request " + imagesList.size() + " and " + AppicationClass.getAddAwardsDetails().size());
+//Awards Images
+            if (imagesList.size() > 0) {
+
+
+                for (int i = 0; i < imagesList.size(); i++) {
+                    System.out.println("in Add Method Entrting into first If " + imagesList.get(i));
+
+                    File AddAwardsList = new File(imagesList.get(i));
+                    builder.addFormDataPart("FirstImage[]", AddAwardsList.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), AddAwardsList));
+                }
+            }
+
+            //Award Details Text
+/*
+            if (AppicationClass.getAddAwardsDetails().size() > 0) {
+
+                for (int i = 0; i < AppicationClass.getAddAwardsDetails().size(); i++) {
+
+                    System.out.println("in Add Method Entrting into Second If " + AppicationClass.getAddAwardsDetails().get(i));
+
+                    File AddAwardsDetailsList = new File(AppicationClass.getAddAwardsDetails().get(i));
+
+                    System.out.println("Awards Details is " + AppicationClass.getAddAwardsDetails().get(i) );
+                    builder.addFormDataPart("Document_Description", AddAwardsDetailsList.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), AddAwardsDetailsList));
+
+                }
+            }*/
+
+            MultipartBody requestBody = builder.build();
+            Call<Awards_and_CertificateResponse> call = request.AwardsAndCertificate(requestBody);
+            call.enqueue(new Callback<Awards_and_CertificateResponse>() {
+                @Override
+                public void onResponse(Call<Awards_and_CertificateResponse> call, Response<Awards_and_CertificateResponse> response) {
+
+                    if (response.isSuccessful()) {
+                        Log.e("Draker", "onResponse: 1" );
+                        Awards_and_CertificateResponse lResponse = response.body();
+                        if(lResponse.getAward_cerificate_photo_response().equals("valid")){
+                            Log.e("Draker", "onResponse: 1" );
+                            System.out.println("Place order entering into method valid");
+                            Toast.makeText(AwardsAndCertificateActivity.this, "Awards and Certificate updated successfully", Toast.LENGTH_SHORT).show();
+                            onBackPressed();
+                        }
+                        progress.dismiss();
+                    }
+
+                    progress.dismiss();
+                }
+
+                @Override
+                public void onFailure(Call<Awards_and_CertificateResponse> call, Throwable t) {
+                    Toast.makeText(AwardsAndCertificateActivity.this, getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
+                    progress.dismiss();
+                }
+            });
+
+
+
+        }
+
+        catch (Exception e){
+
+            progress.dismiss();
+            Log.e("draker", "addPersonaldetailsAPI: "+e );
+            e.printStackTrace();
+        }
+
+    }
 
     //Get Awards and Certificates
 

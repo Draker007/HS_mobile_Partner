@@ -317,21 +317,21 @@ public class Login_Activity extends AppCompatActivity {
 
 
 
-                        if(!gGet_PartnerApprovalStatus.get(0).getAddress_proof_details().equals("Approved") || !gGet_PartnerApprovalStatus.get(0).getIdentity_proof_details().equals("Approved") || !gGet_PartnerApprovalStatus.get(0).getAdmin_partner_bank_account_status().equals("Approved")){
+                        if(!gGet_PartnerApprovalStatus.get(0).getAddress_proof_status().equals("Approved") || !gGet_PartnerApprovalStatus.get(0).getIdentity_Verfication_proof_status().equals("Approved") || !gGet_PartnerApprovalStatus.get(0).getBank_account_status().equals("Approved")){
 
                             // Toast.makeText(ServicesAdd_Activity.this,"Need to take approval for bank details",Toast.LENGTH_SHORT).show();
 
-                            if(gGet_PartnerApprovalStatus.get(0).getAddress_proof_details().equals("Waiting_For_Approval")){
+                            if(gGet_PartnerApprovalStatus.get(0).getAddress_proof_status().equals("Waiting_For_Approval")){
 
 
                                 //  Toast.makeText(ServicesAdd_Activity.this,"Need to take approval for personal details",Toast.LENGTH_SHORT).show();
                             }
-                            if(gGet_PartnerApprovalStatus.get(0).getIdentity_proof_details().equals("Waiting_For_Approval")){
+                            if(gGet_PartnerApprovalStatus.get(0).getIdentity_Verfication_proof_status().equals("Waiting_For_Approval")){
 
 
                                 //  Toast.makeText(ServicesAdd_Activity.this,"Need to take approval for documents",Toast.LENGTH_SHORT).show();
                             }
-                            if(gGet_PartnerApprovalStatus.get(0).getAdmin_partner_bank_account_status().equals("Waiting_For_Approval")){
+                            if(gGet_PartnerApprovalStatus.get(0).getBank_account_status().equals("Waiting_For_Approval")){
 
                                 //  Toast.makeText(ServicesAdd_Activity.this,"Need to take approval for bank details",Toast.LENGTH_SHORT).show();
                             }
@@ -362,7 +362,7 @@ public class Login_Activity extends AppCompatActivity {
 
                         }
 
-                        if(gGet_PartnerApprovalStatus.get(0).getAddress_proof_details().equals("Approved") && gGet_PartnerApprovalStatus.get(0).getIdentity_proof_details().equals("Approved") && gGet_PartnerApprovalStatus.get(0).getAdmin_partner_bank_account_status().equals("Approved")){
+                        if(gGet_PartnerApprovalStatus.get(0).getAddress_proof_status().equals("Approved") && gGet_PartnerApprovalStatus.get(0).getIdentity_Verfication_proof_status().equals("Approved") && gGet_PartnerApprovalStatus.get(0).getBank_account_status().equals("Approved")){
 
                             System.out.println("In partner approval status in second if");
                             gPartner_Status=true;
