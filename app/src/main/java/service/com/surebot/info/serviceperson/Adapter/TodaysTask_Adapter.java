@@ -173,7 +173,6 @@ public class TodaysTask_Adapter extends RecyclerView.Adapter<TodaysTask_Adapter.
                     public void onClick(View view) {
                         lStartservicebyfinalprice_button.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.updatefinalpricebuttonbackground));
                         lStartservicebyissueprice_button.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.buttonblue_background));
-                        communicator.startservice(lTodaysTask_Arraylist.get(position).getTransaction_ID(),"1");
                     }
                 });
 
@@ -182,7 +181,7 @@ public class TodaysTask_Adapter extends RecyclerView.Adapter<TodaysTask_Adapter.
                     public void onClick(View view) {
                         lStartservicebyissueprice_button.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.updatefinalpricebuttonbackground));
                         lStartservicebyfinalprice_button.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.buttonblue_background));
-                        communicator.startservice(lTodaysTask_Arraylist.get(position).getTransaction_ID(),"1");
+                        communicator.startservice(lTodaysTask_Arraylist.get(position).getTransaction_ID(),"1",lTodaysTask_Arraylist.get(position).getUser_Name(),lTodaysTask_Arraylist.get(position).getBooking_Date(),lTodaysTask_Arraylist.get(position).getBooking_Start_Time());
                     }
                 });
 
@@ -196,7 +195,7 @@ public class TodaysTask_Adapter extends RecyclerView.Adapter<TodaysTask_Adapter.
             @Override
             public void onClick(View view) {
 
-                communicator.startservice(lTodaysTask_Arraylist.get(position).getTransaction_ID(),"0");
+                communicator.startservice(lTodaysTask_Arraylist.get(position).getTransaction_ID(),"0",lTodaysTask_Arraylist.get(position).getUser_Name(),lTodaysTask_Arraylist.get(position).getBooking_Date(),lTodaysTask_Arraylist.get(position).getBooking_Start_Time());
             }
         });
 
@@ -219,7 +218,7 @@ public class TodaysTask_Adapter extends RecyclerView.Adapter<TodaysTask_Adapter.
                 lSend_text.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
+                        gUpdateFinalPrice_Dialog.dismiss();
                     }
                 });
                 gUpdateFinalPrice_Dialog.show();
@@ -345,7 +344,7 @@ public class TodaysTask_Adapter extends RecyclerView.Adapter<TodaysTask_Adapter.
         }
     }
     public interface startservicelist_Communicator {
-        void startservice(String transactionid,String statusid);
+        void startservice(String transactionid,String statusid,String username,String bookingdate,String bookingtime);
 
     }
 

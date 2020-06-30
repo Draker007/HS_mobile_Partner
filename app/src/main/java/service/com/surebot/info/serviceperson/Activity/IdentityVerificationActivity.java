@@ -737,7 +737,7 @@ System.out.println("In confirm buttom back end url is " + gFrontSide_Image_FromA
 
 
 
-                            dropdown.setSelection(((ArrayAdapter<String>) dropdown.getAdapter()).getPosition(gGetIdentityVerifications_ImagesList.get(i).getDocument_Category_Name()));
+                            dropdown.setSelection(((ArrayAdapter<String>) dropdown.getAdapter()).getPosition(gGetIdentityVerifications_ImagesList.get(0).getDocument_Category_Name()));
                            // dropdown.setSelection(Integer.parseInt(gGetIdentityVerifications_ImagesList.get(0).getDocument_Category_ID()));
                             gDocument_Id = gGetIdentityVerifications_ImagesList.get(0).getDocument_Category_ID();
 

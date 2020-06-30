@@ -375,12 +375,12 @@ public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.st
     }
 
     @Override
-    public void startservice(String transactionid,String statusid) {
+    public void startservice(String transactionid,String statusid,String username, String bookingdate, String bookingtime) {
 
 
 if(statusid.equals("1")){
 
-    Get_partner_start_servicecode(transactionid,statusid);
+    Get_partner_start_servicecode(transactionid,statusid,username,bookingdate,bookingtime);
 }
 
 if(statusid.equals("0")){
@@ -396,7 +396,7 @@ if(statusid.equals("0")){
             lYes_text.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Get_partner_start_servicecode(transactionid,statusid);
+                    Get_partner_start_servicecode(transactionid,statusid,username,bookingdate,bookingtime);
 
                 }
             });
@@ -561,7 +561,7 @@ if(statusid.equals("0")){
 
 
     //Get Code For Start Service
-    private void Get_partner_start_servicecode(String transactionId,String statusid) {
+    private void Get_partner_start_servicecode(String transactionId,String statusid,String username,String bookingdate,String bookingtime) {
 
         try {
             System.out.println("In User Login Method 1");
@@ -624,9 +624,9 @@ if(statusid.equals("0")){
                                     } else {
                                         otp = otp1 + otp2 + otp3 + otp4;
                                         System.out.println("Entered Otp " + otp);
-
+                                     Toast.makeText(getActivity(),lPartnerStartService_Response.getPartner_start_service_get_otp_response(),Toast.LENGTH_SHORT).show();
                                         if (otp.equals(lPartnerStartService_Response.getPartner_start_service_get_otp_response())) {
-                                            startActivity(new Intent(getActivity(), serviceDetailsActivity.class));
+                                            startActivity(new Intent(getActivity(), serviceDetailsActivity.class).putExtra("UserName",username).putExtra("BookingDate",bookingdate).putExtra("BookingTime",bookingtime));
                                             gEnterCode_Dialog.dismiss();
                                         } else {
                                             Toast.makeText(getActivity(), "Invalid Otp", Toast.LENGTH_SHORT).show();

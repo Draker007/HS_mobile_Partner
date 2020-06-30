@@ -111,11 +111,16 @@ public class GetAwardsDettailsAdapter  extends RecyclerView.Adapter<GetAwardsDet
             @Override
             public void onClick(View v) {
                 if (imageUrls.size()>0){
+
+
                     AppicationClass.addAwardsDetails.remove(position);
                     imageUrls.remove(position);
                     notifyItemRemoved(position);
                     getCheckedItems();
                     notifyItemRangeChanged(position, imageUrls.size());
+
+
+                    // New Cancel popup
 
                 }
 

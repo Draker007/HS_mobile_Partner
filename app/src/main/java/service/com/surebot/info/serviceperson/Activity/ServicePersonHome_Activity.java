@@ -100,6 +100,13 @@ public class ServicePersonHome_Activity extends AppCompatActivity {
             fragment = new MyTask_Fragment();
         }
 
+        if(HomeScreen_Flow.equals("frompaymentreceived")){
+
+            System.out.println("In Homesceen entering into fromlogin");
+            fragment = new MyTask_Fragment();
+        }
+
+
 
         if(HomeScreen_Flow.equals("frombecomeprime")){
 

@@ -288,9 +288,13 @@ public class ServicesAdd_Activity extends AppCompatActivity implements AddServic
             public void onClick(View view) {
                 if (gPartner_Status) {
 
-                    gConfirmation_Dialog.dismiss();
+                   gConfirmation_Dialog.dismiss();
+
+                    System.out.println("Partner status is in If " + gPartner_Status);
 
                 } else {
+
+                    System.out.println("Partner status is in Else" + gPartner_Status);
                     gConfirmation_Dialog.dismiss();
                     Toast.makeText(ServicesAdd_Activity.this, ServicesAdd_Activity.this.getString(R.string.profilestatusnote), Toast.LENGTH_SHORT).show();
                 }
@@ -959,7 +963,7 @@ else{
 
                     System.out.println("In Submit buttoon id and amount are " + SelectedSubServiceID_new + " and " + SelectedSubServiceAmmout_new);
 
-                  //  submitFor_Approval();
+                 submitFor_Approval();
 
 
                 } else {
@@ -1693,7 +1697,7 @@ else{
                                 if (!gCountry_Spinner.getSelectedItem().toString().equals(getResources().getString(R.string.selectcountry))) {
                                     gSelectedCountryId = gCountryID_ArrayList.get(item);
 
-                                    Toast.makeText(ServicesAdd_Activity.this, gSelectedCountryId, Toast.LENGTH_SHORT).show();
+                                  //  Toast.makeText(ServicesAdd_Activity.this, gSelectedCountryId, Toast.LENGTH_SHORT).show();
 
                                 } else {
 
@@ -1842,7 +1846,7 @@ else{
                                             gStatenamewith_Cities = gStateArrayList.get(item);
                                             String gSelectedStatesId = gStateID_ArrayList.get(item);
 
-                                            Toast.makeText(ServicesAdd_Activity.this, gSelectedStatesId, Toast.LENGTH_SHORT).show();
+                                    //        Toast.makeText(ServicesAdd_Activity.this, gSelectedStatesId, Toast.LENGTH_SHORT).show();
 
                                             getCities_List(gSelectedStatesId);
                                         }

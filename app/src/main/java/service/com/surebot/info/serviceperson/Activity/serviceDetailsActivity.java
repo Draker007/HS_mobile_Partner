@@ -35,9 +35,28 @@ public class serviceDetailsActivity extends AppCompatActivity {
     @BindView(R.id.endservice_button)
     Button gEndservice_button;
 
+
+
+
+
+
+    @BindView(R.id.username_text)
+    TextView gUsername_text;
+
+    @BindView(R.id.servicesdate_text)
+    TextView gServicesDate_text;
+
+
+    @BindView(R.id.servicestime_text)
+    TextView gServicestime_text;
+
     private Dialog progress;
     ArrayList<PaymentReceived_Response.PaymentReceived_Records> gPaymentReceived_Arraylist;
-TextView gAmmountpaid_text,gServicelist_text,gService_date,gService_time;
+     TextView gAmmountpaid_text,gServicelist_text,gService_date,gService_time;
+
+    String gUser_Name;
+    String gBooking_Date;
+    String gBooking_Time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +70,15 @@ TextView gAmmountpaid_text,gServicelist_text,gService_date,gService_time;
         progress.setContentView(R.layout.progressbar_background);
         progress.setCancelable(true);
 
+        Intent lintent = this.getIntent();
+        gUser_Name = lintent.getStringExtra("UserName");
+        gBooking_Date= lintent.getStringExtra("BookingDate");
+        gBooking_Time= lintent.getStringExtra("BookingTime");
+
+
+        gUsername_text.setText(gUser_Name);
+        gServicesDate_text.setText(gBooking_Date);
+        gServicestime_text.setText(gBooking_Time);
 
 
         gEndservice_button.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +99,7 @@ TextView gAmmountpaid_text,gServicelist_text,gService_date,gService_time;
                     @Override
                     public void onClick(View view) {
 
-                        startActivity(new Intent(serviceDetailsActivity.this,ServicePersonHome_Activity.class));
+                        startActivity(new Intent(serviceDetailsActivity.this,ServicePersonHome_Activity.class).putExtra("HomeScreenFlow","frompaymentreceived"));
                        // paymentsuccessfull_dialog.dismiss();
                         finish();
                     }
@@ -106,8 +134,8 @@ TextView gAmmountpaid_text,gServicelist_text,gService_date,gService_time;
 
             ApiInterface request = retrofit.create(ApiInterface.class);
             PaymentReceived_Request lNewRequestList_Request = new PaymentReceived_Request();
-            lNewRequestList_Request.setUser_ID(AppicationClass.getUserId_FromLogin());
 
+            lNewRequestList_Request.setUser_ID(AppicationClass.getUserId_FromLogin());
             lNewRequestList_Request.setDocket(Constants.TOKEN);
 
             Call<PaymentReceived_Response> call = request.get_PaymentReceivedDetails(lNewRequestList_Request);
@@ -124,6 +152,10 @@ TextView gAmmountpaid_text,gServicelist_text,gService_date,gService_time;
                         gServicelist_text.setText(gPaymentReceived_Arraylist.get(0).getService());
                         gService_date.setText(gPaymentReceived_Arraylist.get(0).getBooking_Date());
                         gService_time.setText(gPaymentReceived_Arraylist.get(0).getBooking_Date());
+
+
+                      /*  gServicesDate_text.setText(gPaymentReceived_Arraylist.get(0).getBooking_Date());
+                        gServicestime_text.setText(gPaymentReceived_Arraylist.get(0).getBooking_Date());*/
 
                     }
 

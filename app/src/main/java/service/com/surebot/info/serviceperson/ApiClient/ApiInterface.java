@@ -14,6 +14,7 @@ import service.com.surebot.info.serviceperson.RequestClass.BuyPackage_Request;
 import service.com.surebot.info.serviceperson.RequestClass.Category_List_Request;
 import service.com.surebot.info.serviceperson.RequestClass.ChangePasswordRequest;
 import service.com.surebot.info.serviceperson.RequestClass.CustomerSupport_Request;
+import service.com.surebot.info.serviceperson.RequestClass.DeleteAwardsDetails_Request;
 import service.com.surebot.info.serviceperson.RequestClass.DeleteProfilePicRequest;
 import service.com.surebot.info.serviceperson.RequestClass.GetAddressProof_Request;
 import service.com.surebot.info.serviceperson.RequestClass.GetAllZipCode_Request;
@@ -71,6 +72,7 @@ import service.com.surebot.info.serviceperson.ResponseClass.Category_List_Respon
 import service.com.surebot.info.serviceperson.ResponseClass.ChangePasswordResponse;
 import service.com.surebot.info.serviceperson.ResponseClass.CompletedRequestList_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.CustomerSupport_Response;
+import service.com.surebot.info.serviceperson.ResponseClass.DeleteAwardsDetails_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.DeleteProfilePicResponse;
 import service.com.surebot.info.serviceperson.ResponseClass.EditPersonalPhotoResponse;
 import service.com.surebot.info.serviceperson.ResponseClass.GetAddressProof_Response;
@@ -209,6 +211,10 @@ public interface ApiInterface {
     // 12. Getting Awards Details
     @POST("get_award_and_certificate_photos_details")
     Call<GetAwardsDetails_Response> Get_AwardsDetails (@Body GetAwardsDetails_Request request);
+
+    //13 Delete Awards
+    @POST("partner_delete_award_and_certificate_photos")
+    Call<DeleteAwardsDetails_Response> Delete_AwardsDetails (@Body DeleteAwardsDetails_Request request);
 
 
     @POST("edit_photo_personal_details")
@@ -371,7 +377,7 @@ public interface ApiInterface {
 
     //Old Api        get_cities_list
 
-//Getting sub services
+   //Getting sub services
 
 
 

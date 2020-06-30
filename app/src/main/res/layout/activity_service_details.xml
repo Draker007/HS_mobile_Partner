@@ -27,8 +27,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat"
-                android:text="Meghana"
-                android:textColor="@color/color_blue"
+            android:textColor="@color/color_blue"
                 android:textSize="@dimen/regulartextsize"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
@@ -41,7 +40,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/montserrat"
-                android:text="Meghana"
+                android:text="Halosur"
                 android:textColor="@color/color_blue"
                 android:textSize="@dimen/regulartextsize"
                 android:layout_marginLeft="10dp"
@@ -53,7 +52,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/montserrat"
-                android:text="Meghana,adsfg,dwfegr,werfgth,werty,retyhj,wretyh,retrthyj,retrthyj,ewaretrth,wretrht,wretrth,"
+                android:text="Basic Hair Style , MakeUp"
                 android:textColor="@color/color_blue"
                 android:textSize="@dimen/regulartextsize"
                 android:layout_marginLeft="10dp"
@@ -74,7 +73,6 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat"
-                    android:text="04_06_2019"
                     android:textSize="@dimen/regulartextsize"
 
                     />
@@ -85,7 +83,6 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:fontFamily="@font/montserrat"
-                    android:text="03:00PM"
                     android:textSize="@dimen/regulartextsize" />
 
             </LinearLayout>
