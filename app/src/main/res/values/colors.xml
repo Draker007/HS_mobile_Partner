@@ -11,6 +11,9 @@
 
     <color name="color_signuppink">#80FFAAAA</color>
     <color name="color_gray">#707070</color>
+    <color name="colorPrimaryGray">#C2C2C2</color>
+    <color name="colorPrimaryBlack">#272727</color>
+    <color name="colorTertiaryBlack">#777676</color>
 
     <color name="color_orange">#FC7828</color>
     <color name="color_red">#FF0000</color>
@@ -19,10 +22,7 @@
     <color name="orange">#E1710F</color>
     <color name="color_blue">#38A1F4</color>
     <color name="color_green">#07E500</color>
-
     <color name="color_lightgray">#A1A1A1</color>
-
-
-
+    <color name="colorTransparent">#00000000</color>
     <color name="color_transparen">#30000000</color>
 </resources>

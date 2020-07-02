@@ -27,7 +27,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
-        <activity android:name=".Activity.PreLoginActivity"></activity>
+
+        <activity android:name=".Activity.PartnerLoginActivity"></activity>
+        <activity android:name=".Activity.SplashActivity" />
+        <activity android:name=".Activity.PreLoginActivity" />
         <activity android:name=".Activity.SetNewPasswordActivity" />
         <activity android:name=".Activity.ForgotPasswordActivity" />
         <activity android:name=".Activity.Terms" />
@@ -35,7 +38,7 @@
         <activity android:name=".Activity.FAQActivity" />
         <activity android:name=".Activity.CustomerSupportActivity" />
         <activity android:name=".Activity.AddPersonalDetailsActivity" />
-        <activity android:name=".Activity.AccountDetailsActivity"></activity>
+        <activity android:name=".Activity.AccountDetailsActivity" />
         <activity android:name=".Activity.AboutUsActivity" />
         <activity android:name=".Activity.AboutMeActivity" />
         <activity android:name=".Activity.ServicesAdd_Activity" />
@@ -45,10 +48,9 @@
         <activity android:name=".Activity.serviceDetailsActivity" />
         <activity android:name=".Activity.PersonalDetailView" />
         <activity android:name=".Activity.NotificationActivity" />
-        <activity android:name=".Activity.IdentityVerificationActivity"></activity>
-        <activity
-            android:name=".Activity.SplashActivity"
-            android:theme="@style/SplashTheme">
+        <activity android:name=".Activity.IdentityVerificationActivity" />
+
+        <activity android:name=".Activity.PartnerSignupActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

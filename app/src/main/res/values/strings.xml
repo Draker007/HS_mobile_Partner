@@ -104,5 +104,20 @@
     <string name="profilestatusnote">Please get approval for your profile details to add location and services</string>
 
     <string name="waitingforapproval">Waiting for approval</string>
+    <string name="email_phone_number_hint">Email ID/ Phone number</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="new_user_sign_up_text">New User ? Sign Up</string>
+    <string name="signup_text">Signup</string>
+    <string name="details_text">Fill in the details</string>
+    <string name="full_name_hint">Full Name</string>
+    <string name="mobile_num_text">Mobile Number</string>
+    <string name="email_id_text">Email ID</string>
+    <string name="male_text">Male</string>
+    <string name="female_text">Female</string>
+    <string name="date_of_birth_text">Date of birth</string>
+    <string name="confirm_password_text">Confirm Password</string>
+    <string name="terms_text">By signing up, you aree to our Terms and conditions and Privacy policy</string>
+    <string name="already_have_an_account_login">Already have an account ? </string>
+    <string name="terms_and_conditionals">Terms and conditions</string>
 
 </resources>
