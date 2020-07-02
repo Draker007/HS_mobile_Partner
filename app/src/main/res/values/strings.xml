@@ -2,7 +2,7 @@
     <string name="app_name">HS12ServicePerson</string>
 
     <!--Login-->
-    <string name="login">Service Peroson Login</string>
+    <string name="login">Login</string>
     <string name="forgot">Forgot Password ?</string>
     <string name="username_hint"><font size="14">Email_id/Phone number</font></string>
 
@@ -83,7 +83,7 @@
     <string name="onfailure">Something went wrong</string>
     <string name="supportnumber">9886106330</string>
 
-   <!-- Select Country-->
+    <!-- Select Country-->
 
     <string name="selectcountry">Select Country</string>
     <string name="selectcountryid">Country Id</string>
