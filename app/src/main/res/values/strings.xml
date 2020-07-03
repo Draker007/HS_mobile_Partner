@@ -116,8 +116,26 @@
     <string name="female_text">Female</string>
     <string name="date_of_birth_text">Date of birth</string>
     <string name="confirm_password_text">Confirm Password</string>
-    <string name="terms_text">By signing up, you aree to our Terms and conditions and Privacy policy</string>
+    <string name="terms_text">By signing up, you agree to our Terms and conditions and Privacy policy</string>
     <string name="already_have_an_account_login">Already have an account ? </string>
     <string name="terms_and_conditionals">Terms and conditions</string>
+    <string name="work_type_text">Select your type of work</string>
+    <string name="salon_at_home_for_women">Salon at home for Women</string>
+    <string name="next_text">Next</string>
+    <string name="update_profile_text">Upload Profile Picture</string>
+
+    <string name="name">Name</string>
+    <string name="house_flat_no">House/Flat no.</string>
+    <string name="street_text">Street</string>
+    <string name="area">Area</string>
+    <string name="city">City</string>
+    <string name="state">State</string>
+    <string name="phone_number">Phone number</string>
+    <string name="your_current_address">Your Current Address</string>
+    <string name="upload_your_current_address_proof">Upload your current Address proof</string>
+    <string name="select_your_id_proof">Select your ID Proof</string>
+    <string name="type_of_id">Type of ID</string>
+    <string name="full_name_in_id_proof">Full Name in ID proof</string>
+    <string name="enter_the_id_number">Enter the ID number</string>
 
 </resources>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryGray"
+    android:background="@drawable/signup_image_bg"
     android:fillViewport="true">
 
     <RelativeLayout
@@ -48,8 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/detailsTV"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
+           android:layout_marginHorizontal="20dp"
             android:textColorHint="@color/color_orange">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -58,6 +57,7 @@
                 android:layout_height="wrap_content"
                 android:focusable="true"
                 android:hint="@string/full_name_hint"
+                android:textColorHighlight="@color/color_orange"
                 android:importantForAutofill="no"
                 android:inputType="textPersonName"
                 android:textColorHint="@color/color_orange" />
@@ -68,8 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/nameTL"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
+           android:layout_marginHorizontal="20dp"
             android:textColorHint="@color/color_orange">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -88,8 +87,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/mobileNumberTL"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
+           android:layout_marginHorizontal="20dp"
             android:textColorHint="@color/color_orange">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -155,8 +153,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/genderRL"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
+           android:layout_marginHorizontal="20dp"
             android:textColorHint="@color/color_orange">
 
             <com.google.android.material.textfield.TextInputEditText

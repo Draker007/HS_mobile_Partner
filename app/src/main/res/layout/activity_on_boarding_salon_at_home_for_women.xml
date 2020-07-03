@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.OnBoardSalonWomenProfile">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/on_board_women_profile"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/profile_image"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/open_sans"
+            android:gravity="center"
+            android:text="@string/update_profile_text"
+            android:textColor="@color/colorPrimaryBlack" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/nameTL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:textColorHint="@color/colorPrimaryBlue">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/fullNameET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:hint="@string/full_name_hint"
+                android:importantForAutofill="no"
+                android:inputType="textPersonName"
+                android:textColorHighlight="@color/color_orange" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/mobileNumberTL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:textColorHint="@color/colorPrimaryBlue">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/mobileNumberET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:hint="@string/mobile_num_text"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLength="10" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/emailTL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:textColorHint="@color/colorPrimaryBlue">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/emailET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:hint="@string/email_id_text"
+                android:imeOptions="actionDone"
+                android:importantForAutofill="no"
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <RelativeLayout
+            android:id="@+id/genderRL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp">
+
+            <ImageView
+                android:id="@+id/maleGenderIV"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/male_icon"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/maleTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/maleGenderIV"
+                android:layout_marginStart="13dp"
+                android:text="@string/male_text"
+                android:textColor="@color/colorTextSignup"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/femaleGenderIV"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="30dp"
+                android:layout_toEndOf="@+id/maleGenderIV"
+                android:src="@drawable/female_blue_fill"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/femaleTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/femaleGenderIV"
+                android:layout_marginStart="50dp"
+                android:layout_toEndOf="@+id/maleTV"
+                android:text="@string/female_text"
+                android:textColor="@color/colorTextSignup"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/dateOfBirthTL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:textColorHint="@color/colorPrimaryBlue">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/dateOfBirthET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:hint="@string/date_of_birth_text"
+                android:importantForAutofill="no"
+                android:inputType="date" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:fontFamily="@font/open_sans"
+            android:text="@string/your_current_address"
+            android:textColor="@color/colorPrimaryBlue"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:id="@+id/addressDetailsLL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_normal"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/nameET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:hint="@string/name"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                tools:ignore="MissingPrefix,TextFields" />
+
+            <EditText
+                android:id="@+id/houseFlatNoET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:hint="@string/house_flat_no"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                tools:ignore="MissingPrefix,TextFields" />
+
+            <EditText
+                android:id="@+id/streetET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:hint="@string/street_text"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                tools:ignore="MissingPrefix,TextFields" />
+
+            <EditText
+                android:id="@+id/areaET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:hint="@string/area"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                tools:ignore="MissingPrefix,TextFields" />
+
+            <EditText
+                android:id="@+id/cityET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:hint="@string/city"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                tools:ignore="MissingPrefix,TextFields" />
+
+            <EditText
+                android:id="@+id/stateET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:hint="@string/state"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                tools:ignore="MissingPrefix,TextFields" />
+
+            <EditText
+                android:id="@+id/phoneNumberET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:hint="@string/phone_number"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLength="10"
+                tools:ignore="MissingPrefix,TextFields" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:fontFamily="@font/open_sans"
+            android:text="@string/upload_your_current_address_proof"
+            android:textColor="@color/colorPrimaryBlue"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/uploadImageIV"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="@dimen/spacing_medium2"
+            android:layout_marginHorizontal="20dp"
+            android:src="@drawable/upload_image"
+            tools:ignore="ContentDescription" />
+    </LinearLayout>
+
+</ScrollView>

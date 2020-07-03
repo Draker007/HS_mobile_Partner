@@ -27,8 +27,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
-
-        <activity android:name=".Activity.PartnerLoginActivity"></activity>
+        <activity android:name=".Activity.OnBoardSalonWomenProfile"></activity>
+        <activity android:name=".Activity.PartnerSignupWorkTypeActivity" />
+        <activity android:name=".Activity.PartnerSignupActivity" />
+        <activity android:name=".Activity.PartnerLoginActivity" />
         <activity android:name=".Activity.SplashActivity" />
         <activity android:name=".Activity.PreLoginActivity" />
         <activity android:name=".Activity.SetNewPasswordActivity" />
@@ -49,8 +51,7 @@
         <activity android:name=".Activity.PersonalDetailView" />
         <activity android:name=".Activity.NotificationActivity" />
         <activity android:name=".Activity.IdentityVerificationActivity" />
-
-        <activity android:name=".Activity.PartnerSignupActivity">
+        <activity android:name=".Activity.OnBoardIdentityVerificationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
