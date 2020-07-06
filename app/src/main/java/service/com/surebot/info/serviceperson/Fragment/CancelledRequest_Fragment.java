@@ -77,76 +77,10 @@ String gUserId_FromLogin;
         llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         gCancelledquestlist_recyclerview.setLayoutManager(llm);
-
-
-        get_CancelledServiceRequestList();
+        CancelledRequest_Adapter lCompletedRequest_Adapter = new CancelledRequest_Adapter(getActivity());
+        gCancelledquestlist_recyclerview.setAdapter(lCompletedRequest_Adapter);
         return view;
     }
 
 
-    private void get_CancelledServiceRequestList()  {
-        try {
-
-            progress.show();
-
-            OkHttpClient.Builder client = new OkHttpClient.Builder();
-            HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
-            registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-            client.addInterceptor(registrationInterceptor);
-
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(Constants.BASE_URL)
-                    .client(client.build())
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-
-            ApiInterface request = retrofit.create(ApiInterface.class);
-            UpcomingRequestList_Request lNewRequestList_Request = new UpcomingRequestList_Request();
-            lNewRequestList_Request.setUser_ID(gUserId_FromLogin);
-
-            lNewRequestList_Request.setDocket(Constants.TOKEN);
-
-            Call<CancelledRequestList_Response> call = request.get_CancelledServiceRequestList(lNewRequestList_Request);
-            call.enqueue(new Callback<CancelledRequestList_Response>() {
-
-
-                @Override
-                public void onResponse(Call<CancelledRequestList_Response> call, Response<CancelledRequestList_Response> response) {
-                    if (response.isSuccessful()) {
-                        CancelledRequestList_Response lCompletedRequestList_Response = response.body();
-
-                        gCancelledRequestList_Arraylist = new ArrayList<>(Arrays.asList(lCompletedRequestList_Response.getPartner_requests_upcoming()));
-
-                        if(!gCancelledRequestList_Arraylist.get(0).getUser_ID().equals("No Results Found")){
-                            gNorequest_text.setVisibility(View.GONE);
-                            gCancelledquestlist_recyclerview.setVisibility(View.VISIBLE);
-                            CancelledRequest_Adapter lCompletedRequest_Adapter = new CancelledRequest_Adapter(getActivity(),gCancelledRequestList_Arraylist);
-                            gCancelledquestlist_recyclerview.setAdapter(lCompletedRequest_Adapter);
-                        }
-
-                        else {
-                            gNorequest_text.setVisibility(View.VISIBLE);
-                            gCancelledquestlist_recyclerview.setVisibility(View.GONE);
-                        }
-
-                        progress.dismiss();
-                    }
-                    progress.dismiss();
-                }
-
-                @Override
-                public void onFailure(Call<CancelledRequestList_Response> call, Throwable t) {
-
-                    Toast.makeText(getActivity(), "cancel"+getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
-                    progress.dismiss();
-                }
-            });
-        }catch (Exception e) {
-
-            e.printStackTrace();
-            progress.dismiss();
-
-        }
-
-    }
 }

@@ -70,77 +70,14 @@ String gUserId_FromLogin;
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         gCompletedrequestlist_recyclerview.setLayoutManager(llm);
 
+        CompletedRequest_Adapter lCompletedRequest_Adapter = new CompletedRequest_Adapter(getActivity()   );
+        gCompletedrequestlist_recyclerview.setAdapter(lCompletedRequest_Adapter);
 
-        get_CompletedServiceRequestList();
 
         return view;
     }
 
 
-    private void get_CompletedServiceRequestList()  {
-        try {
 
-            progress.show();
-
-            OkHttpClient.Builder client = new OkHttpClient.Builder();
-            HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
-            registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-            client.addInterceptor(registrationInterceptor);
-
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(Constants.BASE_URL)
-                    .client(client.build())
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-
-            ApiInterface request = retrofit.create(ApiInterface.class);
-            UpcomingRequestList_Request lNewRequestList_Request = new UpcomingRequestList_Request();
-            lNewRequestList_Request.setUser_ID(gUserId_FromLogin);
-
-            lNewRequestList_Request.setDocket(Constants.TOKEN);
-
-            Call<CompletedRequestList_Response> call = request.get_CompletedServiceRequestList(lNewRequestList_Request);
-            call.enqueue(new Callback<CompletedRequestList_Response>() {
-
-
-                @Override
-                public void onResponse(Call<CompletedRequestList_Response> call, Response<CompletedRequestList_Response> response) {
-                    if (response.isSuccessful()) {
-                        CompletedRequestList_Response lCompletedRequestList_Response = response.body();
-
-                        gCompeltedRequestList_Arraylist = new ArrayList<>(Arrays.asList(lCompletedRequestList_Response.getPartner_requests_upcoming()));
-
-                       if(!gCompeltedRequestList_Arraylist.get(0).getUser_ID().equals("No Results Found")){
-                           gNorequest_text.setVisibility(View.GONE);
-                           gCompletedrequestlist_recyclerview.setVisibility(View.VISIBLE);
-                           CompletedRequest_Adapter lCompletedRequest_Adapter = new CompletedRequest_Adapter(getActivity(),gCompeltedRequestList_Arraylist);
-                           gCompletedrequestlist_recyclerview.setAdapter(lCompletedRequest_Adapter);
-                       }
-
-                       else {
-                           gNorequest_text.setVisibility(View.VISIBLE);
-                           gCompletedrequestlist_recyclerview.setVisibility(View.GONE);
-                       }
-
-                        progress.dismiss();
-                    }
-                    progress.dismiss();
-                }
-
-                @Override
-                public void onFailure(Call<CompletedRequestList_Response> call, Throwable t) {
-
-                    Toast.makeText(getActivity(), "completed"+getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
-                    progress.dismiss();
-                }
-            });
-        }catch (Exception e) {
-
-            e.printStackTrace();
-            progress.dismiss();
-
-        }
-
-    }
 
 }

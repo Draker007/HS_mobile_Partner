@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.BuyAPackageActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/saloncomponent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="300dp"
+                    android:background="@mipmap/saloonfade"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/textView142"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="3 ."
+                        android:textColor="#B9B9B9"
+                        android:textSize="45sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView143"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="Be a Prime Partner"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView142"
+                        app:layout_constraintStart_toEndOf="@+id/textView142"
+                        app:layout_constraintTop_toTopOf="@+id/textView142" />
+
+                    <TextView
+                        android:id="@+id/textView144"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:text="SKIP"
+                        android:textColor="#E25905"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView143"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/textView143" />
+
+                    <TextView
+                        android:id="@+id/textView145"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginEnd="24dp"
+                        android:text="You are just 3 steps away from reaching your first customer"
+                        android:textColor="@color/color_white"
+                        app:layout_constraintBottom_toTopOf="@+id/textView143"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.8" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textView148"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="We will provide more benefits"
+                    android:textColor="@color/color_black"
+                    app:layout_constraintEnd_toEndOf="@+id/textView147"
+                    app:layout_constraintStart_toStartOf="@+id/textView147"
+                    app:layout_constraintTop_toBottomOf="@+id/textView147" />
+
+                <TextView
+                    android:id="@+id/textView146"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="Advantages of being a prime Partner"
+                    android:textColor="#5D41F0"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView147"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:text="You will get more service if you become Prime partner"
+                    android:textColor="@color/color_black"
+                    app:layout_constraintEnd_toEndOf="@+id/textView146"
+                    app:layout_constraintStart_toStartOf="@+id/textView146"
+                    app:layout_constraintTop_toBottomOf="@+id/textView146" />
+
+                <TextView
+                    android:id="@+id/textView149"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Location radius is more"
+                    android:textColor="@color/color_black"
+                    app:layout_constraintEnd_toEndOf="@+id/textView148"
+                    app:layout_constraintStart_toStartOf="@+id/textView148"
+                    app:layout_constraintTop_toBottomOf="@+id/textView148" />
+
+                <Button
+                    android:id="@+id/button9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:background="@drawable/backgreyround"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="Buy a Package"
+                    android:textColor="@color/color_white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView149" />
+
+                <TextView
+                    android:id="@+id/textView150"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Skip"
+                    android:textColor="#E25905"
+                    app:layout_constraintEnd_toEndOf="@+id/button9"
+                    app:layout_constraintStart_toStartOf="@+id/button9"
+                    app:layout_constraintTop_toBottomOf="@+id/button9" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

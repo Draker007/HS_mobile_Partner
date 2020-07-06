@@ -28,9 +28,8 @@ public class CancelledRequest_Adapter extends RecyclerView.Adapter<CancelledRequ
     Context context;
     ArrayList<CancelledRequestList_Response.CancelledRequestList_Records> gCancelledRequestList_Arraylist;
 String gTimeForUI;
-    public CancelledRequest_Adapter(Context context,   ArrayList<CancelledRequestList_Response.CancelledRequestList_Records> gCancelledRequestList_Arraylist) {
+    public CancelledRequest_Adapter(Context context ) {
         this.context=context;
-        this.gCancelledRequestList_Arraylist=gCancelledRequestList_Arraylist;
     }
 
     @NonNull
@@ -44,36 +43,12 @@ String gTimeForUI;
     @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, final int position) {
-        if(gCancelledRequestList_Arraylist.get(position).getUser_Name()!=null) {
 
-            myViewHolder.lUserName_Text.setText(gCancelledRequestList_Arraylist.get(position).getUser_Name());
-            myViewHolder.lUserAddress_text.setText(gCancelledRequestList_Arraylist.get(position).getUser_Full_Address());
-            myViewHolder.lDate_text.setText(gCancelledRequestList_Arraylist.get(position).getBooking_Date());
-            //myViewHolder.lTime_text.setText(gCancelledRequestList_Arraylist.get(position).getBooking_Start_Time());
-            myViewHolder.lUserphonenumber_text.setText(gCancelledRequestList_Arraylist.get(position).getPhone_location());
-            myViewHolder.lRequestID_text.setText(gCancelledRequestList_Arraylist.get(position).getBooking_Id());
-
-
-            //Time Conversion
-
-            try {
-                DateFormat f = new SimpleDateFormat("HH:mm:ss");
-                Date d = f.parse(gCancelledRequestList_Arraylist.get(position).getBooking_Start_Time());
-                DateFormat date = new SimpleDateFormat("hh:ss a");
-
-                gTimeForUI = date.format(d);
-
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            myViewHolder.lTime_text.setText(gTimeForUI);
-
-        }
     }
 
     @Override
     public int getItemCount() {
-        return gCancelledRequestList_Arraylist.size();
+        return 3;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

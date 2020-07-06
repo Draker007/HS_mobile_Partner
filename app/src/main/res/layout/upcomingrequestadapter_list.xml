@@ -21,20 +21,20 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/username_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/montserrat"
                 android:text="Name"
+                android:textColor="#191919"
                 android:textSize="@dimen/regulartextsize"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -46,10 +46,11 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/montserrat"
                 android:text="02_08_2019"
+                android:textColor="#FC7828"
                 android:textSize="@dimen/regulartextsize"
-                app:layout_constraintBottom_toBottomOf="@+id/time_text"
-                app:layout_constraintEnd_toStartOf="@+id/time_text"
-                app:layout_constraintTop_toTopOf="@+id/time_text" />
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/userphonenumber_text" />
 
             <TextView
                 android:id="@+id/time_text"
@@ -57,66 +58,91 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/montserrat"
                 android:gravity="right"
                 android:text="07:00PM"
+                android:textColor="#FC7828"
                 android:textSize="@dimen/regulartextsize"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                app:layout_constraintTop_toBottomOf="@+id/date_text" />
 
-        <TextView
-            android:id="@+id/useraddress_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:fontFamily="@font/montserrat"
-            android:text="#16/1 Surebot Technology"
-            android:textSize="@dimen/regulartextsize" />
+            <TextView
+                android:id="@+id/useraddress_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/montserrat"
+                android:text="21, Castle St, Ashok Nagar, Bengaluru, Karnataka 560025"
+                android:textColor="#191919"
+                android:textSize="@dimen/regulartextsize"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/date_text"
+                app:layout_constraintStart_toStartOf="@+id/textView102"
+                app:layout_constraintTop_toBottomOf="@+id/textView102" />
 
+            <TextView
+                android:id="@+id/userphonenumber_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:fontFamily="@font/montserrat"
+                android:text="123443567"
+                android:textColor="#191919"
+                android:textSize="@dimen/regulartextsize"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/textView101"
+                app:layout_constraintTop_toTopOf="@+id/textView101" />
 
-        <TextView
-            android:id="@+id/userphonenumber_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:fontFamily="@font/montserrat"
-            android:text="123443567"
-            android:textSize="@dimen/regulartextsize" />
+            <TextView
+                android:id="@+id/textView101"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Phone Number :"
+                android:textColor="@color/color_black"
+                app:layout_constraintStart_toStartOf="@+id/username_text"
+                app:layout_constraintTop_toBottomOf="@+id/username_text" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/textView102"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Scheduled Address :"
+                android:textColor="@color/color_black"
+                app:layout_constraintStart_toStartOf="@+id/textView101"
+                app:layout_constraintTop_toBottomOf="@+id/userphonenumber_text" />
 
             <TextView
                 android:id="@+id/requestid"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/montserrat"
                 android:text="23"
+                android:textColor="#5D41F0"
                 android:textSize="@dimen/regulartextsize"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/requestid_text"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/useraddress_text"
+                app:layout_constraintStart_toStartOf="@+id/useraddress_text"
+                app:layout_constraintTop_toBottomOf="@+id/useraddress_text" />
 
             <TextView
                 android:id="@+id/requestid_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
                 android:fontFamily="@font/montserrat"
                 android:text="Request ID :"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:textColor="#00C828"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/requestid" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </LinearLayout>
 

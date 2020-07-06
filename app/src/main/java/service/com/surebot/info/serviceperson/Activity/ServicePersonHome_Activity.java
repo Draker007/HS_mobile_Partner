@@ -93,36 +93,37 @@ public class ServicePersonHome_Activity extends AppCompatActivity {
         AppicationClass.setUserName_FromLogin(gUserName_FromLogin);
         AppicationClass.setPremium_PartenerId(gPremium_PartnerId);
         AppicationClass.setCategoryId_FromLogin(gCategoryId_FromLogin);
+        HomeScreen_Flow ="fromlogin";
 
-        if(HomeScreen_Flow.equals("fromlogin")){
-
-            System.out.println("In Homesceen entering into fromlogin");
-            fragment = new MyTask_Fragment();
-        }
-
-        if(HomeScreen_Flow.equals("frompaymentreceived")){
-
-            System.out.println("In Homesceen entering into fromlogin");
-            fragment = new MyTask_Fragment();
-        }
-
-
-
-        if(HomeScreen_Flow.equals("frombecomeprime")){
-
-            System.out.println("In Homesceen entering into frombecomeprime");
-            fragment = new MyTask_Fragment();
-        }
-
-        if(HomeScreen_Flow.equals("fromcreateprofile")){
-            System.out.println("In Homesceen entering into fromcreateprofile");
-            fragment = new Profile_Fragment();
-        }
-
-        if(HomeScreen_Flow.equals("fromserviceadd")){
-            System.out.println("In Homesceen entering into Service Add");
-            fragment = new MyTask_Fragment();
-        }
+//        if(HomeScreen_Flow.equals("fromlogin")){
+//
+//            System.out.println("In Homesceen entering into fromlogin");
+//            fragment = new MyTask_Fragment();
+//        }
+//
+//        if(HomeScreen_Flow.equals("frompaymentreceived")){
+//
+//            System.out.println("In Homesceen entering into fromlogin");
+//            fragment = new MyTask_Fragment();
+//        }
+//
+//
+//
+//        if(HomeScreen_Flow.equals("frombecomeprime")){
+//
+//            System.out.println("In Homesceen entering into frombecomeprime");
+//            fragment = new MyTask_Fragment();
+//        }
+//
+//        if(HomeScreen_Flow.equals("fromcreateprofile")){
+//            System.out.println("In Homesceen entering into fromcreateprofile");
+//            fragment = new Profile_Fragment();
+//        }
+//
+//        if(HomeScreen_Flow.equals("fromserviceadd")){
+//            System.out.println("In Homesceen entering into Service Add");
+//            fragment = new MyTask_Fragment();
+//        }
 
 
         check = getIntent().getStringExtra("status");
@@ -144,10 +145,8 @@ public class ServicePersonHome_Activity extends AppCompatActivity {
 
 
 
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-        transaction.add(R.id.fragment_container, fragment);
-        transaction.commit();
+        fragment = new MyTask_Fragment();
+        loadFragment(fragment);
        Listners();
         requestMultiplePermissions();
         closeMore = findViewById(R.id.moreCLose);

@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.NewServiceDetailsActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+           <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".Activity.NewServiceDetailsActivity">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/serviceDetailLayout"
+                    android:layout_width="409dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/salonlayout"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/servicelayoutimg"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:alpha="0.2"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/salon" />
+
+                    <TextView
+                        android:id="@+id/textView83"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:text="Service Details"
+                        android:textColor="@color/color_white"
+                        android:textSize="@dimen/headertextsize"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView86"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="32dp"
+                        android:text="Customer Name"
+                        android:textColor="#CBCBCB"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="@+id/servicelayoutimg"
+                        app:layout_constraintTop_toTopOf="@+id/newservicesRecycler" />
+
+                    <TextView
+                        android:id="@+id/textView87"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Riya"
+                        android:textColor="@color/color_white"
+                        app:layout_constraintEnd_toEndOf="@+id/textView86"
+                        app:layout_constraintTop_toBottomOf="@+id/textView86" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/newservicesRecycler"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintEnd_toStartOf="@+id/textView86"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView83" />
+
+                    <TextView
+                        android:id="@+id/textView88"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="Scheduled Address"
+                        android:textColor="#CBCBCB"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="@+id/newservicesRecycler"
+                        app:layout_constraintTop_toBottomOf="@+id/newservicesRecycler" />
+
+                    <TextView
+                        android:id="@+id/textView89"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="21, Castle St, Ashok Nagar, Bengaluru, Karnataka 560025"
+                        android:textColor="@color/color_white"
+                        app:layout_constraintEnd_toStartOf="@+id/textView92"
+                        app:layout_constraintStart_toStartOf="@+id/textView88"
+                        app:layout_constraintTop_toBottomOf="@+id/textView88" />
+
+                    <TextView
+                        android:id="@+id/textView90"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Phone Number"
+                        android:textColor="#CBCBCB"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="@+id/textView87"
+                        app:layout_constraintTop_toBottomOf="@+id/textView87" />
+
+                    <TextView
+                        android:id="@+id/textView91"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="+1-78945612"
+                        android:textColor="@color/color_white"
+                        app:layout_constraintEnd_toEndOf="@+id/textView90"
+                        app:layout_constraintTop_toBottomOf="@+id/textView90" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/constraintLayout28"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView89">
+
+                        <com.google.android.gms.maps.MapView
+                            android:id="@+id/mapView2"
+                            android:layout_width="0dp"
+                            android:layout_height="200dp"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.74" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <TextView
+                        android:id="@+id/textView92"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Scheduled Date and time"
+                        android:textColor="#CBCBCB"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="@+id/textView91"
+                        app:layout_constraintTop_toTopOf="@+id/textView88" />
+
+                    <TextView
+                        android:id="@+id/textView93"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="24 March 2020"
+                        android:textColor="#FC7828"
+                        app:layout_constraintEnd_toEndOf="@+id/textView92"
+                        app:layout_constraintTop_toBottomOf="@+id/textView92" />
+
+                    <TextView
+                        android:id="@+id/textView94"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="3:30PM"
+                        android:textColor="#FC7828"
+                        app:layout_constraintEnd_toEndOf="@+id/textView93"
+                        app:layout_constraintStart_toStartOf="@+id/textView93"
+                        app:layout_constraintTop_toBottomOf="@+id/textView93" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@color/color_white"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView89">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/ServicepaymentRecycler"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView100" />
+
+                        <TextView
+                            android:id="@+id/textView99"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="PRICE"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textView100"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="16dp"
+                            android:text="QTY"
+                            app:layout_constraintEnd_toStartOf="@+id/textView99"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/serviceDetailLayout">
+
+                    <Button
+                        android:id="@+id/button7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/round_btn_red"
+                        android:paddingLeft="30dp"
+                        android:paddingEnd="30dp"
+                        android:text="Cancel"
+                        android:textColor="@color/color_white"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/button6"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Button
+                        android:id="@+id/button6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/buttongreen_background"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="Start Service"
+                        android:textColor="@color/color_white"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/button7"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/serviceDetailLayout">
+
+                    <EditText
+                        android:id="@+id/otp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:ems="1"
+                        android:fontFamily="@font/montserrat"
+                        android:inputType="textPersonName"
+                        android:maxLength="1"
+                        android:textSize="@dimen/headertextsize"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.4"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/otp5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="1"
+                        android:fontFamily="@font/montserrat"
+                        android:inputType="textPersonName"
+                        android:maxLength="1"
+                        android:textSize="@dimen/headertextsize"
+                        app:layout_constraintStart_toEndOf="@+id/otp"
+                        app:layout_constraintTop_toTopOf="@+id/otp" />
+
+                    <EditText
+                        android:id="@+id/otp6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="1"
+                        android:fontFamily="@font/montserrat"
+                        android:inputType="textPersonName"
+                        android:maxLength="1"
+                        android:textSize="@dimen/headertextsize"
+                        app:layout_constraintStart_toEndOf="@+id/otp5"
+                        app:layout_constraintTop_toTopOf="@+id/otp5" />
+
+                    <EditText
+                        android:id="@+id/otp7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="1"
+                        android:fontFamily="@font/montserrat"
+                        android:inputType="textPersonName"
+                        android:maxLength="1"
+                        android:textSize="@dimen/headertextsize"
+                        app:layout_constraintStart_toEndOf="@+id/otp6"
+                        app:layout_constraintTop_toTopOf="@+id/otp6" />
+
+                    <Button
+                        android:id="@+id/button4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/buttongreen_background"
+                        android:text="OK"
+                        android:textColor="@color/color_white"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/otp6" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

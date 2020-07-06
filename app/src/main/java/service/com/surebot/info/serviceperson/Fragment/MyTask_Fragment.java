@@ -138,30 +138,30 @@ public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.st
         gPremiumPartner_Id = AppicationClass.getPremium_PartenerId();
 
 
-        notification.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), NotificationActivity.class));
-            }
-        });
-
-
-
-        Package_Lists();
-
-
-        gPackages_List = new ArrayList<Integer>();
-        gPackages_List.add(R.mipmap.package1);
-        gPackages_List.add(R.mipmap.package2);
-        gPackages_List.add(R.mipmap.package3);
-
-
-
-        gUserName_List = new ArrayList<String>();
-        gUserName_List.add("Aditi");
-        gUserName_List.add("Sahana");
-        gUserName_List.add("Aditi");
-        gUserName_List.add("Sahana");
+//        notification.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(getActivity(), NotificationActivity.class));
+//            }
+//        });
+//
+//
+//
+//        Package_Lists();
+//
+//
+//        gPackages_List = new ArrayList<Integer>();
+//        gPackages_List.add(R.mipmap.package1);
+//        gPackages_List.add(R.mipmap.package2);
+//        gPackages_List.add(R.mipmap.package3);
+//
+//
+//
+//        gUserName_List = new ArrayList<String>();
+//        gUserName_List.add("Aditi");
+//        gUserName_List.add("Sahana");
+//        gUserName_List.add("Aditi");
+//        gUserName_List.add("Sahana");
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(),1);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         gPackage_recyclerview.setLayoutManager(layoutManager);
@@ -178,7 +178,7 @@ public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.st
 
 
 
-        List<UserAddress_Location> items = new ArrayList<>();
+//        List<UserAddress_Location> items = new ArrayList<>();
 
       /*  items.add(new UserAddress_Location("Item 1"));
         items.add(new UserAddress_Location("Item 2"));
@@ -231,8 +231,12 @@ public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.st
         items.add(new UserAddress_Location(new LatLng(1.289545, 103.849972)));*/
 
 
-        Get_TodaysTaskList();
+//        Get_TodaysTaskList();
 
+        TodaysTask_Adapter lTodaysTask_Adapter = new TodaysTask_Adapter(getActivity() );
+        gTodaytask_recyclerview.setAdapter(lTodaysTask_Adapter);
+        HomePackage_Adapter lHomePackage_Adapter = new HomePackage_Adapter(getActivity() );
+        gPackage_recyclerview.setAdapter(lHomePackage_Adapter);
 
         return view;
 
@@ -240,66 +244,66 @@ public class MyTask_Fragment  extends Fragment implements  TodaysTask_Adapter.st
 
 
     // // Get Packages Detials
-    private void Package_Lists() {
-
-        try {
-            System.out.println("In User Login Method 1");
-            // progress.show();
-            OkHttpClient.Builder client = new OkHttpClient.Builder();
-            HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
-            registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-            client.addInterceptor(registrationInterceptor);
-
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(Constants.BASE_URL)
-                    .client(client.build())
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-            System.out.println("asd1");
-            ApiInterface request = retrofit.create(ApiInterface.class);
-            Partner_package_Request lservice_request = new Partner_package_Request();
-            lservice_request.setDocket(Constants.TOKEN);
-
-            Call<Partner_package_Response> call = request.List_packages(lservice_request);
-            call.enqueue(new Callback<Partner_package_Response>() {
-                @Override
-                public void onResponse(Call<Partner_package_Response> call, Response<Partner_package_Response> response) {
-                    if (response.isSuccessful()) {
-                        System.out.println("asd1");
-                        Partner_package_Response ListPackage = response.body();
-                        partner_package_response =new ArrayList<>(Arrays.asList(ListPackage.getPartner_package_response()));
-                        if(!partner_package_response.get(0).getPackage_ID().equals("No Results Found")) {
-                        HomePackage_Adapter lHomePackage_Adapter = new HomePackage_Adapter(getActivity(), partner_package_response);
-                        gPackage_recyclerview.setAdapter(lHomePackage_Adapter);
-
-                            gBecomember_header.setVisibility(View.VISIBLE);
-
-
-                            lHomePackage_Adapter.setBuypackage_Communicator(MyTask_Fragment.this);
-                            lHomePackage_Adapter.notifyDataSetChanged();
-                        }
-                    }
-
-
-                     progress.dismiss();
-                }
-
-
-
-                @Override
-                public void onFailure(Call<Partner_package_Response> call, Throwable t) {
-                    Toast.makeText(getActivity(), getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
-                       progress.dismiss();
-                }
-            });
-        }
-        catch (Exception e) {
-            System.out.println("In User Login Method 8");
-            e.printStackTrace();
-//            progress.dismiss();
-
-        }
-    }
+//    private void Package_Lists() {
+//
+//        try {
+//            System.out.println("In User Login Method 1");
+//            // progress.show();
+//            OkHttpClient.Builder client = new OkHttpClient.Builder();
+//            HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
+//            registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+//            client.addInterceptor(registrationInterceptor);
+//
+//            Retrofit retrofit = new Retrofit.Builder()
+//                    .baseUrl(Constants.BASE_URL)
+//                    .client(client.build())
+//                    .addConverterFactory(GsonConverterFactory.create())
+//                    .build();
+//            System.out.println("asd1");
+//            ApiInterface request = retrofit.create(ApiInterface.class);
+//            Partner_package_Request lservice_request = new Partner_package_Request();
+//            lservice_request.setDocket(Constants.TOKEN);
+//
+//            Call<Partner_package_Response> call = request.List_packages(lservice_request);
+//            call.enqueue(new Callback<Partner_package_Response>() {
+//                @Override
+//                public void onResponse(Call<Partner_package_Response> call, Response<Partner_package_Response> response) {
+//                    if (response.isSuccessful()) {
+//                        System.out.println("asd1");
+//                        Partner_package_Response ListPackage = response.body();
+//                        partner_package_response =new ArrayList<>(Arrays.asList(ListPackage.getPartner_package_response()));
+//                        if(!partner_package_response.get(0).getPackage_ID().equals("No Results Found")) {
+//                        HomePackage_Adapter lHomePackage_Adapter = new HomePackage_Adapter(getActivity() );
+//                        gPackage_recyclerview.setAdapter(lHomePackage_Adapter);
+//
+//                            gBecomember_header.setVisibility(View.VISIBLE);
+//
+//
+//                            lHomePackage_Adapter.setBuypackage_Communicator(MyTask_Fragment.this);
+//                            lHomePackage_Adapter.notifyDataSetChanged();
+//                        }
+//                    }
+//
+//
+//                     progress.dismiss();
+//                }
+//
+//
+//
+//                @Override
+//                public void onFailure(Call<Partner_package_Response> call, Throwable t) {
+//                    Toast.makeText(getActivity(), getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
+//                       progress.dismiss();
+//                }
+//            });
+//        }
+//        catch (Exception e) {
+//            System.out.println("In User Login Method 8");
+//            e.printStackTrace();
+////            progress.dismiss();
+//
+//        }
+//    }
 
     //Buy a package
 
@@ -486,78 +490,78 @@ if(statusid.equals("0")){
 
 
     //Get Todays Task List
-    private void Get_TodaysTaskList() {
-
-        try {
-            System.out.println("In User Login Method 1");
-             progress.show();
-            OkHttpClient.Builder client = new OkHttpClient.Builder();
-            HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
-            registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-            client.addInterceptor(registrationInterceptor);
-
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(Constants.BASE_URL)
-                    .client(client.build())
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-            System.out.println("asd1");
-            ApiInterface request = retrofit.create(ApiInterface.class);
-            Partner_my_task_today_Request lservice_request = new Partner_my_task_today_Request();
-            lservice_request.setDocket(Constants.TOKEN);
-            lservice_request.setUser_ID(gUserId_FromLogin);
-
-            System.out.println("In Todays task Api" + gUserId_FromLogin);
-            Call<Partner_my_task_today_response> call = request.Get_TodaysTaskList(lservice_request);
-            call.enqueue(new Callback<Partner_my_task_today_response>() {
-                @Override
-                public void onResponse(Call<Partner_my_task_today_response> call, Response<Partner_my_task_today_response> response) {
-                    if (response.isSuccessful()) {
-                        System.out.println("asd12");
-                        Partner_my_task_today_response ListPackage = response.body();
-                        lTodaysTask_Arraylist = new ArrayList<>(Arrays.asList(ListPackage.getPartner_my_task_today_response()));
-
-                        List<UserAddress_Location> items = new ArrayList<>();
-                        if( !lTodaysTask_Arraylist.get(0).getTransaction_ID().equals("No Results Found") && !lTodaysTask_Arraylist.get(0).getUser_ID().equals("User Does Not Exists")){
-                           gTodaytask_recyclerview.setVisibility(View.VISIBLE);
-                           gNotask_header.setVisibility(View.GONE);
-                           gTodyatask_header.setVisibility(View.VISIBLE);
-
-
-                            TodaysTask_Adapter lTodaysTask_Adapter = new TodaysTask_Adapter(getActivity(),lTodaysTask_Arraylist);
-                           gTodaytask_recyclerview.setAdapter(lTodaysTask_Adapter);
-                           lTodaysTask_Adapter.setstartservicelist_Communicator(MyTask_Fragment.this);
-                           lTodaysTask_Adapter.notifyDataSetChanged();
-                       }
-                       else{
-                           gTodyatask_header.setVisibility(View.GONE);
-                           gTodaytask_recyclerview.setVisibility(View.GONE);
-                           gNotask_header.setVisibility(View.VISIBLE);
-                       }
-
-                        progress.dismiss();
-                    }
-
-
-                    progress.dismiss();
-                }
-
-
-
-                @Override
-                public void onFailure(Call<Partner_my_task_today_response> call, Throwable t) {
-                    Toast.makeText(getActivity(), "12"+getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
-                      progress.dismiss();
-                }
-            });
-        }
-        catch (Exception e) {
-            System.out.println("In User Login Method 8");
-            e.printStackTrace();
-//            progress.dismiss();
-
-        }
-    }
+//    private void Get_TodaysTaskList() {
+//
+//        try {
+//            System.out.println("In User Login Method 1");
+//             progress.show();
+//            OkHttpClient.Builder client = new OkHttpClient.Builder();
+//            HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
+//            registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+//            client.addInterceptor(registrationInterceptor);
+//
+//            Retrofit retrofit = new Retrofit.Builder()
+//                    .baseUrl(Constants.BASE_URL)
+//                    .client(client.build())
+//                    .addConverterFactory(GsonConverterFactory.create())
+//                    .build();
+//            System.out.println("asd1");
+//            ApiInterface request = retrofit.create(ApiInterface.class);
+//            Partner_my_task_today_Request lservice_request = new Partner_my_task_today_Request();
+//            lservice_request.setDocket(Constants.TOKEN);
+//            lservice_request.setUser_ID(gUserId_FromLogin);
+//
+//            System.out.println("In Todays task Api" + gUserId_FromLogin);
+//            Call<Partner_my_task_today_response> call = request.Get_TodaysTaskList(lservice_request);
+//            call.enqueue(new Callback<Partner_my_task_today_response>() {
+//                @Override
+//                public void onResponse(Call<Partner_my_task_today_response> call, Response<Partner_my_task_today_response> response) {
+//                    if (response.isSuccessful()) {
+//                        System.out.println("asd12");
+//                        Partner_my_task_today_response ListPackage = response.body();
+//                        lTodaysTask_Arraylist = new ArrayList<>(Arrays.asList(ListPackage.getPartner_my_task_today_response()));
+//
+//                        List<UserAddress_Location> items = new ArrayList<>();
+//                        if( !lTodaysTask_Arraylist.get(0).getTransaction_ID().equals("No Results Found") && !lTodaysTask_Arraylist.get(0).getUser_ID().equals("User Does Not Exists")){
+//                           gTodaytask_recyclerview.setVisibility(View.VISIBLE);
+//                           gNotask_header.setVisibility(View.GONE);
+//                           gTodyatask_header.setVisibility(View.VISIBLE);
+//
+//
+//                            TodaysTask_Adapter lTodaysTask_Adapter = new TodaysTask_Adapter(getActivity(),lTodaysTask_Arraylist);
+//                           gTodaytask_recyclerview.setAdapter(lTodaysTask_Adapter);
+//                           lTodaysTask_Adapter.setstartservicelist_Communicator(MyTask_Fragment.this);
+//                           lTodaysTask_Adapter.notifyDataSetChanged();
+//                       }
+//                       else{
+//                           gTodyatask_header.setVisibility(View.GONE);
+//                           gTodaytask_recyclerview.setVisibility(View.GONE);
+//                           gNotask_header.setVisibility(View.VISIBLE);
+//                       }
+//
+//                        progress.dismiss();
+//                    }
+//
+//
+//                    progress.dismiss();
+//                }
+//
+//
+//
+//                @Override
+//                public void onFailure(Call<Partner_my_task_today_response> call, Throwable t) {
+//                    Toast.makeText(getActivity(), "12"+getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
+//                      progress.dismiss();
+//                }
+//            });
+//        }
+//        catch (Exception e) {
+//            System.out.println("In User Login Method 8");
+//            e.printStackTrace();
+////            progress.dismiss();
+//
+//        }
+//    }
 
 
     //Get Code For Start Service

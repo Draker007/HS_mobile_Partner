@@ -71,76 +71,12 @@ public class UpcomingRequest_Fragment  extends Fragment {
         llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         gUpcomingrequestlist_recyclerview.setLayoutManager(llm);
-        get_UpcomingServiceRequestList();
+        UpcomingRequest_Adapter lUpcomingRequest_Adapter = new UpcomingRequest_Adapter(getActivity()  );
+        gUpcomingrequestlist_recyclerview.setAdapter(lUpcomingRequest_Adapter);
 
         return view;
     }
 
     //Get Upcomiing Request List
-
-    private void get_UpcomingServiceRequestList()  {
-        try {
-
-            progress.show();
-
-            OkHttpClient.Builder client = new OkHttpClient.Builder();
-            HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
-            registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-            client.addInterceptor(registrationInterceptor);
-
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(Constants.BASE_URL)
-                    .client(client.build())
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-
-            ApiInterface request = retrofit.create(ApiInterface.class);
-            UpcomingRequestList_Request lNewRequestList_Request = new UpcomingRequestList_Request();
-            lNewRequestList_Request.setUser_ID(gUserId_FromLogin);
-
-            lNewRequestList_Request.setDocket(Constants.TOKEN);
-
-            Call<UpcomingRequestList_Response> call = request.get_UpcomingServiceRequestList(lNewRequestList_Request);
-            call.enqueue(new Callback<UpcomingRequestList_Response>() {
-
-
-                @Override
-                public void onResponse(Call<UpcomingRequestList_Response> call, Response<UpcomingRequestList_Response> response) {
-                    if (response.isSuccessful()) {
-                        UpcomingRequestList_Response lUpcomingRequestList_Response = response.body();
-
-                        gUpcomingRequestList_Arraylist = new ArrayList<>(Arrays.asList(lUpcomingRequestList_Response.getPartner_requests_upcoming()));
-                       if(!gUpcomingRequestList_Arraylist.get(0).getUser_ID().equals("No Results Found")){
-                           gNorequest_text.setVisibility(View.GONE);
-                           gUpcomingrequestlist_recyclerview.setVisibility(View.VISIBLE);
-                           UpcomingRequest_Adapter lUpcomingRequest_Adapter = new UpcomingRequest_Adapter(getActivity(),gUpcomingRequestList_Arraylist);
-                           gUpcomingrequestlist_recyclerview.setAdapter(lUpcomingRequest_Adapter);
-                       }
-                       else {
-                           Log.e("lol1", "onResponse: was here" );
-                           gNorequest_text.setVisibility(View.VISIBLE);
-                           gUpcomingrequestlist_recyclerview.setVisibility(View.GONE);
-                       }
-
-                        progress.dismiss();
-                    }
-                    progress.dismiss();
-                }
-
-                @Override
-                public void onFailure(Call<UpcomingRequestList_Response> call, Throwable t) {
-                    Toast.makeText(getActivity(), "hihi"+getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
-                    Log.e("lol1", "onFailure: "+t );
-                    progress.dismiss();
-                }
-            });
-        }catch (Exception e) {
-
-            e.printStackTrace();
-            progress.dismiss();
-
-        }
-
-    }
 
 }

@@ -3,6 +3,7 @@ package service.com.surebot.info.serviceperson.Adapter;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +43,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import service.com.surebot.info.serviceperson.Activity.SendQuoteActivity;
 import service.com.surebot.info.serviceperson.ApiClient.ApiInterface;
 import service.com.surebot.info.serviceperson.Constants.Constants;
 import service.com.surebot.info.serviceperson.R;
@@ -66,30 +68,22 @@ public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapte
     ArrayList<String > gServiceName_List= new ArrayList<>();
     ServiceList_Communicator communicator;
 
-    private  ArrayList<String> MappingSubService = new ArrayList<>();
-
-    List<String> MappingIds = new ArrayList<>();
 
     NewTaskSubServicesList_Adapter adapter;
     String quote = "";
     String amnt = "";
     String gTimeForUI;
     String gPremiumPartner_Id = AppicationClass.getPremium_PartenerId();
-    public NewRequests_Adapter(Context context,   ArrayList<NewRequestList_Response.NewRequestList_Response_Records> gNewservicesRequest_List) {
+    public NewRequests_Adapter(Context context ) {
         this.context=context;
-        this.gNewservicesRequest_List=gNewservicesRequest_List;
 
-        AppicationClass.newrequestservicesid.clear();
-
-
-        AppicationClass.newrequestservicesammount.clear();
 
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.newrequestadapter_list, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.upcomingrequestadapter_list, viewGroup, false);
         return new NewRequests_Adapter.MyViewHolder(view);
         // return null;
     }
@@ -98,369 +92,13 @@ public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapte
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, final int position) {
 
-if (gNewservicesRequest_List.get(position).getUser_Name()!=null){
 
-        LinearLayoutManager llm = new LinearLayoutManager(context);
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        myViewHolder.lRequestedservicelist_recyclerview.setLayoutManager(llm);
-
-
-
-
-
-        myViewHolder.lUserName_Text.setText(gNewservicesRequest_List.get(position).getUser_Name());
-        myViewHolder.lDate_Text.setText(gNewservicesRequest_List.get(position).getBooking_Date());
-        myViewHolder.lUserAddress_Text.setText(gNewservicesRequest_List.get(position).getUser_Full_Address());
-        myViewHolder.lUserPhonenumber_Text.setText(gNewservicesRequest_List.get(position).getPhone_location());
-       // myViewHolder.lTime_Text.setText(gNewservicesRequest_List.get(position).getBooking_Start_Time());
-
-        //Time Conversion
-
-        try {
-            DateFormat f = new SimpleDateFormat("HH:mm:ss");
-            Date d = f.parse(gNewservicesRequest_List.get(position).getBooking_Start_Time());
-            DateFormat date = new SimpleDateFormat("hh:ss a");
-
-            gTimeForUI=date.format(d);
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-       // myViewHolder.lTime_Text.setText(gTimeForUI);
-
-    myViewHolder.lTime_Text.setText(gNewservicesRequest_List.get(position).getBooking_Start_Time());
-
-System.out.println("Converted Time is " +gNewservicesRequest_List.get(position).getBooking_Start_Time() + "and "+ gTimeForUI );
-
-        myViewHolder.lSend_button.setOnClickListener(new View.OnClickListener() {
+        myViewHolder.requestid_text.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Log.e("lol1", "onClick: "+ AppicationClass.test1);
-                ArrayList<String > id =new ArrayList<>();
-                ArrayList<String > price =new ArrayList<>();
-
-
-
-                for (int p = 0 ; p<AppicationClass.test1.size();p++){
-                    String[] list = AppicationClass.test1.get(p).split(",");
-                    id.add(list[0]);
-                    price.add(list[1]);
-
-
-                }
-                Log.e("lola", "onClick: "+id+"  "+price );
-
-
-                       //New Try
-
-
-
-
-
-
-                           //New Try
-                ArrayList<String> finalPriceList = new ArrayList<>();
-                ArrayList<String>finalmapingIdList = new ArrayList<>();
-
-
-           if (gPremiumPartner_Id.equals("1")) {
-
-
-
-
-
-
-                int items=0;
-                for ( int j = 0; j<price.size();j++)
-                {
-                    int i =1;
-                    for (int check = 0 ; check<finalmapingIdList.size();check++){
-                        if (!id.get(j).equals(finalmapingIdList.get(check))){
-                            i = 1;
-                        }else{
-                            i = 0;
-                        }
-                    }
-                    if (i == 1){
-                        for (int o = id.size()-1 ; o>=0;o--){
-                            if(id.get(j).equals(id.get(o))){
-
-                                Log.e("asdasd", "onClick: "+ id.get(o) );
-                                finalmapingIdList.add(items,id.get(o));
-                                finalPriceList.add(items,price.get(o));
-                                o=0;
-
-                            }
-
-                        }
-                        items++;
-                    }
-
-                }
-
-
-                    //New Try
-
-                    for (int i = 0; i < AppicationClass.newrequestservicesammount.size(); i++) {
-
-                        //  if(!finalPriceList.contains(AppicationClass.newrequestservicesammount.get(i).toString())){
-                        System.out.println("In Submit method entering into not contains !!!!!");
-                        finalPriceList.add(AppicationClass.newrequestservicesammount.get(i).toString());
-
-                        //   }
-
-/*else{
-                            System.out.println("In Submit method entering into not contains @@@@@@@@");
-                        }*/
-
-                    }
-
-                    for (int i = 0; i < AppicationClass.newrequestservicesid.size(); i++) {
-
-                        if (!finalmapingIdList.contains(AppicationClass.newrequestservicesid.get(i).toString())) {
-                            finalmapingIdList.add(AppicationClass.newrequestservicesid.get(i).toString());
-
-                        } else {
-
-                            finalPriceList.remove(AppicationClass.newrequestservicesammount.get(i).toString());
-                        }
-
-
-                    }
-
-              }
-
-
-                if (gPremiumPartner_Id.equals("0")) {
-
-
-                    int items=0;
-                    for ( int j = 0; j<price.size();j++)
-                    {
-                        int i =1;
-                        for (int check = 0 ; check<finalmapingIdList.size();check++){
-                            if (!id.get(j).equals(finalmapingIdList.get(check))){
-                                i = 1;
-                            }else{
-                                i = 0;
-                            }
-                        }
-                        if (i == 1){
-                            for (int o = id.size()-1 ; o>=0;o--){
-                                if(id.get(j).equals(id.get(o))){
-
-                                    Log.e("asdasd", "onClick: "+ id.get(o) );
-                                    finalmapingIdList.add(items,id.get(o));
-                                    finalPriceList.add(items,price.get(o));
-                                    o=0;
-
-                                }
-
-                            }
-                            items++;
-                        }
-
-                    }
-
-
-
-                }
-
-
-                //New Try
-
-                for(int i=0;i<finalmapingIdList.size();i++){
-
-                    System.out.println("Final mapping  Id and price in first adapter is "+ finalmapingIdList.get(i).toString() +"  and  " + finalPriceList.get(i).toString() );
-                }
-
-              System.out.println("Final mapping  Id and price in first adapter is " +finalmapingIdList.size() + "and" + finalPriceList.size() + "and" + MappingIds.size());
-
-                if(finalPriceList.contains("0") || finalPriceList.contains("00") || finalPriceList.contains("000")){
-                    Toast.makeText(context, "Fill amount for all services", Toast.LENGTH_SHORT).show();
-                }
-
-//System.out.println("in adapter id value is " + finalmapingIdList.size() +" and " +MappingIds.size() );
-              else if(finalmapingIdList.size()== MappingIds.size()){
-
-               // else if(finalmapingIdList.size()== finalPriceList.size()){
-
-                    if(!myViewHolder.lConvenienceCharge_text.getText().toString().trim().equals("")  ) {
-
-                        if(!myViewHolder.lPartnerQuote_Text.getText().toString().trim().equals("")) {
-
-
-
-
-                            for (int i = 0; i < finalmapingIdList.size(); i++) {
-                            if (i == finalmapingIdList.size() - 1) {
-                                quote = quote + finalmapingIdList.get(i);
-                            } else {
-                                quote = quote + finalmapingIdList.get(i) + ",";
-                            }
-                        }
-                        for (int i = 0; i < finalPriceList.size(); i++) {
-                            if (i == finalPriceList.size() - 1) {
-                                amnt = amnt + finalPriceList.get(i);
-                            } else {
-                                amnt = amnt + finalPriceList.get(i) + ",";
-                            }
-                        }
-
-                        System.out.println("Final mapping id and amount is " + quote + " and " + amnt );
-                            String lConveniencecharge = myViewHolder.lConvenienceCharge_text.getText().toString().trim();
-                            String  lPartnerquote = myViewHolder.lPartnerQuote_Text.getText().toString().trim();
-                      sendQuote_toUser("1",lConveniencecharge,lPartnerquote);
-
-                        myViewHolder.lServicedetails_Layout.setVisibility(View.GONE);
-                        myViewHolder.lMore_Textview.setVisibility(View.GONE);
-                        AppicationClass.test1.clear();
-                        communicator.addquotationlist(finalmapingIdList, finalPriceList, "1");
-
-                    }
-
-                        else{
-                            Toast.makeText(context, "Please enter note to coustomer", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                    else{
-                        Toast.makeText(context, "Please enter convenience charge", Toast.LENGTH_SHORT).show();
-
-                    }
-                }
-
-                else{
-
-                    Toast.makeText(context, "Please Fill Price For All Services Before Sending", Toast.LENGTH_SHORT).show();
-
-                }
-
-
-
+            public void onClick(View v) {
+                context.startActivity(new Intent(context, SendQuoteActivity.class));
             }
         });
-
-
-
-
-
-
-        //Clicks on More text
-        myViewHolder.lMore_Textview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-              /*  myViewHolder.lServicedetails_Layout.setVisibility(View.VISIBLE);
-                myViewHolder.lMore_Textview.setVisibility(View.GONE);*/
-                //For New Request Details
-                //Api method starts
-
-                try {
-
-                    progress = new Dialog(context, android.R.style.Theme_Translucent);
-                    progress.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                    progress.setContentView(R.layout.progressbar_background);
-                    progress.setCancelable(true);
-                    progress.show();
-
-                    OkHttpClient.Builder client = new OkHttpClient.Builder();
-                    HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
-                    registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-                    client.addInterceptor(registrationInterceptor);
-
-                    Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl(Constants.BASE_URL)
-                            .client(client.build())
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .build();
-
-                    ApiInterface request = retrofit.create(ApiInterface.class);
-                    NewRequestListDetails_Request lNewRequestListDetails_Request = new NewRequestListDetails_Request();
-                    lNewRequestListDetails_Request.setUser_ID(AppicationClass.getUserId_FromLogin());
-                    lNewRequestListDetails_Request.setTransaction_ID(gNewservicesRequest_List.get(position).getTransaction_ID());
-                    lNewRequestListDetails_Request.setDocket(Constants.TOKEN);
-
-                    Call<NewRequestListDetails_Response> call = request.get_NewServiceRequestDetails(lNewRequestListDetails_Request);
-                    call.enqueue(new Callback<NewRequestListDetails_Response>() {
-
-
-                        @Override
-                        public void onResponse(Call<NewRequestListDetails_Response> call, Response<NewRequestListDetails_Response> response) {
-                            if (response.isSuccessful()) {
-                                NewRequestListDetails_Response lNewRequestList_Response = response.body();
-
-                                ArrayList<NewRequestListDetails_Response.NewRequestpersonalDetails_Records> gNewRequestPersonalDetailsList_Arraylist =  new ArrayList<>(Arrays.asList(lNewRequestList_Response.getPartner_user_details_response()));
-                                if(!gNewRequestPersonalDetailsList_Arraylist.get(0).getTransaction_Partner_Quote_ID().equals("No Results Found")){
-                                    myViewHolder.lServicedetails_Layout.setVisibility(View.VISIBLE);
-                                    myViewHolder.lMore_Textview.setVisibility(View.GONE);
-                                    ArrayList<NewRequestListDetails_Response.NewRequestserviceDetails_Records> gNewRequestList_Arraylist =  new ArrayList<>(Arrays.asList(lNewRequestList_Response.getPartner_service_details_response()));
-
-
-                                    for(int i=0;i<gNewRequestList_Arraylist.size();i++){
-
-                                        gServiceName_List.add(gNewRequestList_Arraylist.get(i).getService_Name());
-                                        MappingIds.add(gNewRequestList_Arraylist.get(i).getService_Mapping_ID());
-                                        MappingSubService.add(gNewRequestList_Arraylist.get(i).getSub_Service_Name());
-
-
-
-
-                                    }
-
-                                    Set<String> set = new HashSet<>(gServiceName_List);
-                                    gServiceName_List.clear();
-                                    gServiceName_List.addAll(set);
-
-                                    NewTaskRequestedServices_Adapter lNewTaskRequestedServices_Adapter = new NewTaskRequestedServices_Adapter(context,gServiceName_List,gNewRequestList_Arraylist);
-                                    myViewHolder.lRequestedservicelist_recyclerview.setAdapter(lNewTaskRequestedServices_Adapter);
-                                    myViewHolder.lButton_layout.setVisibility(View.VISIBLE);
-                                    myViewHolder.lQuotesend_text.setVisibility(View.VISIBLE);
-                                    progress.dismiss();
-
-                                }
-
-                            }
-                            progress.dismiss();
-                        }
-
-                        @Override
-                        public void onFailure(Call<NewRequestListDetails_Response> call, Throwable t) {
-                            Toast.makeText(context, context.getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
-                            progress.dismiss();
-                        }
-                    });
-                }catch (Exception e) {
-
-                    e.printStackTrace();
-                    progress.dismiss();
-
-                } //Api method close
-            }
-        });
-//Clicks on Less twxt
-        myViewHolder.lLess_Textview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                myViewHolder.lServicedetails_Layout.setVisibility(View.GONE);
-                myViewHolder.lMore_Textview.setVisibility(View.VISIBLE);
-            }
-        });
-
-        //Clicks on Send Button
-
-
-
-
-
-
-
-        //Clicks on Reject Button
-        myViewHolder.lReject_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-    }
     }
     public void setServiceList_Communicator(ServiceList_Communicator communicator) {
         this.communicator = communicator;
@@ -468,52 +106,16 @@ System.out.println("Converted Time is " +gNewservicesRequest_List.get(position).
 
     @Override
     public int getItemCount() {
-        return gNewservicesRequest_List.size();
+        return 3;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView lUserName_Text;
-        TextView lDate_Text;
-        TextView lUserAddress_Text;
-        TextView lTime_Text;
-        TextView lUserPhonenumber_Text;
-        RecyclerView lRequestedservicelist_recyclerview;
-        TextView lMore_Textview;
-        TextView lLess_Textview;
-        LinearLayout lServicedetails_Layout;
-        RelativeLayout lButton_layout;
-        Button lSend_button;
-        Button lReject_button;
-        TextView lQuotesend_text;
-
-        CardView lMain_Layout;
-EditText lPartnerQuote_Text;
-EditText lConvenienceCharge_text;
-
-
-
+    TextView requestid_text;
 
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-
-            lUserName_Text=itemView.findViewById(R.id.username_text);
-            lDate_Text=itemView.findViewById(R.id.date_text);
-            lUserAddress_Text=itemView.findViewById(R.id.useraddress_text);
-            lTime_Text=itemView.findViewById(R.id.time_text);
-            lUserPhonenumber_Text=itemView.findViewById(R.id.userphonenumber_text);
-            lRequestedservicelist_recyclerview=itemView.findViewById(R.id.requestedservicelist_recyclerview);
-            lMore_Textview=itemView.findViewById(R.id.more_text);
-            lLess_Textview=itemView.findViewById(R.id.less_text);
-            lMain_Layout=itemView.findViewById(R.id.main_layout);
-            lServicedetails_Layout=itemView.findViewById(R.id.servicedetails_layout);
-            lButton_layout=itemView.findViewById(R.id.button_layout);
-            lSend_button =itemView.findViewById(R.id.send_button);
-            lReject_button =itemView.findViewById(R.id.reject_button);
-            lQuotesend_text=itemView.findViewById(R.id.quotesend_text);
-
-            lPartnerQuote_Text=itemView.findViewById(R.id.partnerquote_text);
-            lConvenienceCharge_text=itemView.findViewById(R.id.conveniencecharge_text);
+            requestid_text = itemView.findViewById(R.id.requestid_text);
         }
     }
 
@@ -522,64 +124,6 @@ EditText lConvenienceCharge_text;
         void addquotationlist( ArrayList<String> finalmapingIdList, ArrayList<String> finalammountList,String StatusId);
 
 
-
-    }
-    private void sendQuote_toUser(String Statusid,String convienincecharge,String partnerquote)  {
-        try {
-
-            progress.show();
-
-            OkHttpClient.Builder client = new OkHttpClient.Builder();
-            HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
-            registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-            client.addInterceptor(registrationInterceptor);
-
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(Constants.BASE_URL)
-                    .client(client.build())
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-
-            ApiInterface request = retrofit.create(ApiInterface.class);
-            SendQuotetoUser_Request lNewRequestList_Request = new SendQuotetoUser_Request();
-
-            lNewRequestList_Request.setUser_ID(AppicationClass.getUserId_FromLogin());
-            lNewRequestList_Request.setQuote_amount(amnt);
-            lNewRequestList_Request.setTransaction_Partner_Quote_ID(quote);
-            lNewRequestList_Request.setStatus_ID(Statusid);
-            lNewRequestList_Request.setConvenience_charge(convienincecharge);
-            lNewRequestList_Request.setPartner_Quote(partnerquote);
-            lNewRequestList_Request.setDocket(Constants.TOKEN);
-
-            Call<SendQuotetoUser_Response> call = request.sendQuote_toUser(lNewRequestList_Request);
-            call.enqueue(new Callback<SendQuotetoUser_Response>() {
-
-
-                @Override
-                public void onResponse(Call<SendQuotetoUser_Response> call, Response<SendQuotetoUser_Response> response) {
-                    if (response.isSuccessful()) {
-                        SendQuotetoUser_Response lSendQuotetoUser_Response = response.body();
-                        if(lSendQuotetoUser_Response.getRequest_partner_quote().equals("valid")){
-                            Toast.makeText(context,"Quote Send Successfully",Toast.LENGTH_SHORT).show();
-                        }
-
-                        progress.dismiss();
-                    }
-                    progress.dismiss();
-                }
-
-                @Override
-                public void onFailure(Call<SendQuotetoUser_Response> call, Throwable t) {
-                    Toast.makeText(context, context.getResources().getString(R.string.onfailure), Toast.LENGTH_SHORT).show();
-                    progress.dismiss();
-                }
-            });
-        }catch (Exception e) {
-
-            e.printStackTrace();
-            progress.dismiss();
-
-        }
 
     }
 

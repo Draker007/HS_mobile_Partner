@@ -57,16 +57,10 @@ View v;
     List<awardsData> awardsDatas = new ArrayList<>();
     ConstraintLayout constraintLayout;
 
-    @BindView(R.id.FragProName)
-    TextView name;
 
-    @BindView(R.id.FragproEmail)
-    TextView email;
 
     Dialog progress;
 
-    @BindView(R.id.FragproNumber)
-    TextView number;
     ArrayList<PartnerProfileResponse.PartnerProfileRecords> partnerProfileRecords ;
 
     Button IdentVerf,personalDetails,aboutME,awards,accDetails,primePartner;
@@ -81,8 +75,7 @@ View v;
         //here we set layout of progress dialog
         progress.setContentView(R.layout.progressbar_background);
         progress.setCancelable(true);
-        callProfileAPI();
-        Initialize();
+
         Listners();
 
         return v;
@@ -90,84 +83,7 @@ View v;
 
     }
 
-    private void callProfileAPI() {
 
-        try {
-            progress.show();
-            OkHttpClient.Builder client = new OkHttpClient.Builder();
-            HttpLoggingInterceptor registrationInterceptor = new HttpLoggingInterceptor();
-            registrationInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-            client.addInterceptor(registrationInterceptor);
-
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(Constants.BASE_URL)
-                    .client(client.build())
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-
-            ApiInterface request = retrofit.create(ApiInterface.class);
-            PartnerProfileRequest partnerLandingPage = new PartnerProfileRequest();
-//            // lbannerimage_request.getUserLandingRequest().setUserid("1");
-            partnerLandingPage.setDocket(Constants.TOKEN);
-            partnerLandingPage.setUser_ID(AppicationClass.getUserId_FromLogin());
-            Log.e("lol", "onResponse: "+AppicationClass.getUserId_FromLogin());
-
-            // Log.e("lol", "user_SignUp: "+ partnerLandingPage.getCategory_ID()+partnerLandingPage.getDocket()+partnerLandingPage.getUser_Contact_Number()+partnerLandingPage.getUser_Email()+partnerLandingPage.getUser_Gender()+partnerLandingPage.getUser_Password() );
-            Call<PartnerProfileResponse> call = request.profileDetails(partnerLandingPage);
-            call.enqueue(new Callback<PartnerProfileResponse>() {
-                @Override
-                public void onResponse(Call<PartnerProfileResponse> call, Response<PartnerProfileResponse> response) {
-                    if (response.isSuccessful()) {
-
-
-                        PartnerProfileResponse partnerProfileResponse = response.body();
-
-                        partnerProfileRecords = new ArrayList<>(Arrays.asList(partnerProfileResponse.getPartner_profile_details()));
-                     //   Log.e("lola", "onResponse: "+partnerUserDetails  );
-                        //Log.e("lol", "onResponse: " +response.body().getUser_Contact_Number());
-                        if(partnerProfileResponse.getStatus_Response().equals("200")){
-                            name.setText(partnerProfileRecords.get(0).getUser_Name());
-                            email.setText(partnerProfileRecords.get(0).getUser_Email());
-                            number.setText(partnerProfileRecords.get(0).getUser_Contact_Number());
-                            if(!partnerProfileRecords.get(0).getUser_Image_Path().equals("") || partnerProfileRecords.get(0).getUser_Image_Path()!=null) {
-                             if(partnerProfileRecords.get(0).getUser_Image_Path().equals("")){
-
-                                 profImge.setImageResource(R.drawable.emptyprofile_image);
-                             }
-                             else{
-                                 Glide.with(getActivity()).load(Constants.IMAGEBASE_URL+partnerProfileRecords.get(0).getUser_Image_Path()).into(profImge);
-
-                             }
-
-                           System.out.println(" In Profile Fragment entering into iff");
-                            }
-
-                            else{
-                                System.out.println(" In Profile Fragment entering into elseee");
-                            }
-                            progress.dismiss();
-                        }
-                        progress.dismiss();
-
-                    }
-
-                    progress.dismiss();
-                }
-
-            @Override
-            public void onFailure(Call<PartnerProfileResponse> call, Throwable t) {
-                System.out.println("In User Login Method 7");
-                progress.dismiss();
-            }
-        });
-    }catch (Exception e) {
-            progress.dismiss();
-        e.printStackTrace();
-
-
-    }
-
-}
 
     private void Listners() {
         personalDetails.setOnClickListener(new View.OnClickListener() {
@@ -210,22 +126,5 @@ View v;
 
     }
 
-    private void Initialize() {pop=new PopupWindow(getContext());
-        profImge = v.findViewById(R.id.EditImageProf);
-        cardView = v.findViewById(R.id.cardView101);
-        IdentVerf = v.findViewById(R.id.btnIdenVerf);
-        aboutME = v.findViewById(R.id.btnAbout);
-        awards = v.findViewById(R.id.btnAward);
-        accDetails = v.findViewById(R.id.accDetailsBTN);
-        primePartner = v.findViewById(R.id.btnPrimePartner);
 
-        //Buttons
-        personalDetails = v.findViewById(R.id.btnPersonaldetails);
-
-
-
-
-        cardView.setBackgroundResource(R.drawable.card_round);
-        profImge.bringToFront();
-    }
 }

@@ -52,9 +52,8 @@ public class HomePackage_Adapter extends RecyclerView.Adapter<HomePackage_Adapte
 
     Buypackage_Communicator communicator;
 
-    public HomePackage_Adapter(Context context, ArrayList<Partner_package_Response.Partner_package_records> partner_package_response) {
+    public HomePackage_Adapter(Context context ) {
         this.context = context;
-        this.partner_package_response = partner_package_response;
     }
 
     // List Package API
@@ -72,32 +71,7 @@ public class HomePackage_Adapter extends RecyclerView.Adapter<HomePackage_Adapte
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, final int position) {
-        Log.e("darker", "onBindViewHolder: "+position );
-        myViewHolder.gHPService.setText(partner_package_response.get(position).getServices());
-        myViewHolder.gHPCost.setText(partner_package_response.get(position).getCost());
-        if (position%2==0){
-            myViewHolder.packageBG.setCardBackgroundColor(Color.parseColor("#673AB7"));
-        }else if(position%3==0){
-            myViewHolder.packageBG.setCardBackgroundColor(Color.parseColor("#38A1F4"));
-        }else{
-            myViewHolder.packageBG.setCardBackgroundColor(Color.parseColor("#E1710F"));
-        }
 
-//        myViewHolder.lMain_Layout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//
-//            }
-//        });
-
-        myViewHolder.lBuyPackage_Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                communicator.buypackage(partner_package_response.get(position).getPackage_ID());
-            }
-        });
     }
 
 
@@ -106,27 +80,22 @@ public class HomePackage_Adapter extends RecyclerView.Adapter<HomePackage_Adapte
         this.communicator = communicator;
     }
 
-    private void CallAPIforPackage() {
 
-    }
 
     @Override
     public int getItemCount() {
-        return partner_package_response.size();
+        return 4;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView gHPCost,gHPService;
-        CardView packageBG;
-        Button lBuyPackage_Button;
+
+        ImageView packageBG;
+
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            packageBG= itemView.findViewById(R.id.packageImage);
 
-            gHPCost= itemView.findViewById(R.id.HPCost);
-            gHPService=itemView.findViewById(R.id.HPServices);
-           packageBG=itemView.findViewById(R.id.packageBG);
-            lBuyPackage_Button=itemView.findViewById(R.id.buy_button);
 
         }
     }

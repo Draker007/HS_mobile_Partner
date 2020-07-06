@@ -10,7 +10,6 @@
         android:id="@+id/constraintLayout22"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:background="@color/color_blackforheader"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -21,13 +20,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="16dp"
-            android:fontFamily="@font/montserrat_bold"
+            android:fontFamily="sans-serif"
             android:gravity="center"
 
             android:padding="10dp"
             android:text="About Me"
-            android:textColor="@color/color_white"
+            android:textColor="@color/color_black"
             android:textSize="@dimen/headertextsize"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -48,6 +48,7 @@
                 android:layout_height="0dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
+                android:tint="@color/color_black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -69,13 +70,13 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-               >
+                android:layout_height="match_parent"
+                android:background="@color/color_white">
 
                 <TextView
                     android:id="@+id/textView22"
@@ -83,9 +84,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="24dp"
-                    android:fontFamily="@font/montserrat"
+                    android:fontFamily="sans-serif"
                     android:text="Introduction"
-                    android:textColor="@color/color_black"
+                    android:textColor="#5D41F0"
+                    android:textStyle="bold"
                     app:fontFamily="@font/montserrat"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -96,15 +98,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="24dp"
-                    app:cardCornerRadius="10dp"
-                    app:cardElevation="5dp"
+                    app:cardElevation="0dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/textView22"
                     app:layout_constraintTop_toBottomOf="@+id/textView22">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:background="@drawable/roundedittxtblack">
 
                         <EditText
                             android:id="@+id/boutMeIntro"
@@ -133,9 +135,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:fontFamily="@font/montserrat"
+                    android:fontFamily="sans-serif"
                     android:text="Experience"
-                    android:textColor="@color/color_black"
+                    android:textColor="#5D41F0"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@+id/cardView7"
                     app:layout_constraintTop_toBottomOf="@+id/cardView7" />
 
@@ -145,15 +148,16 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="24dp"
-                    app:cardCornerRadius="10dp"
-                    app:cardElevation="5dp"
+                    app:cardCornerRadius="0dp"
+                    app:cardElevation="0dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/textView23"
                     app:layout_constraintTop_toBottomOf="@+id/textView23">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:background="@drawable/roundedittxtblack">
 
                         <EditText
                             android:id="@+id/BoutmeExper"
@@ -185,41 +189,33 @@
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/montserrat"
                     android:text="No. of times hired"
-                    android:textColor="@color/color_black"
+                    android:textColor="#5D41F0"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@+id/card"
                     app:layout_constraintTop_toBottomOf="@+id/card" />
-
-                <EditText
-                    android:id="@+id/boutmeHired"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:background="@drawable/roundedittxtblack"
-                    android:ems="10"
-                    android:fontFamily="@font/montserrat"
-                    android:inputType="textPersonName"
-                    android:padding="10dp"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="@+id/textView24"
-                    app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
                 <Button
                     android:id="@+id/save_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="16dp"
                     android:background="@drawable/buttonblue_background"
                     android:paddingLeft="50dp"
                     android:paddingRight="50dp"
                     android:text="Save"
                     android:textColor="@color/color_white"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/boutmeHired" />
+                    app:layout_constraintTop_toBottomOf="@+id/aboutServiceRecyler" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/aboutServiceRecyler"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView24" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
