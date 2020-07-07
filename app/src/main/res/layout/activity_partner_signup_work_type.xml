@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="20dp"
+    tools:context=".Activity.PartnerSignupWorkTypeActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/signupHeaderRL"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:background="@color/colorPrimaryGray"
+            android:paddingBottom="20dp">
+
+            <ImageView
+                android:id="@+id/arrowBack"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="40dp"
+                android:src="@drawable/arrow_back"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/signupTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="25dp"
+                android:fontFamily="@font/open_sans_bold"
+                android:text="@string/signup_text"
+                android:textColor="@color/colorPrimaryBlack"
+                android:textSize="30sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:gravity="center"
+                android:text="@string/work_type_text"
+                android:textColor="@color/colorPrimaryBlack"
+                android:textSize="20sp" />
+
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/workTypeRV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/signupHeaderRL"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="3"
+            tools:listitem="@layout/item_signup_work_type" />
+
+        <Button
+            android:id="@+id/signupButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/workTypeRV"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/loginbutton"
+            android:text="@string/next_text"
+            android:textAllCaps="false"
+            android:textColor="@color/color_orange"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+</ScrollView>

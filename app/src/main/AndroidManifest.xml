@@ -27,10 +27,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
+
         <activity android:name=".Activity.BuyAPackageActivity"></activity>
         <activity android:name=".Activity.PackageListingActivity" />
         <activity android:name=".Activity.SendQuoteActivity" />
         <activity android:name=".Activity.NewServiceDetailsActivity" />
+
+        <activity android:name=".Activity.OnBoardSalonWomenProfile"></activity>
+        <activity android:name=".Activity.PartnerSignupWorkTypeActivity" />
+        <activity android:name=".Activity.PartnerSignupActivity" >
+
+        </activity>
+        <activity android:name=".Activity.PartnerLoginActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+        <activity android:name=".Activity.SplashActivity" />
+
         <activity android:name=".Activity.PreLoginActivity" />
         <activity android:name=".Activity.SetNewPasswordActivity" />
         <activity android:name=".Activity.ForgotPasswordActivity" />
@@ -45,20 +62,23 @@
         <activity android:name=".Activity.ServicesAdd_Activity" />
         <activity android:name=".Activity.CreateProfileActivity" />
         <activity android:name=".Activity.ServicePersonHome_Activity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
         <activity android:name=".Activity.SignUp_Activity" />
         <activity android:name=".Activity.serviceDetailsActivity" />
         <activity android:name=".Activity.PersonalDetailView" />
         <activity android:name=".Activity.NotificationActivity" />
         <activity android:name=".Activity.IdentityVerificationActivity" />
-        <activity
-            android:name=".Activity.SplashActivity"
-            android:theme="@style/SplashTheme">
+
+
+        <activity android:name=".Activity.OnBoardIdentityVerificationActivity">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->

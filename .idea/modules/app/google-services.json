@@ -8,43 +8,6 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:351475556681:android:527f425532edf252613a98",
-        "android_client_info": {
-          "package_name": "service.com.surebot.info.home_service"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "351475556681-ulneeph3qf7po24d3jdb5qghgv8stvbo.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "service.com.surebot.info.home_service",
-            "certificate_hash": "110fc4b28babbd05cd64d51fe085ca087fa59be4"
-          }
-        },
-        {
-          "client_id": "351475556681-15li1onpr1skib8f6cfkctfl6c0leal6.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCTb_Yt0Oxw7JvKYkG1lzZk7F8m0ARWuOk"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "351475556681-15li1onpr1skib8f6cfkctfl6c0leal6.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:351475556681:android:6245c9b6330947e9613a98",
         "android_client_info": {
           "package_name": "service.com.surebot.info.serviceperson"

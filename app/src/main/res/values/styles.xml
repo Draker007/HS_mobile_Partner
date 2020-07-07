@@ -30,4 +30,10 @@
         <item name="android:windowBackground">@mipmap/splash</item>
     </style>
 
+    <style name="ThemeOverlay.App.TextInputLayout" parent="">
+        <item name="colorPrimary">@color/colorPrimaryBlue</item>  //Activated color
+        <item name="colorOnSurface">@color/colorPrimaryBlack</item>    //Normal color
+        <item name="hintTextColor">@color/colorPrimaryBlue</item>    //Normal color
+    </style>
+
 </resources>
