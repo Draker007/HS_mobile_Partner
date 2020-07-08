@@ -137,5 +137,6 @@
     <string name="type_of_id">Type of ID</string>
     <string name="full_name_in_id_proof">Full Name in ID proof</string>
     <string name="enter_the_id_number">Enter the ID number</string>
+    <string name="pick_image_intent_text">Please Select Image</string>
 
 </resources>

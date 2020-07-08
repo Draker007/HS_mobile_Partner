@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import service.com.surebot.info.serviceperson.R;
+import service.com.surebot.info.serviceperson.utils.AppicationClass;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -23,6 +24,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class PartnerLoginActivity extends AppCompatActivity {
 
@@ -39,7 +43,7 @@ public class PartnerLoginActivity extends AppCompatActivity {
     @BindView(R.id.loginButton)
     Button gloginButton;
     private FirebaseAuth mAuth;
-
+    FirebaseUser user;
     private Dialog progress;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,11 +77,11 @@ public class PartnerLoginActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     // Sign in success, update UI with the signed-in user's information
 
-                                    FirebaseUser user = mAuth.getCurrentUser();
+                                     user = mAuth.getCurrentUser();
+                                    callforDetails();
+                                    Log.d("Testing HS---", String.valueOf(user));
 
-                                    Log.d("Testing HS", String.valueOf(user));
-                                    progress.dismiss();
-                                   startActivity(new Intent(PartnerLoginActivity.this,ServicePersonHome_Activity.class));
+                                  // startActivity(new Intent(PartnerLoginActivity.this,ServicePersonHome_Activity.class));
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     Log.w("Testing HS", "signInWithEmail:failure", task.getException());
@@ -94,4 +98,31 @@ public class PartnerLoginActivity extends AppCompatActivity {
         });
 
     }
+
+    private void callforDetails() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("partner").whereEqualTo("UserID",user.getUid())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d("Testing HS", document.getId() + " => " + document.getData().get(""));
+                                AppicationClass.UserId_FromLogin = (String) document.getData().get("UserID");
+                                AppicationClass.UserName_FromLogin = (String) document.getData().get("Partner_Name");
+                                AppicationClass.UserTableID = document.getId();
+                                AppicationClass.CategoryId_FromLogin = (String) document.getData().get("Partner_Parent_Category");
+                                startActivity(new Intent(PartnerLoginActivity.this,OnBoardSalonWomenProfile.class));
+                                progress.dismiss();
+                            }
+                        } else { progress.dismiss();
+                            Log.w("Testing HS", "Error getting documents.", task.getException());
+                        }
+
+                    }   });
+}
+
+
+
 }

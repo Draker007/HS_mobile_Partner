@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -94,6 +94,7 @@
                 android:id="@+id/fullNameET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:enabled="false"
                 android:focusable="true"
                 android:hint="@string/full_name_hint"
                 android:importantForAutofill="no"
@@ -112,6 +113,7 @@
                 android:id="@+id/mobileNumberET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:enabled="false"
                 android:focusable="true"
                 android:hint="@string/mobile_num_text"
                 android:importantForAutofill="no"
@@ -130,6 +132,7 @@
                 android:id="@+id/emailET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:enabled="false"
                 android:focusable="true"
                 android:hint="@string/email_id_text"
                 android:imeOptions="actionDone"
@@ -194,6 +197,7 @@
                 android:id="@+id/dateOfBirthET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:enabled="false"
                 android:focusable="true"
                 android:hint="@string/date_of_birth_text"
                 android:importantForAutofill="no"
@@ -285,12 +289,12 @@
                 tools:ignore="MissingPrefix,TextFields" />
 
             <EditText
-                android:id="@+id/phoneNumberET"
+                android:id="@+id/PincodeET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:hint="@string/phone_number"
+                android:hint="Pincode"
                 android:importantForAutofill="no"
                 android:inputType="number"
                 android:maxLength="10"
@@ -318,10 +322,10 @@
             tools:ignore="ContentDescription" />
 
         <Button
-            android:id="@+id/button10"
+            android:id="@+id/profileGotbtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Button" />
     </LinearLayout>
 
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

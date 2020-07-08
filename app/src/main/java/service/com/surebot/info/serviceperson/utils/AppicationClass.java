@@ -4,10 +4,11 @@ import java.util.ArrayList;
 
 public class AppicationClass {
 
-    public static String UserId_FromLogin;
-    public static String UserName_FromLogin;
-    public static  String CategoryId_FromLogin;
-    public static  String UserType_FromCountryList;
+    public static String UserId_FromLogin="pBmfARqTEHNoZYZnWurQdFEbRND2";
+    public static String UserName_FromLogin="1";
+    public static String UserTableID="9oXlKpfQ6oVUe9TOuqqg";
+    public static  String CategoryId_FromLogin="1";
+    public static  String UserType_FromCountryList="1";
 
     public static ArrayList<String> test1 =new ArrayList<>();
     public static ArrayList<String> test2 = new ArrayList<>();

@@ -35,6 +35,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import service.com.surebot.info.serviceperson.R;
+import service.com.surebot.info.serviceperson.utils.AppicationClass;
 
 public class PartnerSignupActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -70,6 +71,7 @@ public class PartnerSignupActivity extends AppCompatActivity {
     Button gsignupButton;
     private FirebaseFunctions mFunctions;
     FirebaseFirestore db;
+    FirebaseUser user ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,7 +107,8 @@ public class PartnerSignupActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("Testing","createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
+                             user = mAuth.getCurrentUser();
+
                             AddDetails();
                         } else {
                             // If sign in fails, display a message to the user.
@@ -124,23 +127,28 @@ public class PartnerSignupActivity extends AppCompatActivity {
 
     private void AddDetails() {
         // Create a new user with a first, middle, and last name
-        Map<String, Object> user = new HashMap<>();
-        user.put("DOB",gdateOfBirthET.getText().toString().trim());
-        user.put("Partner_Email", gemailET.getText().toString().trim());
-        user.put("Partner_Gender", "male");
-        user.put("Partner_Name", gfullNameET.getText().toString().trim());
-        user.put("Partner_Number", gmobileNumberET.getText().toString().trim());
-        user.put("Partner_Parent_Category","Salon at home for women");
-        user.put("Partner_Type", "Free");
+        Map<String, Object> userdetails = new HashMap<>();
+        userdetails.put("DOB",gdateOfBirthET.getText().toString().trim());
+        userdetails.put("Partner_Email", gemailET.getText().toString().trim());
+        userdetails.put("Partner_Gender", "male");
+        userdetails.put("Partner_Name", gfullNameET.getText().toString().trim());
+        userdetails.put("Partner_Number", gmobileNumberET.getText().toString().trim());
+        userdetails.put("Partner_Parent_Category","Salon at home for women");
+        userdetails.put("Partner_Type", "Free");
+        userdetails.put("UserID", user.getUid());
 
 // Add a new document with a generated ID
         db.collection("partner")
-                .add(user)
+                .add(userdetails)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         Log.d("Testing", "DocumentSnapshot added with ID: " + documentReference.getId());
+                        AppicationClass.UserId_FromLogin =user.getUid();
+                        AppicationClass.UserName_FromLogin = gfullNameET.getText().toString().trim();
+                        AppicationClass.CategoryId_FromLogin = "Salon at home for women" ;
                         startActivity(new Intent(PartnerSignupActivity.this,OnBoardSalonWomenProfile.class));
+                        AppicationClass.UserTableID =documentReference.getId();
 progress.dismiss();
                     }
                 })
