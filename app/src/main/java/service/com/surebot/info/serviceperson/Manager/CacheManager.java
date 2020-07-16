@@ -60,7 +60,4 @@ public class CacheManager {
         return pref.getString(USER_ID,null);
     }
 
-
-
-
 }

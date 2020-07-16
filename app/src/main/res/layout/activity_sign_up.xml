@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/color_signuppink"
-    tools:context=".Activity.SignUp_Activity">
+    tools:context=".activities.SignUp_Activity">
 
     <FrameLayout
         android:layout_width="match_parent"

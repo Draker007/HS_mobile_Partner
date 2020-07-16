@@ -24,5 +24,7 @@
         android:layout_marginStart="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        tools:listitem="@layout/newsubservice_recycler"
+        tools:itemCount="2"
         app:layout_constraintTop_toBottomOf="@+id/textView84" />
 </androidx.constraintlayout.widget.ConstraintLayout>

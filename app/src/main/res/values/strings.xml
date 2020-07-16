@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">HS12ServicePerson</string>
+    <dimen name="header_height">80dp</dimen>
 
     <!--Login-->
     <string name="login">Login</string>
@@ -138,5 +139,49 @@
     <string name="full_name_in_id_proof">Full Name in ID proof</string>
     <string name="enter_the_id_number">Enter the ID number</string>
     <string name="pick_image_intent_text">Please Select Image</string>
+    <string name="if_you_are_new_partner">If you are new partner,</string>
+    <string name="or_text">OR</string>
+    <string name="already_have_a_partner_account_text">Already have a partner account,</string>
+    <string name="reschedule_text">Reschedule</string>
+    <string name="end_service_text">End Service</string>
+    <string name="service_has_started_text">Service has started....</string>
+    <string name="ok_text">OK</string>
+    <string name="reason_for_rescheduling_the_service_text">Reason for Rescheduling the service</string>
+    <string name="customer_not_at_home_text">Customer not at home</string>
+    <string name="customer_not_well_text">Customer not well</string>
+    <string name="technical_issue_text">Technical issue</string>
+    <string name="others_text">Others</string>
+    <string name="schedule_date_time_text"><![CDATA[Schedule Date & Time]]></string>
+    <string name="cancel_text">Cancel</string>
+    <string name="submit_text">Submit</string>
+    <string name="colon_symbol">:</string>
+    <string name="tomorrow_text">Tomorrow 25 Thu</string>
+    <string name="day_after_26_fri">Day After 26 Fri</string>
+    <string name="service_has_been_rescheduled_to">Service has been rescheduled to</string>
+    <string name="tomorrow_25_thu_at_1_30_pm">Tomorrow, 25 Thu at 1:30 PM</string>
+    <string name="service_ended_text">Service has ended , payment yet to be done....</string>
+    <string name="payment_received_text">Payment Received</string>
+    <string name="payment_pending_text">Payment pending</string>
+    <string name="qty_text">QTY</string>
+    <string name="price_text">PRICE</string>
+    <string name="main_service">Main Service</string>
+    <string name="textview">TextView</string>
+    <string name="service_charge_text">Service Charge</string>
+    <string name="convivence_charge">Convivence Charge</string>
+    <string name="payment_Sucessfull_done_text">Payment Sucessfull done</string>
+    <string name="total_text">TOTAL</string>
+    <string name="list_of_service">List of service</string>
+    <string name="task_text">Task</string>
+    <string name="more_text">More</string>
+    <string name="my_payment_text">My payment</string>
+    <string name="about_us">About us</string>
+    <string name="help_centre">Help centre</string>
+    <string name="prime_packages_text">Prime Packages</string>
+    <string name="change_password_text">Change Password</string>
+    <string name="logout_text">Logout</string>
+    <string name="request_id">Request ID :</string>
+    <string name="paid_text">PAID</string>
+    <string name="services_text">Services</string>
+    <string name="amount_text">Amount</string>
 
 </resources>

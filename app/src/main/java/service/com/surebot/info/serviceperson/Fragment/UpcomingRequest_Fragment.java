@@ -3,35 +3,22 @@ package service.com.surebot.info.serviceperson.Fragment;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-import service.com.surebot.info.serviceperson.Adapter.UpcomingRequest_Adapter;
-import service.com.surebot.info.serviceperson.ApiClient.ApiInterface;
-import service.com.surebot.info.serviceperson.Constants.Constants;
+import service.com.surebot.info.serviceperson.adapters.UpcomingRequest_Adapter;
 import service.com.surebot.info.serviceperson.R;
-import service.com.surebot.info.serviceperson.RequestClass.UpcomingRequestList_Request;
 import service.com.surebot.info.serviceperson.ResponseClass.UpcomingRequestList_Response;
 import service.com.surebot.info.serviceperson.utils.AppicationClass;
 

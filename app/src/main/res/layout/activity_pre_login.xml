@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#C2C2C2"
-    tools:context=".Activity.PreLoginActivity">
+    tools:context=".activities.PreLoginActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/signinButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -37,9 +37,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:text="If you are new partner,"
+            android:text="@string/if_you_are_new_partner"
             android:textColor="@color/color_black"
-            app:layout_constraintBottom_toTopOf="@+id/button"
+            app:layout_constraintBottom_toTopOf="@+id/signinButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -73,7 +73,7 @@
             android:id="@+id/textView46"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="OR"
+            android:text="@string/or_text"
             app:layout_constraintBottom_toBottomOf="@+id/constraintLayout27"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -84,14 +84,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Already have a partner account,"
+            android:text="@string/already_have_a_partner_account_text"
             android:textColor="@color/color_black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView46" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/loginButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -102,9 +102,9 @@
             android:paddingBottom="10dp"
             android:text="@string/login"
             android:textColor="@color/color_orange"
-            app:layout_constraintEnd_toEndOf="@+id/button"
+            app:layout_constraintEnd_toEndOf="@+id/signinButton"
             app:layout_constraintHorizontal_bias="0.921"
-            app:layout_constraintStart_toStartOf="@+id/button"
+            app:layout_constraintStart_toStartOf="@+id/signinButton"
             app:layout_constraintTop_toBottomOf="@+id/textView57" />
 
         <ImageView
@@ -114,7 +114,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button3"
-            app:srcCompat="@drawable/sigupillustration" />
+            app:layout_constraintTop_toBottomOf="@+id/loginButton"
+            app:srcCompat="@drawable/signup_illustration"
+            tools:ignore="ContentDescription" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

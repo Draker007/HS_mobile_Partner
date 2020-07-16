@@ -1,40 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
+    <item
+        android:id="@+id/navigationTask"
+        android:icon="@drawable/navigation_task"
+        android:title="@string/task_text"
+        app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/navigation_mytask"
-        android:icon="@drawable/menuselectionformytask_layout"
-        android:title="@string/home_menu"
-        app:showAsAction="ifRoom"
-
-        />
-
-    <item
-        android:id="@+id/navigation_profile"
-        android:icon="@drawable/menuselectionforprofile_layout"
+        android:id="@+id/navigationProfile"
+        android:icon="@drawable/navigation_profile"
         android:title="@string/profile_menu"
-        app:showAsAction="ifRoom"
-        />
+        app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/navigation_allrequest"
-        android:icon="@drawable/menuselectionforallrequest_layout"
+        android:id="@+id/navigationRequest"
+        android:icon="@drawable/navigation_request"
         android:title="@string/request_menu"
-        app:showAsAction="ifRoom"
-        />
-
-
+        app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/navigation_more"
-        android:icon="@drawable/menuselectionformore_layout"
+        android:id="@+id/navigationMore"
+        android:icon="@drawable/navigation_more"
         android:title="@string/more_menu"
-        app:showAsAction="ifRoom"
-        />
-
-
-
-
+        app:showAsAction="ifRoom" />
 </menu>
 
     <!--     app:showAsAction="always|never"-->

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.NewServiceDetailsActivity">
+    tools:context=".activities.NewServiceDetailsActivity">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -16,14 +16,14 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
+            android:id="@+id/mainLL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-           <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:context=".Activity.NewServiceDetailsActivity">
+                android:layout_height="match_parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/serviceDetailLayout"
@@ -42,6 +42,19 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:srcCompat="@drawable/salon" />
+
+                    <ImageView
+                        android:id="@+id/successIVAnim"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="80dp"
+                        android:elevation="@dimen/spacing_20"
+                        android:src="@drawable/confirmation"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toTopOf="@+id/newservicesRecycler"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tools:ignore="ContentDescription,UnusedAttribute"
+                        tools:visibility="visible" />
 
                     <TextView
                         android:id="@+id/textView83"
@@ -85,7 +98,9 @@
                         android:layout_marginTop="16dp"
                         app:layout_constraintEnd_toStartOf="@+id/textView86"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView83" />
+                        app:layout_constraintTop_toBottomOf="@+id/textView83"
+                        tools:itemCount="3"
+                        tools:listitem="@layout/new_service_recycler" />
 
                     <TextView
                         android:id="@+id/textView88"
@@ -135,7 +150,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="32dp"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView89">
@@ -144,12 +159,13 @@
                             android:id="@+id/mapView2"
                             android:layout_width="0dp"
                             android:layout_height="200dp"
-                            android:visibility="gone"
+                            android:visibility="visible"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.74" />
+                            app:layout_constraintVertical_bias="0.74"
+                            tools:visibility="visible" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <TextView
@@ -184,59 +200,193 @@
                         app:layout_constraintTop_toBottomOf="@+id/textView93" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="32dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:background="@color/color_white"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView89">
+                        android:id="@+id/paymentSuccesfullCL"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingBottom="@dimen/spacing_20"
+                        android:visibility="gone"
+                        app:layout_constraintTop_toBottomOf="@+id/textView89"
+                        tools:visibility="visible">
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/ServicepaymentRecycler"
-                            android:layout_width="0dp"
+                        <TextView
+                            android:id="@+id/paymentSuccesfullTV"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginBottom="8dp"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/open_sans_bold"
+                            android:gravity="center"
+                            android:text="@string/payment_Sucessfull_done_text"
+                            android:textColor="#00C828"
+                            android:textSize="16sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/spacing_20"
+                            android:layout_marginVertical="@dimen/spacing_20"
+                            android:paddingBottom="@dimen/spacing_20"
+                            app:cardCornerRadius="@dimen/spacing_20"
+                            app:cardElevation="@dimen/spacing_micro"
+                            app:cardUseCompatPadding="true"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView100" />
+                            app:layout_constraintTop_toBottomOf="@+id/paymentSuccesfullTV">
 
-                        <TextView
-                            android:id="@+id/textView99"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginEnd="8dp"
-                            android:text="PRICE"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/textView100"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginEnd="16dp"
-                            android:text="QTY"
-                            app:layout_constraintEnd_toStartOf="@+id/textView99"
-                            app:layout_constraintTop_toTopOf="parent" />
+                                <LinearLayout
+                                    android:id="@+id/qntyPriceLL"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+                                    <TextView
+                                        android:id="@+id/quantityTV"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/spacing_medium"
+                                        android:layout_weight="2.5"
+                                        android:fontFamily="@font/open_sans_semibold"
+                                        android:gravity="end"
+                                        android:text="@string/qty_text" />
+
+                                    <TextView
+                                        android:id="@+id/priceTV"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/spacing_medium"
+                                        android:layout_marginEnd="@dimen/spacing_double2"
+                                        android:layout_weight=".5"
+                                        android:fontFamily="@font/open_sans_semibold"
+                                        android:gravity="end"
+                                        android:text="@string/price_text" />
+
+                                </LinearLayout>
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/servicePaymentRecycler"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/spacing_20"
+                                    tools:itemCount="2"
+                                    tools:listitem="@layout/new_service_qnty_price" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/spacing_20"
+                                        android:layout_marginTop="@dimen/spacing_20"
+                                        android:layout_weight="2"
+                                        android:fontFamily="@font/open_sans_semibold"
+                                        android:text="@string/service_charge_text"
+                                        android:textColor="#929292" />
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/spacing_20"
+                                        android:layout_marginEnd="10dp"
+                                        android:layout_weight=".5"
+                                        android:gravity="center"
+                                        android:text="99" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/spacing_20"
+                                        android:layout_weight="2"
+                                        android:fontFamily="@font/open_sans_semibold"
+                                        android:text="@string/convivence_charge"
+                                        android:textColor="#929292" />
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginEnd="10dp"
+                                        android:layout_weight=".5"
+                                        android:gravity="center"
+                                        android:text="99" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="@dimen/spacing_double2">
+
+                                    <ImageView
+                                        android:id="@+id/successIV"
+                                        android:layout_width="0dp"
+                                        android:layout_height="50dp"
+                                        android:layout_weight="2"
+                                        android:src="@drawable/confirmation"
+                                        android:visibility="gone"
+                                        tools:ignore="ContentDescription"
+                                        tools:visibility="visible" />
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="40dp"
+                                        android:layout_gravity="end"
+                                        android:layout_marginEnd="15dp"
+                                        android:layout_marginBottom="@dimen/spacing_20"
+                                        android:layout_weight="1"
+                                        android:background="@drawable/round_btn_gray"
+                                        android:gravity="center_vertical">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="10dp"
+                                            android:fontFamily="@font/open_sans_bold"
+                                            android:gravity="center"
+                                            android:text="@string/total_text" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="22dp"
+                                            android:fontFamily="@font/open_sans_bold"
+                                            android:text="999" />
+
+                                    </LinearLayout>
+                                </LinearLayout>
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cancelStartServiceCL"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/serviceDetailLayout">
+                    app:layout_constraintTop_toBottomOf="@+id/serviceDetailLayout"
+                    tools:visibility="gone">
 
                     <Button
                         android:id="@+id/button7"
@@ -270,13 +420,15 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/serviceCodeCL"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/serviceDetailLayout">
+                    app:layout_constraintTop_toBottomOf="@+id/serviceDetailLayout"
+                    tools:visibility="gone">
 
                     <EditText
                         android:id="@+id/otp"
@@ -330,19 +482,173 @@
                         app:layout_constraintTop_toTopOf="@+id/otp6" />
 
                     <Button
-                        android:id="@+id/button4"
+                        android:id="@+id/okButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
                         android:background="@drawable/buttongreen_background"
-                        android:text="OK"
+                        android:text="@string/ok_text"
                         android:textColor="@color/color_white"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/otp6" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rescheduleEndServicesRL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/serviceDetailLayout"
+                    tools:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/serviceStartedTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="@dimen/spacing_20"
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:text="@string/service_has_started_text"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/serviceStartedTV"
+                        android:layout_marginTop="@dimen/spacing_20"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/rescheduleTV"
+                            android:layout_width="120dp"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="@dimen/spacing_medium"
+                            android:layout_marginBottom="@dimen/spacing_medium"
+                            android:background="@drawable/buttongreen_background"
+                            android:gravity="center"
+                            android:text="@string/reschedule_text"
+                            android:textColor="@color/color_white" />
+
+                        <TextView
+                            android:id="@+id/endServiceTV"
+                            android:layout_width="120dp"
+                            android:layout_height="50dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="@dimen/spacing_medium"
+                            android:layout_marginBottom="@dimen/spacing_medium"
+                            android:background="@drawable/round_btn_red"
+                            android:gravity="center"
+                            android:text="@string/end_service_text"
+                            android:textColor="@color/color_white"
+                            tools:ignore="UnusedAttribute" />
+
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/serviceRescheduledLL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/spacing_20"
+                    android:layout_marginTop="@dimen/spacing_double2"
+                    android:layout_marginBottom="@dimen/spacing_20"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/serviceDetailLayout">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:gravity="center"
+                        android:text="@string/service_has_been_rescheduled_to" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:gravity="center"
+                        android:text="@string/tomorrow_25_thu_at_1_30_pm"
+                        android:textColor="@color/colorPrimaryOrange" />
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/spacing_20"
+                        android:layout_marginBottom="10dp"
+                        android:src="@drawable/confirmation"
+                        tools:ignore="ContentDescription" />
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/paymentServiceRL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/serviceDetailLayout"
+                    tools:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/serviceEndedTV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_20"
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:gravity="center"
+                        android:text="@string/service_ended_text"
+                        android:textColor="@color/color_black"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/serviceEndedTV"
+                        android:layout_marginTop="@dimen/spacing_20"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        tools:visibility="gone">
+
+                        <TextView
+                            android:id="@+id/paymentPendingTV"
+                            android:layout_width="130dp"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="@dimen/spacing_medium"
+                            android:layout_marginBottom="@dimen/spacing_medium"
+                            android:background="@drawable/round_btn_gray"
+                            android:gravity="center"
+                            android:text="@string/payment_pending_text"
+                            android:textColor="@color/color_black"
+                            tools:ignore="UnusedAttribute" />
+
+                        <TextView
+                            android:id="@+id/paymentReceivedTV"
+                            android:layout_width="130dp"
+                            android:layout_height="50dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="@dimen/spacing_medium"
+                            android:layout_marginBottom="@dimen/spacing_medium"
+                            android:background="@drawable/buttongreen_background"
+                            android:gravity="center"
+                            android:text="@string/payment_received_text"
+                            android:textColor="@color/color_white"
+                            tools:ignore="UnusedAttribute" />
+
+                    </LinearLayout>
+                </RelativeLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>

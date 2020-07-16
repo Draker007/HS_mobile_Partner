@@ -1,281 +1,215 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout35"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:background="@drawable/salonlayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/imageView28"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginBottom="-10dp"
-            android:alpha="0.2"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/salon" />
-
-        <TextView
-            android:id="@+id/textView136"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="More"
-            android:textColor="@color/color_white"
-            android:textSize="@dimen/headertextsize"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView29"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/imageView29"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/back" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout36"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout35">
-
-        <TextView
-            android:id="@+id/textView130"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="4dp"
-            android:text="My payment"
-            android:textColor="#3E3E3E"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageView27"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/imageView27"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView130"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView130"
-            app:srcCompat="@drawable/gohere" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout37"
+    <RelativeLayout
+        android:id="@+id/headerRL"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout36">
+        android:layout_height="80dp"
+        android:background="@drawable/salon_men_header_bg"
+        tools:ignore="UselessParent">
 
         <TextView
-            android:id="@+id/textView137"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="4dp"
-            android:text="About us"
-            android:textColor="#3E3E3E"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageView30"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:id="@+id/headerTV"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:fontFamily="@font/open_sans_bold"
+            android:gravity="center"
+            android:text="@string/more_text"
+            android:textColor="@color/color_white"
+            android:textSize="20sp" />
 
         <ImageView
-            android:id="@+id/imageView30"
+            android:id="@+id/arrowIV"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView137"
-            app:srcCompat="@drawable/gohere" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_centerVertical="true"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/arrow_back"
+            android:tint="@color/color_white"
+            tools:ignore="ContentDescription" />
+    </RelativeLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout38"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:id="@+id/paymentLL"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout37">
+        android:layout_below="@+id/headerRL"
+        android:layout_marginTop="@dimen/spacing_20"
+        android:gravity="center_vertical"
+        tools:ignore="UseCompoundDrawables">
 
         <TextView
-            android:id="@+id/textView138"
+            android:id="@+id/paymentTV"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="4dp"
-            android:text="Help centre"
-            android:textColor="#3E3E3E"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageView31"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginStart="@dimen/spacing_double2"
+            android:layout_weight="1"
+            android:fontFamily="@font/open_sans_bold"
+            android:text="@string/my_payment_text"
+            android:textColor="@color/color_black"
+            android:textSize="16sp" />
 
         <ImageView
-            android:id="@+id/imageView31"
+            android:id="@+id/paymentArrowIV"
             android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView138"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView138"
-            app:srcCompat="@drawable/gohere" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_height="23dp"
+            android:layout_marginEnd="@dimen/spacing_20"
+            android:src="@drawable/next_arrow"
+            tools:ignore="ContentDescription" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout39"
-        android:layout_width="0dp"
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/aboutUsLL"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="1dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout38">
+        android:layout_below="@+id/paymentLL"
+        android:layout_marginTop="@dimen/spacing_20"
+        android:gravity="center_vertical"
+        tools:ignore="UseCompoundDrawables">
 
         <TextView
-            android:id="@+id/textView139"
+            android:id="@+id/aboutUsTV"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="4dp"
-            android:text="Prime Packages"
-            android:textColor="#3E3E3E"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageView32"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginStart="@dimen/spacing_double2"
+            android:layout_weight="1"
+            android:fontFamily="@font/open_sans_bold"
+            android:text="@string/about_us"
+            android:textColor="@color/color_black"
+            android:textSize="16sp" />
 
         <ImageView
-            android:id="@+id/imageView32"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView139"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView139"
-            app:srcCompat="@drawable/gohere" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:id="@+id/aboutUsIV"
+            android:layout_width="@dimen/spacing_20"
+            android:layout_height="23dp"
+            android:layout_marginEnd="@dimen/spacing_20"
+            android:src="@drawable/next_arrow"
+            tools:ignore="ContentDescription" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout40"
-        android:layout_width="0dp"
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/helpCenterLL"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="1dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout39">
+        android:layout_below="@+id/aboutUsLL"
+        android:layout_marginTop="@dimen/spacing_20"
+        android:gravity="center_vertical"
+        tools:ignore="UseCompoundDrawables">
 
         <TextView
-            android:id="@+id/textView140"
+            android:id="@+id/helpCenterTV"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="4dp"
-            android:text="Change Password"
-            android:textColor="#3E3E3E"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageView33"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginStart="@dimen/spacing_double2"
+            android:layout_weight="1"
+            android:fontFamily="@font/open_sans_bold"
+            android:text="@string/help_centre"
+            android:textColor="@color/color_black"
+            android:textSize="16sp" />
 
         <ImageView
-            android:id="@+id/imageView33"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView140"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView140"
-            app:srcCompat="@drawable/gohere" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:id="@+id/helpCenterIV"
+            android:layout_width="@dimen/spacing_20"
+            android:layout_height="23dp"
+            android:layout_marginEnd="@dimen/spacing_20"
+            android:src="@drawable/next_arrow"
+            tools:ignore="ContentDescription" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="0dp"
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/primePackagesLL"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="1dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout40">
+        android:layout_below="@+id/helpCenterLL"
+        android:layout_marginTop="@dimen/spacing_20"
+        android:gravity="center_vertical"
+        tools:ignore="UseCompoundDrawables">
 
         <TextView
-            android:id="@+id/textView141"
+            android:id="@+id/primePackagesTV"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="4dp"
-            android:text="Logout"
-            android:textColor="#3E3E3E"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageView34"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginStart="@dimen/spacing_double2"
+            android:layout_weight="1"
+            android:fontFamily="@font/open_sans_bold"
+            android:text="@string/prime_packages_text"
+            android:textColor="@color/color_black"
+            android:textSize="16sp" />
 
         <ImageView
-            android:id="@+id/imageView34"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView141"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView141"
-            app:srcCompat="@drawable/gohere" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:id="@+id/primePackagesIV"
+            android:layout_width="@dimen/spacing_20"
+            android:layout_height="23dp"
+            android:layout_marginEnd="@dimen/spacing_20"
+            android:src="@drawable/next_arrow"
+            tools:ignore="ContentDescription" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/changePasswordLL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/primePackagesLL"
+        android:layout_marginTop="@dimen/spacing_20"
+        android:gravity="center_vertical"
+        tools:ignore="UseCompoundDrawables">
+
+        <TextView
+            android:id="@+id/changePasswordTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_double2"
+            android:layout_weight="1"
+            android:fontFamily="@font/open_sans_bold"
+            android:text="@string/change_password_text"
+            android:textColor="@color/color_black"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/changePasswordIV"
+            android:layout_width="@dimen/spacing_20"
+            android:layout_height="23dp"
+            android:layout_marginEnd="@dimen/spacing_20"
+            android:src="@drawable/next_arrow"
+            tools:ignore="ContentDescription" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/changePasswordLL"
+        android:layout_marginTop="@dimen/spacing_20"
+        android:gravity="center_vertical"
+        tools:ignore="UseCompoundDrawables">
+
+        <TextView
+            android:id="@+id/logoutTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_double2"
+            android:layout_weight="1"
+            android:fontFamily="@font/open_sans_bold"
+            android:text="@string/logout_text"
+            android:textColor="@color/color_black"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/logoutIV"
+            android:layout_width="@dimen/spacing_20"
+            android:layout_height="23dp"
+            android:layout_marginEnd="@dimen/spacing_20"
+            android:src="@drawable/next_arrow"
+            tools:ignore="ContentDescription" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

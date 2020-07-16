@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_normal"
+        android:paddingBottom="@dimen/spacing_20">
+
+        <RelativeLayout
+            android:id="@+id/mainLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/nameTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_20"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/open_sans_semibold"
+                tools:text="Priya" />
+
+            <TextView
+                android:id="@+id/requestIdTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toStartOf="@+id/requestIdNumberTV"
+                android:fontFamily="@font/open_sans_bold"
+                android:text="@string/request_id"
+                tools:ignore="RelativeOverlap" />
+
+            <TextView
+                android:id="@+id/requestIdNumberTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="@dimen/spacing_20"
+                android:fontFamily="@font/open_sans_bold"
+                tools:text="CR002DR83" />
+
+            <TextView
+                android:id="@+id/dateTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/requestIdTV"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/spacing_20"
+                android:fontFamily="@font/open_sans_bold"
+                android:textColor="@color/colorPrimaryGreen"
+                tools:text="24 March 2020" />
+
+            <TextView
+                android:id="@+id/paidTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/dateTV"
+                android:layout_marginStart="@dimen/spacing_20"
+                android:fontFamily="@font/open_sans_bold"
+                android:text="@string/paid_text"
+                android:textColor="@color/colorPrimaryGreen" />
+
+            <TextView
+                android:id="@+id/paidAmountTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/dateTV"
+                android:layout_marginStart="@dimen/spacing_normal"
+                android:layout_toEndOf="@+id/paidTV"
+                android:fontFamily="@font/open_sans_bold"
+                tools:text="$625" />
+
+            <TextView
+                android:id="@+id/timeTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/dateTV"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/spacing_20"
+                android:fontFamily="@font/open_sans_bold"
+                android:textColor="@color/colorPrimaryGreen"
+                tools:text="10:45AM" />
+
+            <LinearLayout
+                android:id="@+id/moreLL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/timeTV"
+                android:layout_alignParentEnd="true"
+                android:orientation="horizontal"
+                tools:ignore="UseCompoundDrawables">
+
+                <TextView
+                    android:id="@+id/moreTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_normal"
+                    android:text="@string/more_text" />
+
+                <ImageView
+                    android:id="@+id/downArrowIV"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="@dimen/spacing_20"
+                    android:rotation="180"
+                    android:src="@drawable/arrow_up"
+                    tools:ignore="ContentDescription" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/completedDetailsRL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/moreLL"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <LinearLayout
+                    android:id="@+id/qntyPriceLL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_20">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.5"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:gravity="center"
+                        android:text="@string/services_text"
+                        android:textColor="@color/color_black" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".5"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:gravity="start"
+                        android:text="@string/qty_text"
+                        android:textColor="@color/color_black" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_weight=".5"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:text="@string/amount_text"
+                        android:textColor="@color/color_black" />
+
+                </LinearLayout>
+
+                <include
+                    android:id="@+id/childView"
+                    layout="@layout/payment_completed_details_child_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/qntyPriceLL"
+                    android:layout_marginHorizontal="@dimen/spacing_double"
+                    android:layout_marginVertical="@dimen/spacing_double" />
+
+                <LinearLayout
+                    android:id="@+id/serviceChargeLL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/childView"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_20"
+                        android:layout_weight="2"
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:text="@string/service_charge_text"
+                        android:textColor="#929292" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight=".5"
+                        android:gravity="center"
+                        android:text="$99" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/convinenceChargeLL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/serviceChargeLL"
+                    android:layout_marginTop="@dimen/spacing_normal"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_20"
+                        android:layout_weight="2"
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:text="@string/convivence_charge"
+                        android:textColor="#929292" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight=".5"
+                        android:gravity="center"
+                        android:text="$99" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/convinenceChargeLL"
+                    android:layout_marginTop="40dp"
+                    android:layout_toStartOf="@+id/totalLL"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:text="@string/paid_text"
+                    android:textColor="@color/colorPrimaryGreen"
+                    android:textSize="20sp" />
+
+                <LinearLayout
+                    android:id="@+id/totalLL"
+                    android:layout_width="180dp"
+                    android:layout_height="40dp"
+                    android:layout_below="@+id/convinenceChargeLL"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="@dimen/spacing_double2"
+                    android:layout_marginEnd="@dimen/spacing_20"
+                    android:layout_marginBottom="@dimen/spacing_20"
+                    android:background="@drawable/round_btn_gray"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight=".7"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:gravity="center"
+                        android:text="@string/total_text" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/spacing_double"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:gravity="end"
+                        android:text="999" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/arrowUpIV"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/totalLL"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/spacing_20"
+                    android:src="@drawable/arrow_up"
+                    tools:ignore="ContentDescription" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

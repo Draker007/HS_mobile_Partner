@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/popupwhitebackground">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_20">
+
+        <TextView
+            android:id="@id/rescheduleTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_20"
+            android:layout_marginTop="@dimen/spacing_20"
+            android:fontFamily="@font/open_sans_semibold"
+            android:text="@string/reason_for_rescheduling_the_service_text"
+            android:textColor="@color/color_black"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/customerNotAtHomeIV"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/rescheduleTV"
+            android:layout_marginStart="@dimen/spacing_double2"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/checkbox_unchecked_white"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rescheduleTV"
+            android:layout_marginStart="@dimen/spacing_20"
+            android:layout_marginTop="42dp"
+            android:layout_toEndOf="@+id/customerNotAtHomeIV"
+            android:fontFamily="@font/open_sans"
+            android:text="@string/customer_not_at_home_text"
+            android:textColor="@color/color_black" />
+
+        <ImageView
+            android:id="@+id/customerNotWellIV"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/customerNotAtHomeIV"
+            android:layout_marginStart="@dimen/spacing_double2"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:src="@drawable/checkbox_unchecked_white"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/customerNotAtHomeIV"
+            android:layout_marginStart="@dimen/spacing_20"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:layout_toEndOf="@+id/customerNotWellIV"
+            android:fontFamily="@font/open_sans"
+            android:text="@string/customer_not_well_text"
+            android:textColor="@color/color_black" />
+
+        <ImageView
+            android:id="@+id/technicalIssueIV"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/customerNotWellIV"
+            android:layout_marginStart="@dimen/spacing_double2"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:src="@drawable/checkbox_unchecked_white"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/customerNotWellIV"
+            android:layout_marginStart="@dimen/spacing_20"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:layout_toEndOf="@+id/technicalIssueIV"
+            android:fontFamily="@font/open_sans"
+            android:text="@string/technical_issue_text"
+            android:textColor="@color/color_black" />
+
+        <ImageView
+            android:id="@+id/OthersIV"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/technicalIssueIV"
+            android:layout_marginStart="@dimen/spacing_double2"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:src="@drawable/checkbox_unchecked_white"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/technicalIssueIV"
+            android:layout_marginStart="@dimen/spacing_20"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:layout_toEndOf="@+id/OthersIV"
+            android:fontFamily="@font/open_sans"
+            android:text="@string/others_text"
+            android:textColor="@color/color_black" />
+
+        <EditText
+            android:id="@+id/editTextET"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@+id/OthersIV"
+            android:layout_marginHorizontal="@dimen/spacing_double2"
+            android:layout_marginTop="@dimen/spacing_20"
+            android:background="@drawable/backgreyround"
+            android:backgroundTint="@color/colorWorkTypeBg"
+            android:importantForAutofill="no"
+            android:textColor="@color/color_black"
+            tools:ignore="LabelFor,TextFields,UnusedAttribute" />
+
+        <TextView
+            android:id="@+id/scheduleDateTimeTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editTextET"
+            android:layout_marginStart="@dimen/spacing_20"
+            android:layout_marginTop="@dimen/spacing_20"
+            android:fontFamily="@font/open_sans_semibold"
+            android:text="@string/schedule_date_time_text"
+            android:textSize="16sp" />
+
+        <RelativeLayout
+            android:id="@+id/dayAndDate"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@+id/scheduleDateTimeTV"
+            android:layout_marginTop="@dimen/spacing_double"
+            android:background="@drawable/locationspinnerbackground"
+            android:backgroundTint="@color/colorWorkTypeBg"
+            tools:targetApi="lollipop">
+
+            <TextView
+                android:id="@+id/tomorrowTV"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/spacing_double3"
+                android:background="@drawable/popupwhitebackground"
+                android:gravity="center_vertical|center"
+                android:text="@string/tomorrow_text" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/spacing_20"
+                android:layout_toEndOf="@+id/tomorrowTV"
+                android:background="@drawable/popupwhitebackground"
+                android:gravity="center_vertical|center"
+                android:layout_marginEnd="@dimen/spacing_20"
+                android:text="@string/day_after_26_fri" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/timeView"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@+id/dayAndDate"
+            android:layout_marginHorizontal="@dimen/spacing_double3"
+            android:layout_marginTop="@dimen/spacing_20"
+            android:background="@drawable/locationspinnerbackground"
+            android:backgroundTint="@color/colorWorkTypeBg"
+            tools:targetApi="lollipop">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/hourScrollView"
+                android:layout_marginVertical="5dp"
+                android:layout_marginStart="25dp"
+                android:src="@drawable/next_icon"
+                tools:ignore="ContentDescription" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/hourScrollView"
+                android:layout_marginVertical="5dp"
+                android:layout_marginStart="25dp"
+                android:rotation="180"
+                android:src="@drawable/next_icon"
+                tools:ignore="ContentDescription" />
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/hourScrollView"
+                android:layout_width="30dp"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/spacing_20"
+                android:background="@color/color_white">
+
+                <LinearLayout
+                    android:id="@+id/hourLL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center|center_vertical"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="20dp"
+                    android:scrollbarSize="@dimen/spacing_20" />
+
+            </androidx.core.widget.NestedScrollView>
+
+
+            <TextView
+                android:id="@+id/colonTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_toEndOf="@+id/hourScrollView"
+                android:fontFamily="@font/open_sans_bold"
+                android:text="@string/colon_symbol"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/secondScrollView"
+                android:layout_marginVertical="5dp"
+                android:layout_marginStart="15dp"
+                android:layout_toEndOf="@+id/colonTV"
+                android:src="@drawable/next_icon"
+                tools:ignore="ContentDescription" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/secondScrollView"
+                android:layout_marginVertical="5dp"
+                android:layout_marginStart="15dp"
+                android:layout_toEndOf="@+id/colonTV"
+                android:rotation="180"
+                android:src="@drawable/next_icon"
+                tools:ignore="ContentDescription" />
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/secondScrollView"
+                android:layout_width="30dp"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@+id/colonTV"
+                android:background="@color/color_white">
+
+                <LinearLayout
+                    android:id="@+id/secondLL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center|center_vertical"
+                    android:orientation="vertical" />
+
+            </androidx.core.widget.NestedScrollView>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/amPmScrollView"
+                android:layout_marginVertical="5dp"
+                android:layout_marginStart="25dp"
+                android:layout_toEndOf="@+id/secondScrollView"
+                android:src="@drawable/next_icon"
+                tools:ignore="ContentDescription" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/amPmScrollView"
+                android:layout_marginVertical="5dp"
+                android:layout_marginStart="25dp"
+                android:layout_toEndOf="@+id/secondScrollView"
+                android:rotation="180"
+                android:src="@drawable/next_icon"
+                tools:ignore="ContentDescription" />
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/amPmScrollView"
+                android:layout_width="30dp"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/spacing_20"
+                android:layout_marginEnd="@dimen/spacing_20"
+                android:layout_toEndOf="@+id/secondScrollView"
+                android:background="@color/color_white">
+
+                <LinearLayout
+                    android:id="@+id/amPmLL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center|center_vertical"
+                    android:orientation="vertical" />
+
+            </androidx.core.widget.NestedScrollView>
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/timeView"
+            android:layout_marginTop="@dimen/spacing_20"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/cancelTV"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:layout_marginBottom="@dimen/spacing_medium"
+                android:background="@drawable/round_btn_red"
+                android:gravity="center"
+                android:text="@string/cancel_text"
+                android:textColor="@color/color_white" />
+
+            <TextView
+                android:id="@+id/submitTV"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:layout_marginBottom="@dimen/spacing_medium"
+                android:background="@drawable/buttongreen_background"
+                android:gravity="center"
+                android:text="@string/submit_text"
+                android:textColor="@color/color_white"
+                tools:ignore="UnusedAttribute" />
+
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>

@@ -1,7 +1,6 @@
 package service.com.surebot.info.serviceperson.Fragment;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,15 +27,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import service.com.surebot.info.serviceperson.Adapter.paymentParentAdapter;
+import service.com.surebot.info.serviceperson.adapters.paymentParentAdapter;
 import service.com.surebot.info.serviceperson.ApiClient.ApiInterface;
 import service.com.surebot.info.serviceperson.Constants.Constants;
 import service.com.surebot.info.serviceperson.DataFiles.paymentChildData;
-import service.com.surebot.info.serviceperson.DataFiles.paymentParentData;
 import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.RequestClass.Partner_payment_Request;
 import service.com.surebot.info.serviceperson.ResponseClass.Partner_payment_Response;
-import service.com.surebot.info.serviceperson.ResponseClass.Payment_completed_transaction_Response;
 import service.com.surebot.info.serviceperson.utils.AppicationClass;
 
 public class PendingPaymentFragment extends Fragment {

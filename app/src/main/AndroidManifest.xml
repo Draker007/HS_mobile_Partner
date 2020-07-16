@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="service.com.surebot.info.serviceperson">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -27,17 +28,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
-
-        <activity android:name=".Activity.BuyAPackageActivity"
-            android:windowSoftInputMode="adjustPan"></activity>
-        <activity android:name=".Activity.PackageListingActivity"
+        <activity android:name=".activities.PaymentActivity"></activity>
+        <activity
+            android:name=".activities.BuyAPackageActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".Activity.SendQuoteActivity"
+        <activity
+            android:name=".activities.PackageListingActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".Activity.NewServiceDetailsActivity"
-            android:windowSoftInputMode="adjustPan"/>
-
-        <activity android:name=".Activity.OnBoardSalonWomenProfile"
+        <activity
+            android:name=".activities.SendQuoteActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".activities.SplashActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".activities.ServicePersonHome_Activity"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -45,66 +50,50 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.PartnerSignupWorkTypeActivity"
+        <activity
+            android:name=".activities.PartnerSignupWorkTypeActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".Activity.PartnerSignupActivity"
-            android:windowSoftInputMode="adjustPan" >
-
-        </activity>
-        <activity android:name=".Activity.PartnerLoginActivity"
+        <activity
+            android:name=".activities.PartnerSignupActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".activities.PartnerLoginActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".activities.OnBoardSalonWomenProfile" />
+        <activity android:name=".activities.PreLoginActivity" />
+        <activity
+            android:name=".activities.SetNewPasswordActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".activities.Terms"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".activities.CustomerSupportActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".activities.AboutUsActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".activities.AboutMeActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".activities.NewServiceDetailsActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".activities.SignUp_Activity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".activities.serviceDetailsActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".activities.NotificationActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".activities.OnBoardIdentityVerificationActivity"
             android:windowSoftInputMode="adjustPan">
 
-
-        </activity>
-        <activity android:name=".Activity.SplashActivity" />
-
-        <activity android:name=".Activity.PreLoginActivity" />
-        <activity android:name=".Activity.SetNewPasswordActivity"
-            android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".Activity.ForgotPasswordActivity"
-            android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".Activity.Terms"
-            android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".Activity.HelpCenterActivity"
-            android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".Activity.FAQActivity" />
-        <activity android:name=".Activity.CustomerSupportActivity"
-            android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".Activity.AddPersonalDetailsActivity" />
-        <activity android:name=".Activity.AccountDetailsActivity"
-            android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".Activity.AboutUsActivity"
-            android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".Activity.AboutMeActivity"
-            android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".Activity.ServicesAdd_Activity"
-            android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".Activity.CreateProfileActivity"
-            android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".Activity.ServicePersonHome_Activity"
-            android:windowSoftInputMode="adjustPan">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-        </activity>
-        <activity android:name=".Activity.SignUp_Activity"
-            android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".Activity.serviceDetailsActivity"
-            android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".Activity.PersonalDetailView"
-            android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".Activity.NotificationActivity"
-            android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".Activity.IdentityVerificationActivity"
-            android:windowSoftInputMode="adjustPan"/>
-
-
-        <activity android:name=".Activity.OnBoardIdentityVerificationActivity"
-            android:windowSoftInputMode="adjustPan">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
 
 
             <!-- <intent-filter> -->
@@ -114,15 +103,11 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".Activity.congratsActivity"
-            android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".Activity.PrimePartnerActivity"
+        <activity
+            android:name=".activities.AwardsAndCertificateActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".Activity.AwardsAndCertificateActivity"
-            android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".Activity.PaymentActivity" />
-        <activity android:name=".Activity.Login_Activity" />
-        <activity android:name=".Activity.changePasswordActivity" />
+        <activity android:name=".activities.Login_Activity" />
+        <activity android:name=".activities.changePasswordActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

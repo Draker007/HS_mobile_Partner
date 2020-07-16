@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_blackforheader"
-    tools:context=".Activity.PersonalDetailView">
+    tools:context=".activities.PersonalDetailView">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"

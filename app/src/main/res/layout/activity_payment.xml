@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.PaymentActivity">
+    tools:context=".activities.PaymentActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@color/color_blackforheader"
+        android:layout_height="@dimen/header_height"
+        android:background="@drawable/salon_men_header_bg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="21dp"
             android:fontFamily="@font/montserrat_bold"
-            android:text="My Payment"
+            android:text="@string/my_payment_text"
             android:textColor="@color/color_white"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -36,7 +36,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/back" />
+            app:srcCompat="@drawable/back"
+            tools:ignore="ContentDescription" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.tabs.TabLayout

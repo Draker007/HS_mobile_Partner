@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:fillViewport="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/header_height"
+            android:background="@drawable/salon_men_header_bg">
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/my_payment_text"/>
+            
+        </RelativeLayout>
+
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/bookingsTabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:elevation="10dp" />
+
+
+        <FrameLayout
+            android:id="@+id/bookingContainer"
+            android:layout_width="match_parent"
+            android:layout_height="0dp" />
+
+    </RelativeLayout>
+</ScrollView>
