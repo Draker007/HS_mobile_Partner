@@ -26,6 +26,18 @@
                 tools:text="Priya" />
 
             <TextView
+                android:id="@+id/yetToPayTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/yet_to_pay"
+                android:layout_below="@+id/nameTV"
+                android:visibility="gone"
+                android:fontFamily="@font/open_sans_bold"
+                tools:visibility="visible"
+                android:layout_marginStart="@dimen/spacing_20"
+                android:textColor="@color/colorRed"/>
+
+            <TextView
                 android:id="@+id/requestIdTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -61,6 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/dateTV"
                 android:layout_marginStart="@dimen/spacing_20"
+                android:layout_marginTop="@dimen/spacing_double"
                 android:fontFamily="@font/open_sans_bold"
                 android:text="@string/paid_text"
                 android:textColor="@color/colorPrimaryGreen" />
@@ -70,6 +83,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/dateTV"
+                android:layout_marginTop="@dimen/spacing_double"
                 android:layout_marginStart="@dimen/spacing_normal"
                 android:layout_toEndOf="@+id/paidTV"
                 android:fontFamily="@font/open_sans_bold"

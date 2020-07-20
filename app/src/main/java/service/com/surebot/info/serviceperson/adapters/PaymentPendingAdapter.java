@@ -19,23 +19,22 @@ import service.com.surebot.info.serviceperson.models.PaymentCompletedDetailServi
 import service.com.surebot.info.serviceperson.models.PaymentCompletedService;
 import service.com.surebot.info.serviceperson.utils.Utils;
 
-public class PaymentCompletedAdapter extends RecyclerView.Adapter<PaymentCompletedAdapter.ViewHolder> {
-
+public class PaymentPendingAdapter extends RecyclerView.Adapter<PaymentPendingAdapter.ViewHolder> {
     private final List<PaymentCompletedService> paymentCompletedServiceList;
 
-    public PaymentCompletedAdapter(List<PaymentCompletedService> paymentCompletedServiceList) {
+    public PaymentPendingAdapter(List<PaymentCompletedService> paymentCompletedServiceList) {
         this.paymentCompletedServiceList = paymentCompletedServiceList;
     }
 
     @NonNull
     @Override
-    public PaymentCompletedAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public PaymentPendingAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View layoutInflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_payment_completed, parent, false);
-        return new ViewHolder(layoutInflate);
+        return new PaymentPendingAdapter.ViewHolder(layoutInflate);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PaymentCompletedAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PaymentPendingAdapter.ViewHolder holder, int position) {
         PaymentCompletedService paymentCompletedService = paymentCompletedServiceList.get(position);
         holder.name.setText(paymentCompletedService.getName());
         holder.dateTV.setText(paymentCompletedService.getDate());
@@ -47,9 +46,7 @@ public class PaymentCompletedAdapter extends RecyclerView.Adapter<PaymentComplet
         holder.arrowUpIV.setOnClickListener(v -> Utils.showHideView(false, holder.completedDetailsRL));
 
         List<PaymentCompletedDetailService> paymentCompletedDetailServiceList = new ArrayList<>();
-
-        Utils.showHideView(false, holder.yetToPayTV);
-
+        Utils.showHideView(true, holder.yetToPayTV);
         for (int i = 0; i <= 3; i++) {
             PaymentCompletedDetailService paymentCompletedDetailService = new PaymentCompletedDetailService();
             paymentCompletedDetailService.setTitle("Title");
@@ -58,9 +55,9 @@ public class PaymentCompletedAdapter extends RecyclerView.Adapter<PaymentComplet
             paymentCompletedDetailService.setQuantity("$99");
             paymentCompletedDetailServiceList.add(paymentCompletedDetailService);
         }
-        PaymentCompletedDetailsAdapter paymentCompletedDetailsAdapter = new PaymentCompletedDetailsAdapter(paymentCompletedDetailServiceList);
-        holder.completedDetailServiceRV.setAdapter(paymentCompletedDetailsAdapter);
-        paymentCompletedDetailsAdapter.notifyDataSetChanged();
+        PaymentPendingDetailsAdapter paymentPendingDetailsAdapter = new PaymentPendingDetailsAdapter(paymentCompletedDetailServiceList);
+        holder.completedDetailServiceRV.setAdapter(paymentPendingDetailsAdapter);
+        paymentPendingDetailsAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -71,7 +68,7 @@ public class PaymentCompletedAdapter extends RecyclerView.Adapter<PaymentComplet
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView name, requestIdNumberTV, dateTV, paidAmountTV, timeTV, yetToPayTV;
         private final RecyclerView completedDetailServiceRV;
-        private ImageView arrowUpIV, downArrowIV;
+        private ImageView arrowUpIV;
         private RelativeLayout completedDetailsRL;
         private LinearLayout moreLL;
 
@@ -84,7 +81,6 @@ public class PaymentCompletedAdapter extends RecyclerView.Adapter<PaymentComplet
             paidAmountTV = itemView.findViewById(R.id.paidAmountTV);
             completedDetailsRL = itemView.findViewById(R.id.completedDetailsRL);
             arrowUpIV = itemView.findViewById(R.id.arrowUpIV);
-            downArrowIV = itemView.findViewById(R.id.downArrowIV);
             moreLL = itemView.findViewById(R.id.moreLL);
             completedDetailServiceRV = itemView.findViewById(R.id.completedDetailServiceRV);
             yetToPayTV = itemView.findViewById(R.id.yetToPayTV);

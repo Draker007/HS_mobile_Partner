@@ -2,6 +2,7 @@ package service.com.surebot.info.serviceperson.activities;
 
 import android.os.Bundle;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -22,6 +23,8 @@ public class PaymentActivity extends AppCompatActivity {
     TabLayout tabLayout;
     @BindView(R.id.paymentContainer)
     FrameLayout paymentContainer;
+    @BindView(R.id.arrowIV)
+    ImageView arrowIV;
 
     private PaymentCompletedFragment completedFragment;
     private PaymentPendingFragment pendingFragment;
@@ -36,6 +39,10 @@ public class PaymentActivity extends AppCompatActivity {
         setUpTabs();
         setTabSelectListener();
         replaceFragment(completedFragment);
+
+        arrowIV.setOnClickListener(v -> {
+            finish();
+        });
     }
 
     private void setTabSelectListener() {

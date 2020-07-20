@@ -41,7 +41,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/paymentTV" />
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/arrowIV"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginStart="70dp"

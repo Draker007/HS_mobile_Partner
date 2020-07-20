@@ -183,5 +183,21 @@
     <string name="paid_text">PAID</string>
     <string name="services_text">Services</string>
     <string name="amount_text">Amount</string>
+    <string name="yet_to_pay">Yet to Pay</string>
+    <string name="abouts_us_text">The main objective of Home Service is to hire professionals to help the customers by providing services like salon at home for men and women, carpnter, electrician, plumber,
+        house interior decoration, bridal makeup, cleaning pest control, appliances and electronic repairs.</string>
+    <string name="about_us_details">Home services is providing you the best service professionals to fulfill
+        your requirements.Our aim is to use smart technology and process to build unorganized service market all over India</string>
+    <string name="help_centre_text">Help centre</string>
+    <string name="customer_support">Customer support</string>
+    <string name="terms_of_use">Terms of use</string>
+    <string name="f_a_q_text">F.A.Q</string>
+    <string name="home_service_support_text">Home service support</string>
+    <string name="service_text">It may take some time, please wait\n until we connect a call.</string>
+    <string name="request_all_back_text">Request call back</string>
+    <string name="email_account_text"><![CDATA[EMAIL ID:<xxxxx@gmail.com>]]></string>
+    <string name="registered_office_add_text">Registered Office Address</string>
+    <string name="customer_support_address">16/2, Haudin Road, Sivanchetti\n Garden Ulsoor, Bangalore,\n Karnataka, 560042</string>
+    <string name="open_in_maps_text">Open in Maps</string>
 
 </resources>
