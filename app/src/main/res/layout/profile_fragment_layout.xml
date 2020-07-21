@@ -56,7 +56,7 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="8dp"
                         android:fontFamily="@font/montserrat_bold"
-                        android:text="Profile"
+                        android:text="@string/profile_text"
                         android:textColor="#FFFFFF"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -68,7 +68,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Service Selected :"
+                        android:text="@string/service_selected_text"
                         android:textColor="@color/color_white"
                         android:textSize="12sp"
                         app:layout_constraintStart_toStartOf="@+id/textView133"
@@ -79,7 +79,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="TextView"
+                        android:text="@string/textview"
                         android:textColor="@color/color_white"
                         android:textSize="12sp"
                         app:layout_constraintStart_toStartOf="@+id/ProfileName"
@@ -90,7 +90,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="TextView"
+                        android:text="@string/textview"
                         android:textColor="@color/color_white"
                         android:textSize="12sp"
                         app:layout_constraintStart_toStartOf="@+id/textView132"
@@ -102,7 +102,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="4dp"
                         android:layout_marginEnd="4dp"
-                        android:text="Salon at home for Women"
+                        android:text="@string/salon_at_home_for_women"
                         android:textColor="@color/color_white"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/textView134"
@@ -119,7 +119,8 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/salon" />
+                        app:srcCompat="@drawable/salon"
+                        tools:ignore="ContentDescription" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -144,7 +145,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/constraintLayout30"
+                        android:id="@+id/profileDetailsCL"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -153,14 +154,14 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <TextView
-                            android:id="@+id/textView119"
+                            android:id="@+id/profileDetailsTV"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginEnd="8dp"
                             android:layout_marginBottom="8dp"
-                            android:text="Personal details"
+                            android:text="@string/personal_details"
                             android:textColor="#3E3E3E"
                             android:textSize="18sp"
                             android:textStyle="bold"
@@ -174,9 +175,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="16dp"
-                            android:text="Approved"
+                            android:text="@string/approved_text"
                             android:textColor="#00C828"
-                            app:layout_constraintBottom_toBottomOf="@+id/textView119"
+                            app:layout_constraintBottom_toBottomOf="@+id/profileDetailsTV"
                             app:layout_constraintEnd_toStartOf="@+id/imageView15" />
 
                         <ImageView
@@ -188,27 +189,28 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/gohere" />
+                            app:srcCompat="@drawable/gohere"
+                            tools:ignore="ContentDescription" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/constraintLayout29"
+                        android:id="@+id/identityVerificationCL"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/constraintLayout30">
+                        app:layout_constraintTop_toBottomOf="@+id/profileDetailsCL">
 
                         <TextView
-                            android:id="@+id/textView122"
+                            android:id="@+id/identityVerificationTV"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginEnd="8dp"
                             android:layout_marginBottom="8dp"
-                            android:text="Identity verification"
+                            android:text="@string/identity_verification_text"
                             android:textColor="#3E3E3E"
                             android:textSize="18sp"
                             android:textStyle="bold"
@@ -222,8 +224,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="16dp"
-                            android:text="TextView"
-                            app:layout_constraintBottom_toBottomOf="@+id/textView122"
+                            android:text="@string/textview"
+                            app:layout_constraintBottom_toBottomOf="@+id/identityVerificationTV"
                             app:layout_constraintEnd_toStartOf="@+id/imageView22" />
 
                         <ImageView
@@ -235,24 +237,25 @@
                             app:layout_constraintBottom_toBottomOf="@+id/textView123"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="@+id/textView123"
-                            app:srcCompat="@drawable/gohere" />
+                            app:srcCompat="@drawable/gohere"
+                            tools:ignore="ContentDescription" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/constraintLayout31"
+                        android:id="@+id/aboutMeCL"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/constraintLayout29">
+                        app:layout_constraintTop_toBottomOf="@+id/identityVerificationCL">
 
                         <TextView
-                            android:id="@+id/textView125"
+                            android:id="@+id/aboutMeTV"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="16dp"
-                            android:text="TextView"
+                            android:text="@string/textview"
                             app:layout_constraintBottom_toBottomOf="@+id/textView124"
                             app:layout_constraintEnd_toStartOf="@+id/imageView23"
                             tools:layout_editor_absoluteY="10dp" />
@@ -265,12 +268,12 @@
                             android:layout_marginTop="8dp"
                             android:layout_marginEnd="8dp"
                             android:layout_marginBottom="8dp"
-                            android:text="About me"
+                            android:text="@string/about_me_text"
                             android:textColor="#3E3E3E"
                             android:textSize="18sp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/textView125"
+                            app:layout_constraintEnd_toStartOf="@+id/aboutMeTV"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -280,14 +283,15 @@
                             android:layout_height="20dp"
                             android:layout_marginEnd="8dp"
                             android:tint="@color/color_black"
-                            app:layout_constraintBottom_toBottomOf="@+id/textView125"
+                            app:layout_constraintBottom_toBottomOf="@+id/aboutMeTV"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/textView125"
-                            app:srcCompat="@drawable/gohere" />
+                            app:layout_constraintTop_toTopOf="@+id/aboutMeTV"
+                            app:srcCompat="@drawable/gohere"
+                            tools:ignore="ContentDescription" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/constraintLayout32"
+                        android:id="@+id/licensesAndCertificatedCL"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="1dp"
@@ -295,17 +299,17 @@
                         android:layout_marginEnd="1dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/constraintLayout31">
+                        app:layout_constraintTop_toBottomOf="@+id/aboutMeCL">
 
                         <TextView
-                            android:id="@+id/textView126"
+                            android:id="@+id/licensesAndCertificatedTV"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginEnd="8dp"
                             android:layout_marginBottom="8dp"
-                            android:text="Licenses and certificates"
+                            android:text="@string/licenses_and_certificates_text"
                             android:textColor="#3E3E3E"
                             android:textSize="18sp"
                             android:textStyle="bold"
@@ -319,8 +323,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="16dp"
-                            android:text="TextView"
-                            app:layout_constraintBottom_toBottomOf="@+id/textView126"
+                            android:text="@string/textview"
+                            app:layout_constraintBottom_toBottomOf="@+id/licensesAndCertificatedTV"
                             app:layout_constraintEnd_toStartOf="@+id/imageView24" />
 
                         <ImageView
@@ -332,7 +336,8 @@
                             app:layout_constraintBottom_toBottomOf="@+id/textView127"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="@+id/textView127"
-                            app:srcCompat="@drawable/gohere" />
+                            app:srcCompat="@drawable/gohere"
+                            tools:ignore="ContentDescription" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -341,15 +346,15 @@
                         android:layout_marginTop="8dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/constraintLayout32">
+                        app:layout_constraintTop_toBottomOf="@+id/licensesAndCertificatedCL">
 
                         <TextView
-                            android:id="@+id/textView128"
+                            android:id="@+id/primePartnerTV"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_marginTop="8dp"
-                            android:text="Prime partner"
+                            android:text="@string/prime_partner_text"
                             android:textColor="#3E3E3E"
                             android:textSize="18sp"
                             android:textStyle="bold"
@@ -365,17 +370,18 @@
                             android:tint="@color/color_black"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/gohere" />
+                            app:srcCompat="@drawable/gohere"
+                            tools:ignore="ContentDescription" />
 
                         <TextView
                             android:id="@+id/textView129"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="Package 1 bought on 22 May 2020"
+                            android:text="@string/package_1_bought_on_22_may_2020"
                             android:textColor="#FC7828"
-                            app:layout_constraintStart_toStartOf="@+id/textView128"
-                            app:layout_constraintTop_toBottomOf="@+id/textView128" />
+                            app:layout_constraintStart_toStartOf="@+id/primePartnerTV"
+                            app:layout_constraintTop_toBottomOf="@+id/primePartnerTV" />
 
                         <TextView
                             android:id="@+id/textView131"
@@ -383,7 +389,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:layout_marginBottom="8dp"
-                            android:text="Expires on 22 June 2020"
+                            android:text="@string/expires_on_22_june_2020"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="@+id/textView129"
                             app:layout_constraintTop_toBottomOf="@+id/textView129" />

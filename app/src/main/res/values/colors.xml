@@ -14,6 +14,7 @@
     <color name="colorWorkTypeBg">#EEEEEE</color>
     <color name="colorPrimaryGray">#C2C2C2</color>
     <color name="colorSecondaryGray">#DCDCDC</color>
+    <color name="colorTermsBg">#ECECEC</color>
     <color name="helpCenterColor">#F8F8F8</color>
     <color name="colorTabLayoutGray">#EFEFEF</color>
     <color name="colorPrimaryBlack">#272727</color>
@@ -29,8 +30,11 @@
     <color name="orange">#E1710F</color>
     <color name="color_blue">#38A1F4</color>
     <color name="colorPrimaryBlue">#3E8FEC</color>
+    <color name="colorBlue">#5D41F0</color>
     <color name="color_green">#07E500</color>
+    <color name="colorChangePasswordBg">#D4D4D4</color>
     <color name="colorPrimaryGreen">#00C828</color>
+    <color name="colorGreen">#00E92F</color>
     <color name="color_lightgray">#A1A1A1</color>
     <color name="colorPrimaryRed">#FF3131</color>
     <color name="colorRed">#E20505</color>

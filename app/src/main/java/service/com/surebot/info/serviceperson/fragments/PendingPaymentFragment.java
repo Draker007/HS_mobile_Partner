@@ -1,4 +1,4 @@
-package service.com.surebot.info.serviceperson.Fragment;
+package service.com.surebot.info.serviceperson.fragments;
 
 import android.app.Dialog;
 import android.os.Bundle;

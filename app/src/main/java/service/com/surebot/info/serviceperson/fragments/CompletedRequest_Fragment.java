@@ -1,4 +1,4 @@
-package service.com.surebot.info.serviceperson.Fragment;
+package service.com.surebot.info.serviceperson.fragments;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -17,33 +17,24 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import service.com.surebot.info.serviceperson.adapters.NewRequests_Adapter;
+import service.com.surebot.info.serviceperson.adapters.CompletedRequest_Adapter;
 import service.com.surebot.info.serviceperson.R;
-import service.com.surebot.info.serviceperson.ResponseClass.NewRequestList_Response;
+import service.com.surebot.info.serviceperson.ResponseClass.CompletedRequestList_Response;
 import service.com.surebot.info.serviceperson.utils.AppicationClass;
 
-public class NewRequest_Fragment  extends Fragment  {
-
+public class CompletedRequest_Fragment  extends Fragment {
 
     @BindView(R.id.newrequestlist_recyclerview)
-    RecyclerView gNewrequestlist_recyclerview;
+    RecyclerView gCompletedrequestlist_recyclerview;
     @BindView(R.id.norequest_text)
     TextView gNorequest_text;
 
+
     LinearLayoutManager llm;
+String gUserId_FromLogin;
 
-
-
-
+    ArrayList<CompletedRequestList_Response.CompletedRequestList_Records> gCompeltedRequestList_Arraylist;
     private Dialog progress;
-
-    ArrayList<NewRequestList_Response.NewRequestList_Response_Records> gNewRequestList_Arraylist;
-    String gUserId_FromLogin;
-
-    String gStatus_Id;
-
-    String gFinalServicesMaping_Id,gFinalServices_Ammount;
-
     @SuppressLint("WrongConstant")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,26 +50,21 @@ public class NewRequest_Fragment  extends Fragment  {
         progress.setCancelable(true);
 
 
-        llm = new LinearLayoutManager(getActivity());
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        gNewrequestlist_recyclerview.setLayoutManager(llm);
-
         gUserId_FromLogin = AppicationClass.getUserId_FromLogin();
 
 
-        NewRequests_Adapter NewRequests_Adapter= new NewRequests_Adapter(getActivity());
-        gNewrequestlist_recyclerview.setAdapter(NewRequests_Adapter);
+        llm = new LinearLayoutManager(getActivity());
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        gCompletedrequestlist_recyclerview.setLayoutManager(llm);
+
+        CompletedRequest_Adapter lCompletedRequest_Adapter = new CompletedRequest_Adapter(getActivity()   );
+        gCompletedrequestlist_recyclerview.setAdapter(lCompletedRequest_Adapter);
+
 
         return view;
     }
-    // First New Request List
 
 
 
 
-
-    //Send Or Reject Qoute to Use
-
-
-
-    }
+}

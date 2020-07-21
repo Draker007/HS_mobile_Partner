@@ -1,50 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activities.FAQActivity">
+    android:paddingBottom="@dimen/spacing_20"
+    android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout15"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@color/color_blackforheader"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/FAQHeader"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="159dp"
-            android:fontFamily="@font/montserrat_bold"
-            android:text="Service at Home"
-            android:textColor="@color/color_white"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/imageView10"
+            android:id="@+id/arrowIV"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_marginStart="28dp"
-            app:layout_constraintBottom_toBottomOf="@+id/FAQHeader"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/FAQHeader"
-            app:srcCompat="@drawable/back" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_marginStart="@dimen/spacing_20"
+            android:layout_marginTop="@dimen/spacing_20"
+            android:src="@drawable/arrow_back"
+            tools:ignore="ContentDescription" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/FAQ_Recycler"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout15" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/faqCV"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@+id/arrowIV"
+            android:layout_marginHorizontal="@dimen/spacing_20"
+            android:layout_marginTop="@dimen/spacing_20"
+            app:cardBackgroundColor="@color/helpCenterColor">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/open_sans_semibold"
+                android:text="@string/f_a_q_text"
+                android:textColor="@color/color_black"
+                android:textSize="20sp" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/FaqRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_20"
+            android:layout_marginTop="@dimen/spacing_20"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_faq"
+            android:layout_below="@+id/faqCV"/>
+
+    </RelativeLayout>
+</ScrollView>

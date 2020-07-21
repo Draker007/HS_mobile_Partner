@@ -1,4 +1,4 @@
-package service.com.surebot.info.serviceperson.Fragment;
+package service.com.surebot.info.serviceperson.fragments;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -17,27 +17,26 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import service.com.surebot.info.serviceperson.adapters.UpcomingRequest_Adapter;
+import service.com.surebot.info.serviceperson.adapters.CancelledRequest_Adapter;
 import service.com.surebot.info.serviceperson.R;
-import service.com.surebot.info.serviceperson.ResponseClass.UpcomingRequestList_Response;
+import service.com.surebot.info.serviceperson.ResponseClass.CancelledRequestList_Response;
 import service.com.surebot.info.serviceperson.utils.AppicationClass;
 
-public class UpcomingRequest_Fragment  extends Fragment {
-
+public class CancelledRequest_Fragment extends Fragment {
 
     @BindView(R.id.newrequestlist_recyclerview)
-    RecyclerView gUpcomingrequestlist_recyclerview;
+    RecyclerView gCancelledquestlist_recyclerview;
     @BindView(R.id.norequest_text)
     TextView gNorequest_text;
 
 
     LinearLayoutManager llm;
 
-
     private Dialog progress;
-    ArrayList<UpcomingRequestList_Response.UpcomingRequestList_Records> gUpcomingRequestList_Arraylist;
-    String gUserId_FromLogin;
 
+
+    ArrayList<CancelledRequestList_Response.CancelledRequestList_Records> gCancelledRequestList_Arraylist;
+String gUserId_FromLogin;
     @SuppressLint("WrongConstant")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,18 +51,20 @@ public class UpcomingRequest_Fragment  extends Fragment {
         progress.setContentView(R.layout.progressbar_background);
         progress.setCancelable(true);
 
+
         gUserId_FromLogin = AppicationClass.getUserId_FromLogin();
+
+
+
 
 
         llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
-        gUpcomingrequestlist_recyclerview.setLayoutManager(llm);
-        UpcomingRequest_Adapter lUpcomingRequest_Adapter = new UpcomingRequest_Adapter(getActivity()  );
-        gUpcomingrequestlist_recyclerview.setAdapter(lUpcomingRequest_Adapter);
-
+        gCancelledquestlist_recyclerview.setLayoutManager(llm);
+        CancelledRequest_Adapter lCompletedRequest_Adapter = new CancelledRequest_Adapter(getActivity());
+        gCancelledquestlist_recyclerview.setAdapter(lCompletedRequest_Adapter);
         return view;
     }
 
-    //Get Upcomiing Request List
 
 }

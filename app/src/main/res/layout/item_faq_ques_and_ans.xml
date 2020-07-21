@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:ignore="UseCompoundDrawables">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight=".1"
+            android:gravity="center"
+            android:text="@string/one_text" />
+
+        <TextView
+            android:id="@+id/questionTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_20"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:padding="@dimen/spacing_medium2"
+            tools:text="@string/textview" />
+
+        <ImageView
+            android:id="@+id/arrowDownIV"
+            android:layout_width="10dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight=".2"
+            android:rotation="90"
+            android:src="@drawable/next_arrow"
+            android:visibility="visible"
+            tools:ignore="ContentDescription"
+            tools:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/arrowUpIV"
+            android:layout_width="10dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight=".2"
+            android:rotation="270"
+            android:src="@drawable/next_arrow"
+            android:visibility="gone"
+            tools:ignore="ContentDescription" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/answerTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_double2"
+        android:layout_marginTop="10dp"
+        android:visibility="gone"
+        android:text="@string/about_us_details"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/color_gray" />
+
+</LinearLayout>

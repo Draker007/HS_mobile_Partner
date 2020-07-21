@@ -29,7 +29,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
         tools:ignore="AllowBackup">
-        <activity android:name=".activities.HelpCenterActivity"></activity>
+        <activity android:name=".activities.PrimePackageActivity"></activity>
+        <activity android:name=".activities.FAQQuesAndAnsActivity" />
+        <activity android:name=".activities.HelpCenterActivity" />
         <activity
             android:name=".activities.PaymentActivity"
             android:configChanges="orientation|screenSize|smallestScreenSize"
@@ -70,7 +72,7 @@
             android:name=".activities.SetNewPasswordActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".activities.Terms"
+            android:name=".activities.TermsActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".activities.CustomerSupportActivity"
@@ -112,7 +114,8 @@
             android:name=".activities.AwardsAndCertificateActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".activities.Login_Activity" />
-        <activity android:name=".activities.changePasswordActivity" />
+        <activity android:name=".activities.ChangePasswordActivity" />
+        <activity android:name=".activities.FAQActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

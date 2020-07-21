@@ -18,6 +18,10 @@ public class HelpCenterActivity extends AppCompatActivity implements View.OnClic
     ImageView arrowIV;
     @BindView(R.id.customerSupportCV)
     CardView customerSupportCV;
+    @BindView(R.id.termsOfUseCV)
+    CardView termsOfUseCV;
+    @BindView(R.id.faqCV)
+    CardView faqCV;
     private HelpCenterActivity context;
 
     @Override
@@ -27,7 +31,10 @@ public class HelpCenterActivity extends AppCompatActivity implements View.OnClic
         ButterKnife.bind(this);
         context = HelpCenterActivity.this;
         arrowIV.setOnClickListener(this);
+
         customerSupportCV.setOnClickListener(this);
+        termsOfUseCV.setOnClickListener(this);
+        faqCV.setOnClickListener(this);
     }
 
     @Override
@@ -39,6 +46,14 @@ public class HelpCenterActivity extends AppCompatActivity implements View.OnClic
             break;
             case R.id.customerSupportCV: {
                 Utils.startIntent(context, CustomerSupportActivity.class, false);
+            }
+            break;
+            case R.id.termsOfUseCV: {
+                Utils.startIntent(context, TermsActivity.class, false);
+            }
+            break;
+            case R.id.faqCV: {
+                Utils.startIntent(context, FAQActivity.class, false);
             }
             break;
         }

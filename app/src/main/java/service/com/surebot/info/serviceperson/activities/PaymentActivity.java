@@ -13,8 +13,8 @@ import com.google.android.material.tabs.TabLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import service.com.surebot.info.serviceperson.Fragment.PaymentCompletedFragment;
-import service.com.surebot.info.serviceperson.Fragment.PaymentPendingFragment;
+import service.com.surebot.info.serviceperson.fragments.PaymentCompletedFragment;
+import service.com.surebot.info.serviceperson.fragments.PaymentPendingFragment;
 import service.com.surebot.info.serviceperson.R;
 
 public class PaymentActivity extends AppCompatActivity {

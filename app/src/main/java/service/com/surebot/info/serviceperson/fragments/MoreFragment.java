@@ -1,10 +1,9 @@
-package service.com.surebot.info.serviceperson.Fragment;
+package service.com.surebot.info.serviceperson.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
@@ -12,14 +11,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
-import com.google.firebase.database.collection.LLRBBlackValueNode;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.activities.AboutUsActivity;
+import service.com.surebot.info.serviceperson.activities.ChangePasswordActivity;
 import service.com.surebot.info.serviceperson.activities.HelpCenterActivity;
 import service.com.surebot.info.serviceperson.activities.PaymentActivity;
+import service.com.surebot.info.serviceperson.activities.PrimePackageActivity;
 import service.com.surebot.info.serviceperson.utils.Utils;
 
 public class MoreFragment extends Fragment implements View.OnClickListener {
@@ -30,6 +29,10 @@ public class MoreFragment extends Fragment implements View.OnClickListener {
     LinearLayout helpCenterLL;
     @BindView(R.id.aboutUsLL)
     LinearLayout aboutUsLL;
+    @BindView(R.id.primePackagesLL)
+    LinearLayout primePackagesLL;
+    @BindView(R.id.changePasswordLL)
+    LinearLayout changePasswordLL;
     private FragmentActivity context;
 
     @Nullable
@@ -43,6 +46,8 @@ public class MoreFragment extends Fragment implements View.OnClickListener {
         paymentLL.setOnClickListener(this);
         aboutUsLL.setOnClickListener(this);
         helpCenterLL.setOnClickListener(this);
+        primePackagesLL.setOnClickListener(this);
+        changePasswordLL.setOnClickListener(this);
         return view;
     }
 
@@ -59,6 +64,14 @@ public class MoreFragment extends Fragment implements View.OnClickListener {
             break;
             case R.id.helpCenterLL: {
                 Utils.startIntent(context, HelpCenterActivity.class, false);
+            }
+            break;
+            case R.id.primePackagesLL: {
+                Utils.startIntent(context, PrimePackageActivity.class, false);
+            }
+            break;
+            case R.id.changePasswordLL: {
+                Utils.startIntent(context, ChangePasswordActivity.class, false);
             }
             break;
         }

@@ -199,5 +199,25 @@
     <string name="registered_office_add_text">Registered Office Address</string>
     <string name="customer_support_address">16/2, Haudin Road, Sivanchetti\n Garden Ulsoor, Bangalore,\n Karnataka, 560042</string>
     <string name="open_in_maps_text">Open in Maps</string>
+    <string name="terms_description">Welcome to Home service. You may use our services through our website www.house service.in (“Website”) or our mobile application (“HS App”). Our Website and HS App have been created to provide information about our company and services to the visitors and user of services, whether accessible to you via web, mobile App or other platform (our services, together with the Site, are the Services)</string>
+    <string name="salon_at_home">Salon at home</string>
+    <string name="one_text">1.</string>
+    <string name="expires_on_22_june_2020">Expires on 22 June 2020</string>
+    <string name="package_1_bought_on_22_may_2020">Package 1 bought on 22 May 2020</string>
+    <string name="prime_partner_text">Prime partner</string>
+    <string name="profile_text">Profile</string>
+    <string name="service_selected_text">Service Selected :</string>
+    <string name="personal_details">Personal details</string>
+    <string name="approved_text">Approved</string>
+    <string name="identity_verification_text">Identity verification</string>
+    <string name="about_me_text">About me</string>
+    <string name="licenses_and_certificates_text">Licenses and certificates</string>
+    <string name="advantages_of_being_a_prime_partner_text">Advantages of being a prime Partner</string>
+    <string name="prime_package_text_one">You will get more service if you become Prime\n partner</string>
+    <string name="prime_package_text_two">We will provide more benefits</string>
+    <string name="prime_package_text_three">Location radius is more</string>
+    <string name="buy_package_text">Buy Package</string>
+    <string name="current_password_text">Current Password</string>
+    <string name="new_password_text">New Password</string>
 
 </resources>

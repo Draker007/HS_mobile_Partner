@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.PrimePackageActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingBottom="@dimen/spacing_20"
+        android:layout_marginBottom="30dp">
+
+        <ImageView
+            android:id="@+id/salonBgIV"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:src="@drawable/saloonprofilecurvelayout"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/servicelayoutimg"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:alpha="0.2"
+            android:layout_alignParentEnd="true"
+            app:srcCompat="@drawable/salon"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/arrowIV"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="@dimen/spacing_20"
+            android:layout_marginTop="30dp"
+            android:tint="@color/color_white"
+            android:src="@drawable/arrow_back"
+            tools:ignore="ContentDescription,UnusedAttribute" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/arrowIV"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:fontFamily="@font/open_sans_bold"
+            android:textColor="@color/color_white"
+            android:text="@string/prime_packages_text"
+            android:layout_marginTop="@dimen/spacing_20"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/primePackagesImageRV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:spanCount="1"
+            tools:itemCount="3"
+            tools:listitem="@layout/item_prime_package" />
+
+        <TextView
+            android:id="@+id/primeAdvantagesTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/salonBgIV"
+            android:layout_marginTop="200dp"
+            android:gravity="center"
+            android:textColor="@color/colorBlue"
+            android:fontFamily="@font/open_sans_semibold"
+            android:text="@string/advantages_of_being_a_prime_partner_text"/>
+
+        <ImageView
+            android:id="@+id/bulletOneIV"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_marginTop="@dimen/spacing_20"
+            android:layout_marginStart="@dimen/spacing_20"
+            android:tint="@color/color_black"
+            android:layout_below="@+id/primeAdvantagesTV"
+            android:src="@drawable/circle_for_status"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/primePackageOneTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/bulletOneIV"
+            android:layout_marginTop="12dp"
+            android:gravity="center_vertical"
+            android:layout_marginStart="@dimen/spacing_20"
+            android:fontFamily="@font/open_sans_semibold"
+            android:layout_below="@+id/primeAdvantagesTV"
+            android:text="@string/prime_package_text_one"/>
+
+        <ImageView
+            android:id="@+id/bulletTwoIV"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_marginTop="@dimen/spacing_20"
+            android:layout_marginStart="@dimen/spacing_20"
+            android:tint="@color/color_black"
+            android:layout_below="@+id/primePackageOneTV"
+            android:src="@drawable/circle_for_status"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/primePackageTextTwo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/bulletOneIV"
+            android:layout_marginTop="12dp"
+            android:gravity="center_vertical"
+            android:layout_marginStart="@dimen/spacing_20"
+            android:fontFamily="@font/open_sans_semibold"
+            android:layout_below="@+id/primePackageOneTV"
+            android:text="@string/prime_package_text_two"/>
+
+        <ImageView
+            android:id="@+id/bulletThreeIV"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_marginTop="@dimen/spacing_20"
+            android:layout_marginStart="@dimen/spacing_20"
+            android:tint="@color/color_black"
+            android:layout_below="@+id/primePackageTextTwo"
+            android:src="@drawable/circle_for_status"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/primePackageTextThree"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/bulletOneIV"
+            android:layout_marginTop="12dp"
+            android:gravity="center_vertical"
+            android:layout_marginStart="@dimen/spacing_20"
+            android:fontFamily="@font/open_sans_semibold"
+            android:layout_below="@+id/primePackageTextTwo"
+            android:text="@string/prime_package_text_three"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@+id/primePackageTextThree"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginTop="@dimen/spacing_20"
+            android:text="@string/buy_package_text"
+            android:gravity="center"
+            android:textColor="@color/color_white"
+            android:fontFamily="@font/open_sans_semibold"
+            android:background="@drawable/prime_package_button_green_bg"/>
+
+
+    </RelativeLayout>
+
+</ScrollView>

@@ -1,4 +1,4 @@
-package service.com.surebot.info.serviceperson.Fragment;
+package service.com.surebot.info.serviceperson.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,7 +16,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import service.com.surebot.info.serviceperson.R;
-import service.com.surebot.info.serviceperson.adapters.PaymentCompletedAdapter;
 import service.com.surebot.info.serviceperson.adapters.PaymentPendingAdapter;
 import service.com.surebot.info.serviceperson.models.PaymentCompletedService;
 

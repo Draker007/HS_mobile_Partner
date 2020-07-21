@@ -6,14 +6,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -26,12 +24,11 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import java.util.List;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
-import service.com.surebot.info.serviceperson.Fragment.MoreFragment;
-import service.com.surebot.info.serviceperson.Fragment.MyTaskFragment;
-import service.com.surebot.info.serviceperson.Fragment.ProfileFragment;
-import service.com.surebot.info.serviceperson.Fragment.RequestListFragment;
+import service.com.surebot.info.serviceperson.fragments.MoreFragment;
+import service.com.surebot.info.serviceperson.fragments.MyTaskFragment;
+import service.com.surebot.info.serviceperson.fragments.ProfileFragment;
+import service.com.surebot.info.serviceperson.fragments.RequestListFragment;
 import service.com.surebot.info.serviceperson.Manager.CacheManager;
 import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.utils.AppicationClass;
@@ -169,7 +166,6 @@ public class ServicePersonHome_Activity extends AppCompatActivity {
                 case R.id.navigationTask:
                     fragment = new MyTaskFragment();
                     loadFragment(fragment);
-                    //   back = 0;
                     break;
                 case R.id.navigationProfile:
                     fragment = new ProfileFragment();
@@ -177,13 +173,11 @@ public class ServicePersonHome_Activity extends AppCompatActivity {
                     back = 0;
                     break;
                 case R.id.navigationRequest:
-                    status = 3;
                     fragment = new RequestListFragment();
                     loadFragment(fragment);
                     back = 0;
                     break;
                 case R.id.navigationMore:
-                    status = 3;
                     fragment = new MoreFragment();
                     loadFragment(fragment);
                     back = 0;
