@@ -36,7 +36,7 @@ public class AboutMeActivity extends AppCompatActivity {
 
     private Dialog progress;
 
-    @BindView(R.id.save_button)
+    @BindView(R.id.updateBtn)
     Button gSave_button;
     ArrayList<About_me_Response.About_me_Records> about_me_Response;
     @Override

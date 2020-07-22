@@ -1,40 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/header_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/color_blackforheader"
-        >
-
+        android:layout_height="80dp"
+        android:background="@drawable/salon_men_header_bg"
+        tools:ignore="UselessParent">
 
         <TextView
-            android:id="@+id/myprofile_header"
+            android:id="@+id/headerTV"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:fontFamily="@font/montserrat_bold"
+            android:layout_height="90dp"
+            android:fontFamily="@font/open_sans_bold"
             android:gravity="center"
-            android:padding="10dp"
-            android:text="Requests"
+            android:text="@string/request_text"
             android:textColor="@color/color_white"
-            android:textSize="@dimen/headertextsize"
+            android:textSize="20sp" />
 
-            />
-
-    </LinearLayout>
+        <ImageView
+            android:id="@+id/arrowIV"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/arrow_back"
+            android:tint="@color/color_white"
+            tools:ignore="ContentDescription" />
+    </RelativeLayout>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/allrequestlist_tablayout"
         android:layout_below="@+id/header_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:background="@android:color/white"
         app:tabGravity="fill"
         app:tabIndicatorColor="@color/color_black"

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="@dimen/spacing_20"
     tools:context=".activities.AboutMeActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,7 +24,7 @@
             android:gravity="center"
 
             android:padding="10dp"
-            android:text="About Me"
+            android:text="@string/about_me_text"
             android:textColor="@color/color_black"
             android:textSize="@dimen/headertextsize"
             android:textStyle="bold"
@@ -185,25 +186,24 @@
                     android:id="@+id/textView24"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_20"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/open_sans_semibold"
                     android:text="@string/list_of_service"
-                    android:layout_marginStart="@dimen/spacing_20"
                     android:textColor="#1F00C2"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@+id/card"
                     app:layout_constraintTop_toBottomOf="@+id/card" />
 
                 <Button
-                    android:id="@+id/save_button"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/updateBtn"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:background="@drawable/buttonblue_background"
-                    android:paddingLeft="50dp"
-                    android:paddingRight="50dp"
-                    android:text="Save"
+                    android:layout_marginHorizontal="30dp"
+                    android:layout_marginTop="@dimen/spacing_20"
+                    android:background="@drawable/loginbutton"
+                    android:text="@string/update_text"
+                    android:textAllCaps="false"
                     android:textColor="@color/color_white"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -213,11 +213,11 @@
                     android:id="@+id/aboutServiceRecyler"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_20"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="@dimen/spacing_20"
-                    tools:listitem="@layout/addservicesadapter_list"
-                    app:layout_constraintTop_toBottomOf="@+id/textView24" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView24"
+                    tools:listitem="@layout/addservicesadapter_list" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>

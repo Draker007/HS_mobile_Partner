@@ -9,7 +9,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import service.com.surebot.info.serviceperson.R;
 
-public class IdentityVerificationActivity extends AppCompatActivity {
+public class PersonalDetailsActivity extends AppCompatActivity {
 
     @BindView(R.id.arrowIV)
     ImageView arrowIV;
@@ -17,13 +17,11 @@ public class IdentityVerificationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_identity_verification);
+        setContentView(R.layout.activity_personal_detail_view);
         ButterKnife.bind(this);
 
         arrowIV.setOnClickListener(v -> {
             finish();
         });
-
     }
-
 }

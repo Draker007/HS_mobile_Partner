@@ -61,7 +61,7 @@
     <string name="quotecoustomer">Note to coustomers</string>
     <string name="adminfee">Admin fee</string>
     <string name="convcharge">"Convenience Charge"</string>
-    <string name="enterammount">"Enter ammount"</string>
+    <string name="enteramount">"Enter amount"</string>
     <string name="enterpartnerquote"><font size="14"> Type here..."</font></string>
 
 
@@ -219,5 +219,23 @@
     <string name="buy_package_text">Buy Package</string>
     <string name="current_password_text">Current Password</string>
     <string name="new_password_text">New Password</string>
+    <string name="profile_details_text">Enter City and Area Pin code you want to\n provide Service</string>
+    <string name="select_city_text">Select City</string>
+    <string name="button_text">Button</string>
+    <string name="update_text">Update</string>
+    <string name="pincode">Pincode</string>
+    <string name="_1">1 .</string>
+    <string name="complete_your_profile_text">Complete your Profile</string>
+    <string name="complete_profile_details_text">You are just 3 steps away from reaching your first customer</string>
+    <string name="full_name_in_id_proof_text">Full Name in ID proof</string>
+    <string name="enter_the_id_number_text">Enter the ID number</string>
+    <string name="awards_and_certificates"><![CDATA[Awards & certificates]]></string>
+    <string name="photos_upload_2">Photos Upload : 2</string>
+    <string name="front_side_text">Front Side</string>
+    <string name="back_side_text">Back Side</string>
+    <string name="add_photos_text">Add Photos</string>
+    <string name="hair_styling_text">Certificate of Hairstyling from Ayra Institute</string>
+    <string name="award_text">AWARD</string>
+    <string name="request_text">Request</string>
 
 </resources>

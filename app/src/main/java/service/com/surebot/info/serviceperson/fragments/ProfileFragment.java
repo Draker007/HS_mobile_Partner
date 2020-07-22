@@ -19,7 +19,8 @@ import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.activities.AboutMeActivity;
 import service.com.surebot.info.serviceperson.activities.AwardsAndCertificateActivity;
 import service.com.surebot.info.serviceperson.activities.IdentityVerificationActivity;
-import service.com.surebot.info.serviceperson.activities.PersonalDetailView;
+import service.com.surebot.info.serviceperson.activities.PersonalDetailsActivity;
+import service.com.surebot.info.serviceperson.activities.PrimePackageActivity;
 import service.com.surebot.info.serviceperson.activities.PrimePartnerActivity;
 
 public class ProfileFragment extends Fragment {
@@ -35,6 +36,8 @@ public class ProfileFragment extends Fragment {
     ConstraintLayout licensesAndCertificatedCL;
     @BindView(R.id.primePartnerTV)
     TextView primePartnerTV;
+    @BindView(R.id.primePartnerCL)
+    ConstraintLayout primePartnerCL;
 
     @Nullable
     @Override
@@ -44,7 +47,7 @@ public class ProfileFragment extends Fragment {
         ButterKnife.bind(this, view);
         context = getActivity();
 
-        profileDetailsCL.setOnClickListener(view1 -> startActivity(new Intent(getActivity(), PersonalDetailView.class)));
+        profileDetailsCL.setOnClickListener(view1 -> startActivity(new Intent(getActivity(), PersonalDetailsActivity.class)));
         identityVerificationCL.setOnClickListener(view12 -> startActivity(new Intent(getActivity(),
                 IdentityVerificationActivity.class)));
         aboutMeCL.setOnClickListener(new View.OnClickListener() {
@@ -61,10 +64,10 @@ public class ProfileFragment extends Fragment {
                 startActivity(new Intent(getActivity(), AccountDetailsActivity.class));
             }
         });*/
-        primePartnerTV.setOnClickListener(new View.OnClickListener() {
+        primePartnerCL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), PrimePartnerActivity.class));
+                startActivity(new Intent(getActivity(), PrimePackageActivity.class));
             }
         });
         return view;

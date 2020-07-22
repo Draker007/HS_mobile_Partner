@@ -1,203 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="@dimen/spacing_20"
     tools:context=".activities.AwardsAndCertificateActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/header_layout"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/color_blackforheader"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/arrowIV"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="@dimen/spacing_20"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/arrow_back"
+            tools:ignore="ContentDescription,UnusedAttribute" />
 
         <TextView
-            android:id="@+id/textView80"
-            android:layout_width="0dp"
-            android:layout_height="70dp"
-            android:layout_marginStart="8dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/montserrat_bold"
-            android:gravity="center"
-            android:padding="10dp"
-
-            android:text="@string/award"
-            android:textColor="@color/color_white"
-            android:textSize="@dimen/headertextsize"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.45"
-            app:layout_constraintStart_toEndOf="@+id/AwardsBack" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/AwardsBack"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/imageView19"
-                android:layout_width="10dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/back" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:fillViewport="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/header_layout">
-
-        <LinearLayout
+            android:id="@+id/headerTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginTop="@dimen/spacing_20"
+            android:fontFamily="@font/open_sans_bold"
+            android:gravity="center"
+            android:text="@string/awards_and_certificates"
+            android:textColor="@color/color_black"
+            android:textSize="20sp" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+        <TextView
+            android:id="@+id/photoUploadTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/headerTV"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:fontFamily="@font/open_sans_semibold"
+            android:gravity="center"
+            android:text="@string/photos_upload_2"
+            android:textColor="@color/colorBlue"
+            android:textSize="20sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/photoUploadTV"
+            android:layout_marginTop="@dimen/spacing_medium2"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/uploadImageOneIV"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginHorizontal="20dp"
+                android:src="@drawable/upload_image"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/uploadImageOneIV"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/add_photos_text"
+                android:textColor="@color/color_orange" />
+
+            <ImageView
+                android:id="@+id/uploadImageTwoIV"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_toEndOf="@+id/uploadImageOneIV"
+                android:src="@drawable/upload_image"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/uploadImageTwoIV"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="@dimen/spacing_double2"
+                android:layout_toEndOf="@+id/uploadImageOneIV"
+                android:gravity="center"
+                android:text="@string/hair_styling_text"
+                android:textColor="@color/color_orange" />
+
+            <ImageView
+                android:id="@+id/uploadImageThreeIV"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_below="@+id/uploadImageOneIV"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="40dp"
+                android:src="@drawable/upload_image"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/uploadImageThreeTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/uploadImageThreeIV"
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/award_text"
+                android:textColor="@color/color_orange" />
+
+            <Button
+                android:id="@+id/updateBtn"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/uploadImageThreeTV"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="@dimen/spacing_double2"
+                android:background="@drawable/loginbutton"
+                android:text="@string/update_text"
+                android:textAllCaps="false"
+                android:textColor="@color/color_white" />
+        </RelativeLayout>
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
-                    app:cardCornerRadius="3dp"
-                    app:cardElevation="3dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+    </RelativeLayout>
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
 
-                        <ImageView
-                            android:id="@+id/AwardGallery"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="16dp"
-                            android:layout_marginRight="16dp"
-                            android:layout_marginBottom="16dp"
-                            android:tint="#a1a1a1"
-                            app:layout_constraintBottom_toTopOf="@+id/textView21"
-                            app:layout_constraintEnd_toStartOf="@+id/constraintLayout3"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/gallery" />
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/constraintLayout3"
-                            android:layout_width="1dp"
-                            android:layout_height="0dp"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginEnd="8dp"
-                            android:background="#2A707070"
-                            app:layout_constraintBottom_toTopOf="@+id/textView21"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <TextView
-                            android:id="@+id/textView21"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginBottom="8dp"
-                            android:text="+  Add photo"
-                            app:fontFamily="@font/montserrat"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
-
-                        <ImageView
-                            android:id="@+id/AwardCamera"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="16dp"
-                            android:layout_marginRight="16dp"
-                            android:layout_marginBottom="16dp"
-                            android:tint="#a1a1a1"
-                            app:layout_constraintBottom_toTopOf="@+id/textView21"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/constraintLayout3"
-                            app:layout_constraintTop_toTopOf="@+id/constraintLayout3"
-                            app:srcCompat="@drawable/camera" />
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="0dp"
-                            android:layout_height="1dp"
-                            android:background="#2A707070"
-                            app:layout_constraintBottom_toBottomOf="@+id/constraintLayout3"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent">
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </androidx.cardview.widget.CardView>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/awardRecycler1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/cardView8" />
-
-                <Button
-                    android:id="@+id/AwardSave"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginBottom="8dp"
-                    android:background="@drawable/buttonblue_background"
-                    android:fontFamily="@font/montserrat"
-                    android:paddingLeft="50dp"
-                    android:paddingRight="50dp"
-                    android:text="save"
-                    android:textColor="@color/color_white"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/awardRecycler1" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

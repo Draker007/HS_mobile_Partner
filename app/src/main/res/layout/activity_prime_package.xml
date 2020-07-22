@@ -16,7 +16,7 @@
             android:id="@+id/salonBgIV"
             android:layout_width="match_parent"
             android:layout_height="400dp"
-            android:src="@drawable/saloonprofilecurvelayout"
+            android:src="@drawable/saloon_profile_curve_layout"
             tools:ignore="ContentDescription" />
 
         <ImageView

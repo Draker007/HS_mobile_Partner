@@ -24,6 +24,8 @@
 
     <color name="color_orange">#FC7828</color>
     <color name="colorPrimaryOrange">#E25905</color>
+    <color name="colorOrange">#FF8033</color>
+    <color name="colorSecondaryOrange">#C94C00</color>
     <color name="color_red">#FF0000</color>
 
     <color name="color_purple">#673AB7</color>

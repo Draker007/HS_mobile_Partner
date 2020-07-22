@@ -30,7 +30,7 @@
                     android:id="@+id/constraintLayout33"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/saloonprofilecurvelayout"
+                    android:background="@drawable/saloon_profile_curve_layout"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -224,7 +224,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="16dp"
-                            android:text="@string/textview"
+                            android:text="@string/approved_text"
+                            android:textColor="#00C828"
                             app:layout_constraintBottom_toBottomOf="@+id/identityVerificationTV"
                             app:layout_constraintEnd_toStartOf="@+id/imageView22" />
 
@@ -255,7 +256,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="16dp"
-                            android:text="@string/textview"
+                            android:text="@string/approved_text"
+                            android:textColor="#00C828"
                             app:layout_constraintBottom_toBottomOf="@+id/textView124"
                             app:layout_constraintEnd_toStartOf="@+id/imageView23"
                             tools:layout_editor_absoluteY="10dp" />
@@ -323,7 +325,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="16dp"
-                            android:text="@string/textview"
+                            android:text="@string/approved_text"
+                            android:textColor="#00C828"
                             app:layout_constraintBottom_toBottomOf="@+id/licensesAndCertificatedTV"
                             app:layout_constraintEnd_toStartOf="@+id/imageView24" />
 
@@ -341,6 +344,7 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/primePartnerCL"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"

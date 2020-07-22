@@ -116,6 +116,8 @@
         <activity android:name=".activities.Login_Activity" />
         <activity android:name=".activities.ChangePasswordActivity" />
         <activity android:name=".activities.FAQActivity" />
+        <activity android:name=".activities.PersonalDetailsActivity" />
+        <activity android:name=".activities.IdentityVerificationActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

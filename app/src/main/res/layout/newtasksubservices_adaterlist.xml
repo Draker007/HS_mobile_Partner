@@ -36,7 +36,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/montserrat"
-            android:text="@string/enterammount"
+            android:text="@string/enteramount"
             android:textSize="@dimen/regulartextsize"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/adminheadertext"

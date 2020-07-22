@@ -1,254 +1,347 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_blackforheader"
-    tools:context=".activities.PersonalDetailView">
+    android:paddingBottom="@dimen/spacing_20"
+    tools:context=".activities.PersonalDetailsActivity">
 
-    <androidx.core.widget.NestedScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="0dp"
+        android:layout_marginBottom="30dp"
+        android:paddingBottom="@dimen/spacing_20">
+
+        <ImageView
+            android:id="@+id/salonBgIV"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:src="@drawable/saloon_profile_curve_layout"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/serviceIV"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_alignParentEnd="true"
+            android:alpha="0.2"
+            app:srcCompat="@drawable/salon"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/arrowIV"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="@dimen/spacing_20"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/arrow_back"
+            android:tint="@color/color_white"
+            tools:ignore="ContentDescription,UnusedAttribute" />
+
+        <TextView
+            android:id="@+id/profileTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/salonBgIV"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginTop="@dimen/spacing_20"
+            android:fontFamily="@font/open_sans"
+            android:text="@string/profile_details_text"
+            android:textColor="@color/colorBlue" />
+
+        <LinearLayout
+            android:id="@+id/spinnerLL"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/profileTV"
+            android:layout_marginHorizontal="@dimen/spacing_20"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:background="@drawable/bg_gradient_orange"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="@string/select_city_text"
+                android:textColor="@color/color_white"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/identitySpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:layout_marginHorizontal="@dimen/spacing_20"
+                android:backgroundTint="@color/color_white"
+                tools:ignore="UnusedAttribute" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/spinnerLL"
             android:orientation="vertical">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/nameTL"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:textColorHint="@color/colorPrimaryBlue">
 
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/fullNameET"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="52dp"
-                    android:layout_marginLeft="52dp"
-                    android:layout_marginTop="32dp"
-                    android:text="Name"
-                    android:textColor="#a1a1a1"
-                    android:textSize="14sp"
-                    app:fontFamily="@font/montserrat"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/PerDetailImage" />
+                    android:hint="@string/full_name_hint"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
+                    android:textColorHighlight="@color/color_orange" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/mobileNumberTL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:textColorHint="@color/colorPrimaryBlue">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/mobileNumberET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/mobile_num_text"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    android:maxLength="10" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/emailTL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:textColorHint="@color/colorPrimaryBlue">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/emailET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/email_id_text"
+                    android:imeOptions="actionDone"
+                    android:importantForAutofill="no"
+                    android:inputType="textEmailAddress" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <RelativeLayout
+                android:id="@+id/genderRL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp">
 
                 <ImageView
-                    android:id="@+id/editProfIMG"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/PerDetailImage"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/textView"
-                    app:layout_constraintTop_toBottomOf="@+id/textView"
-                    app:layout_constraintVertical_bias="0.13999999"
-                    app:srcCompat="@drawable/edit" />
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/PerDetailImage"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:layout_marginTop="16dp"
-                    android:src="@drawable/emptyprofile_image"
-                    app:civ_border_color="#00000000"
-                    app:civ_border_width="2dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+                    android:id="@+id/maleGenderIV"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/male_icon"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="70dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:gravity="center"
-                    android:text="Personal Details"
-                    android:textColor="#ffffff"
-                    android:textSize="@dimen/headertextsize"
-                    app:fontFamily="@font/montserrat_bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/NameView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginEnd="8dp"
-                    android:textColor="#ffffff"
-                    android:textSize="14sp"
-                    app:fontFamily="@font/montserrat"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/textView4"
-                    app:layout_constraintTop_toTopOf="@+id/textView2" />
-
-                <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/maleTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="Phone Number"
-                    android:textColor="#a1a1a1"
-                    android:textSize="14sp"
-                    app:fontFamily="@font/montserrat"
-                    app:layout_constraintStart_toStartOf="@+id/textView2"
-                    app:layout_constraintTop_toBottomOf="@+id/NameView" />
+                    android:layout_below="@id/maleGenderIV"
+                    android:layout_marginStart="13dp"
+                    android:text="@string/male_text"
+                    android:textColor="@color/colorTextSignup"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/femaleGenderIV"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_toEndOf="@+id/maleGenderIV"
+                    android:src="@drawable/female_blue_fill"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
-                    android:id="@+id/NumberView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
-                    android:textColor="#ffffff"
-                    android:textSize="14sp"
-                    app:fontFamily="@font/montserrat"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/NameView"
-                    app:layout_constraintTop_toBottomOf="@+id/NameView" />
-
-                <TextView
-                    android:id="@+id/textView6"
+                    android:id="@+id/femaleTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="Email-Id"
-                    android:textColor="#a1a1a1"
-                    android:textSize="14sp"
-                    app:fontFamily="@font/montserrat"
-                    app:layout_constraintStart_toStartOf="@+id/textView4"
-                    app:layout_constraintTop_toBottomOf="@+id/NumberView" />
+                    android:layout_below="@id/femaleGenderIV"
+                    android:layout_marginStart="50dp"
+                    android:layout_toEndOf="@+id/maleTV"
+                    android:text="@string/female_text"
+                    android:textColor="@color/colorTextSignup"
+                    android:textSize="16sp" />
 
-                <TextView
-                    android:id="@+id/EmailView"
-                    android:layout_width="0dp"
+            </RelativeLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/dateOfBirthTL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:textColorHint="@color/colorPrimaryBlue">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/dateOfBirthET"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
-                    android:textColor="#ffffff"
-                    android:textSize="14sp"
-                    app:fontFamily="@font/montserrat"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/NumberView"
-                    app:layout_constraintTop_toBottomOf="@+id/NumberView" />
+                    android:hint="@string/date_of_birth_text"
+                    android:importantForAutofill="no"
+                    android:inputType="date" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                <TextView
-                    android:id="@+id/textView8"
-                    android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/your_current_address"
+                android:textColor="@color/colorPrimaryBlue"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:id="@+id/addressDetailsLL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_normal"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/nameET"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="Gender"
-                    android:textColor="#a1a1a1"
-                    android:textSize="14sp"
-                    app:fontFamily="@font/montserrat"
-                    app:layout_constraintStart_toStartOf="@+id/textView6"
-                    app:layout_constraintTop_toBottomOf="@+id/EmailView" />
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:hint="@string/name"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    tools:ignore="MissingPrefix,TextFields" />
 
-                <TextView
-                    android:id="@+id/GenderView"
-                    android:layout_width="0dp"
+                <EditText
+                    android:id="@+id/houseFlatNoET"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
-                    android:textColor="#ffffff"
-                    android:textSize="14sp"
-                    app:fontFamily="@font/montserrat"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/EmailView"
-                    app:layout_constraintTop_toBottomOf="@+id/EmailView" />
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:hint="@string/house_flat_no"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    tools:ignore="MissingPrefix,TextFields" />
 
-                <TextView
-                    android:id="@+id/textView12"
-                    android:layout_width="wrap_content"
+                <EditText
+                    android:id="@+id/streetET"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="Profession"
-                    android:textColor="#a1a1a1"
-                    android:textSize="14sp"
-                    app:fontFamily="@font/montserrat"
-                    app:layout_constraintStart_toStartOf="@+id/textView8"
-                    app:layout_constraintTop_toBottomOf="@+id/GenderView" />
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:hint="@string/street_text"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    tools:ignore="MissingPrefix,TextFields" />
 
-                <TextView
-                    android:id="@+id/ProfessionView"
-                    android:layout_width="0dp"
+                <EditText
+                    android:id="@+id/areaET"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
-                    android:textColor="#ffffff"
-                    android:textSize="14sp"
-                    app:fontFamily="@font/montserrat"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/GenderView"
-                    app:layout_constraintTop_toBottomOf="@+id/GenderView" />
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:hint="@string/area"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    tools:ignore="MissingPrefix,TextFields" />
 
-                <TextView
-                    android:id="@+id/textView14"
-                    android:layout_width="wrap_content"
+                <EditText
+                    android:id="@+id/cityET"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="Address"
-                    android:textColor="#a1a1a1"
-                    android:textSize="14sp"
-                    app:fontFamily="@font/montserrat"
-                    app:layout_constraintStart_toStartOf="@+id/textView12"
-                    app:layout_constraintTop_toBottomOf="@+id/ProfessionView" />
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:hint="@string/city"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    tools:ignore="MissingPrefix,TextFields" />
 
-                <TextView
-                    android:id="@+id/AddressView"
-                    android:layout_width="0dp"
+                <EditText
+                    android:id="@+id/stateET"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
-                    android:background="#00000000"
-                    android:ems="10"
-                    android:gravity="start|top"
-                    android:inputType="none"
-                    android:textColor="#FFFFFF"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/ProfessionView"
-                    app:layout_constraintTop_toBottomOf="@+id/ProfessionView" />
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:hint="@string/state"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    tools:ignore="MissingPrefix,TextFields" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/PersonalDetailBack"
-                    android:layout_width="wrap_content"
-                    android:layout_height="70dp"
-                    android:layout_marginStart="8dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                <EditText
+                    android:id="@+id/PincodeET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:hint="@string/pincode"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    tools:ignore="MissingPrefix,TextFields" />
 
-                    <ImageView
-                        android:id="@+id/imageView17"
-                        android:layout_width="10dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/back" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/upload_your_current_address_proof"
+                android:textColor="@color/colorPrimaryBlue"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/uploadImageOneIV"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="@dimen/spacing_medium2"
+                    android:src="@drawable/upload_image"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/uploadImageTwoIV"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="@dimen/spacing_medium2"
+                    android:src="@drawable/upload_image"
+                    tools:ignore="ContentDescription" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/updateBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="@dimen/spacing_20"
+                android:background="@drawable/loginbutton"
+                android:text="@string/update_text"
+                android:textAllCaps="false"
+                android:textColor="@color/color_white" />
         </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
+</androidx.core.widget.NestedScrollView>

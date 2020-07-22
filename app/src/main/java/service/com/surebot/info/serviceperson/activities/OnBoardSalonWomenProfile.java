@@ -77,7 +77,7 @@ public class OnBoardSalonWomenProfile extends AppCompatActivity {
     @BindView(R.id.uploadImageIV)
     ImageView guploadImageIV;
 
-    @BindView(R.id.profileGotbtn)
+    @BindView(R.id.updateBtn)
     Button gprofileGotbtn;
     FirebaseFirestore db;
     String TAG = "Testing HS";
