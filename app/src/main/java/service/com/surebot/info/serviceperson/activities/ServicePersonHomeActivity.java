@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.Window;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -33,22 +32,15 @@ import service.com.surebot.info.serviceperson.Manager.CacheManager;
 import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.utils.AppicationClass;
 
-public class ServicePersonHome_Activity extends AppCompatActivity {
-    // ConstraintLayout moree,payment,myService,Logout,helpCenter,ChangePass;
+public class ServicePersonHomeActivity extends AppCompatActivity {
     BottomNavigationView navigation;
-    ImageView closeMore;
-    // this will setup
     int status = 1;
     String check = null;
     Fragment fragment = null;
-    private Dialog progress;
-
-    private CacheManager mCacheManager;
 
     int back = 0;
 
     String HomeScreen_Flow;
-
     String gUserId_FromLogin, gUserName_FromLogin, gPremium_PartnerId, gCategoryId_FromLogin;
 
     @Override
@@ -62,7 +54,7 @@ public class ServicePersonHome_Activity extends AppCompatActivity {
 
         System.out.println("Service Person screen flow is " + HomeScreen_Flow);
 
-        SharedPreferences sp1 = ServicePersonHome_Activity.this.getSharedPreferences("User_Info", 0);
+        SharedPreferences sp1 = ServicePersonHomeActivity.this.getSharedPreferences("User_Info", 0);
         gUserId_FromLogin = sp1.getString("User_Id", null);
         gUserName_FromLogin = sp1.getString("User_Name", null);
         gPremium_PartnerId = sp1.getString("Premium_PartnerId", null);
@@ -74,52 +66,20 @@ public class ServicePersonHome_Activity extends AppCompatActivity {
         AppicationClass.setCategoryId_FromLogin(gCategoryId_FromLogin);
         HomeScreen_Flow = "fromlogin";
 
-//        if(HomeScreen_Flow.equals("fromlogin")){
-//
-//            System.out.println("In Homesceen entering into fromlogin");
-//            fragment = new MyTask_Fragment();
-//        }
-//
-//        if(HomeScreen_Flow.equals("frompaymentreceived")){
-//
-//            System.out.println("In Homesceen entering into fromlogin");
-//            fragment = new MyTask_Fragment();
-//        }
-//
-//
-//
-//        if(HomeScreen_Flow.equals("frombecomeprime")){
-//
-//            System.out.println("In Homesceen entering into frombecomeprime");
-//            fragment = new MyTask_Fragment();
-//        }
-//
-//        if(HomeScreen_Flow.equals("fromcreateprofile")){
-//            System.out.println("In Homesceen entering into fromcreateprofile");
-//            fragment = new Profile_Fragment();
-//        }
-//
-//        if(HomeScreen_Flow.equals("fromserviceadd")){
-//            System.out.println("In Homesceen entering into Service Add");
-//            fragment = new MyTask_Fragment();
-//        }
-
-
         check = getIntent().getStringExtra("status");
         if (check == "1") {
             navigation.setSelectedItemId(R.id.navigationProfile);
         }
 
-        mCacheManager = new CacheManager(ServicePersonHome_Activity.this);
+        CacheManager mCacheManager = new CacheManager(ServicePersonHomeActivity.this);
 
-        progress = new Dialog(this, android.R.style.Theme_Translucent);
+        Dialog progress = new Dialog(this, android.R.style.Theme_Translucent);
         progress.requestWindowFeature(Window.FEATURE_NO_TITLE);
         //here we set layout of progress dialog
         progress.setContentView(R.layout.progressbar_background);
         progress.setCancelable(true);
         navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        navigation.setItemIconTintList(null);
 
         fragment = new MyTaskFragment();
         loadFragment(fragment);
@@ -128,7 +88,7 @@ public class ServicePersonHome_Activity extends AppCompatActivity {
     }  //Oncreate close
 
     private void requestMultiplePermissions() {
-        Dexter.withActivity(ServicePersonHome_Activity.this)
+        Dexter.withActivity(ServicePersonHomeActivity.this)
                 .withPermissions(
                         Manifest.permission.CAMERA,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -141,7 +101,7 @@ public class ServicePersonHome_Activity extends AppCompatActivity {
 
                         // check for permanent denial of any permission
                         if (report.isAnyPermissionPermanentlyDenied()) {
-                            Toast.makeText(ServicePersonHome_Activity.this, "Request Denied By  User", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ServicePersonHomeActivity.this, "Request Denied By  User", Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -158,53 +118,30 @@ public class ServicePersonHome_Activity extends AppCompatActivity {
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigationTask:
-                    fragment = new MyTaskFragment();
-                    loadFragment(fragment);
-                    break;
-                case R.id.navigationProfile:
-                    fragment = new ProfileFragment();
-                    loadFragment(fragment);
-                    back = 0;
-                    break;
-                case R.id.navigationRequest:
-                    fragment = new RequestListFragment();
-                    loadFragment(fragment);
-                    back = 0;
-                    break;
-                case R.id.navigationMore:
-                    fragment = new MoreFragment();
-                    loadFragment(fragment);
-                    back = 0;
-                    break;
-            }
-                   /* closeMore.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            moree.setVisibility(View.GONE);
-                            switch (status){
-                                case 1: navigation.setSelectedItemId(R.id.navigationTask);
-                                    break;
-                                case 2: navigation.setSelectedItemId(R.id.navigationProfile);
-                                    break;
-                                case 3: navigation.setSelectedItemId(R.id.navigationRequest);
-                                    break;
-                            }
-                        }
-                    });
-                    back = 0;
-                    break;
-
-            }*/
-            return true;
-        }
-    };
-
+            = item -> {
+                switch (item.getItemId()) {
+                    case R.id.navigationTask:
+                        fragment = new MyTaskFragment();
+                        loadFragment(fragment);
+                        break;
+                    case R.id.navigationProfile:
+                        fragment = new ProfileFragment();
+                        loadFragment(fragment);
+                        back = 0;
+                        break;
+                    case R.id.navigationRequest:
+                        fragment = new RequestListFragment();
+                        loadFragment(fragment);
+                        back = 0;
+                        break;
+                    case R.id.navigationMore:
+                        fragment = new MoreFragment();
+                        loadFragment(fragment);
+                        back = 0;
+                        break;
+                }
+                return true;
+            };
 
     //For Switching Fragments
     private void loadFragment(Fragment fragment) {
@@ -213,7 +150,6 @@ public class ServicePersonHome_Activity extends AppCompatActivity {
         transaction.addToBackStack(null);
         transaction.commit();
     }
-
 
     @Override
     public void onBackPressed() {

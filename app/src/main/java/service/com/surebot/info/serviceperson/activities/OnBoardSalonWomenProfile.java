@@ -1,44 +1,23 @@
 package service.com.surebot.info.serviceperson.activities;
 
 import android.app.Dialog;
-import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
-import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import service.com.surebot.info.serviceperson.R;
-import service.com.surebot.info.serviceperson.utils.AppicationClass;
+import service.com.surebot.info.serviceperson.utils.Utils;
 
 public class OnBoardSalonWomenProfile extends AppCompatActivity {
     @BindView(R.id.fullNameET)
@@ -77,8 +56,11 @@ public class OnBoardSalonWomenProfile extends AppCompatActivity {
     @BindView(R.id.uploadImageIV)
     ImageView guploadImageIV;
 
+    @BindView(R.id.arrowBack)
+    ImageView arrowBack;
     @BindView(R.id.updateBtn)
-    Button gprofileGotbtn;
+    Button updateBtn;
+
     FirebaseFirestore db;
     String TAG = "Testing HS";
     static String addid = "";
@@ -89,12 +71,15 @@ public class OnBoardSalonWomenProfile extends AppCompatActivity {
     private final int PICK_IMAGE_REQUEST = 22;
 
     private Dialog progress;
+    private OnBoardSalonWomenProfile context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_on_boarding_salon_at_home_for_women);
         ButterKnife.bind(this);
+        context = OnBoardSalonWomenProfile.this;
+
         db = FirebaseFirestore.getInstance();
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
@@ -103,7 +88,18 @@ public class OnBoardSalonWomenProfile extends AppCompatActivity {
         //here we set layout of progress dialog
         progress.setContentView(R.layout.progressbar_background);
         progress.setCancelable(true);
-        getData();
+
+        arrowBack.setOnClickListener(v -> {
+            finish();
+        });
+
+        updateBtn.setOnClickListener(v -> {
+            Utils.startIntent(context, OnBoardIdentityVerificationActivity.class, false);
+        });
+
+       /* getData();
+
+
         guploadImageIV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -315,7 +311,7 @@ public class OnBoardSalonWomenProfile extends AppCompatActivity {
                             Log.w("Testing HS", "Error getting documents.", task.getException());
                         }
                     }
-                });
+                });*/
 
     }
 }

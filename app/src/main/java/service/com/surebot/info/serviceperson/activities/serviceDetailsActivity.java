@@ -98,7 +98,7 @@ public class serviceDetailsActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
 
-                        startActivity(new Intent(serviceDetailsActivity.this,ServicePersonHome_Activity.class).putExtra("HomeScreenFlow","frompaymentreceived"));
+                        startActivity(new Intent(serviceDetailsActivity.this, ServicePersonHomeActivity.class).putExtra("HomeScreenFlow","frompaymentreceived"));
                        // paymentsuccessfull_dialog.dismiss();
                         finish();
                     }

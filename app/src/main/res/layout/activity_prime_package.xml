@@ -141,6 +141,7 @@
             android:text="@string/prime_package_text_three"/>
 
         <Button
+            android:id="@+id/buypackageButton"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_below="@+id/primePackageTextThree"

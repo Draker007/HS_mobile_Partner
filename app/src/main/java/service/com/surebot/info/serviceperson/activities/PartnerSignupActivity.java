@@ -1,41 +1,28 @@
 package service.com.surebot.info.serviceperson.activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Dialog;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.functions.FirebaseFunctions;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import service.com.surebot.info.serviceperson.R;
-import service.com.surebot.info.serviceperson.utils.AppicationClass;
+import service.com.surebot.info.serviceperson.utils.Utils;
 
 public class PartnerSignupActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
-    String email , password;
+    String email, password;
 
     private Dialog progress;
 
@@ -62,17 +49,22 @@ public class PartnerSignupActivity extends AppCompatActivity {
 
     @BindView(R.id.confirmPasswordET)
     EditText gconfirmPasswordET;
+    @BindView(R.id.arrowBack)
+    ImageView arrowBack;
 
     @BindView(R.id.signupButton)
     Button gsignupButton;
     private FirebaseFunctions mFunctions;
     FirebaseFirestore db;
-    FirebaseUser user ;
+    FirebaseUser user;
+    private PartnerSignupActivity context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_partner_signup);
         ButterKnife.bind(this);
+        context = PartnerSignupActivity.this;
         progress = new Dialog(this, android.R.style.Theme_Translucent);
         progress.requestWindowFeature(Window.FEATURE_NO_TITLE);
         //here we set layout of progress dialog
@@ -80,10 +72,19 @@ public class PartnerSignupActivity extends AppCompatActivity {
         progress.setCancelable(true);
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
-       db = FirebaseFirestore.getInstance();
+        db = FirebaseFirestore.getInstance();
         mFunctions = FirebaseFunctions.getInstance();
 
-        gsignupButton.setOnClickListener(new View.OnClickListener() {
+        gsignupButton.setOnClickListener(v -> Utils.startIntent(context, OnBoardSalonWomenProfile.class,
+                true));
+
+        arrowBack.setOnClickListener(v -> {
+            finish();
+        });
+
+    }
+
+/*        gsignupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 callSignUp();
@@ -157,5 +158,5 @@ progress.dismiss();
                 });
 
 
-    }
+    }*/
 }

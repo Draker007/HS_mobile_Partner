@@ -237,5 +237,11 @@
     <string name="hair_styling_text">Certificate of Hairstyling from Ayra Institute</string>
     <string name="award_text">AWARD</string>
     <string name="request_text">Request</string>
+    <string name="home_text">Home</string>
+    <string name="forgot_password_text">Forgot Password</string>
+    <string name="enter_registered_email_text">Enter your registered Email-ID or Phone number to continue..</string>
+    <string name="send_otp">Send OTP</string>
+    <string name="otp_text">Enter OTP which have sent to your phone number or Email-ID</string>
+    <string name="resend_otp">Resend OTP</string>
 
 </resources>

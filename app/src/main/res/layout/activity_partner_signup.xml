@@ -210,7 +210,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <ImageView
-            android:id="@+id/checkBoxIV"
+            android:id="@+id/checkBoxUncheckedIV"
             android:layout_width="50dp"
             android:layout_height="40dp"
             android:layout_below="@+id/confirmPasswordTL"
@@ -224,7 +224,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/confirmPasswordTL"
             android:layout_marginStart="5dp"
-            android:layout_toEndOf="@+id/checkBoxIV"
+            android:layout_toEndOf="@+id/checkBoxUncheckedIV"
             android:fontFamily="@font/open_sans"
             android:text="@string/terms_text"
             android:textSize="12sp" />

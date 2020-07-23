@@ -1400,7 +1400,7 @@ else{
                             AppicationClass.addserviceammount.clear();
                             AppicationClass.addservicemapingid.clear();
                             AppicationClass.multipleaddservicemapingid.clear();
-                            startActivity(new Intent(ServicesAdd_Activity.this, ServicePersonHome_Activity.class).putExtra("HomeScreenFlow", "fromserviceadd"));
+                            startActivity(new Intent(ServicesAdd_Activity.this, ServicePersonHomeActivity.class).putExtra("HomeScreenFlow", "fromserviceadd"));
                             finish();
                         } else {
                             subService_List(gServiceId_FromService);

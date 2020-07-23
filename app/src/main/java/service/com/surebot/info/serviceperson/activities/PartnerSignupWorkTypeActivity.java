@@ -32,7 +32,7 @@ public class PartnerSignupWorkTypeActivity extends AppCompatActivity {
 
         workDoneTitle.add("Salon at home for Women");
         workDoneTitle.add("Salon at home for Men");
-        workDoneTitle.add("Electrican");
+        workDoneTitle.add("Electrician");
         workDoneTitle.add("Plumber");
         workDoneTitle.add("Carpenter");
         workDoneTitle.add("Cleaning");

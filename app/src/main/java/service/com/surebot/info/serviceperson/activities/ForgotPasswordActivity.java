@@ -25,26 +25,34 @@ import service.com.surebot.info.serviceperson.Constants.Constants;
 import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.RequestClass.Send_otp_mail_Request;
 import service.com.surebot.info.serviceperson.ResponseClass.Send_otp_mail_Response;
+import service.com.surebot.info.serviceperson.utils.Utils;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
 
-    @BindView(R.id.EmailORNumber)
+    @BindView(R.id.emailET)
     EditText gEmailORNumber;
 
-    @BindView(R.id.sendotp)
-    Button gSendOTPbtn;
+    @BindView(R.id.sendOtpBtn)
+    Button sendOtpBtn;
         Dialog progress;
+    private ForgotPasswordActivity context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
         ButterKnife.bind(this);
+        context = ForgotPasswordActivity.this;
         progress = new Dialog(this, android.R.style.Theme_Translucent);
         progress.requestWindowFeature(Window.FEATURE_NO_TITLE);
         //here we set layout of progress dialog
-        progress.setContentView(R.layout.progressbar_background);
+
+        sendOtpBtn.setOnClickListener(v -> {
+            Utils.startIntent(context, SetNewPasswordActivity.class, true);
+        });
+       /* progress.setContentView(R.layout.progressbar_background);
         progress.setCancelable(true);
-        gSendOTPbtn.setOnClickListener(new View.OnClickListener() {
+        sendOtpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(gEmailORNumber.getText().toString().isEmpty()){
@@ -127,6 +135,6 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             startActivity(intent);
             progress.dismiss();
 
-        }
+        }*/
     }
 }

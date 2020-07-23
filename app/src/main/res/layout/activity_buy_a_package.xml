@@ -34,6 +34,18 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
+                    <ImageView
+                        android:id="@+id/arrowBack"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginTop="@dimen/spacing_double2"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:tint="@color/color_white"
+                        android:src="@drawable/arrow_back"
+                        tools:ignore="ContentDescription" />
+
                     <TextView
                         android:id="@+id/textView142"
                         android:layout_width="wrap_content"
@@ -139,7 +151,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView148" />
 
                 <Button
-                    android:id="@+id/button9"
+                    android:id="@+id/buyAPackageBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
@@ -159,9 +171,9 @@
                     android:layout_marginTop="8dp"
                     android:text="Skip"
                     android:textColor="#E25905"
-                    app:layout_constraintEnd_toEndOf="@+id/button9"
-                    app:layout_constraintStart_toStartOf="@+id/button9"
-                    app:layout_constraintTop_toBottomOf="@+id/button9" />
+                    app:layout_constraintEnd_toEndOf="@+id/buyAPackageBtn"
+                    app:layout_constraintStart_toStartOf="@+id/buyAPackageBtn"
+                    app:layout_constraintTop_toBottomOf="@+id/buyAPackageBtn" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

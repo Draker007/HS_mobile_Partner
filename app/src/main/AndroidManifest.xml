@@ -29,7 +29,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
         tools:ignore="AllowBackup">
-        <activity android:name=".activities.PrimePackageActivity"></activity>
+        <activity android:name=".activities.LoginChangePasswordActivity"></activity>
+        <activity android:name=".activities.PrimePackageActivity" />
         <activity android:name=".activities.FAQQuesAndAnsActivity" />
         <activity android:name=".activities.HelpCenterActivity" />
         <activity
@@ -46,10 +47,10 @@
             android:name=".activities.SendQuoteActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".activities.SplashActivity"
+            android:name=".activities.ServicePersonHomeActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".activities.ServicePersonHome_Activity"
+            android:name=".activities.SplashActivity"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -118,6 +119,7 @@
         <activity android:name=".activities.FAQActivity" />
         <activity android:name=".activities.PersonalDetailsActivity" />
         <activity android:name=".activities.IdentityVerificationActivity" />
+        <activity android:name=".activities.ForgotPasswordActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

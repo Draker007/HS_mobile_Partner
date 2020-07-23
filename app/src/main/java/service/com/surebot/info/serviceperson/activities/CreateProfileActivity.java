@@ -57,7 +57,7 @@ public class CreateProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
              startActivity(new Intent(CreateProfileActivity.this, ServicesAdd_Activity.class));
 
-                Intent userHomeIntent = new Intent(getApplicationContext(), ServicePersonHome_Activity.class);
+                Intent userHomeIntent = new Intent(getApplicationContext(), ServicePersonHomeActivity.class);
                 userHomeIntent.putExtra("HomeScreenFlow","fromcreateprofile");
                 startActivity(userHomeIntent);
                 finish();

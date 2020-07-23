@@ -14,6 +14,7 @@
     <color name="colorWorkTypeBg">#EEEEEE</color>
     <color name="colorPrimaryGray">#C2C2C2</color>
     <color name="colorSecondaryGray">#DCDCDC</color>
+    <color name="menuSelectedColor">#6A6A6A</color>
     <color name="colorTermsBg">#ECECEC</color>
     <color name="helpCenterColor">#F8F8F8</color>
     <color name="colorTabLayoutGray">#EFEFEF</color>

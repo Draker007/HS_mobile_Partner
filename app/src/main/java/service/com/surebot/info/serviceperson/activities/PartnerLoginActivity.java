@@ -1,35 +1,24 @@
 package service.com.surebot.info.serviceperson.activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import service.com.surebot.info.serviceperson.R;
-import service.com.surebot.info.serviceperson.utils.AppicationClass;
-
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import service.com.surebot.info.serviceperson.R;
+import service.com.surebot.info.serviceperson.utils.Utils;
 
 public class PartnerLoginActivity extends AppCompatActivity {
-
 
     @BindView(R.id.loginEmailET)
     EditText gloginEmailET;
@@ -39,17 +28,22 @@ public class PartnerLoginActivity extends AppCompatActivity {
 
     @BindView(R.id.newUserTV)
     TextView gnewUserTV;
+    @BindView(R.id.forgotPasswordTV)
+    TextView forgotPasswordTV;
 
     @BindView(R.id.loginButton)
     Button gloginButton;
     private FirebaseAuth mAuth;
     FirebaseUser user;
     private Dialog progress;
+    private PartnerLoginActivity context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_partner_login);
         ButterKnife.bind(this);
+        context = PartnerLoginActivity.this;
         progress = new Dialog(this, android.R.style.Theme_Translucent);
         progress.requestWindowFeature(Window.FEATURE_NO_TITLE);
         //here we set layout of progress dialog
@@ -58,17 +52,16 @@ public class PartnerLoginActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        gnewUserTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(PartnerLoginActivity.this,PartnerSignupActivity.class));
-            }
-        });
+        gnewUserTV.setOnClickListener(v -> startActivity(new Intent(context, PartnerSignupWorkTypeActivity.class)));
 
-        gloginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(!gloginEmailET.getText().toString().trim().equals("") && !gloginPasswordET.getText().toString().trim().equals("")){
+        forgotPasswordTV.setOnClickListener(v -> {
+            Utils.startIntent(context, ForgotPasswordActivity.class, true);
+        });
+/*
+        gloginButton.setOnClickListener(v -> {
+
+                }
+            if (!gloginEmailET.getText().toString().trim().equals("") && !gloginPasswordET.getText().toString().trim().equals("")) {
                 progress.show();
                 mAuth.signInWithEmailAndPassword(gloginEmailET.getText().toString().trim(), gloginPasswordET.getText().toString().trim())
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -77,11 +70,11 @@ public class PartnerLoginActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     // Sign in success, update UI with the signed-in user's information
 
-                                     user = mAuth.getCurrentUser();
+                                    user = mAuth.getCurrentUser();
                                     callforDetails();
                                     Log.d("Testing HS---", String.valueOf(user));
 
-                                  // startActivity(new Intent(PartnerLoginActivity.this,ServicePersonHome_Activity.class));
+                                    // startActivity(new Intent(PartnerLoginActivity.this,ServicePersonHome_Activity.class));
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     Log.w("Testing HS", "signInWithEmail:failure", task.getException());
@@ -91,17 +84,16 @@ public class PartnerLoginActivity extends AppCompatActivity {
                                 }
                             }
                         });
-            }else{
-                    Toast.makeText(PartnerLoginActivity.this, "Please Fill the required field", Toast.LENGTH_SHORT).show();
-                }
+            } else {
+                Toast.makeText(PartnerLoginActivity.this, "Please Fill the required field", Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
 
     }
 
-    private void callforDetails() {
+   /* private void callforDetails() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("partner").whereEqualTo("UserID",user.getUid())
+        db.collection("partner").whereEqualTo("UserID", user.getUid())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -113,16 +105,17 @@ public class PartnerLoginActivity extends AppCompatActivity {
                                 AppicationClass.UserName_FromLogin = (String) document.getData().get("Partner_Name");
                                 AppicationClass.UserTableID = document.getId();
                                 AppicationClass.CategoryId_FromLogin = (String) document.getData().get("Partner_Parent_Category");
-                                startActivity(new Intent(PartnerLoginActivity.this,OnBoardSalonWomenProfile.class));
+                                startActivity(new Intent(PartnerLoginActivity.this, OnBoardSalonWomenProfile.class));
                                 progress.dismiss();
                             }
-                        } else { progress.dismiss();
+                        } else {
+                            progress.dismiss();
                             Log.w("Testing HS", "Error getting documents.", task.getException());
                         }
 
-                    }   });
-}
-
+                    }
+                });
+    }*/
 
 
 }

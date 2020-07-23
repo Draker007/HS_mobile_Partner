@@ -25,6 +25,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
+                <ImageView
+                    android:id="@+id/arrowBack"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="@dimen/spacing_double2"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:tint="@color/color_white"
+                    android:src="@drawable/arrow_back"
+                    tools:ignore="ContentDescription" />
+
                 <TextView
                     android:id="@+id/textView154"
                     android:layout_width="wrap_content"

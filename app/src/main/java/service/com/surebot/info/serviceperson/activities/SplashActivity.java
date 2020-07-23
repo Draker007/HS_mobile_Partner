@@ -26,13 +26,13 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(() -> {
 
             if (!mCacheManager.isFirstTimeLaunch()) {
-                Intent userHomeIntent = new Intent(getApplicationContext(), ServicePersonHome_Activity.class);
+                Intent userHomeIntent = new Intent(getApplicationContext(), ServicePersonHomeActivity.class);
                 // Intent userHomeIntent = new Intent(getApplicationContext(),CreateProfileActivity.class);
                 userHomeIntent.putExtra("HomeScreenFlow", "fromlogin");
                 startActivity(userHomeIntent);
                 finish();
             } else {
-                Intent loginIntent = new Intent(getApplicationContext(), PreLoginActivity.class);
+                Intent loginIntent = new Intent(getApplicationContext(), PartnerLoginActivity.class);
                 startActivity(loginIntent);
                 finish();
             }

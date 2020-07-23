@@ -27,7 +27,7 @@ public class PrimePartnerActivity extends AppCompatActivity {
         buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(PrimePartnerActivity.this, ServicePersonHome_Activity.class).putExtra("HomeScreenFlow","frombecomeprime"));
+                startActivity(new Intent(PrimePartnerActivity.this, ServicePersonHomeActivity.class).putExtra("HomeScreenFlow","frombecomeprime"));
                 finish();
             }
         });
