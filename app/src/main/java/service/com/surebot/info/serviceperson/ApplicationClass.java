@@ -1,8 +1,10 @@
-package service.com.surebot.info.serviceperson.utils;
+package service.com.surebot.info.serviceperson;
 
 import java.util.ArrayList;
 
-public class AppicationClass {
+import service.com.surebot.info.serviceperson.utils.SendquotetoUser_New;
+
+public class ApplicationClass {
 
     public static String UserId_FromLogin="pBmfARqTEHNoZYZnWurQdFEbRND2";
     public static String UserName_FromLogin="1";
@@ -30,6 +32,7 @@ public class AppicationClass {
 
 
     public static ArrayList<String> multipleaddservicemapingid =new ArrayList<>();
+    private static int categorySelection;
 
 
     public static String getCategoryId_FromLogin() {
@@ -45,7 +48,7 @@ public class AppicationClass {
     }
 
     public static void setTest1(ArrayList<String> test1) {
-        AppicationClass.test1 = test1;
+        ApplicationClass.test1 = test1;
     }
 
     public static ArrayList<String> getTest2() {
@@ -53,7 +56,7 @@ public class AppicationClass {
     }
 
     public static void setTest2(ArrayList<String> test2) {
-        AppicationClass.test2 = test2;
+        ApplicationClass.test2 = test2;
     }
 
     public static ArrayList<String> getNewrequestservicesammount() {
@@ -61,7 +64,7 @@ public class AppicationClass {
     }
 
     public static void setNewrequestservicesammount(ArrayList<String> newrequestservicesammount) {
-        AppicationClass.newrequestservicesammount = newrequestservicesammount;
+        ApplicationClass.newrequestservicesammount = newrequestservicesammount;
     }
 
     public static ArrayList<String> getNewrequestservicesid() {
@@ -69,7 +72,7 @@ public class AppicationClass {
     }
 
     public static void setNewrequestservicesid(ArrayList<String> newrequestservicesid) {
-        AppicationClass.newrequestservicesid = newrequestservicesid;
+        ApplicationClass.newrequestservicesid = newrequestservicesid;
     }
 
     public static ArrayList<String> getAddservicemapingid() {
@@ -77,7 +80,7 @@ public class AppicationClass {
     }
 
     public static void setAddservicemapingid(ArrayList<String> addservicemapingid) {
-        AppicationClass.addservicemapingid = addservicemapingid;
+        ApplicationClass.addservicemapingid = addservicemapingid;
     }
 
     public static ArrayList<String> getAddserviceammount() {
@@ -85,7 +88,7 @@ public class AppicationClass {
     }
 
     public static void setAddserviceammount(ArrayList<String> addserviceammount) {
-        AppicationClass.addserviceammount = addserviceammount;
+        ApplicationClass.addserviceammount = addserviceammount;
     }
 
 
@@ -94,7 +97,7 @@ public class AppicationClass {
     }
 
     public static void setAddnewserviceammount(ArrayList<String> addnewserviceammount) {
-        AppicationClass.addnewserviceammount = addnewserviceammount;
+        ApplicationClass.addnewserviceammount = addnewserviceammount;
     }
 
     public static String Premium_PartenerId;
@@ -142,7 +145,7 @@ public class AppicationClass {
     }
 
     public static void setAddAwardsDetails(ArrayList<String> addAwardsDetails) {
-        AppicationClass.addAwardsDetails = addAwardsDetails;
+        ApplicationClass.addAwardsDetails = addAwardsDetails;
     }
 
     public static ArrayList<String> getGetAwardsDetails() {
@@ -150,7 +153,7 @@ public class AppicationClass {
     }
 
     public static void setGetAwardsDetails(ArrayList<String> getAwardsDetails) {
-        AppicationClass.getAwardsDetails = getAwardsDetails;
+        ApplicationClass.getAwardsDetails = getAwardsDetails;
     }
 
     public static ArrayList<String> getAddlocationservicecities() {
@@ -158,7 +161,7 @@ public class AppicationClass {
     }
 
     public static void setAddlocationservicecities(ArrayList<String> addlocationservicecities) {
-        AppicationClass.addlocationservicecities = addlocationservicecities;
+        ApplicationClass.addlocationservicecities = addlocationservicecities;
     }
 
     public static ArrayList<String> getAddlocationservicestates() {
@@ -166,7 +169,7 @@ public class AppicationClass {
     }
 
     public static void setAddlocationservicestates(ArrayList<String> addlocationservicestates) {
-        AppicationClass.addlocationservicestates = addlocationservicestates;
+        ApplicationClass.addlocationservicestates = addlocationservicestates;
     }
 
     public static String getUserType_FromCountryList() {
@@ -182,6 +185,14 @@ public class AppicationClass {
     }
 
     public static void setMultipleaddservicemapingid(ArrayList<String> multipleaddservicemapingid) {
-        AppicationClass.multipleaddservicemapingid = multipleaddservicemapingid;
+        ApplicationClass.multipleaddservicemapingid = multipleaddservicemapingid;
+    }
+
+    public static void setCategorySelection(int categorySelection) {
+        ApplicationClass.categorySelection = categorySelection;
+    }
+
+    public static int getCategorySelection() {
+        return categorySelection;
     }
 }

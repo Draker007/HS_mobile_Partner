@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import androidx.appcompat.app.AppCompatActivity;
+
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -20,7 +20,7 @@ import butterknife.ButterKnife;
 import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.utils.Utils;
 
-public class PartnerSignupActivity extends AppCompatActivity {
+public class PartnerSignupActivity extends BaseActivity {
     private FirebaseAuth mAuth;
     String email, password;
 
@@ -75,7 +75,7 @@ public class PartnerSignupActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         mFunctions = FirebaseFunctions.getInstance();
 
-        gsignupButton.setOnClickListener(v -> Utils.startIntent(context, OnBoardSalonWomenProfile.class,
+        gsignupButton.setOnClickListener(v -> Utils.startIntent(context, PartnerSignupWorkTypeActivity.class,
                 true));
 
         arrowBack.setOnClickListener(v -> {

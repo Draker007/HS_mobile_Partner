@@ -17,12 +17,12 @@ import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.ResponseClass.UpcomingRequestList_Response;
 
 
-public class UpcomingRequest_Adapter extends RecyclerView.Adapter<UpcomingRequest_Adapter.MyViewHolder> {
+public class UpcomingRequestAdapter extends RecyclerView.Adapter<UpcomingRequestAdapter.MyViewHolder> {
 
     Context context;
     ArrayList<UpcomingRequestList_Response.UpcomingRequestList_Records> gUpcomingRequestList_Arraylist;
 String gTimeForUI;
-    public UpcomingRequest_Adapter(Context context ) {
+    public UpcomingRequestAdapter(Context context ) {
         this.context=context;
         this.gUpcomingRequestList_Arraylist=gUpcomingRequestList_Arraylist;
     }
@@ -31,7 +31,7 @@ String gTimeForUI;
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.upcomingrequestadapter_list, viewGroup, false);
-        return new UpcomingRequest_Adapter.MyViewHolder(view);
+        return new UpcomingRequestAdapter.MyViewHolder(view);
         // return null;
     }
 

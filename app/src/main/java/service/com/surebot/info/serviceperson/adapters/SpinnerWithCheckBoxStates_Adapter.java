@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import service.com.surebot.info.serviceperson.R;
-import service.com.surebot.info.serviceperson.utils.AppicationClass;
+import service.com.surebot.info.serviceperson.ApplicationClass;
 import service.com.surebot.info.serviceperson.utils.spinnerData;
 
 
@@ -84,8 +84,8 @@ public class SpinnerWithCheckBoxStates_Adapter extends ArrayAdapter<spinnerData>
 
 if(listState.get(position).getState_status().equals("1")){
     holder.mCheckBox.setChecked(true);
-    if(!AppicationClass.addlocationservicestates.contains(listState.get(position).getStateId())) {
-        AppicationClass.addlocationservicestates.add(listState.get(position).getStateId());
+    if(!ApplicationClass.addlocationservicestates.contains(listState.get(position).getStateId())) {
+        ApplicationClass.addlocationservicestates.add(listState.get(position).getStateId());
     }
     System.out.println("In State adapter State status size is " +listState.get(position).getStateId()+" "+position);
 }
@@ -101,15 +101,15 @@ if(listState.get(position).getState_status().equals("1")){
                     System.out.println("Checked States from States List " + String.valueOf(position));
 
                     listState.get(position).setState_status("1");
-                    AppicationClass.addlocationservicestates.add(listState.get(position).getStateId());
+                    ApplicationClass.addlocationservicestates.add(listState.get(position).getStateId());
 
-                    System.out.println("In Cities Adapter Checked Items addedd " +   AppicationClass.addlocationservicestates.size());
+                    System.out.println("In Cities Adapter Checked Items addedd " +   ApplicationClass.addlocationservicestates.size());
 
                 }else{
                     listState.get(position).setState_status("");
-                    System.out.println("In Cities Adapter Checked Items removed " +   AppicationClass.addlocationservicestates.size());
+                    System.out.println("In Cities Adapter Checked Items removed " +   ApplicationClass.addlocationservicestates.size());
                     checkedItem.remove(listState.get(position).getStateId());
-                    AppicationClass.addlocationservicestates.remove(listState.get(position).getStateId());
+                    ApplicationClass.addlocationservicestates.remove(listState.get(position).getStateId());
                 }
             }
         });

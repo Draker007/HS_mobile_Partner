@@ -17,7 +17,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.appcompat.widget.AppCompatButton;
 
 import java.util.ArrayList;
@@ -41,10 +41,10 @@ import service.com.surebot.info.serviceperson.RequestClass.Category_List_Request
 import service.com.surebot.info.serviceperson.RequestClass.PartnerSigup_Request;
 import service.com.surebot.info.serviceperson.ResponseClass.Category_List_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.PartnerSignup_Response;
-import service.com.surebot.info.serviceperson.utils.AppicationClass;
+import service.com.surebot.info.serviceperson.ApplicationClass;
 import service.com.surebot.info.serviceperson.utils.NetworkUtil;
 
-public class SignUp_Activity extends AppCompatActivity {
+public class SignUp_Activity extends BaseActivity {
 
     @BindView(R.id.username_text)
     EditText gUserName_Text;
@@ -265,10 +265,10 @@ public class SignUp_Activity extends AppCompatActivity {
                         PartnerSignup_Response partnerUserDetails = response.body();
                         if (partnerUserDetails.getRegister_response().equals("valid")) {
                             if (partnerUserDetails.getUser_Role().equals("2")) {
-                                AppicationClass.setUserId_FromLogin(partnerUserDetails.getUser_ID());
-                                AppicationClass.setUserName_FromLogin(partnerUserDetails.getUser_Name());
-                                AppicationClass.setPremium_PartenerId(partnerUserDetails.getUser_Premium());
-                                AppicationClass.setCategoryId_FromLogin(partnerUserDetails.getCategory_ID());
+                                ApplicationClass.setUserId_FromLogin(partnerUserDetails.getUser_ID());
+                                ApplicationClass.setUserName_FromLogin(partnerUserDetails.getUser_Name());
+                                ApplicationClass.setPremium_PartenerId(partnerUserDetails.getUser_Premium());
+                                ApplicationClass.setCategoryId_FromLogin(partnerUserDetails.getCategory_ID());
 
                                 editer.putString("User_Id", partnerUserDetails.getUser_ID());
                                 editer.putString("User_Name", partnerUserDetails.getUser_Name());

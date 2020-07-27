@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.cardview.widget.CardView;
 
 import butterknife.BindView;
@@ -12,7 +12,7 @@ import butterknife.ButterKnife;
 import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.utils.Utils;
 
-public class HelpCenterActivity extends AppCompatActivity implements View.OnClickListener {
+public class HelpCenterActivity extends BaseActivity implements View.OnClickListener {
 
     @BindView(R.id.arrowIV)
     ImageView arrowIV;

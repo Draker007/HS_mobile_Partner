@@ -1,6 +1,6 @@
 package service.com.surebot.info.serviceperson.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
+
 
 import android.os.Bundle;
 import android.widget.Button;
@@ -10,7 +10,7 @@ import butterknife.ButterKnife;
 import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.utils.Utils;
 
-public class PreLoginActivity extends AppCompatActivity {
+public class PreLoginActivity extends BaseActivity {
 
     @BindView(R.id.signinButton)
     Button signinButton;

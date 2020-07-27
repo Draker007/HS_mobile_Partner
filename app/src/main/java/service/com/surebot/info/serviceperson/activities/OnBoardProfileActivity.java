@@ -1,65 +1,78 @@
 package service.com.surebot.info.serviceperson.activities;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import service.com.surebot.info.serviceperson.ApplicationClass;
 import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.utils.Utils;
 
-public class OnBoardSalonWomenProfile extends AppCompatActivity {
+public class OnBoardProfileActivity extends BaseActivity implements View.OnClickListener {
+
     @BindView(R.id.fullNameET)
-    EditText gfullNameET;
-
+    EditText fullNameET;
     @BindView(R.id.mobileNumberET)
-    EditText gmobileNumberET;
-
+    EditText mobileNumberET;
     @BindView(R.id.emailET)
-    EditText gemailET;
-
+    EditText emailET;
     @BindView(R.id.dateOfBirthET)
-    EditText gdateOfBirthET;
-
+    EditText dateOfBirthET;
     @BindView(R.id.nameET)
-    EditText gnameET;
-
+    EditText nameET;
     @BindView(R.id.houseFlatNoET)
-    EditText ghouseFlatNoET;
-
+    EditText houseFlatNoET;
     @BindView(R.id.streetET)
-    EditText gstreetET;
-
+    EditText streetET;
     @BindView(R.id.areaET)
-    EditText gareaET;
-
+    EditText areaET;
     @BindView(R.id.cityET)
-    EditText gcityET;
-
+    EditText cityET;
     @BindView(R.id.stateET)
-    EditText gstateET;
-
-    @BindView(R.id.PincodeET)
-    EditText gPincodeET;
-
+    EditText stateET;
+    @BindView(R.id.pincodeET)
+    EditText pincodeET;
     @BindView(R.id.uploadImageIV)
-    ImageView guploadImageIV;
-
+    ImageView uploadImageIV;
     @BindView(R.id.arrowBack)
     ImageView arrowBack;
     @BindView(R.id.updateBtn)
     Button updateBtn;
+    @BindView(R.id.headerProfileCL)
+    ConstraintLayout headerProfileCL;
+    @BindView(R.id.headerProfileFadeCL)
+    ConstraintLayout headerProfileFadeCL;
+    @BindView(R.id.nameTL)
+    TextInputLayout nameTL;
+    @BindView(R.id.mobileNumberTL)
+    TextInputLayout mobileNumberTL;
+    @BindView(R.id.emailTL)
+    TextInputLayout emailTL;
+    @BindView(R.id.dateOfBirthTL)
+    TextInputLayout dateOfBirthTL;
+    @BindView(R.id.currentAddressTV)
+    TextView currentAddressTV;
+    @BindView(R.id.femaleGenderIV)
+    ImageView femaleGenderIV;
+    @BindView(R.id.uploadCurrentAddressTV)
+    TextView uploadCurrentAddressTV;
 
     FirebaseFirestore db;
     String TAG = "Testing HS";
@@ -71,14 +84,15 @@ public class OnBoardSalonWomenProfile extends AppCompatActivity {
     private final int PICK_IMAGE_REQUEST = 22;
 
     private Dialog progress;
-    private OnBoardSalonWomenProfile context;
+    private OnBoardProfileActivity context;
 
+    @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_on_boarding_salon_at_home_for_women);
+        setContentView(R.layout.activity_on_board_profile);
         ButterKnife.bind(this);
-        context = OnBoardSalonWomenProfile.this;
+        context = OnBoardProfileActivity.this;
 
         db = FirebaseFirestore.getInstance();
         storage = FirebaseStorage.getInstance();
@@ -89,18 +103,38 @@ public class OnBoardSalonWomenProfile extends AppCompatActivity {
         progress.setContentView(R.layout.progressbar_background);
         progress.setCancelable(true);
 
-        arrowBack.setOnClickListener(v -> {
-            finish();
-        });
+        //getData();
 
-        updateBtn.setOnClickListener(v -> {
-            Utils.startIntent(context, OnBoardIdentityVerificationActivity.class, false);
-        });
+        arrowBack.setOnClickListener(this);
+        updateBtn.setOnClickListener(this);
 
-       /* getData();
+        int categorySelection = ApplicationClass.getCategorySelection();
+        int headerProfile = R.drawable.salon_onboard_women;
+        int headerProfileFade = R.mipmap.saloonfade;
 
+        switch (categorySelection) {
+            case 1: {
+                headerProfile = R.drawable.salon_onboard_women;
+                headerProfileFade = R.mipmap.saloonfade;
+            }
+            break;
+            case 2: {
+                headerProfile = R.drawable.salon_onboard_men;
+                headerProfileFade = R.mipmap.saloonfade;
+            }
+            break;
+            case 3: {
+                headerProfile = R.drawable.onboard_electrician;
+                headerProfileFade = R.mipmap.electrician_fade;
+                femaleGenderIV.setColorFilter(context.getResources().getColor(R.color.colorElectricianText));
+            }
+            break;
+        }
 
-        guploadImageIV.setOnClickListener(new View.OnClickListener() {
+        headerProfileCL.setBackground(ContextCompat.getDrawable(context, headerProfile));
+        headerProfileFadeCL.setBackground(ContextCompat.getDrawable(context, headerProfileFade));
+
+     /*   uploadImageIV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                Intent chooseImageIntent = ImagePicker.getPickImageIntent(OnBoardSalonWomenProfile.this);
@@ -109,19 +143,19 @@ public class OnBoardSalonWomenProfile extends AppCompatActivity {
                 SelectImage();
             }
         });
-        gprofileGotbtn.setOnClickListener(new View.OnClickListener() {
+        updateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (!gareaET.getText().toString().trim().equals("") && !gcityET.getText().toString().trim().equals("") && !gdateOfBirthET.getText().toString().trim().equals("")
-                        && !gfullNameET.getText().toString().trim().equals("") && !ghouseFlatNoET.getText().toString().trim().equals("") && !gnameET.getText().toString().trim().equals("")
-                        && !gmobileNumberET.getText().toString().trim().equals("") && !gstateET.getText().toString().trim().equals("")) {
+                if (!areaET.getText().toString().trim().equals("") && !cityET.getText().toString().trim().equals("") && !dateOfBirthET.getText().toString().trim().equals("")
+                        && !fullNameET.getText().toString().trim().equals("") && !houseFlatNoET.getText().toString().trim().equals("") && !nameET.getText().toString().trim().equals("")
+                        && !mobileNumberET.getText().toString().trim().equals("") && !stateET.getText().toString().trim().equals("")) {
 // Create a new user with a first, middle, and last name
                     progress.show();
                     uploadImage();
 
                 } else {
-                    Toast.makeText(OnBoardSalonWomenProfile.this, "Please fill all details before Continuing", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Please fill all details before Continuing", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -146,7 +180,6 @@ public class OnBoardSalonWomenProfile extends AppCompatActivity {
             ref.putFile(filePath)
                     .addOnSuccessListener(
                             new OnSuccessListener<UploadTask.TaskSnapshot>() {
-
                                 @Override
                                 public void onSuccess(
                                         UploadTask.TaskSnapshot taskSnapshot) {
@@ -157,14 +190,14 @@ public class OnBoardSalonWomenProfile extends AppCompatActivity {
                                             Map<String, Object> addressID = new HashMap<>();
 
                                             Map<String, Object> address = new HashMap<>();
-                                            address.put("Address_Name", gnameET.getText().toString().trim());
-                                            address.put("Area", gareaET.getText().toString().trim());
-                                            address.put("City", gcityET.getText().toString().trim());
-                                            address.put("House_No", ghouseFlatNoET.getText().toString().trim());
-                                            address.put("Pincode", gPincodeET.getText().toString().trim());
-                                            address.put("State", gstateET.getText().toString().trim());
-                                            address.put("Street", gstreetET.getText().toString().trim());
-                                            address.put("PartnerDocID", AppicationClass.UserTableID);
+                                            address.put("Address_Name", nameET.getText().toString().trim());
+                                            address.put("Area", areaET.getText().toString().trim());
+                                            address.put("City", cityET.getText().toString().trim());
+                                            address.put("House_No", houseFlatNoET.getText().toString().trim());
+                                            address.put("Pincode", pincodeET.getText().toString().trim());
+                                            address.put("State", stateET.getText().toString().trim());
+                                            address.put("Street", streetET.getText().toString().trim());
+                                            address.put("PartnerDocID", ApplicationClass.UserTableID);
                                             address.put("AddressProof", uri.toString());
 
 // Add a new document with a generated ID
@@ -173,20 +206,20 @@ public class OnBoardSalonWomenProfile extends AppCompatActivity {
                                                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                                         @Override
                                                         public void onSuccess(DocumentReference documentReference) {
-                                                            Log.d("Testing HS", "DocumentSnapshot added with ID::: " + AppicationClass.UserTableID);
-                                                            Toast.makeText(OnBoardSalonWomenProfile.this, "Address Sent For Approval", Toast.LENGTH_SHORT).show();
+                                                            Log.d("Testing HS", "DocumentSnapshot added with ID::: " + ApplicationClass.UserTableID);
+                                                            Toast.makeText(context, "Address Sent For Approval", Toast.LENGTH_SHORT).show();
                                                             addid = documentReference.getId();
 
                                                             addressID.put("AddressID", documentReference.getId());
-                                                            db.collection("partner").document(AppicationClass.UserTableID)
+                                                            db.collection("partner").document(ApplicationClass.UserTableID)
                                                                     .set(addressID, SetOptions.merge())
                                                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                         @Override
                                                                         public void onSuccess(Void aVoid) {
                                                                             // Log.d("Testing HS", "DocumentSnapshot added with ID: " + documentReference.getId());
-                                                                            Toast.makeText(OnBoardSalonWomenProfile.this, "Address Sent For Approval", Toast.LENGTH_SHORT).show();
+                                                                            Toast.makeText(context, "Address Sent For Approval", Toast.LENGTH_SHORT).show();
                                                                             progress.dismiss();
-                                                                            startActivity(new Intent(OnBoardSalonWomenProfile.this, OnBoardIdentityVerificationActivity.class));
+                                                                            startActivity(new Intent(context, OnBoardIdentityVerificationActivity.class));
 
                                                                         }
                                                                     })
@@ -215,7 +248,7 @@ public class OnBoardSalonWomenProfile extends AppCompatActivity {
                                     // Dismiss dialog
                                     progress.dismiss();
                                     Toast
-                                            .makeText(OnBoardSalonWomenProfile.this,
+                                            .makeText(context,
                                                     "Image Uploaded!!",
                                                     Toast.LENGTH_SHORT)
                                             .show();
@@ -231,7 +264,7 @@ public class OnBoardSalonWomenProfile extends AppCompatActivity {
                             // Error, Image not uploaded
                             progress.dismiss();
                             Toast
-                                    .makeText(OnBoardSalonWomenProfile.this,
+                                    .makeText(context,
                                             "Failed " + e.getMessage(),
                                             Toast.LENGTH_SHORT)
                                     .show();
@@ -285,7 +318,7 @@ public class OnBoardSalonWomenProfile extends AppCompatActivity {
                         .getBitmap(
                                 getContentResolver(),
                                 filePath);
-                guploadImageIV.setImageBitmap(bitmap);
+                uploadImageIV.setImageBitmap(bitmap);
             } catch (IOException e) {
                 // Log the exception
                 e.printStackTrace();
@@ -295,17 +328,17 @@ public class OnBoardSalonWomenProfile extends AppCompatActivity {
 
 
     private void getData() {
-        db.collection("partner").whereEqualTo("UserID", AppicationClass.UserId_FromLogin)
+        db.collection("partner").whereEqualTo("UserID", ApplicationClass.UserId_FromLogin)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                gfullNameET.setText(document.getData().get("Partner_Name").toString());
-                                gmobileNumberET.setText(document.getData().get("Partner_Number").toString());
-                                gemailET.setText(document.getData().get("Partner_Email").toString());
-                                gdateOfBirthET.setText(document.getData().get("DOB").toString());
+                                fullNameET.setText(document.getData().get("Partner_Name").toString());
+                                mobileNumberET.setText(document.getData().get("Partner_Number").toString());
+                                emailET.setText(document.getData().get("Partner_Email").toString());
+                                dateOfBirthET.setText(document.getData().get("DOB").toString());
                             }
                         } else {
                             Log.w("Testing HS", "Error getting documents.", task.getException());
@@ -313,5 +346,19 @@ public class OnBoardSalonWomenProfile extends AppCompatActivity {
                     }
                 });*/
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.arrowBack: {
+                finish();
+            }
+            break;
+            case R.id.updateBtn: {
+                Utils.startIntent(context, OnBoardIdentityVerificationActivity.class, false);
+            }
+            break;
+        }
     }
 }

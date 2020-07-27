@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import service.com.surebot.info.serviceperson.R;
-import service.com.surebot.info.serviceperson.utils.AppicationClass;
+import service.com.surebot.info.serviceperson.ApplicationClass;
 
 
 public class NewTaskSubServicesList_Adapter extends RecyclerView.Adapter<NewTaskSubServicesList_Adapter.MyViewHolder> {
@@ -34,7 +34,7 @@ public class NewTaskSubServicesList_Adapter extends RecyclerView.Adapter<NewTask
     // private  ArrayList<SendquotetoUser> gSendquotetoUserList = new ArrayList<>();
     private ArrayList<String> gSendquotetoUserList_New = new ArrayList<String>();
 
-    String gPremiumPartner_Id = AppicationClass.getPremium_PartenerId();
+    String gPremiumPartner_Id = ApplicationClass.getPremium_PartenerId();
 
     public NewTaskSubServicesList_Adapter(Context context, ArrayList<String> gSub_services_List, ArrayList<String> mapppingID, ArrayList<String> gServiceamount) {
         this.context = context;
@@ -61,8 +61,8 @@ public class NewTaskSubServicesList_Adapter extends RecyclerView.Adapter<NewTask
             if(!gServiceamount.get(position).toString().equals("")){
 
                 myViewHolder.lQuantity_Text.setText(gServiceamount.get(position).toString());
-                AppicationClass.newrequestservicesammount.add(gServiceamount.get(position).toString());
-                AppicationClass.newrequestservicesid.add(MapppingID.get(position).toString());
+                ApplicationClass.newrequestservicesammount.add(gServiceamount.get(position).toString());
+                ApplicationClass.newrequestservicesid.add(MapppingID.get(position).toString());
 
 
             }
@@ -72,7 +72,7 @@ public class NewTaskSubServicesList_Adapter extends RecyclerView.Adapter<NewTask
 
         if (gPremiumPartner_Id.equals("0")) {
 
-            AppicationClass.newrequestservicesid.add(MapppingID.get(position).toString());
+            ApplicationClass.newrequestservicesid.add(MapppingID.get(position).toString());
         }
 
         myViewHolder.lQuantity_Text.addTextChangedListener(new TextWatcher() {
@@ -95,15 +95,15 @@ public class NewTaskSubServicesList_Adapter extends RecyclerView.Adapter<NewTask
                     gSendquotetoUserList_New.add(editable.toString());
                     Log.e("lol1", "afterTextChanged: "+editable.toString() );
                     if(editable.length() >0) {
-                        AppicationClass.test1.add(MapppingID.get(position)+","+ editable.toString());
+                        ApplicationClass.test1.add(MapppingID.get(position)+","+ editable.toString());
                     }else{
-                        AppicationClass.test1.add(MapppingID.get(position)+","+"0");
+                        ApplicationClass.test1.add(MapppingID.get(position)+","+"0");
                     }
 
                     System.out.println("Mapping Id In inside adpater" + MapppingID.get(position));
                     System.out.println("Chare Sequesnce Value Are " + editable.toString() + gSendquotetoUserList_New.size());
 
-                    System.out.println("Id and price in inside adapter is " +AppicationClass.test1.size());
+                    System.out.println("Id and price in inside adapter is " + ApplicationClass.test1.size());
                 }else if (editable.toString()==""){
                     Log.e("lol1", "afterTextChanged: was here" );
                 }

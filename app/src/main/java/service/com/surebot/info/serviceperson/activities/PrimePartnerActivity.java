@@ -5,14 +5,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import service.com.surebot.info.serviceperson.R;
 
-public class PrimePartnerActivity extends AppCompatActivity {
+public class PrimePartnerActivity extends BaseActivity {
         @BindView(R.id.PrimePartnerBack)
     ConstraintLayout back;
 

@@ -13,7 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,36 +23,36 @@ import com.google.android.gms.maps.SupportMapFragment;
 
 import java.util.ArrayList;
 
-import service.com.surebot.info.serviceperson.activities.NewServiceDetailsActivity;
 import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.ResponseClass.Partner_my_task_today_response;
+import service.com.surebot.info.serviceperson.activities.BaseActivity;
+import service.com.surebot.info.serviceperson.activities.NewServiceDetailsActivity;
 import service.com.surebot.info.serviceperson.utils.UserAddress_Location;
 
 
-public class TodaysTask_Adapter extends RecyclerView.Adapter<TodaysTask_Adapter.MyViewHolder>{
+public class TodaysTaskAdapter extends RecyclerView.Adapter<TodaysTaskAdapter.MyViewHolder> {
 
     Context context;
     ArrayList<String> gUserName_List;
     //private final List<String> items;
-    int i = 0,j=0;
+    int i = 0, j = 0;
     private SupportMapFragment mapFragment;
 
     String TAG = "cocacola";
-    UserAddress_Location timeSlot =new UserAddress_Location();
+    UserAddress_Location timeSlot = new UserAddress_Location();
 
     double latitude, longitude;
 
     startservicelist_Communicator communicator;
     String gTimeForUI;
 
-    ArrayList<Partner_my_task_today_response.Partner_my_task_today_Records> lTodaysTask_Arraylist ;
+    ArrayList<Partner_my_task_today_response.Partner_my_task_today_Records> lTodaysTask_Arraylist;
 
-    public TodaysTask_Adapter(Context context ) {
+    public TodaysTaskAdapter(Context context) {
         /*Log.e(TAG, "TodaysTask_Adapter: "+items.get(0));
         Log.e(TAG, "TodaysTask_Adapter: "+items.get(1));*/
-        this.context=context;
-     //   this.items=items;
-
+        this.context = context;
+        //   this.items=items;
 
 
     }
@@ -68,21 +67,21 @@ public class TodaysTask_Adapter extends RecyclerView.Adapter<TodaysTask_Adapter.
     }
 
 
-
     @Override
     public void onViewDetachedFromWindow(MyViewHolder holder) {
         super.onViewDetachedFromWindow(holder);
         Log.e(TAG, "onViewDetachedFromWindow: ");
 
-     //   holder.removeMapFragment();
+        //   holder.removeMapFragment();
 
     }
 
 
-
     @SuppressLint("ResourceAsColor")
     @Override
-    public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder,  int position) {
+    public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, int position) {
+        myViewHolder.more.setOnClickListener(view -> context.startActivity(new Intent(context, NewServiceDetailsActivity.class)));
+        myViewHolder.nextArrowIV.setOnClickListener(view -> context.startActivity(new Intent(context, NewServiceDetailsActivity.class)));
 //
 //        latitude =Double.parseDouble(lTodaysTask_Arraylist.get(position).getLatitude_val()); //Double.parseDouble(split[0]);
 //        longitude = Double.parseDouble(lTodaysTask_Arraylist.get(position).getLongitude_val());
@@ -112,12 +111,6 @@ public class TodaysTask_Adapter extends RecyclerView.Adapter<TodaysTask_Adapter.
 //
 //
 //
-        myViewHolder.more.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                context.startActivity(new Intent(context, NewServiceDetailsActivity.class));
-            }
-        });
 //        myViewHolder.hide.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -216,8 +209,7 @@ public class TodaysTask_Adapter extends RecyclerView.Adapter<TodaysTask_Adapter.
     }
 
     @Override
-    public void onViewRecycled(MyViewHolder holder)
-    {
+    public void onViewRecycled(MyViewHolder holder) {
 //        // Cleanup MapView here?
 //        if (holder.mapCurrnet != null)
 //        {
@@ -233,16 +225,14 @@ public class TodaysTask_Adapter extends RecyclerView.Adapter<TodaysTask_Adapter.
     }
 
 
-
-
     public class MyViewHolder extends RecyclerView.ViewHolder implements OnMapReadyCallback {
-        public TextView username_text,date_text,time_text,useraddress_text,userphonenumber_text,requestID_text,moreheader_text,more;
+        public TextView username_text, date_text, time_text, useraddress_text, userphonenumber_text, requestID_text, moreheader_text, more;
         public MapView map;
         public LinearLayout map_layout;
-        Button cancel,start,updatefinalprice_button;
-        ImageView hide;
+        Button cancel, start, updatefinalprice_button;
+        ImageView hide, nextArrowIV;
         public GoogleMap mapCurrnet;
-        public  UserAddress_Location item;
+        public UserAddress_Location item;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -253,16 +243,13 @@ public class TodaysTask_Adapter extends RecyclerView.Adapter<TodaysTask_Adapter.
             useraddress_text = (TextView) itemView.findViewById(R.id.useraddress_text);
             userphonenumber_text = (TextView) itemView.findViewById(R.id.userphonenumber_text);
             requestID_text = (TextView) itemView.findViewById(R.id.requestID_text);
-            moreheader_text = (TextView) itemView.findViewById(R.id.moreheader_text);
-            updatefinalprice_button = (Button) itemView.findViewById(R.id.updatefinalprice_button);
             cancel = (Button) itemView.findViewById(R.id.cancel_button);
             start = (Button) itemView.findViewById(R.id.startservice_button);
             map_layout = itemView.findViewById(R.id.map_layout);
             map = (MapView) itemView.findViewById(R.id.mapView);
             more = itemView.findViewById(R.id.moreheader_text);
-            hide = itemView.findViewById(R.id.slide_image);
-            if (map != null)
-            {
+            nextArrowIV = itemView.findViewById(R.id.nextArrowIV);
+            if (map != null) {
                 ((MapView) map).onCreate(null);
                 ((MapView) map).onResume();
                 ((MapView) map).getMapAsync(this);
@@ -275,22 +262,23 @@ public class TodaysTask_Adapter extends RecyclerView.Adapter<TodaysTask_Adapter.
             if (mapFragment == null) {
                 mapFragment = SupportMapFragment.newInstance();
                 mapFragment.getMapAsync(callback);
-                Log.e(TAG, "getMapFragmentAndCallback: " );
+                Log.e(TAG, "getMapFragmentAndCallback: ");
 
             }
 
             // for fragment
             // FragmentManager fragmentManager = getChildFragmentManager();
             // for activity
-            FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+            FragmentManager fragmentManager = ((BaseActivity) context).getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.mapView, mapFragment).commit();
             return mapFragment;
         }
+
         public void removeMapFragment() {
             if (mapFragment != null) {
-                FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+                FragmentManager fragmentManager = ((BaseActivity) context).getSupportFragmentManager();
                 fragmentManager.beginTransaction().remove(mapFragment).commitAllowingStateLoss();
-                Log.e(TAG, "removeMapFragment: "+i );
+                Log.e(TAG, "removeMapFragment: " + i);
                 mapFragment = null;
 
             }
@@ -299,7 +287,7 @@ public class TodaysTask_Adapter extends RecyclerView.Adapter<TodaysTask_Adapter.
         @Override
         public void onMapReady(GoogleMap googleMap) {
 
-          //  if(i<items.size()) {
+            //  if(i<items.size()) {
 //
 //            for(int i=0;i<lTodaysTask_Arraylist.size();i++){
 //              /*  String s = items.get(i);
@@ -324,11 +312,11 @@ public class TodaysTask_Adapter extends RecyclerView.Adapter<TodaysTask_Adapter.
 
         }
     }
+
     public interface startservicelist_Communicator {
-        void startservice(String transactionid,String statusid,String username,String bookingdate,String bookingtime);
+        void startservice(String transactionid, String statusid, String username, String bookingdate, String bookingtime);
 
     }
-
 
 
 }

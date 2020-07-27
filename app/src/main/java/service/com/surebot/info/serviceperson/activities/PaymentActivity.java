@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -17,7 +17,7 @@ import service.com.surebot.info.serviceperson.fragments.PaymentCompletedFragment
 import service.com.surebot.info.serviceperson.fragments.PaymentPendingFragment;
 import service.com.surebot.info.serviceperson.R;
 
-public class PaymentActivity extends AppCompatActivity {
+public class PaymentActivity extends BaseActivity {
 
     @BindView(R.id.paymentTabLayout)
     TabLayout tabLayout;

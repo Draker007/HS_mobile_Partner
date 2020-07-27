@@ -21,7 +21,7 @@
                 android:id="@+id/paymentTV"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/header_height"
-                android:background="@drawable/salon_men_header_bg"
+                android:background="@drawable/salon_header_bg"
                 android:fontFamily="@font/open_sans_bold"
                 android:gravity="center"
                 android:text="@string/my_payment_text"

@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 import service.com.surebot.info.serviceperson.DataFiles.awardsData;
 import service.com.surebot.info.serviceperson.R;
-import service.com.surebot.info.serviceperson.utils.AppicationClass;
+import service.com.surebot.info.serviceperson.ApplicationClass;
 
 
 public class AddAwardsAdapter  extends RecyclerView.Adapter<AddAwardsAdapter.ViewHolder> {
@@ -37,7 +37,7 @@ public class AddAwardsAdapter  extends RecyclerView.Adapter<AddAwardsAdapter.Vie
     public AddAwardsAdapter(Context gContext,ArrayList<String> imageUrls,boolean isCustomGalleryActivity){
         this.gContext = gContext;
         this.imageUrls = imageUrls;
-        AppicationClass.addAwardsDetails.clear();
+        ApplicationClass.addAwardsDetails.clear();
         inflater = LayoutInflater.from(gContext);
         this.isCustomGalleryActivity = isCustomGalleryActivity;
         mSparseBooleanArray = new SparseBooleanArray();
@@ -73,7 +73,7 @@ public class AddAwardsAdapter  extends RecyclerView.Adapter<AddAwardsAdapter.Vie
 
 
 
-        AppicationClass.addAwardsDetails.add("");
+        ApplicationClass.addAwardsDetails.add("");
 
         viewHolder.Text.addTextChangedListener(new TextWatcher() {
             @Override
@@ -85,7 +85,7 @@ public class AddAwardsAdapter  extends RecyclerView.Adapter<AddAwardsAdapter.Vie
                     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                         if (charSequence!=null) {
 
-                    AppicationClass.addAwardsDetails.set(position,charSequence.toString());
+                    ApplicationClass.addAwardsDetails.set(position,charSequence.toString());
 
                 }}
 
@@ -102,7 +102,7 @@ public class AddAwardsAdapter  extends RecyclerView.Adapter<AddAwardsAdapter.Vie
             @Override
             public void onClick(View v) {
                 if (imageUrls.size()>0){
-                    AppicationClass.addAwardsDetails.remove(position);
+                    ApplicationClass.addAwardsDetails.remove(position);
                     imageUrls.remove(position);
                     notifyItemRemoved(position);
                     getCheckedItems();

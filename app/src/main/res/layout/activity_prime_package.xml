@@ -20,12 +20,13 @@
             tools:ignore="ContentDescription" />
 
         <ImageView
-            android:id="@+id/servicelayoutimg"
+            android:id="@+id/serviceLayoutIV"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:alpha="0.2"
+            android:layout_marginTop="@dimen/spacing_20"
             android:layout_alignParentEnd="true"
-            app:srcCompat="@drawable/salon"
+            android:src="@drawable/salon"
             tools:ignore="ContentDescription" />
 
         <ImageView
@@ -67,7 +68,6 @@
             android:layout_below="@+id/salonBgIV"
             android:layout_marginTop="200dp"
             android:gravity="center"
-            android:textColor="@color/colorBlue"
             android:fontFamily="@font/open_sans_semibold"
             android:text="@string/advantages_of_being_a_prime_partner_text"/>
 
@@ -90,6 +90,7 @@
             android:layout_marginTop="12dp"
             android:gravity="center_vertical"
             android:layout_marginStart="@dimen/spacing_20"
+            android:textColor="@color/color_black"
             android:fontFamily="@font/open_sans_semibold"
             android:layout_below="@+id/primeAdvantagesTV"
             android:text="@string/prime_package_text_one"/>
@@ -113,6 +114,7 @@
             android:layout_marginTop="12dp"
             android:gravity="center_vertical"
             android:layout_marginStart="@dimen/spacing_20"
+            android:textColor="@color/color_black"
             android:fontFamily="@font/open_sans_semibold"
             android:layout_below="@+id/primePackageOneTV"
             android:text="@string/prime_package_text_two"/>
@@ -136,6 +138,7 @@
             android:layout_marginTop="12dp"
             android:gravity="center_vertical"
             android:layout_marginStart="@dimen/spacing_20"
+            android:textColor="@color/color_black"
             android:fontFamily="@font/open_sans_semibold"
             android:layout_below="@+id/primePackageTextTwo"
             android:text="@string/prime_package_text_three"/>

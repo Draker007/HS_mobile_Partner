@@ -4,14 +4,14 @@ import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import androidx.appcompat.app.AppCompatActivity;
+
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.utils.Utils;
 
-public class SetNewPasswordActivity extends AppCompatActivity {
+public class SetNewPasswordActivity extends BaseActivity {
 
     @BindView(R.id.otpEnter)
     EditText otpEnter;

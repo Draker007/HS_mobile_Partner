@@ -1,6 +1,6 @@
 package service.com.surebot.info.serviceperson.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,7 +11,7 @@ import butterknife.ButterKnife;
 import service.com.surebot.info.serviceperson.adapters.SendQuoteServiceAdapter;
 import service.com.surebot.info.serviceperson.R;
 
-public class SendQuoteActivity extends AppCompatActivity {
+public class SendQuoteActivity extends BaseActivity {
     @BindView(R.id.sendQuoteServiceREcy)
     RecyclerView gsendQuoteServiceREcy;
 

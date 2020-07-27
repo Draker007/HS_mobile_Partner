@@ -3,13 +3,13 @@ package service.com.surebot.info.serviceperson.activities;
 import android.os.Bundle;
 import android.widget.ImageView;
 
-import androidx.appcompat.app.AppCompatActivity;
+
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import service.com.surebot.info.serviceperson.R;
 
-public class CustomerSupportActivity extends AppCompatActivity {
+public class CustomerSupportActivity extends BaseActivity {
 
     @BindView(R.id.arrowIV)
     ImageView arrowIV;

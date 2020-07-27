@@ -34,7 +34,7 @@ import service.com.surebot.info.serviceperson.DataFiles.paymentChildData;
 import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.RequestClass.Partner_payment_Request;
 import service.com.surebot.info.serviceperson.ResponseClass.Partner_payment_Response;
-import service.com.surebot.info.serviceperson.utils.AppicationClass;
+import service.com.surebot.info.serviceperson.ApplicationClass;
 
 public class PendingPaymentFragment extends Fragment {
     RecyclerView r1;
@@ -89,7 +89,7 @@ public class PendingPaymentFragment extends Fragment {
             Partner_payment_Request lservice_request = new Partner_payment_Request();
 
 
-            lservice_request.setUser_ID(AppicationClass.getUserId_FromLogin());
+            lservice_request.setUser_ID(ApplicationClass.getUserId_FromLogin());
             lservice_request.setDocket(Constants.TOKEN);
             Log.e(TAG, "completedPaymentAPI: ");
 

@@ -8,15 +8,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.fragment.app.Fragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import service.com.surebot.info.serviceperson.R;
-import service.com.surebot.info.serviceperson.utils.AppicationClass;
+import service.com.surebot.info.serviceperson.ApplicationClass;
 
-public class CreateProfileActivity extends AppCompatActivity {
+public class CreateProfileActivity extends BaseActivity {
 
     @BindView(R.id.createprofile_button)
     Button gCreateprofile_button;
@@ -47,7 +47,7 @@ public class CreateProfileActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        gUserId_FromLogin=  AppicationClass.getUserId_FromLogin();
+        gUserId_FromLogin=  ApplicationClass.getUserId_FromLogin();
 
 
 

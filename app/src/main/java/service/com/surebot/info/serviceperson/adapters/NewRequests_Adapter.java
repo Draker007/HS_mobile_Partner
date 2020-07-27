@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import service.com.surebot.info.serviceperson.activities.SendQuoteActivity;
 import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.ResponseClass.NewRequestList_Response;
-import service.com.surebot.info.serviceperson.utils.AppicationClass;
+import service.com.surebot.info.serviceperson.ApplicationClass;
 
 
 public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapter.MyViewHolder> {
@@ -37,7 +37,7 @@ public class NewRequests_Adapter extends RecyclerView.Adapter<NewRequests_Adapte
     String quote = "";
     String amnt = "";
     String gTimeForUI;
-    String gPremiumPartner_Id = AppicationClass.getPremium_PartenerId();
+    String gPremiumPartner_Id = ApplicationClass.getPremium_PartenerId();
     public NewRequests_Adapter(Context context ) {
         this.context=context;
 

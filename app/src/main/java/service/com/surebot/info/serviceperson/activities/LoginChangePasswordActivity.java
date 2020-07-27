@@ -1,6 +1,6 @@
 package service.com.surebot.info.serviceperson.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
+
 
 import android.os.Bundle;
 import android.widget.EditText;
@@ -10,7 +10,7 @@ import butterknife.ButterKnife;
 import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.utils.Utils;
 
-public class LoginChangePasswordActivity extends AppCompatActivity {
+public class LoginChangePasswordActivity extends BaseActivity {
 
     @BindView(R.id.changePasswordBtn)
     EditText changePasswordBtn;

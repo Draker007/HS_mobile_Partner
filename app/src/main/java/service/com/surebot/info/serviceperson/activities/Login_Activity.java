@@ -1,6 +1,6 @@
 package service.com.surebot.info.serviceperson.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
+
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -37,10 +37,10 @@ import service.com.surebot.info.serviceperson.RequestClass.PartnerApprovalStatus
 import service.com.surebot.info.serviceperson.RequestClass.Partnerlogin_Request;
 import service.com.surebot.info.serviceperson.ResponseClass.PartnerApprovalStatus_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Partnerlogin_Response;
-import service.com.surebot.info.serviceperson.utils.AppicationClass;
+import service.com.surebot.info.serviceperson.ApplicationClass;
 import service.com.surebot.info.serviceperson.utils.NetworkUtil;
 
-public class Login_Activity extends AppCompatActivity {
+public class Login_Activity extends BaseActivity {
 
 
     @BindView(R.id.signup_text)
@@ -196,10 +196,10 @@ public class Login_Activity extends AppCompatActivity {
                             if (partnerlogin_response.getUser_Role().equals("2")) {
                                 System.out.println("In User Login Method 6");
                               gPartnerIdOnLogin= partnerlogin_response.getUser_ID();
-                                AppicationClass.setUserId_FromLogin(partnerlogin_response.getUser_ID());
-                                AppicationClass.setUserName_FromLogin(partnerlogin_response.getUserName());
-                                AppicationClass.setPremium_PartenerId(partnerlogin_response.getUser_Premium());
-                                AppicationClass.setCategoryId_FromLogin(partnerlogin_response.getCategory_ID());
+                                ApplicationClass.setUserId_FromLogin(partnerlogin_response.getUser_ID());
+                                ApplicationClass.setUserName_FromLogin(partnerlogin_response.getUserName());
+                                ApplicationClass.setPremium_PartenerId(partnerlogin_response.getUser_Premium());
+                                ApplicationClass.setCategoryId_FromLogin(partnerlogin_response.getCategory_ID());
 
                                 editer.putString("User_Id", partnerlogin_response.getUser_ID());
                                 editer.putString("User_Name", partnerlogin_response.getUserName());

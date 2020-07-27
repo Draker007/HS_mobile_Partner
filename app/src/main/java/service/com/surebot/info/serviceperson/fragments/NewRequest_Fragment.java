@@ -20,7 +20,7 @@ import butterknife.ButterKnife;
 import service.com.surebot.info.serviceperson.adapters.NewRequests_Adapter;
 import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.ResponseClass.NewRequestList_Response;
-import service.com.surebot.info.serviceperson.utils.AppicationClass;
+import service.com.surebot.info.serviceperson.ApplicationClass;
 
 public class NewRequest_Fragment  extends Fragment  {
 
@@ -63,7 +63,7 @@ public class NewRequest_Fragment  extends Fragment  {
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         gNewrequestlist_recyclerview.setLayoutManager(llm);
 
-        gUserId_FromLogin = AppicationClass.getUserId_FromLogin();
+        gUserId_FromLogin = ApplicationClass.getUserId_FromLogin();
 
 
         NewRequests_Adapter NewRequests_Adapter= new NewRequests_Adapter(getActivity());

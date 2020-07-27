@@ -3,7 +3,7 @@ package service.com.surebot.info.serviceperson.activities;
 import android.os.Bundle;
 import android.widget.ImageView;
 
-import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.adapters.FAQQuesAndAnsAdapter;
 import service.com.surebot.info.serviceperson.models.FAQQuesAndAnsList;
 
-public class  FAQQuesAndAnsActivity extends AppCompatActivity {
+public class  FAQQuesAndAnsActivity extends BaseActivity {
 
     @BindView(R.id.faqQueAndAndRV)
     RecyclerView faqQueAndAndRV;

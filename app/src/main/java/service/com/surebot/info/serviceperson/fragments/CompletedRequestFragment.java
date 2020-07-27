@@ -17,27 +17,24 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import service.com.surebot.info.serviceperson.adapters.UpcomingRequest_Adapter;
+import service.com.surebot.info.serviceperson.adapters.CompletedRequest_Adapter;
 import service.com.surebot.info.serviceperson.R;
-import service.com.surebot.info.serviceperson.ResponseClass.UpcomingRequestList_Response;
-import service.com.surebot.info.serviceperson.utils.AppicationClass;
+import service.com.surebot.info.serviceperson.ResponseClass.CompletedRequestList_Response;
+import service.com.surebot.info.serviceperson.ApplicationClass;
 
-public class UpcomingRequest_Fragment  extends Fragment {
-
+public class CompletedRequestFragment extends Fragment {
 
     @BindView(R.id.newrequestlist_recyclerview)
-    RecyclerView gUpcomingrequestlist_recyclerview;
+    RecyclerView gCompletedrequestlist_recyclerview;
     @BindView(R.id.norequest_text)
     TextView gNorequest_text;
 
 
     LinearLayoutManager llm;
+String gUserId_FromLogin;
 
-
+    ArrayList<CompletedRequestList_Response.CompletedRequestList_Records> gCompeltedRequestList_Arraylist;
     private Dialog progress;
-    ArrayList<UpcomingRequestList_Response.UpcomingRequestList_Records> gUpcomingRequestList_Arraylist;
-    String gUserId_FromLogin;
-
     @SuppressLint("WrongConstant")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,18 +49,22 @@ public class UpcomingRequest_Fragment  extends Fragment {
         progress.setContentView(R.layout.progressbar_background);
         progress.setCancelable(true);
 
-        gUserId_FromLogin = AppicationClass.getUserId_FromLogin();
+
+        gUserId_FromLogin = ApplicationClass.getUserId_FromLogin();
 
 
         llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
-        gUpcomingrequestlist_recyclerview.setLayoutManager(llm);
-        UpcomingRequest_Adapter lUpcomingRequest_Adapter = new UpcomingRequest_Adapter(getActivity()  );
-        gUpcomingrequestlist_recyclerview.setAdapter(lUpcomingRequest_Adapter);
+        gCompletedrequestlist_recyclerview.setLayoutManager(llm);
+
+        CompletedRequest_Adapter lCompletedRequest_Adapter = new CompletedRequest_Adapter(getActivity()   );
+        gCompletedrequestlist_recyclerview.setAdapter(lCompletedRequest_Adapter);
+
 
         return view;
     }
 
-    //Get Upcomiing Request List
+
+
 
 }

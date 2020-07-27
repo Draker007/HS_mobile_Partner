@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import java.util.ArrayList;
@@ -30,9 +30,9 @@ import service.com.surebot.info.serviceperson.RequestClass.Account_details_Reque
 import service.com.surebot.info.serviceperson.RequestClass.Add_account_details_Request;
 import service.com.surebot.info.serviceperson.ResponseClass.Account_details_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.Add_account_details_Response;
-import service.com.surebot.info.serviceperson.utils.AppicationClass;
+import service.com.surebot.info.serviceperson.ApplicationClass;
 
-public class AccountDetailsActivity extends AppCompatActivity {
+public class AccountDetailsActivity extends BaseActivity {
 
     @BindView(R.id.bnkName)
     EditText gbnkName;
@@ -136,7 +136,7 @@ public class AccountDetailsActivity extends AppCompatActivity {
                 Account_details_Request lservice_request = new Account_details_Request();
 
 
-                lservice_request.setUser_ID(AppicationClass.getUserId_FromLogin());
+                lservice_request.setUser_ID(ApplicationClass.getUserId_FromLogin());
                 lservice_request.setDocket(Constants.TOKEN);
 
 
@@ -221,7 +221,7 @@ public class AccountDetailsActivity extends AppCompatActivity {
             Add_account_details_Request lservice_request = new Add_account_details_Request();
 
 
-            lservice_request.setUser_ID(AppicationClass.getUserId_FromLogin());
+            lservice_request.setUser_ID(ApplicationClass.getUserId_FromLogin());
             lservice_request.setDocket(Constants.TOKEN);
             lservice_request.setAccount_Number(gAccNumber.getText().toString());
             lservice_request.setAccount_Holder_Name(gAccHolderName.getText().toString());

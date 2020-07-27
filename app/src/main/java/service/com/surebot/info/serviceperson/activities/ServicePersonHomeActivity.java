@@ -5,12 +5,10 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.Window;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -24,15 +22,15 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import java.util.List;
 
 import butterknife.ButterKnife;
+import service.com.surebot.info.serviceperson.ApplicationClass;
+import service.com.surebot.info.serviceperson.Manager.CacheManager;
+import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.fragments.MoreFragment;
 import service.com.surebot.info.serviceperson.fragments.MyTaskFragment;
 import service.com.surebot.info.serviceperson.fragments.ProfileFragment;
 import service.com.surebot.info.serviceperson.fragments.RequestListFragment;
-import service.com.surebot.info.serviceperson.Manager.CacheManager;
-import service.com.surebot.info.serviceperson.R;
-import service.com.surebot.info.serviceperson.utils.AppicationClass;
 
-public class ServicePersonHomeActivity extends AppCompatActivity {
+public class ServicePersonHomeActivity extends BaseActivity {
     BottomNavigationView navigation;
     int status = 1;
     String check = null;
@@ -60,10 +58,10 @@ public class ServicePersonHomeActivity extends AppCompatActivity {
         gPremium_PartnerId = sp1.getString("Premium_PartnerId", null);
         gCategoryId_FromLogin = sp1.getString("Category_Id", null);
 
-        AppicationClass.setUserId_FromLogin(gUserId_FromLogin);
-        AppicationClass.setUserName_FromLogin(gUserName_FromLogin);
-        AppicationClass.setPremium_PartenerId(gPremium_PartnerId);
-        AppicationClass.setCategoryId_FromLogin(gCategoryId_FromLogin);
+        ApplicationClass.setUserId_FromLogin(gUserId_FromLogin);
+        ApplicationClass.setUserName_FromLogin(gUserName_FromLogin);
+        ApplicationClass.setPremium_PartenerId(gPremium_PartnerId);
+        ApplicationClass.setCategoryId_FromLogin(gCategoryId_FromLogin);
         HomeScreen_Flow = "fromlogin";
 
         check = getIntent().getStringExtra("status");
@@ -78,12 +76,11 @@ public class ServicePersonHomeActivity extends AppCompatActivity {
         //here we set layout of progress dialog
         progress.setContentView(R.layout.progressbar_background);
         progress.setCancelable(true);
-        navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        navigation = findViewById(R.id.bottom_navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         fragment = new MyTaskFragment();
         loadFragment(fragment);
-        Listners();
         requestMultiplePermissions();
     }  //Oncreate close
 
@@ -113,35 +110,31 @@ public class ServicePersonHomeActivity extends AppCompatActivity {
                 .check();
     }
 
-    private void Listners() {
-
-    }
-
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
-                switch (item.getItemId()) {
-                    case R.id.navigationTask:
-                        fragment = new MyTaskFragment();
-                        loadFragment(fragment);
-                        break;
-                    case R.id.navigationProfile:
-                        fragment = new ProfileFragment();
-                        loadFragment(fragment);
-                        back = 0;
-                        break;
-                    case R.id.navigationRequest:
-                        fragment = new RequestListFragment();
-                        loadFragment(fragment);
-                        back = 0;
-                        break;
-                    case R.id.navigationMore:
-                        fragment = new MoreFragment();
-                        loadFragment(fragment);
-                        back = 0;
-                        break;
-                }
-                return true;
-            };
+        switch (item.getItemId()) {
+            case R.id.navigationTask:
+                fragment = new MyTaskFragment();
+                loadFragment(fragment);
+                break;
+            case R.id.navigationProfile:
+                fragment = new ProfileFragment();
+                loadFragment(fragment);
+                back = 0;
+                break;
+            case R.id.navigationRequest:
+                fragment = new RequestListFragment();
+                loadFragment(fragment);
+                back = 0;
+                break;
+            case R.id.navigationMore:
+                fragment = new MoreFragment();
+                loadFragment(fragment);
+                back = 0;
+                break;
+        }
+        return true;
+    };
 
     //For Switching Fragments
     private void loadFragment(Fragment fragment) {
@@ -163,7 +156,7 @@ public class ServicePersonHomeActivity extends AppCompatActivity {
             transaction.commit();
         } else if (back == 1) {
             finishAffinity();
-            System.exit(0);
+            moveTaskToBack(true);
         }
     }
 }

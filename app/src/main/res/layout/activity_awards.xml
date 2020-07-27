@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/spacing_20"
-    tools:context=".activities.AwardsAndCertificateActivity">
+    tools:context=".activities.LicensesAndCertificatesActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -39,7 +39,6 @@
             android:fontFamily="@font/open_sans_semibold"
             android:gravity="center"
             android:text="@string/photos_upload_2"
-            android:textColor="@color/colorBlue"
             android:textSize="20sp" />
 
         <RelativeLayout

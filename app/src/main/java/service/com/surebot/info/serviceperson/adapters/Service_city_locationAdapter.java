@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import service.com.surebot.info.serviceperson.R;
-import service.com.surebot.info.serviceperson.utils.AppicationClass;
+import service.com.surebot.info.serviceperson.ApplicationClass;
 
 public class Service_city_locationAdapter extends RecyclerView.Adapter<Service_city_locationAdapter.MyViewHolder>{
 
@@ -42,10 +42,10 @@ public class Service_city_locationAdapter extends RecyclerView.Adapter<Service_c
             myViewHolder.Selectarea_checkbox.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(AppicationClass.addLocation.contains(location_response.get(position))){
-                        AppicationClass.addLocation.remove(location_response.get(position));
+                    if(ApplicationClass.addLocation.contains(location_response.get(position))){
+                        ApplicationClass.addLocation.remove(location_response.get(position));
                     }else
-                        AppicationClass.addLocation.add(location_response.get(position));
+                        ApplicationClass.addLocation.add(location_response.get(position));
                 }
 
             });

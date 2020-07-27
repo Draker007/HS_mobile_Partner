@@ -8,7 +8,7 @@
     android:orientation="vertical">
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/d"
+        android:id="@+id/nestedScroll"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:fillViewport="true"
@@ -27,7 +27,7 @@
                 android:layout_height="match_parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraintLayout33"
+                    android:id="@+id/profileHeaderCL"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/saloon_profile_curve_layout"
@@ -109,7 +109,7 @@
                         app:layout_constraintTop_toTopOf="@+id/textView134" />
 
                     <ImageView
-                        android:id="@+id/imageView26"
+                        android:id="@+id/serviceLayoutIV"
                         android:layout_width="120dp"
                         android:layout_height="120dp"
                         android:layout_marginTop="8dp"
@@ -131,7 +131,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout33">
+                    app:layout_constraintTop_toBottomOf="@+id/profileHeaderCL">
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cardView101"

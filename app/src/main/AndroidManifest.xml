@@ -29,7 +29,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
         tools:ignore="AllowBackup">
-        <activity android:name=".activities.LoginChangePasswordActivity"></activity>
+        <activity
+            android:name=".activities.BaseActivity"
+            android:configChanges="orientation|screenSize|smallestScreenSize"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".activities.LoginChangePasswordActivity" />
         <activity android:name=".activities.PrimePackageActivity" />
         <activity android:name=".activities.FAQQuesAndAnsActivity" />
         <activity android:name=".activities.HelpCenterActivity" />
@@ -67,7 +71,7 @@
         <activity
             android:name=".activities.PartnerLoginActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".activities.OnBoardSalonWomenProfile" />
+        <activity android:name=".activities.OnBoardProfileActivity" />
         <activity android:name=".activities.PreLoginActivity" />
         <activity
             android:name=".activities.SetNewPasswordActivity"
@@ -112,7 +116,7 @@
             <!-- </intent-filter> -->
         </activity>
         <activity
-            android:name=".activities.AwardsAndCertificateActivity"
+            android:name=".activities.LicensesAndCertificatesActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".activities.Login_Activity" />
         <activity android:name=".activities.ChangePasswordActivity" />

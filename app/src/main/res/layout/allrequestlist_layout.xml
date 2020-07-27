@@ -10,7 +10,7 @@
         android:id="@+id/header_layout"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="@drawable/salon_men_header_bg"
+        android:background="@drawable/salon_header_bg"
         tools:ignore="UselessParent">
 
         <TextView
@@ -46,18 +46,14 @@
         app:tabSelectedTextColor="@color/color_black"
         app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
         android:textAllCaps="false"
-        app:tabTextColor="@color/color_black"
-
-        />
+        app:tabTextColor="@color/color_black" />
 
     <androidx.viewpager.widget.ViewPager
         android:layout_width="match_parent"
         android:id="@+id/allrequestlist_viewpager"
         android:layout_height="match_parent"
-        android:layout_below="@+id/allrequestlist_tablayout"
-        >
+        android:layout_below="@+id/allrequestlist_tablayout">
 
     </androidx.viewpager.widget.ViewPager>
-
 
 </RelativeLayout>

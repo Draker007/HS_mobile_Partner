@@ -43,10 +43,10 @@
             android:layout_marginHorizontal="@dimen/spacing_20"
             android:layout_marginTop="@dimen/spacing_20"
             android:fontFamily="@font/open_sans_semibold"
-            android:text="@string/select_your_id_proof"
-            android:textColor="@color/colorBlue" />
+            android:text="@string/select_your_id_proof"  />
 
         <LinearLayout
+            android:id="@+id/borderLL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_20"
@@ -61,7 +61,6 @@
                 android:layout_marginTop="@dimen/spacing_normal"
                 android:fontFamily="@font/open_sans_semibold"
                 android:text="@string/type_of_id"
-                android:textColor="@color/colorBlue"
                 android:textSize="12sp" />
 
             <Spinner
@@ -77,8 +76,7 @@
             android:id="@+id/nameTL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:textColorHint="@color/colorBlue">
+            android:layout_marginHorizontal="20dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/fullNameET"
@@ -94,8 +92,7 @@
             android:id="@+id/mobileNumberTL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:textColorHint="@color/colorBlue">
+            android:layout_marginHorizontal="20dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/mobileNumberET"
@@ -114,7 +111,6 @@
             android:layout_marginTop="@dimen/spacing_normal"
             android:fontFamily="@font/open_sans"
             android:text="@string/upload_your_current_address_proof"
-            android:textColor="@color/colorBlue"
             android:textSize="18sp" />
 
         <RelativeLayout

@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
+
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,7 +27,7 @@ import service.com.surebot.info.serviceperson.RequestClass.Send_otp_mail_Request
 import service.com.surebot.info.serviceperson.ResponseClass.Send_otp_mail_Response;
 import service.com.surebot.info.serviceperson.utils.Utils;
 
-public class ForgotPasswordActivity extends AppCompatActivity {
+public class ForgotPasswordActivity extends BaseActivity {
 
     @BindView(R.id.emailET)
     EditText gEmailORNumber;

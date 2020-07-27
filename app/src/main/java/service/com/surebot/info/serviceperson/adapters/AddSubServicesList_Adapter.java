@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.ResponseClass.ListOfSubServices_Response;
-import service.com.surebot.info.serviceperson.utils.AppicationClass;
+import service.com.surebot.info.serviceperson.ApplicationClass;
 
 
 public class AddSubServicesList_Adapter extends RecyclerView.Adapter<AddSubServicesList_Adapter.MyViewHolder> {
@@ -32,8 +32,8 @@ public class AddSubServicesList_Adapter extends RecyclerView.Adapter<AddSubServi
 
     ArrayList<String> addedSubService = new ArrayList<>();
 
-   String gPremiumPartner_Id = AppicationClass.getPremium_PartenerId();
-    String gUserTypeFrom_CountryList = AppicationClass.getUserType_FromCountryList();
+   String gPremiumPartner_Id = ApplicationClass.getPremium_PartenerId();
+    String gUserTypeFrom_CountryList = ApplicationClass.getUserType_FromCountryList();
 
     ArrayList<ListOfSubServices_Response.ListOfSubServices_Records> gSubServicesList_Arraylist;
 
@@ -45,9 +45,9 @@ public static  int multiple = 0;
         this.gSubServicesList_Arraylist=gSubServicesList_Arraylist;
 
         if(multiple==0){
-            AppicationClass.addservicemapingid.clear();
+            ApplicationClass.addservicemapingid.clear();
 
-            AppicationClass.addserviceammount.clear();
+            ApplicationClass.addserviceammount.clear();
 
             System.out.println("multiple services flow entering into 11111");
         }
@@ -108,8 +108,8 @@ public static  int multiple = 0;
                 if (!gSubServicesList_Arraylist.get(position).getService_Amount().equals("")) {
 
                     System.out.println("In Adapter Service ammount is " + gSubServicesList_Arraylist.get(position).getService_Amount());
-                    AppicationClass.addserviceammount.add(gSubServicesList_Arraylist.get(position).getService_Amount());
-                    AppicationClass.addservicemapingid.add(gSubServicesList_Arraylist.get(position).getService_Mapping_ID());
+                    ApplicationClass.addserviceammount.add(gSubServicesList_Arraylist.get(position).getService_Amount());
+                    ApplicationClass.addservicemapingid.add(gSubServicesList_Arraylist.get(position).getService_Mapping_ID());
                 }
                 //   AppicationClass.addservicemapingid.add(gSubServicesList_Arraylist.get(position).getService_Mapping_ID()+","+ gSubServicesList_Arraylist.get(position).getService_Amount());
             }
@@ -124,14 +124,14 @@ public static  int multiple = 0;
             // if(gSubServicesList_Arraylist.get(position).getService_Is_There().equals("Exists")){
             myViewHolder.lQuantityCheckBox.setChecked(false);
 
-                System.out.println("In Adapter Entering into 1111111111"  + AppicationClass.addservicemapingid.size());
-            if (!AppicationClass.addservicemapingid.contains(gSubServicesList_Arraylist.get(position).getService_Mapping_ID())) {
-                System.out.println("Array value is "  + AppicationClass.addservicemapingid + " and " + gSubServicesList_Arraylist.get(position).getService_Mapping_ID());
+                System.out.println("In Adapter Entering into 1111111111"  + ApplicationClass.addservicemapingid.size());
+            if (!ApplicationClass.addservicemapingid.contains(gSubServicesList_Arraylist.get(position).getService_Mapping_ID())) {
+                System.out.println("Array value is "  + ApplicationClass.addservicemapingid + " and " + gSubServicesList_Arraylist.get(position).getService_Mapping_ID());
                 System.out.println("In Adapter Entering into 2222222");
                 if (gSubServicesList_Arraylist.get(position).getService_Is_There().equals("Exists")) {
                     System.out.println("In Adapter Entering into 3333333");
                     myViewHolder.lQuantityCheckBox.setChecked(true);
-                    AppicationClass.addservicemapingid.add(gSubServicesList_Arraylist.get(position).getService_Mapping_ID());
+                    ApplicationClass.addservicemapingid.add(gSubServicesList_Arraylist.get(position).getService_Mapping_ID());
 
                 }
 
@@ -148,7 +148,7 @@ public static  int multiple = 0;
 
             if(multiple==1){
                 myViewHolder.lQuantityCheckBox.setChecked(true);
-                AppicationClass.addservicemapingid.add(gSubServicesList_Arraylist.get(position).getService_Mapping_ID());
+                ApplicationClass.addservicemapingid.add(gSubServicesList_Arraylist.get(position).getService_Mapping_ID());
             }
 
         }
@@ -211,7 +211,7 @@ public static  int multiple = 0;
 
 
 
-                        AppicationClass.addnewserviceammount.add(gSubServicesList_Arraylist.get(position).getService_Mapping_ID()+","+editable.toString());
+                        ApplicationClass.addnewserviceammount.add(gSubServicesList_Arraylist.get(position).getService_Mapping_ID()+","+editable.toString());
                     }
 
                     System.out.println("In service add adapter entering in second else");
@@ -231,17 +231,17 @@ public static  int multiple = 0;
             public void onClick(View view) {
 
                 if(myViewHolder.lQuantityCheckBox.isChecked()){
-                    AppicationClass.addservicemapingid.add(gSubServicesList_Arraylist.get(position).getService_Mapping_ID());
-                    AppicationClass.multipleaddservicemapingid.add(gSubServicesList_Arraylist.get(position).getService_Mapping_ID());
+                    ApplicationClass.addservicemapingid.add(gSubServicesList_Arraylist.get(position).getService_Mapping_ID());
+                    ApplicationClass.multipleaddservicemapingid.add(gSubServicesList_Arraylist.get(position).getService_Mapping_ID());
 
                     myViewHolder.lQuantityCheckBox.setChecked(true);
 System.out.println("Checkbox entering in to the true");
                     multiple=1;
                 }
                    else{
-                    if(AppicationClass.addservicemapingid.contains(gSubServicesList_Arraylist.get(position).getService_Mapping_ID())){
-                        AppicationClass.addservicemapingid.remove(gSubServicesList_Arraylist.get(position).getService_Mapping_ID());
-                        AppicationClass.multipleaddservicemapingid.remove(gSubServicesList_Arraylist.get(position).getService_Mapping_ID());
+                    if(ApplicationClass.addservicemapingid.contains(gSubServicesList_Arraylist.get(position).getService_Mapping_ID())){
+                        ApplicationClass.addservicemapingid.remove(gSubServicesList_Arraylist.get(position).getService_Mapping_ID());
+                        ApplicationClass.multipleaddservicemapingid.remove(gSubServicesList_Arraylist.get(position).getService_Mapping_ID());
 
                         myViewHolder.lQuantityCheckBox.setChecked(false);
                         multiple=2;

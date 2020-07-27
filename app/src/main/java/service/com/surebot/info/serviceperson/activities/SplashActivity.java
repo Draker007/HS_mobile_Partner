@@ -1,6 +1,6 @@
 package service.com.surebot.info.serviceperson.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
+
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +11,7 @@ import android.view.WindowManager;
 import service.com.surebot.info.serviceperson.Manager.CacheManager;
 import service.com.surebot.info.serviceperson.R;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends BaseActivity {
 
     private CacheManager mCacheManager;
     @Override
@@ -32,7 +32,7 @@ public class SplashActivity extends AppCompatActivity {
                 startActivity(userHomeIntent);
                 finish();
             } else {
-                Intent loginIntent = new Intent(getApplicationContext(), PartnerLoginActivity.class);
+                Intent loginIntent = new Intent(getApplicationContext(), PreLoginActivity.class);
                 startActivity(loginIntent);
                 finish();
             }

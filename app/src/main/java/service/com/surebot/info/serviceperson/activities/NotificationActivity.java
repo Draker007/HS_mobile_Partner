@@ -7,7 +7,7 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,9 +29,9 @@ import service.com.surebot.info.serviceperson.DataFiles.NotificationData;
 import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.RequestClass.Notification_Request;
 import service.com.surebot.info.serviceperson.ResponseClass.Notification_Response;
-import service.com.surebot.info.serviceperson.utils.AppicationClass;
+import service.com.surebot.info.serviceperson.ApplicationClass;
 
-public class NotificationActivity extends AppCompatActivity {
+public class NotificationActivity extends BaseActivity {
     RecyclerView r1;
     NotificationAdapter adapter;
     private Dialog progress;
@@ -81,7 +81,7 @@ public class NotificationActivity extends AppCompatActivity {
             System.out.println("In User Login Method 2");
             ApiInterface request = retrofit.create(ApiInterface.class);
             Notification_Request lservice_request = new Notification_Request();
-        lservice_request.setUser_ID(AppicationClass.getUserId_FromLogin());
+        lservice_request.setUser_ID(ApplicationClass.getUserId_FromLogin());
             lservice_request.setDocket(Constants.TOKEN);
 
 

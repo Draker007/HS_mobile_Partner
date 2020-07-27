@@ -12,11 +12,13 @@
         android:orientation="vertical">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/headerIdentityCL"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:background="@drawable/saloncomponent">
+            android:background="@drawable/salon_onboard_women">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/headerIdentityFadeCL"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@mipmap/saloonfade"
@@ -31,10 +33,10 @@
                     android:layout_height="25dp"
                     android:layout_marginStart="40dp"
                     android:layout_marginTop="@dimen/spacing_double2"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:tint="@color/color_white"
                     android:src="@drawable/arrow_back"
+                    android:tint="@color/color_white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="ContentDescription" />
 
                 <TextView
@@ -82,13 +84,13 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
+            android:id="@+id/selectIdProofTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_20"
             android:layout_marginTop="@dimen/spacing_normal"
             android:fontFamily="@font/open_sans_semibold"
             android:text="@string/select_your_id_proof"
-            android:textColor="@color/colorPrimaryBlue"
             android:textSize="18sp" />
 
         <LinearLayout
@@ -100,14 +102,15 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/typeOfIdTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_20"
                 android:layout_marginTop="@dimen/spacing_normal"
                 android:fontFamily="@font/open_sans_semibold"
                 android:text="@string/type_of_id"
-                android:textColor="@color/colorPrimaryBlue"
-                android:textSize="8sp" />
+                android:textSize="8sp"
+                tools:ignore="SmallSp" />
 
             <Spinner
                 android:id="@+id/identitySpinner"
@@ -122,8 +125,7 @@
             android:id="@+id/nameTL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_20"
-            android:textColorHint="@color/colorPrimaryBlue">
+            android:layout_marginHorizontal="@dimen/spacing_20">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/fullNameET"
@@ -137,10 +139,10 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/idNumberTL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_20"
-            android:textColorHint="@color/colorPrimaryBlue">
+            android:layout_marginHorizontal="@dimen/spacing_20">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/idnumberET"
@@ -154,13 +156,13 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
+            android:id="@+id/currentAddressTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="@dimen/spacing_normal"
             android:fontFamily="@font/open_sans"
             android:text="@string/upload_your_current_address_proof"
-            android:textColor="@color/colorPrimaryBlue"
             android:textSize="18sp" />
 
         <LinearLayout

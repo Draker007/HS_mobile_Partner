@@ -243,5 +243,21 @@
     <string name="send_otp">Send OTP</string>
     <string name="otp_text">Enter OTP which have sent to your phone number or Email-ID</string>
     <string name="resend_otp">Resend OTP</string>
+    <string name="advantages_of_being_a_prime_partner">Advantages of being a prime Partner</string>
+    <string name="we_will_provide_more_benefits">We will provide more benefits</string>
+    <string name="skip_text">Skip</string>
+    <string name="buy_a_package">Buy a Package</string>
+    <string name="location_radius_is_more">Location radius is more</string>
+    <string name="you_will_get_more_service_if_you_become_prime_partner">You will get more service if you become Prime partner</string>
+    <string name="be_a_prime_partner">Be a Prime Partner</string>
+    <string name="SKIP_text">SKIP</string>
+    <string name="you_are_just_3_steps_away_from_reaching_your_first_customer">You are just 3 steps away from reaching your first customer</string>
+    <string name="_3">3 .</string>
+    <string name="my_task">My Task</string>
+    <string name="your_current_location">Your Current Location</string>
+    <string name="today_s_task">Today\'s task</string>
+    <string name="introduction">Introduction</string>
+    <string name="type_here">Type here...</string>
+    <string name="experience">Experience</string>
 
 </resources>

@@ -20,6 +20,16 @@
             android:src="@drawable/saloon_profile_curve_layout"
             tools:ignore="ContentDescription" />
 
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/EditImageProf"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="80dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/emptyprofile_image"
+            app:civ_border_color="#FFFBFB"
+            app:civ_border_width="2dp" />
+
         <ImageView
             android:id="@+id/serviceIV"
             android:layout_width="200dp"
@@ -47,8 +57,7 @@
             android:layout_marginHorizontal="40dp"
             android:layout_marginTop="@dimen/spacing_20"
             android:fontFamily="@font/open_sans"
-            android:text="@string/profile_details_text"
-            android:textColor="@color/colorBlue" />
+            android:text="@string/profile_details_text" />
 
         <LinearLayout
             android:id="@+id/spinnerLL"
@@ -91,8 +100,7 @@
                 android:id="@+id/nameTL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:textColorHint="@color/colorPrimaryBlue">
+                android:layout_marginHorizontal="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/fullNameET"
@@ -108,8 +116,7 @@
                 android:id="@+id/mobileNumberTL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:textColorHint="@color/colorPrimaryBlue">
+                android:layout_marginHorizontal="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/mobileNumberET"
@@ -125,8 +132,7 @@
                 android:id="@+id/emailTL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:textColorHint="@color/colorPrimaryBlue">
+                android:layout_marginHorizontal="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/emailET"
@@ -188,8 +194,7 @@
                 android:id="@+id/dateOfBirthTL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:textColorHint="@color/colorPrimaryBlue">
+                android:layout_marginHorizontal="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/dateOfBirthET"
@@ -207,7 +212,6 @@
                 android:layout_marginTop="@dimen/spacing_normal"
                 android:fontFamily="@font/open_sans"
                 android:text="@string/your_current_address"
-                android:textColor="@color/colorPrimaryBlue"
                 android:textSize="18sp" />
 
             <LinearLayout
@@ -285,7 +289,7 @@
                     tools:ignore="MissingPrefix,TextFields" />
 
                 <EditText
-                    android:id="@+id/PincodeET"
+                    android:id="@+id/pincodeET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -305,7 +309,6 @@
                 android:layout_marginTop="@dimen/spacing_normal"
                 android:fontFamily="@font/open_sans"
                 android:text="@string/upload_your_current_address_proof"
-                android:textColor="@color/colorPrimaryBlue"
                 android:textSize="18sp" />
 
             <LinearLayout

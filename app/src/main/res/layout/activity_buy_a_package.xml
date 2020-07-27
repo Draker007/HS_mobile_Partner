@@ -21,11 +21,13 @@
             android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/headerBuyPackageCL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/saloncomponent">
+                android:background="@drawable/salon_onboard_women">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/headerBuyPackageFadeCL"
                     android:layout_width="0dp"
                     android:layout_height="300dp"
                     android:background="@mipmap/saloonfade"
@@ -40,10 +42,10 @@
                         android:layout_height="25dp"
                         android:layout_marginStart="40dp"
                         android:layout_marginTop="@dimen/spacing_double2"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:tint="@color/color_white"
                         android:src="@drawable/arrow_back"
+                        android:tint="@color/color_white"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="ContentDescription" />
 
                     <TextView
@@ -52,7 +54,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginBottom="8dp"
-                        android:text="3 ."
+                        android:text="@string/_3"
                         android:textColor="#B9B9B9"
                         android:textSize="45sp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -63,7 +65,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text="Be a Prime Partner"
+                        android:text="@string/be_a_prime_partner"
                         android:textColor="#FFFFFF"
                         android:textSize="20sp"
                         app:layout_constraintBottom_toBottomOf="@+id/textView142"
@@ -75,7 +77,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
-                        android:text="SKIP"
+                        android:text="@string/SKIP_text"
                         android:textColor="#E25905"
                         android:textSize="20sp"
                         app:layout_constraintBottom_toBottomOf="@+id/textView143"
@@ -88,7 +90,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
                         android:layout_marginEnd="24dp"
-                        android:text="You are just 3 steps away from reaching your first customer"
+                        android:text="@string/you_are_just_3_steps_away_from_reaching_your_first_customer"
                         android:textColor="@color/color_white"
                         app:layout_constraintBottom_toTopOf="@+id/textView143"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -107,21 +109,20 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="We will provide more benefits"
+                    android:text="@string/we_will_provide_more_benefits"
                     android:textColor="@color/color_black"
                     app:layout_constraintEnd_toEndOf="@+id/textView147"
                     app:layout_constraintStart_toStartOf="@+id/textView147"
                     app:layout_constraintTop_toBottomOf="@+id/textView147" />
 
                 <TextView
-                    android:id="@+id/textView146"
+                    android:id="@+id/advantagesTV"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
-                    android:text="Advantages of being a prime Partner"
-                    android:textColor="#5D41F0"
+                    android:text="@string/advantages_of_being_a_prime_partner"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
@@ -133,18 +134,18 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
-                    android:text="You will get more service if you become Prime partner"
+                    android:text="@string/you_will_get_more_service_if_you_become_prime_partner"
                     android:textColor="@color/color_black"
-                    app:layout_constraintEnd_toEndOf="@+id/textView146"
-                    app:layout_constraintStart_toStartOf="@+id/textView146"
-                    app:layout_constraintTop_toBottomOf="@+id/textView146" />
+                    app:layout_constraintEnd_toEndOf="@+id/advantagesTV"
+                    app:layout_constraintStart_toStartOf="@+id/advantagesTV"
+                    app:layout_constraintTop_toBottomOf="@+id/advantagesTV" />
 
                 <TextView
                     android:id="@+id/textView149"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="Location radius is more"
+                    android:text="@string/location_radius_is_more"
                     android:textColor="@color/color_black"
                     app:layout_constraintEnd_toEndOf="@+id/textView148"
                     app:layout_constraintStart_toStartOf="@+id/textView148"
@@ -158,7 +159,7 @@
                     android:background="@drawable/backgreyround"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:text="Buy a Package"
+                    android:text="@string/buy_a_package"
                     android:textColor="@color/color_white"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -169,7 +170,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Skip"
+                    android:text="@string/skip_text"
                     android:textColor="#E25905"
                     app:layout_constraintEnd_toEndOf="@+id/buyAPackageBtn"
                     app:layout_constraintStart_toStartOf="@+id/buyAPackageBtn"

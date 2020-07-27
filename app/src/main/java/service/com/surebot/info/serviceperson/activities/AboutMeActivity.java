@@ -1,6 +1,6 @@
 package service.com.surebot.info.serviceperson.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,7 +20,7 @@ import service.com.surebot.info.serviceperson.adapters.AboutServiceAdapter;
 import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.ResponseClass.About_me_Response;
 
-public class AboutMeActivity extends AppCompatActivity {
+public class AboutMeActivity extends BaseActivity {
 
     @BindView(R.id.boutMeIntro)
     EditText gIntoroduction_text;

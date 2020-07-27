@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import service.com.surebot.info.serviceperson.Constants.Constants;
 import service.com.surebot.info.serviceperson.DataFiles.awardsData;
 import service.com.surebot.info.serviceperson.R;
-import service.com.surebot.info.serviceperson.utils.AppicationClass;
+import service.com.surebot.info.serviceperson.ApplicationClass;
 
 
 
@@ -39,7 +39,7 @@ public class GetAwardsDettailsAdapter  extends RecyclerView.Adapter<GetAwardsDet
     public GetAwardsDettailsAdapter(Context gContext,ArrayList<String> imageUrls,boolean isCustomGalleryActivity){
         this.gContext = gContext;
         this.imageUrls = imageUrls;
-        AppicationClass.addAwardsDetails.clear();
+        ApplicationClass.addAwardsDetails.clear();
         inflater = LayoutInflater.from(gContext);
         this.isCustomGalleryActivity = isCustomGalleryActivity;
         mSparseBooleanArray = new SparseBooleanArray();
@@ -72,17 +72,17 @@ public class GetAwardsDettailsAdapter  extends RecyclerView.Adapter<GetAwardsDet
         Glide.with(gContext)
                 .load(Constants.IMAGEBASE_URL+new File(imageUrls.get(position))) // Uri of the picture
                 .into(viewHolder.img_android);
-        System.out.println("In Adapter Array size is @@@@@@" + AppicationClass.getGetAwardsDetails().size());
+        System.out.println("In Adapter Array size is @@@@@@" + ApplicationClass.getGetAwardsDetails().size());
 
-        if(AppicationClass.getGetAwardsDetails().size()>0){
-            System.out.println("In Adapter Array size is " + AppicationClass.getGetAwardsDetails().size());
-            viewHolder.Text.setText(AppicationClass.getGetAwardsDetails().get(position));
+        if(ApplicationClass.getGetAwardsDetails().size()>0){
+            System.out.println("In Adapter Array size is " + ApplicationClass.getGetAwardsDetails().size());
+            viewHolder.Text.setText(ApplicationClass.getGetAwardsDetails().get(position));
         }
 
 
 
 
-        AppicationClass.addAwardsDetails.add("");
+        ApplicationClass.addAwardsDetails.add("");
 
         viewHolder.Text.addTextChangedListener(new TextWatcher() {
             @Override
@@ -94,7 +94,7 @@ public class GetAwardsDettailsAdapter  extends RecyclerView.Adapter<GetAwardsDet
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (charSequence!=null) {
 
-                    AppicationClass.addAwardsDetails.set(position,charSequence.toString());
+                    ApplicationClass.addAwardsDetails.set(position,charSequence.toString());
 
                 }}
 
@@ -113,7 +113,7 @@ public class GetAwardsDettailsAdapter  extends RecyclerView.Adapter<GetAwardsDet
                 if (imageUrls.size()>0){
 
 
-                    AppicationClass.addAwardsDetails.remove(position);
+                    ApplicationClass.addAwardsDetails.remove(position);
                     imageUrls.remove(position);
                     notifyItemRemoved(position);
                     getCheckedItems();

@@ -9,7 +9,7 @@
         android:id="@+id/headerRL"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="@drawable/salon_men_header_bg"
+        android:background="@drawable/salon_header_bg"
         tools:ignore="UselessParent">
 
         <TextView

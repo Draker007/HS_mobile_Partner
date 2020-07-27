@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
+
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,9 +28,9 @@ import service.com.surebot.info.serviceperson.Constants.Constants;
 import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.RequestClass.PaymentReceived_Request;
 import service.com.surebot.info.serviceperson.ResponseClass.PaymentReceived_Response;
-import service.com.surebot.info.serviceperson.utils.AppicationClass;
+import service.com.surebot.info.serviceperson.ApplicationClass;
 
-public class serviceDetailsActivity extends AppCompatActivity {
+public class serviceDetailsActivity extends BaseActivity {
     @BindView(R.id.endservice_button)
     Button gEndservice_button;
 
@@ -134,7 +134,7 @@ public class serviceDetailsActivity extends AppCompatActivity {
             ApiInterface request = retrofit.create(ApiInterface.class);
             PaymentReceived_Request lNewRequestList_Request = new PaymentReceived_Request();
 
-            lNewRequestList_Request.setUser_ID(AppicationClass.getUserId_FromLogin());
+            lNewRequestList_Request.setUser_ID(ApplicationClass.getUserId_FromLogin());
             lNewRequestList_Request.setDocket(Constants.TOKEN);
 
             Call<PaymentReceived_Response> call = request.get_PaymentReceivedDetails(lNewRequestList_Request);

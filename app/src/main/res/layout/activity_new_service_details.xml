@@ -35,13 +35,13 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
-                        android:id="@+id/servicelayoutimg"
+                        android:id="@+id/serviceLayoutIV"
                         android:layout_width="200dp"
                         android:layout_height="200dp"
                         android:alpha="0.2"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/salon" />
+                        android:src="@drawable/salon" />
 
                     <ImageView
                         android:id="@+id/successIVAnim"
@@ -77,7 +77,7 @@
                         android:text="Customer Name"
                         android:textColor="#CBCBCB"
                         android:textSize="12sp"
-                        app:layout_constraintEnd_toEndOf="@+id/servicelayoutimg"
+                        app:layout_constraintEnd_toEndOf="@+id/serviceLayoutIV"
                         app:layout_constraintTop_toTopOf="@+id/newservicesRecycler" />
 
                     <TextView

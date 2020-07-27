@@ -9,12 +9,12 @@ import java.util.List;
 
 
 
-public class AllRequestList_Adapter extends FragmentPagerAdapter {
+public class RequestListAdapter extends FragmentPagerAdapter {
 
     private final List<Fragment> fragmentList = new ArrayList<>();
     private final List<String> fragmentListTitles = new ArrayList<>();
 
-    public AllRequestList_Adapter(FragmentManager fm) {
+    public RequestListAdapter(FragmentManager fm) {
         super(fm);
     }
 

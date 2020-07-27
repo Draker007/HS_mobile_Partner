@@ -19,8 +19,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,12 +30,13 @@ import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import service.com.surebot.info.serviceperson.ApplicationClass;
 import service.com.surebot.info.serviceperson.adapters.NewPaymentServiceAdapter;
 import service.com.surebot.info.serviceperson.adapters.NewservicesAdapter;
 import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.utils.Utils;
 
-public class NewServiceDetailsActivity extends AppCompatActivity implements View.OnClickListener {
+public class NewServiceDetailsActivity extends BaseActivity implements View.OnClickListener {
     @BindView(R.id.newservicesRecycler)
     RecyclerView gnewservicesRecycler;
 
@@ -42,6 +44,8 @@ public class NewServiceDetailsActivity extends AppCompatActivity implements View
     RecyclerView servicePaymentRecycler;
     @BindView(R.id.serviceCodeCL)
     ConstraintLayout serviceCodeCL;
+    @BindView(R.id.serviceDetailLayout)
+    ConstraintLayout serviceDetailLayout;
     @BindView(R.id.okButton)
     Button okButton;
     @BindView(R.id.rescheduleEndServicesRL)
@@ -68,6 +72,8 @@ public class NewServiceDetailsActivity extends AppCompatActivity implements View
     ImageView successIV;
     @BindView(R.id.successIVAnim)
     ImageView successIVAnim;
+    @BindView(R.id.serviceLayoutIV)
+    ImageView serviceLayoutIV;
     private NewServiceDetailsActivity context;
     private LinearLayout hourLL;
     private NestedScrollView hourScrollView;
@@ -92,6 +98,28 @@ public class NewServiceDetailsActivity extends AppCompatActivity implements View
         servicePaymentRecycler.setLayoutManager(llm2);
         NewPaymentServiceAdapter NewPaymentServiceAdapter = new NewPaymentServiceAdapter(this);
         servicePaymentRecycler.setAdapter(NewPaymentServiceAdapter);
+
+        int categorySelection = ApplicationClass.getCategorySelection();
+        int headerLayout = R.color.colorElectricianText;
+        int layoutServiceImage = R.drawable.electrician;
+
+        switch (categorySelection) {
+            case 1:
+            case 2: {
+                headerLayout = R.color.colorBlue;
+                layoutServiceImage = R.drawable.salon;
+            }
+            break;
+            case 3: {
+                headerLayout = R.color.colorElectricianText;
+                layoutServiceImage = R.drawable.electrician;
+            }
+            break;
+        }
+
+        serviceDetailLayout.setBackgroundTintList(context.getColorStateList(headerLayout));
+        serviceLayoutIV.setBackground(ContextCompat.getDrawable(context, layoutServiceImage));
+
 
         button6.setOnClickListener(this);
         okButton.setOnClickListener(this);

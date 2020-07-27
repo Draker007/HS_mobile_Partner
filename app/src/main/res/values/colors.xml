@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">#707070</color>
 
     <color name="color_white">  #FFFFFF</color>
     <color name="color_black">#000000</color>
@@ -40,6 +40,7 @@
     <color name="colorGreen">#00E92F</color>
     <color name="color_lightgray">#A1A1A1</color>
     <color name="colorPrimaryRed">#FF3131</color>
+    <color name="colorElectricianText">#E84242</color>
     <color name="colorRed">#E20505</color>
 
 
