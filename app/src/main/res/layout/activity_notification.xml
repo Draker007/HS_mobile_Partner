@@ -7,7 +7,7 @@
     tools:context=".activities.NotificationActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/header_layout"
+        android:id="@+id/headerRL"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="@color/color_blackforheader"
@@ -59,7 +59,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/header_layout" />
+        app:layout_constraintTop_toBottomOf="@+id/headerRL" />
 
     <TextView
         android:id="@+id/NoNotification"
@@ -78,6 +78,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/header_layout" />
+        app:layout_constraintTop_toBottomOf="@+id/headerRL" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

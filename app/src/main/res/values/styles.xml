@@ -46,13 +46,23 @@
         <item name="android:textColor">@color/colorElectricianText</item>
         <item name="android:textColorHint">@color/colorElectricianText</item>
         <item name="android:editTextColor">@color/colorElectricianText</item>
+        <item name="android:windowDisablePreview">true</item>
         <item name="hintTextColor">@color/colorElectricianText</item>
     </style>
 
     <style name="ThemeSaloon" parent="">
+        <item name="android:textColor">@color/colorBlue</item>
+        <item name="android:textColorHint">@color/colorBlue</item>
+        <item name="android:editTextColor">@color/colorBlue</item>
+        <item name="android:windowDisablePreview">true</item>
+        <item name="hintTextColor">@color/colorBlue</item>
+    </style>
+
+    <style name="ThemePlumber" parent="">
         <item name="android:textColor">@color/colorPrimaryBlue</item>
         <item name="android:textColorHint">@color/colorPrimaryBlue</item>
         <item name="android:editTextColor">@color/colorPrimaryBlue</item>
+        <item name="android:windowDisablePreview">true</item>
         <item name="hintTextColor">@color/colorPrimaryBlue</item>
     </style>
 

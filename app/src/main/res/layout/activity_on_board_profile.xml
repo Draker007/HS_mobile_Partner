@@ -150,6 +150,7 @@
                 android:hint="@string/full_name_hint"
                 android:importantForAutofill="no"
                 android:inputType="textPersonName"
+                android:textColor="@color/color_black"
                 android:textColorHighlight="@color/color_orange" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -166,6 +167,7 @@
                 android:enabled="false"
                 android:focusable="true"
                 android:hint="@string/mobile_num_text"
+                android:textColor="@color/color_black"
                 android:importantForAutofill="no"
                 android:inputType="number"
                 android:maxLength="10" />
@@ -184,6 +186,7 @@
                 android:enabled="false"
                 android:focusable="true"
                 android:hint="@string/email_id_text"
+                android:textColor="@color/color_black"
                 android:imeOptions="actionDone"
                 android:importantForAutofill="no"
                 android:inputType="textEmailAddress" />
@@ -247,6 +250,7 @@
                 android:layout_height="wrap_content"
                 android:enabled="false"
                 android:focusable="true"
+                android:textColor="@color/color_black"
                 android:hint="@string/date_of_birth_text"
                 android:importantForAutofill="no"
                 android:inputType="date" />
@@ -277,6 +281,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
                 android:hint="@string/name"
+                android:textColor="@color/color_black"
                 android:importantForAutofill="no"
                 android:inputType="text"
                 tools:ignore="MissingPrefix,TextFields" />
@@ -290,6 +295,7 @@
                 android:hint="@string/house_flat_no"
                 android:importantForAutofill="no"
                 android:inputType="text"
+                android:textColor="@color/color_black"
                 tools:ignore="MissingPrefix,TextFields" />
 
             <EditText
@@ -301,6 +307,7 @@
                 android:hint="@string/street_text"
                 android:importantForAutofill="no"
                 android:inputType="text"
+                android:textColor="@color/color_black"
                 tools:ignore="MissingPrefix,TextFields" />
 
             <EditText
@@ -312,6 +319,7 @@
                 android:hint="@string/area"
                 android:importantForAutofill="no"
                 android:inputType="text"
+                android:textColor="@color/color_black"
                 tools:ignore="MissingPrefix,TextFields" />
 
             <EditText
@@ -321,6 +329,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:hint="@string/city"
+                android:textColor="@color/color_black"
                 android:importantForAutofill="no"
                 android:inputType="text"
                 tools:ignore="MissingPrefix,TextFields" />
@@ -334,6 +343,7 @@
                 android:hint="@string/state"
                 android:importantForAutofill="no"
                 android:inputType="text"
+                android:textColor="@color/color_black"
                 tools:ignore="MissingPrefix,TextFields" />
 
             <EditText
@@ -343,6 +353,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:hint="@string/pincode"
+                android:textColor="@color/color_black"
                 android:importantForAutofill="no"
                 android:inputType="number"
                 android:maxLength="10"

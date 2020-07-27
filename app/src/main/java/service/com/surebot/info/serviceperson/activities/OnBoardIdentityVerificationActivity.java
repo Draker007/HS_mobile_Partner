@@ -84,10 +84,13 @@ public class OnBoardIdentityVerificationActivity extends BaseActivity implements
             }
             break;
             case 3: {
-                ColorStateList redColor = ColorStateList.valueOf(getResources().getColor
-                        (R.color.colorElectricianText));
                 headerProfile = R.drawable.onboard_electrician;
                 headerProfileFade = R.mipmap.electrician_fade;
+            }
+            break;
+            case 4: {
+                headerProfile = R.drawable.onboard_plumber;
+                headerProfileFade = R.mipmap.plumber_fade;
             }
             break;
         }

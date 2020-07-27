@@ -74,6 +74,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 layoutServiceImage = R.drawable.electrician;
             }
             break;
+            case 4: {
+                headerLayout = R.color.colorPrimaryBlue;
+                layoutServiceImage = R.drawable.plumber;
+            }
+            break;
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

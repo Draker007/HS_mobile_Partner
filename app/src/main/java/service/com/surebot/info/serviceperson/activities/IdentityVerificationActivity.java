@@ -36,13 +36,19 @@ public class IdentityVerificationActivity extends BaseActivity {
             case 1:
             case 2: {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    borderLL.setBackgroundTintList(context.getColorStateList(R.color.colorPrimaryBlue));
+                    borderLL.setBackground(ContextCompat.getDrawable(context, R.drawable.bg_border_blue));
                 }
             }
             break;
             case 3: {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    borderLL.setBackgroundTintList(context.getColorStateList(R.color.colorElectricianText));
+                    borderLL.setBackground(ContextCompat.getDrawable(context, R.drawable.bg_border_red));
+                }
+            }
+            break;
+            case 4: {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    borderLL.setBackground(ContextCompat.getDrawable(context, R.drawable.bg_border_plumber));
                 }
             }
             break;

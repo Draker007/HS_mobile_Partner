@@ -7,7 +7,7 @@
     tools:context=".activities.PrimePartnerActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/header_layout"
+        android:id="@+id/headerRL"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="@color/color_blackforheader"
@@ -69,7 +69,7 @@
         app:fontFamily="@font/montserrat"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/header_layout" />
+        app:layout_constraintTop_toBottomOf="@+id/headerRL" />
 
     <TextView
         android:id="@+id/textView26"

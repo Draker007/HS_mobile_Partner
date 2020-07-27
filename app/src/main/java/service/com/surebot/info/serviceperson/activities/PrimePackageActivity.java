@@ -56,7 +56,7 @@ public class PrimePackageActivity extends BaseActivity {
             case 1:
             case 2: {
                 layoutImage = R.drawable.salon;
-                textColor = R.color.colorPrimaryBlue;
+                textColor = R.color.colorBlue;
             }
             break;
             case 3: {
@@ -65,6 +65,14 @@ public class PrimePackageActivity extends BaseActivity {
                 }
                 layoutImage = R.drawable.electrician;
                 textColor = R.color.colorElectricianText;
+            }
+            break;
+            case 4: {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    salonBgIV.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimaryBlue)));
+                }
+                layoutImage = R.drawable.plumber;
+                textColor = R.color.colorPrimaryBlue;
             }
             break;
         }

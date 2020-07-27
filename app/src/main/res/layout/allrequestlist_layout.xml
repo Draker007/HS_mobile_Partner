@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
-        android:id="@+id/header_layout"
+        android:id="@+id/headerRL"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:background="@drawable/salon_header_bg"
@@ -36,7 +36,7 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/allrequestlist_tablayout"
-        android:layout_below="@+id/header_layout"
+        android:layout_below="@+id/headerRL"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"

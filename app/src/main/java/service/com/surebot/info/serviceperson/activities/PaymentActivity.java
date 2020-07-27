@@ -1,10 +1,13 @@
 package service.com.surebot.info.serviceperson.activities;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 
-
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -13,9 +16,10 @@ import com.google.android.material.tabs.TabLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import service.com.surebot.info.serviceperson.ApplicationClass;
+import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.fragments.PaymentCompletedFragment;
 import service.com.surebot.info.serviceperson.fragments.PaymentPendingFragment;
-import service.com.surebot.info.serviceperson.R;
 
 public class PaymentActivity extends BaseActivity {
 
@@ -25,6 +29,8 @@ public class PaymentActivity extends BaseActivity {
     FrameLayout paymentContainer;
     @BindView(R.id.arrowIV)
     ImageView arrowIV;
+    @BindView(R.id.paymentTV)
+    TextView paymentTV;
 
     private PaymentCompletedFragment completedFragment;
     private PaymentPendingFragment pendingFragment;
@@ -43,6 +49,29 @@ public class PaymentActivity extends BaseActivity {
         arrowIV.setOnClickListener(v -> {
             finish();
         });
+
+        int categorySelection = ApplicationClass.getCategorySelection();
+        int headerBackground = R.drawable.electrician_header_background;
+
+        switch (categorySelection) {
+            case 1:
+            case 2: {
+                headerBackground = R.drawable.salon_header_bg;
+            }
+            break;
+            case 3: {
+                headerBackground = R.drawable.electrician_header_background;
+            }
+            break;
+            case 4: {
+                headerBackground = R.drawable.plumber_header_bg;
+            }
+            break;
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            paymentTV.setBackground(ContextCompat.getDrawable(context, headerBackground));
+        }
     }
 
     private void setTabSelectListener() {

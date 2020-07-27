@@ -50,6 +50,12 @@ public class PersonalDetailsActivity extends BaseActivity {
                 femaleGenderIV.setColorFilter(context.getResources().getColor(R.color.colorElectricianText));
             }
             break;
+            case 4: {
+                headerLayout = R.color.colorPrimaryBlue;
+                layoutServiceImage = R.drawable.plumber;
+                femaleGenderIV.setColorFilter(context.getResources().getColor(R.color.colorPrimaryBlue));
+            }
+            break;
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

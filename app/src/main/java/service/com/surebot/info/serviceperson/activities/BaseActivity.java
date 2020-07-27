@@ -30,9 +30,14 @@ public class BaseActivity extends AppCompatActivity {
                 theme = R.style.ThemeElectrician;
             }
             break;
+            case 4: {
+                theme = R.style.ThemePlumber;
+            }
+            break;
         }
         setTheme(theme);
         recreate();
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        //overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        overridePendingTransition(R.anim.fade_in_animation, R.anim.fade_out_animation);
     }
 }
