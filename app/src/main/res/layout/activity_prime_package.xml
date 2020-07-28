@@ -24,10 +24,44 @@
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:alpha="0.2"
+            tools:visibility="gone"
+            android:visibility="visible"
             android:layout_marginTop="@dimen/spacing_20"
             android:layout_alignParentEnd="true"
             android:src="@drawable/salon"
             tools:ignore="ContentDescription" />
+
+        <LinearLayout
+            android:id="@+id/serviceLayoutCarpenterLL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:gravity="end">
+
+            <ImageView
+                android:id="@+id/serviceCarpeneterHammerIV"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:alpha="0.2"
+                android:layout_marginTop="@dimen/spacing_20"
+                android:layout_marginEnd="-20dp"
+                android:src="@drawable/carpenter_hammer"
+                tools:ignore="ContentDescription" />
+
+            <ImageView
+                android:id="@+id/serviceCarpeneterhacksawIV"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:alpha="0.2"
+                android:layout_marginTop="-20dp"
+                android:layout_marginEnd="-20dp"
+                android:src="@drawable/carpenter_hacksaw"
+                tools:ignore="ContentDescription" />
+
+
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/arrowIV"

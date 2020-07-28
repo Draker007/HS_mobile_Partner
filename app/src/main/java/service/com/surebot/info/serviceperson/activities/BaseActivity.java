@@ -34,6 +34,10 @@ public class BaseActivity extends AppCompatActivity {
                 theme = R.style.ThemePlumber;
             }
             break;
+            case 5: {
+                theme = R.style.ThemeCarpenter;
+            }
+            break;
         }
         setTheme(theme);
         recreate();

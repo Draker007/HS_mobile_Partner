@@ -16,7 +16,8 @@
             android:layout_height="wrap_content"
             android:layout_weight=".1"
             android:gravity="center"
-            android:text="@string/one_text" />
+            android:text="@string/one_text"
+            android:textColor="@color/color_black" />
 
         <TextView
             android:id="@+id/questionTV"
@@ -26,6 +27,7 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:padding="@dimen/spacing_medium2"
+            android:textColor="@color/color_black"
             tools:text="@string/textview" />
 
         <ImageView
@@ -59,8 +61,10 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/spacing_double2"
         android:layout_marginTop="10dp"
+        android:text="@string/about_us_details"
+        android:textColor="@color/color_black"
         android:visibility="gone"
-        android:text="@string/about_us_details"/>
+        tools:visibility="gone" />
 
     <TextView
         android:layout_width="match_parent"

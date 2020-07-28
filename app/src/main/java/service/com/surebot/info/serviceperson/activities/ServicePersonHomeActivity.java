@@ -4,10 +4,11 @@ import android.Manifest;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.Window;
 import android.widget.Toast;
-
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -40,6 +41,8 @@ public class ServicePersonHomeActivity extends BaseActivity {
 
     String HomeScreen_Flow;
     String gUserId_FromLogin, gUserName_FromLogin, gPremium_PartnerId, gCategoryId_FromLogin;
+    private ServicePersonHomeActivity context;
+    private int categorySelection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,8 @@ public class ServicePersonHomeActivity extends BaseActivity {
         setContentView(R.layout.activity_service_person_home);
 
         ButterKnife.bind(this);
+        context = ServicePersonHomeActivity.this;
+        categorySelection = ApplicationClass.getCategorySelection();
         Intent lintent = this.getIntent();
         HomeScreen_Flow = lintent.getStringExtra("HomeScreenFlow");
 
@@ -65,7 +70,7 @@ public class ServicePersonHomeActivity extends BaseActivity {
         HomeScreen_Flow = "fromlogin";
 
         check = getIntent().getStringExtra("status");
-        if (check == "1") {
+        if (check != null && check.equalsIgnoreCase("1")) {
             navigation.setSelectedItemId(R.id.navigationProfile);
         }
 
@@ -78,6 +83,7 @@ public class ServicePersonHomeActivity extends BaseActivity {
         progress.setCancelable(true);
         navigation = findViewById(R.id.bottom_navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
 
         fragment = new MyTaskFragment();
         loadFragment(fragment);
@@ -115,26 +121,61 @@ public class ServicePersonHomeActivity extends BaseActivity {
         switch (item.getItemId()) {
             case R.id.navigationTask:
                 fragment = new MyTaskFragment();
-                loadFragment(fragment);
                 break;
             case R.id.navigationProfile:
                 fragment = new ProfileFragment();
-                loadFragment(fragment);
                 back = 0;
                 break;
             case R.id.navigationRequest:
                 fragment = new RequestListFragment();
-                loadFragment(fragment);
                 back = 0;
                 break;
             case R.id.navigationMore:
                 fragment = new MoreFragment();
-                loadFragment(fragment);
                 back = 0;
                 break;
         }
+        setBottomNavColor(item);
+        loadFragment(fragment);
         return true;
     };
+
+    private void setBottomNavColor(MenuItem item) {
+        int bottomNavColor = R.color.colorBlue;
+        switch (categorySelection) {
+            case 1:
+            case 2: {
+                bottomNavColor = R.color.colorBlue;
+                break;
+            }
+            case 3: {
+                bottomNavColor = R.color.colorElectricianText;
+                break;
+            }
+            case 4: {
+                bottomNavColor = R.color.colorPrimaryBlue;
+                break;
+            }
+        }
+        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            item.setIconTintList(ContextCompat.getColorStateList(context, bottomNavColor));
+        }*/
+
+        int[][] states = new int[][]{
+                new int[]{android.R.attr.state_checked}, // state_checked
+                new int[]{}  //
+        };
+
+        int[] colors = new int[]{
+                R.color.menuSelectedColor,
+                bottomNavColor
+        };
+
+        ColorStateList myColorList = new ColorStateList(states, colors);
+        navigation.setItemIconTintList(myColorList);
+//        navigation.setItemIconTintList(ColorStateList.valueOf(ContextCompat.getColor(context, bottomNavColor)));
+
+    }
 
     //For Switching Fragments
     private void loadFragment(Fragment fragment) {

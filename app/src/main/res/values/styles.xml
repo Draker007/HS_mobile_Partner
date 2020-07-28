@@ -66,4 +66,12 @@
         <item name="hintTextColor">@color/colorPrimaryBlue</item>
     </style>
 
+    <style name="ThemeCarpenter" parent="">
+        <item name="android:textColor">@color/colorBrown</item>
+        <item name="android:textColorHint">@color/colorBrown</item>
+        <item name="android:editTextColor">@color/colorBrown</item>
+        <item name="android:windowDisablePreview">true</item>
+        <item name="hintTextColor">@color/colorBrown</item>
+    </style>
+
 </resources>

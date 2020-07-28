@@ -5,12 +5,15 @@ import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.database.collection.LLRBBlackValueNode;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,6 +35,8 @@ public class PrimePackageActivity extends BaseActivity {
     ImageView salonBgIV;
     @BindView(R.id.primeAdvantagesTV)
     TextView primeAdvantagesTV;
+    @BindView(R.id.serviceLayoutCarpenterLL)
+    LinearLayout serviceLayoutCarpenterLL;
     private PrimePackageActivity context;
 
     @Override
@@ -50,35 +55,48 @@ public class PrimePackageActivity extends BaseActivity {
 
         int categorySelection = ApplicationClass.getCategorySelection();
         int layoutImage = R.drawable.salon;
+        int headerLayout = R.drawable.salonlayout;
         int textColor = R.color.colorElectricianText;
 
         switch (categorySelection) {
             case 1:
             case 2: {
                 layoutImage = R.drawable.salon;
+                headerLayout = R.drawable.salonlayout;
                 textColor = R.color.colorBlue;
             }
             break;
             case 3: {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    salonBgIV.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorElectricianText)));
                 }
                 layoutImage = R.drawable.electrician;
+                headerLayout = R.drawable.electrician_layout;
                 textColor = R.color.colorElectricianText;
             }
             break;
             case 4: {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    salonBgIV.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimaryBlue)));
                 }
                 layoutImage = R.drawable.plumber;
+                headerLayout = R.drawable.plumber_layout;
                 textColor = R.color.colorPrimaryBlue;
+            }
+            break;
+            case 5: {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    salonBgIV.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorBrown)));
+                    Utils.showHideView(true , serviceLayoutCarpenterLL);
+                    Utils.showHideView(false, serviceLayoutIV);
+                }
+                textColor = R.color.colorBrown;
+                headerLayout = R.drawable.carpenter_layout;
             }
             break;
         }
 
         serviceLayoutIV.setImageDrawable(ContextCompat.getDrawable(context, layoutImage));
         primeAdvantagesTV.setTextColor(getResources().getColor(textColor));
+        salonBgIV.setImageDrawable(ContextCompat.getDrawable(context, headerLayout));
 
 
     }

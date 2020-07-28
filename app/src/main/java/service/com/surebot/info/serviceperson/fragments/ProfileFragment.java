@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,6 +29,7 @@ import service.com.surebot.info.serviceperson.activities.LicensesAndCertificates
 import service.com.surebot.info.serviceperson.activities.IdentityVerificationActivity;
 import service.com.surebot.info.serviceperson.activities.PersonalDetailsActivity;
 import service.com.surebot.info.serviceperson.activities.PrimePackageActivity;
+import service.com.surebot.info.serviceperson.utils.Utils;
 
 public class ProfileFragment extends Fragment implements View.OnClickListener {
     private FragmentActivity context;
@@ -48,6 +50,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     ConstraintLayout profileHeaderCL;
     @BindView(R.id.serviceLayoutIV)
     ImageView serviceLayoutIV;
+    @BindView(R.id.serviceLayoutCarpenterLL)
+    LinearLayout serviceLayoutCarpenterLL;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Nullable
@@ -59,30 +63,36 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         context = getActivity();
 
         int categorySelection = ApplicationClass.getCategorySelection();
-        int headerLayout = R.color.colorElectricianText;
+        int headerLayout = R.drawable.salonlayout;
         int layoutServiceImage = R.drawable.electrician;
 
         switch (categorySelection) {
             case 1:
             case 2: {
-                headerLayout = R.color.colorBlue;
+                headerLayout = R.drawable.salonlayout;
                 layoutServiceImage = R.drawable.salon;
             }
             break;
             case 3: {
-                headerLayout = R.color.colorElectricianText;
+                headerLayout = R.drawable.electrician_layout;
                 layoutServiceImage = R.drawable.electrician;
             }
             break;
             case 4: {
-                headerLayout = R.color.colorPrimaryBlue;
+                headerLayout = R.drawable.plumber_layout;
                 layoutServiceImage = R.drawable.plumber;
+            }
+            break;
+            case 5: {
+                headerLayout = R.drawable.carpenter_layout;
+                Utils.showHideView(true, serviceLayoutCarpenterLL);
+                Utils.showHideView(false, serviceLayoutIV);
             }
             break;
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            profileHeaderCL.setBackgroundTintList(Objects.requireNonNull(getActivity()).getColorStateList(headerLayout));
+            profileHeaderCL.setBackground(ContextCompat.getDrawable(Objects.requireNonNull(getActivity()), headerLayout));
             serviceLayoutIV.setImageDrawable(ContextCompat.getDrawable(getActivity(), layoutServiceImage));
         }
 

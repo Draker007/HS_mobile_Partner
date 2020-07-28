@@ -67,6 +67,10 @@ public class PaymentActivity extends BaseActivity {
                 headerBackground = R.drawable.plumber_header_bg;
             }
             break;
+            case 5: {
+                headerBackground = R.drawable.carpenter_header_bg;
+            }
+            break;
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

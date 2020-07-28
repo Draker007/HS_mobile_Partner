@@ -72,6 +72,8 @@ public class NewServiceDetailsActivity extends BaseActivity implements View.OnCl
     ImageView successIV;
     @BindView(R.id.successIVAnim)
     ImageView successIVAnim;
+    @BindView(R.id.serviceLayoutCarpenterLL)
+    LinearLayout serviceLayoutCarpenterLL;
     @BindView(R.id.serviceLayoutIV)
     ImageView serviceLayoutIV;
     private NewServiceDetailsActivity context;
@@ -100,25 +102,36 @@ public class NewServiceDetailsActivity extends BaseActivity implements View.OnCl
         servicePaymentRecycler.setAdapter(NewPaymentServiceAdapter);
 
         int categorySelection = ApplicationClass.getCategorySelection();
-        int headerLayout = R.color.colorElectricianText;
+        int headerLayout = R.drawable.salonlayout;
         int layoutServiceImage = R.drawable.electrician;
 
         switch (categorySelection) {
             case 1:
             case 2: {
-                headerLayout = R.color.colorBlue;
+                headerLayout = R.drawable.salonlayout;
                 layoutServiceImage = R.drawable.salon;
             }
             break;
             case 3: {
-                headerLayout = R.color.colorElectricianText;
+                headerLayout = R.drawable.electrician_layout;
                 layoutServiceImage = R.drawable.electrician;
+            }
+            break;
+            case 4: {
+                headerLayout = R.drawable.plumber_layout;
+                layoutServiceImage = R.drawable.plumber;
+            }
+            break;
+            case 5: {
+                headerLayout = R.drawable.carpenter_layout;
+                Utils.showHideView(true, serviceLayoutCarpenterLL);
+                Utils.showHideView(false, serviceLayoutIV);
             }
             break;
         }
 
-        serviceDetailLayout.setBackgroundTintList(context.getColorStateList(headerLayout));
-        serviceLayoutIV.setBackground(ContextCompat.getDrawable(context, layoutServiceImage));
+        serviceDetailLayout.setBackground(ContextCompat.getDrawable(context, headerLayout));
+        serviceLayoutIV.setImageDrawable(ContextCompat.getDrawable(context, layoutServiceImage));
 
 
         button6.setOnClickListener(this);

@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,9 +42,11 @@ import service.com.surebot.info.serviceperson.RequestClass.BuyPackage_Request;
 import service.com.surebot.info.serviceperson.RequestClass.PartnerStartService_Request;
 import service.com.surebot.info.serviceperson.ResponseClass.BuyPackage_Response;
 import service.com.surebot.info.serviceperson.ResponseClass.PartnerStartService_Response;
+import service.com.surebot.info.serviceperson.activities.PrimePackageActivity;
 import service.com.surebot.info.serviceperson.activities.serviceDetailsActivity;
 import service.com.surebot.info.serviceperson.adapters.HomePackage_Adapter;
 import service.com.surebot.info.serviceperson.adapters.TodaysTaskAdapter;
+import service.com.surebot.info.serviceperson.utils.Utils;
 
 
 public class MyTaskFragment extends Fragment implements TodaysTaskAdapter.startservicelist_Communicator, HomePackage_Adapter.Buypackage_Communicator {
@@ -58,6 +61,9 @@ public class MyTaskFragment extends Fragment implements TodaysTaskAdapter.starts
     ConstraintLayout headerLayoutCL;
     @BindView(R.id.layoutServiceIV)
     ImageView layoutServiceIV;
+    LinearLayout serviceLayoutCarpenterLL;
+    private PrimePackageActivity context;
+
 
     Dialog gEnterCode_Dialog;
     EditText lOtp_text1, lOtp_text2, lOtp_text3, lOtp_text4;
@@ -87,30 +93,36 @@ public class MyTaskFragment extends Fragment implements TodaysTaskAdapter.starts
         progress.setCancelable(true);
 
         int categorySelection = ApplicationClass.getCategorySelection();
-        int headerLayout = R.color.colorElectricianText;
+        int headerLayout = R.drawable.salonlayout;
         int layoutServiceImage = R.drawable.electrician;
 
         switch (categorySelection) {
             case 1:
             case 2: {
-                headerLayout = R.color.colorBlue;
+                headerLayout = R.drawable.salonlayout;
                 layoutServiceImage = R.drawable.salon;
             }
             break;
             case 3: {
-                headerLayout = R.color.colorElectricianText;
+                headerLayout = R.drawable.electrician_layout;
                 layoutServiceImage = R.drawable.electrician;
             }
             break;
             case 4: {
-                headerLayout = R.color.colorPrimaryBlue;
+                headerLayout = R.drawable.plumber_layout;
                 layoutServiceImage = R.drawable.plumber;
+            }
+            break;
+            case 5: {
+                headerLayout = R.drawable.carpenter_layout;
+                Utils.showHideView(true , serviceLayoutCarpenterLL);
+                Utils.showHideView(false, layoutServiceIV);
             }
             break;
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            headerLayoutCL.setBackgroundTintList(getActivity().getColorStateList(headerLayout));
+            headerLayoutCL.setBackground(ContextCompat.getDrawable(getActivity(), headerLayout));
             layoutServiceIV.setImageDrawable(ContextCompat.getDrawable(getActivity(), layoutServiceImage));
         }
 

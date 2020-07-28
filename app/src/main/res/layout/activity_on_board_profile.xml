@@ -213,7 +213,7 @@
                 android:layout_below="@id/maleGenderIV"
                 android:layout_marginStart="13dp"
                 android:text="@string/male_text"
-                android:textColor="@color/colorTextSignup"
+                android:textColor="@color/colorBrown"
                 android:textSize="16sp" />
 
             <ImageView
@@ -233,7 +233,7 @@
                 android:layout_marginStart="50dp"
                 android:layout_toEndOf="@+id/maleTV"
                 android:text="@string/female_text"
-                android:textColor="@color/colorTextSignup"
+                android:textColor="@color/colorBrown"
                 android:textSize="16sp" />
 
         </RelativeLayout>
