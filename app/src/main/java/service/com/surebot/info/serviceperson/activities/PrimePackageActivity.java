@@ -1,6 +1,5 @@
 package service.com.surebot.info.serviceperson.activities;
 
-import android.content.res.ColorStateList;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
@@ -8,12 +7,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.RequiresApi;
-
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.firebase.database.collection.LLRBBlackValueNode;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,8 +30,6 @@ public class PrimePackageActivity extends BaseActivity {
     ImageView salonBgIV;
     @BindView(R.id.primeAdvantagesTV)
     TextView primeAdvantagesTV;
-    @BindView(R.id.serviceLayoutCarpenterLL)
-    LinearLayout serviceLayoutCarpenterLL;
     private PrimePackageActivity context;
 
     @Override
@@ -84,12 +77,18 @@ public class PrimePackageActivity extends BaseActivity {
             break;
             case 5: {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    salonBgIV.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorBrown)));
-                    Utils.showHideView(true , serviceLayoutCarpenterLL);
-                    Utils.showHideView(false, serviceLayoutIV);
                 }
+                layoutImage = R.drawable.carpenter;
                 textColor = R.color.colorBrown;
                 headerLayout = R.drawable.carpenter_layout;
+            }
+            break;
+            case 6: {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                }
+                layoutImage = R.drawable.cleaning;
+                textColor = R.color.colorGray;
+                headerLayout = R.drawable.cleaning_layout;
             }
             break;
         }

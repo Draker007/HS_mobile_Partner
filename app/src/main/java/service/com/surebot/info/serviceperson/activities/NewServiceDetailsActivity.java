@@ -72,8 +72,6 @@ public class NewServiceDetailsActivity extends BaseActivity implements View.OnCl
     ImageView successIV;
     @BindView(R.id.successIVAnim)
     ImageView successIVAnim;
-    @BindView(R.id.serviceLayoutCarpenterLL)
-    LinearLayout serviceLayoutCarpenterLL;
     @BindView(R.id.serviceLayoutIV)
     ImageView serviceLayoutIV;
     private NewServiceDetailsActivity context;
@@ -124,8 +122,12 @@ public class NewServiceDetailsActivity extends BaseActivity implements View.OnCl
             break;
             case 5: {
                 headerLayout = R.drawable.carpenter_layout;
-                Utils.showHideView(true, serviceLayoutCarpenterLL);
-                Utils.showHideView(false, serviceLayoutIV);
+                layoutServiceImage = R.drawable.carpenter;
+            }
+            break;
+            case 6: {
+                headerLayout = R.drawable.cleaning_layout;
+                layoutServiceImage = R.drawable.cleaning;
             }
             break;
         }

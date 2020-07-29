@@ -59,6 +59,10 @@ public class HelpCenterActivity extends BaseActivity implements View.OnClickList
                 headerBackground = R.drawable.carpenter_header_bg;
             }
             break;
+            case 6: {
+                headerBackground = R.drawable.cleaning_header_bg;
+            }
+            break;
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

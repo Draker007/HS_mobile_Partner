@@ -69,6 +69,11 @@ public class BuyAPackageActivity extends BaseActivity implements View.OnClickLis
                 headerProfileFade = R.mipmap.carpenter_fade;
             }
             break;
+            case 6: {
+                headerProfile = R.drawable.onboard_cleaning;
+                headerProfileFade = R.mipmap.cleaning_fade;
+            }
+            break;
         }
 
         headerBuyPackageCL.setBackground(ContextCompat.getDrawable(context, headerProfile));

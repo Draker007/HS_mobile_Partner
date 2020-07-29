@@ -12,7 +12,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import service.com.surebot.info.serviceperson.ApplicationClass;
 import service.com.surebot.info.serviceperson.R;
-import service.com.surebot.info.serviceperson.utils.Utils;
 
 public class PersonalDetailsActivity extends BaseActivity {
 
@@ -24,8 +23,6 @@ public class PersonalDetailsActivity extends BaseActivity {
     ImageView serviceIV;
     @BindView(R.id.femaleGenderIV)
     ImageView femaleGenderIV;
-    @BindView(R.id.serviceLayoutCarpenterLL)
-    LinearLayout serviceLayoutCarpenterLL;
     private PersonalDetailsActivity context;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -59,11 +56,15 @@ public class PersonalDetailsActivity extends BaseActivity {
             }
             break;
             case 5: {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    femaleGenderIV.setColorFilter(context.getResources().getColor(R.color.colorBrown));
-                }
-                Utils.showHideView(true, serviceLayoutCarpenterLL);
-                Utils.showHideView(false, serviceIV);
+                femaleGenderIV.setColorFilter(context.getResources().getColor(R.color.colorBrown));
+                headerLayout = R.drawable.carpenter_layout;
+                layoutServiceImage = R.drawable.carpenter;
+            }
+            break;
+            case 6: {
+                femaleGenderIV.setColorFilter(context.getResources().getColor(R.color.colorGray));
+                headerLayout = R.drawable.cleaning_layout;
+                layoutServiceImage = R.drawable.cleaning;
             }
             break;
 

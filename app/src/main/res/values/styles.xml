@@ -74,4 +74,12 @@
         <item name="hintTextColor">@color/colorBrown</item>
     </style>
 
+    <style name="ThemeCleaning" parent="">
+        <item name="android:textColor">@color/colorGray</item>
+        <item name="android:textColorHint">@color/colorGray</item>
+        <item name="android:editTextColor">@color/colorGray</item>
+        <item name="android:windowDisablePreview">true</item>
+        <item name="hintTextColor">@color/colorGray</item>
+    </style>
+
 </resources>

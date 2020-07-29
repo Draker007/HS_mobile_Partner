@@ -61,7 +61,6 @@ public class MyTaskFragment extends Fragment implements TodaysTaskAdapter.starts
     ConstraintLayout headerLayoutCL;
     @BindView(R.id.layoutServiceIV)
     ImageView layoutServiceIV;
-    LinearLayout serviceLayoutCarpenterLL;
     private PrimePackageActivity context;
 
 
@@ -115,8 +114,12 @@ public class MyTaskFragment extends Fragment implements TodaysTaskAdapter.starts
             break;
             case 5: {
                 headerLayout = R.drawable.carpenter_layout;
-                Utils.showHideView(true , serviceLayoutCarpenterLL);
-                Utils.showHideView(false, layoutServiceIV);
+                layoutServiceImage = R.drawable.carpenter;
+            }
+            break;
+            case 6: {
+                headerLayout = R.drawable.cleaning_layout;
+                layoutServiceImage = R.drawable.cleaning;
             }
             break;
         }

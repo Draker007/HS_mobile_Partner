@@ -58,6 +58,12 @@ public class IdentityVerificationActivity extends BaseActivity {
                 }
             }
             break;
+            case 6: {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    borderLL.setBackground(ContextCompat.getDrawable(context, R.drawable.bg_border_gray));
+                }
+            }
+            break;
         }
 
 

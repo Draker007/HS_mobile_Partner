@@ -25,8 +25,8 @@ import butterknife.ButterKnife;
 import service.com.surebot.info.serviceperson.ApplicationClass;
 import service.com.surebot.info.serviceperson.R;
 import service.com.surebot.info.serviceperson.activities.AboutMeActivity;
-import service.com.surebot.info.serviceperson.activities.LicensesAndCertificatesActivity;
 import service.com.surebot.info.serviceperson.activities.IdentityVerificationActivity;
+import service.com.surebot.info.serviceperson.activities.LicensesAndCertificatesActivity;
 import service.com.surebot.info.serviceperson.activities.PersonalDetailsActivity;
 import service.com.surebot.info.serviceperson.activities.PrimePackageActivity;
 import service.com.surebot.info.serviceperson.utils.Utils;
@@ -50,8 +50,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     ConstraintLayout profileHeaderCL;
     @BindView(R.id.serviceLayoutIV)
     ImageView serviceLayoutIV;
-    @BindView(R.id.serviceLayoutCarpenterLL)
-    LinearLayout serviceLayoutCarpenterLL;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Nullable
@@ -85,8 +83,12 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             break;
             case 5: {
                 headerLayout = R.drawable.carpenter_layout;
-                Utils.showHideView(true, serviceLayoutCarpenterLL);
-                Utils.showHideView(false, serviceLayoutIV);
+                layoutServiceImage = R.drawable.carpenter;
+            }
+            break;
+            case 6: {
+                headerLayout = R.drawable.cleaning_layout;
+                layoutServiceImage = R.drawable.cleaning;
             }
             break;
         }
