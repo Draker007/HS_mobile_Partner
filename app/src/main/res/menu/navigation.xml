@@ -14,7 +14,7 @@
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/navigationRequest"
-        android:icon="@drawable/navigation_request"
+        android:icon="@drawable/request_icon"
         android:title="@string/request_menu"
         app:showAsAction="ifRoom" />
     <item

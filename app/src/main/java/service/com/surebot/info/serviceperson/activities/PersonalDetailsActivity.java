@@ -67,6 +67,24 @@ public class PersonalDetailsActivity extends BaseActivity {
                 layoutServiceImage = R.drawable.cleaning;
             }
             break;
+            case 7: {
+                femaleGenderIV.setColorFilter(context.getResources().getColor(R.color.colorApplianceText));
+                headerLayout = R.drawable.appliance_layout;
+                layoutServiceImage = R.drawable.appliances;
+            }
+            break;
+            case 8: {
+                femaleGenderIV.setColorFilter(context.getResources().getColor(R.color.colorGray));
+                headerLayout = R.drawable.pest_layout;
+                layoutServiceImage = R.drawable.pest;
+            }
+            break;
+            case 9: {
+                femaleGenderIV.setColorFilter(context.getResources().getColor(R.color.colorPaintText));
+                headerLayout = R.drawable.paint_layout;
+                layoutServiceImage = R.drawable.paint;
+            }
+            break;
 
         }
         salonBgIV.setImageDrawable(ContextCompat.getDrawable(context, headerLayout));

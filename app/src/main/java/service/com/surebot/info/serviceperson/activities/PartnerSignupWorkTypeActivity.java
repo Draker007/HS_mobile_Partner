@@ -33,7 +33,7 @@ public class PartnerSignupWorkTypeActivity extends BaseActivity implements Signu
     private void loadWorkDoneList() {
         ArrayList<Category> categories = new ArrayList<>();
 
-        for (int i = 1; i <= 8; i++) {
+        for (int i = 1; i <= 9; i++) {
             switch (i) {
                 case 1:
                     Category category = new Category();

@@ -52,6 +52,18 @@ public class ChangePasswordActivity extends BaseActivity {
                 headerBackground = R.drawable.cleaning_header_bg;
             }
             break;
+            case 7: {
+                headerBackground = R.drawable.appliances_header_bg;
+            }
+            break;
+            case 8: {
+                headerBackground = R.drawable.pest_header_bg;
+            }
+            break;
+            case 9: {
+                headerBackground = R.drawable.paint_header_bg;
+            }
+            break;
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

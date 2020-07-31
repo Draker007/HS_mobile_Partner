@@ -130,6 +130,21 @@ public class NewServiceDetailsActivity extends BaseActivity implements View.OnCl
                 layoutServiceImage = R.drawable.cleaning;
             }
             break;
+            case 7: {
+                headerLayout = R.drawable.appliance_layout;
+                layoutServiceImage = R.drawable.appliances;
+            }
+            break;
+            case 8: {
+                headerLayout = R.drawable.pest_layout;
+                layoutServiceImage = R.drawable.pest;
+            }
+            break;
+            case 9: {
+                headerLayout = R.drawable.paint_layout;
+                layoutServiceImage = R.drawable.paint;
+            }
+            break;
         }
 
         serviceDetailLayout.setBackground(ContextCompat.getDrawable(context, headerLayout));

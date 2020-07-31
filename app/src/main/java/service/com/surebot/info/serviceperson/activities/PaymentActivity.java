@@ -6,7 +6,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -73,6 +72,18 @@ public class PaymentActivity extends BaseActivity {
             break;
             case 6: {
                 headerBackground = R.drawable.cleaning_header_bg;
+            }
+            break;
+            case 7: {
+                headerBackground = R.drawable.appliances_header_bg;
+            }
+            break;
+            case 8: {
+                headerBackground = R.drawable.pest_header_bg;
+            }
+            break;
+            case 9: {
+                headerBackground = R.drawable.paint_header_bg;
             }
             break;
         }

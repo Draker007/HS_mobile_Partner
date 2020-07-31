@@ -147,6 +147,24 @@ public class OnBoardProfileActivity extends BaseActivity implements View.OnClick
                 femaleGenderIV.setColorFilter(context.getResources().getColor(R.color.colorGray));
             }
             break;
+            case 7: {
+                headerProfile = R.drawable.onboarding_appliances;
+                headerProfileFade = R.mipmap.appliance_fade;
+                femaleGenderIV.setColorFilter(context.getResources().getColor(R.color.colorApplianceText));
+            }
+            break;
+            case 8: {
+                headerProfile = R.drawable.onboard_pest;
+                headerProfileFade = R.mipmap.pest_fade;
+                femaleGenderIV.setColorFilter(context.getResources().getColor(R.color.colorGray));
+            }
+            break;
+            case 9: {
+                headerProfile = R.drawable.onboard_paint;
+                headerProfileFade = R.mipmap.paint_fade;
+                femaleGenderIV.setColorFilter(context.getResources().getColor(R.color.colorPaintText));
+            }
+            break;
         }
 
         headerProfileCL.setBackground(ContextCompat.getDrawable(context, headerProfile));

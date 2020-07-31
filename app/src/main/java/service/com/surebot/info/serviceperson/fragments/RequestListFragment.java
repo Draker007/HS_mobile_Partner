@@ -19,8 +19,8 @@ import java.util.Objects;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import service.com.surebot.info.serviceperson.ApplicationClass;
-import service.com.surebot.info.serviceperson.adapters.RequestListAdapter;
 import service.com.surebot.info.serviceperson.R;
+import service.com.surebot.info.serviceperson.adapters.RequestListAdapter;
 
 public class RequestListFragment extends Fragment {
 
@@ -31,8 +31,6 @@ public class RequestListFragment extends Fragment {
     ViewPager gAllrequestlist_viewpager;
     @BindView(R.id.headerRL)
     RelativeLayout headerRL;
-
-    RequestListAdapter requestListAdapter;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -67,6 +65,18 @@ public class RequestListFragment extends Fragment {
                 headerBackground = R.drawable.cleaning_header_bg;
             }
             break;
+            case 7: {
+                headerBackground = R.drawable.appliances_header_bg;
+            }
+            break;
+            case 8: {
+                headerBackground = R.drawable.pest_header_bg;
+            }
+            break;
+            case 9: {
+                headerBackground = R.drawable.paint_header_bg;
+            }
+            break;
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -75,7 +85,7 @@ public class RequestListFragment extends Fragment {
 
         gAllrequestlist_tablayout.setupWithViewPager(gAllrequestlist_viewpager);
         // gViewpager_Adapter = new MyBookingTab_Adapter(getActivity().getSupportFragmentManager());
-        requestListAdapter = new RequestListAdapter(getChildFragmentManager());
+        RequestListAdapter requestListAdapter = new RequestListAdapter(getChildFragmentManager());
         requestListAdapter.AddFragment(new NewRequest_Fragment(), "New");
         requestListAdapter.AddFragment(new UpcomingRequestFragment(), "Upcoming");
         requestListAdapter.AddFragment(new CompletedRequestFragment(), "Completed");

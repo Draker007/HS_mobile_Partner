@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-
 import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 
@@ -58,14 +57,26 @@ public class IdentityVerificationActivity extends BaseActivity {
                 }
             }
             break;
-            case 6: {
+            case 6:
+            case 8: {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     borderLL.setBackground(ContextCompat.getDrawable(context, R.drawable.bg_border_gray));
                 }
             }
             break;
+            case 7: {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    borderLL.setBackground(ContextCompat.getDrawable(context, R.drawable.bg_border_appliance));
+                }
+            }
+            break;
+            case 9: {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    borderLL.setBackground(ContextCompat.getDrawable(context, R.drawable.bg_border_paint));
+                }
+            }
+            break;
         }
-
 
 
         arrowIV.setOnClickListener(v -> {

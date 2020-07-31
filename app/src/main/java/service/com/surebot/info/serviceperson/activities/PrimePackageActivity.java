@@ -1,10 +1,8 @@
 package service.com.surebot.info.serviceperson.activities;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
@@ -60,35 +58,45 @@ public class PrimePackageActivity extends BaseActivity {
             }
             break;
             case 3: {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                }
                 layoutImage = R.drawable.electrician;
                 headerLayout = R.drawable.electrician_layout;
                 textColor = R.color.colorElectricianText;
             }
             break;
             case 4: {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                }
                 layoutImage = R.drawable.plumber;
                 headerLayout = R.drawable.plumber_layout;
                 textColor = R.color.colorPrimaryBlue;
             }
             break;
             case 5: {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                }
                 layoutImage = R.drawable.carpenter;
                 textColor = R.color.colorBrown;
                 headerLayout = R.drawable.carpenter_layout;
             }
             break;
             case 6: {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                }
                 layoutImage = R.drawable.cleaning;
                 textColor = R.color.colorGray;
                 headerLayout = R.drawable.cleaning_layout;
+            }
+            break;
+            case 7: {
+                layoutImage = R.drawable.appliances;
+                textColor = R.color.colorApplianceText;
+                headerLayout = R.drawable.appliance_layout;
+            }
+            break;
+            case 8: {
+                layoutImage = R.drawable.pest;
+                textColor = R.color.colorGray;
+                headerLayout = R.drawable.pest_layout;
+            }
+            break;
+            case 9: {
+                layoutImage = R.drawable.paint;
+                textColor = R.color.colorPaintText;
+                headerLayout = R.drawable.paint_layout;
             }
             break;
         }

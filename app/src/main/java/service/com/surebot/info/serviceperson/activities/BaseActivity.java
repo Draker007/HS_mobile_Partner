@@ -38,8 +38,17 @@ public class BaseActivity extends AppCompatActivity {
                 theme = R.style.ThemeCarpenter;
             }
             break;
-            case 6: {
+            case 6:
+            case 8: {
                 theme = R.style.ThemeCleaning;
+            }
+            break;
+            case 7: {
+                theme = R.style.ThemeAppliance;
+            }
+            break;
+            case 9: {
+                theme = R.style.ThemePaint;
             }
             break;
         }

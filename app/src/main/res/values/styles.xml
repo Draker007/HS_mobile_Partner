@@ -82,4 +82,20 @@
         <item name="hintTextColor">@color/colorGray</item>
     </style>
 
+    <style name="ThemeAppliance" parent="">
+        <item name="android:textColor">@color/colorApplianceText</item>
+        <item name="android:textColorHint">@color/colorApplianceText</item>
+        <item name="android:editTextColor">@color/colorApplianceText</item>
+        <item name="android:windowDisablePreview">true</item>
+        <item name="hintTextColor">@color/colorApplianceText</item>
+    </style>
+
+    <style name="ThemePaint" parent="">
+        <item name="android:textColor">@color/colorPaintText</item>
+        <item name="android:textColorHint">@color/colorPaintText</item>
+        <item name="android:editTextColor">@color/colorPaintText</item>
+        <item name="android:windowDisablePreview">true</item>
+        <item name="hintTextColor">@color/colorPaintText</item>
+    </style>
+
 </resources>

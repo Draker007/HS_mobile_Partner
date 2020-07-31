@@ -103,6 +103,21 @@ public class OnBoardIdentityVerificationActivity extends BaseActivity implements
                 headerProfileFade = R.mipmap.cleaning_fade;
             }
             break;
+            case 7: {
+                headerProfile = R.drawable.onboarding_appliances;
+                headerProfileFade = R.mipmap.appliance_fade;
+            }
+            break;
+            case 8: {
+                headerProfile = R.drawable.onboard_pest;
+                headerProfileFade = R.mipmap.pest_fade;
+            }
+            break;
+            case 9: {
+                headerProfile = R.drawable.onboard_paint;
+                headerProfileFade = R.mipmap.paint_fade;
+            }
+            break;
         }
 
         headerIdentityCL.setBackground(ContextCompat.getDrawable(context, headerProfile));
