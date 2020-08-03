@@ -54,7 +54,7 @@
             android:name=".activities.ServicePersonHomeActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".activities.PartnerSignupWorkTypeActivity"
+            android:name=".activities.SplashActivity"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -62,9 +62,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--<activity
+        <activity
             android:name=".activities.PartnerSignupWorkTypeActivity"
-            android:windowSoftInputMode="adjustPan" />-->
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".activities.PartnerSignupActivity"
             android:windowSoftInputMode="adjustPan" />
