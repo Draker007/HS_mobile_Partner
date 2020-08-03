@@ -5,11 +5,13 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.Window;
 import android.widget.Toast;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -32,6 +34,7 @@ import service.com.surebot.info.serviceperson.fragments.ProfileFragment;
 import service.com.surebot.info.serviceperson.fragments.RequestListFragment;
 
 public class ServicePersonHomeActivity extends BaseActivity {
+
     BottomNavigationView navigation;
     int status = 1;
     String check = null;
@@ -140,7 +143,7 @@ public class ServicePersonHomeActivity extends BaseActivity {
         return true;
     };
 
-    private void setBottomNavColor(MenuItem item) {
+    private void setBottomNavColor(MenuItem selectedItem) {
         int bottomNavColor = R.color.colorBlue;
         switch (categorySelection) {
             case 1:
@@ -176,7 +179,7 @@ public class ServicePersonHomeActivity extends BaseActivity {
         }
 
         int[][] states = new int[][]{
-                new int[]{android.R.attr.state_selected}, // state_checked
+                new int[]{android.R.attr.state_checked}, // state_checked
                 new int[]{}
         };
 
@@ -185,10 +188,12 @@ public class ServicePersonHomeActivity extends BaseActivity {
                 bottomNavColor
         };
 
-        ColorStateList myColorList = new ColorStateList(states, colors);
-        navigation.setItemIconTintList(myColorList);
-//        navigation.setItemIconTintList(ColorStateList.valueOf(ContextCompat.getColor(context, bottomNavColor)));
-
+        ColorStateList myTextColorList = new ColorStateList(states, colors);
+        navigation.setItemTextColor(myTextColorList);
+        navigation.setItemIconTintList(myTextColorList);
+       /* if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            selectedItem.setIconTintList(ColorStateList.valueOf(ContextCompat.getColor(context, bottomNavColor)));
+        }*/
     }
 
     //For Switching Fragments
