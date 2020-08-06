@@ -5,13 +5,14 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.Window;
 import android.widget.Toast;
 
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -88,6 +89,94 @@ public class ServicePersonHomeActivity extends BaseActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 
+        //color changing
+
+
+        int bottomNavColor = R.color.colorBlue;
+        Log.d("categorySelection", "onCreate: categorySelection" + categorySelection);
+
+        switch (categorySelection) {
+            case 1:
+            case 2: {
+                bottomNavColor = R.color.colorBlue;
+                bottomNavColor = Color.BLUE;
+            }
+            break;
+            case 3: {
+                bottomNavColor = R.color.colorElectricianText;
+                bottomNavColor = Color.RED;
+            }
+            break;
+            case 4: {
+                bottomNavColor = R.color.colorPrimaryBlue;
+                bottomNavColor = Color.BLUE;
+            }
+            break;
+            case 5: {
+                bottomNavColor = R.color.colorBrown;
+                bottomNavColor = Color.parseColor("#3A1A06");
+            }
+            break;
+            case 6:
+            case 8: {
+                bottomNavColor = R.color.colorGray;
+                bottomNavColor = Color.GRAY;
+            }
+            break;
+            case 7: {
+                bottomNavColor = R.color.colorApplianceText;
+                bottomNavColor = Color.YELLOW;
+            }
+            break;
+            case 9: {
+                bottomNavColor = R.color.colorPaintText;
+
+                bottomNavColor = Color.parseColor("#7F20FC");
+            }
+            break;
+        }
+
+       /* int[][] states = new int[][]{
+                new int[]{android.R.attr.state_checked}, // state_checkednew int[]{}
+        };
+
+        int[] colors = new int[]{
+//                bottomNavColor, R.color.menuSelectedColor
+                bottomNavColor,
+                bottomNavColor,
+        };*/
+
+        int[][] states = new int[][]{
+                new int[]{android.R.attr.state_checked}, // state_checked
+                new int[]{},
+                new int[]{},
+                new int[]{},
+                new int[]{}
+        };
+
+        int[] colors = new int[]{
+//                bottomNavColor,
+//                R.color.menuSelectedColor
+                bottomNavColor,
+                bottomNavColor,
+                bottomNavColor,
+                bottomNavColor,
+                bottomNavColor,
+//                Color.GREEN,
+//                Color.BLUE
+
+        };
+
+        ColorStateList myTextColorList = new ColorStateList(states, colors);
+        navigation.setItemTextColor(myTextColorList);
+        navigation.setItemIconTintList(myTextColorList);
+
+//        navigation.setItemIconTintList(ContextCompat.getColorStateList(this, R.color.colorApplianceText));
+
+
+        //Finised
+
+
         fragment = new MyTaskFragment();
         loadFragment(fragment);
         requestMultiplePermissions();
@@ -144,56 +233,67 @@ public class ServicePersonHomeActivity extends BaseActivity {
     };
 
     private void setBottomNavColor(MenuItem selectedItem) {
-        int bottomNavColor = R.color.colorBlue;
+
+        int bottomNavColor = Color.BLUE;
         switch (categorySelection) {
             case 1:
             case 2: {
                 bottomNavColor = R.color.colorBlue;
+                bottomNavColor = Color.parseColor("#5D41F0");
             }
             break;
             case 3: {
                 bottomNavColor = R.color.colorElectricianText;
+                bottomNavColor = Color.parseColor("#E84242");
             }
             break;
             case 4: {
                 bottomNavColor = R.color.colorPrimaryBlue;
+                bottomNavColor = Color.parseColor("#3E8FEC");
             }
             break;
             case 5: {
                 bottomNavColor = R.color.colorBrown;
+                bottomNavColor = Color.parseColor("#3A1A06");
             }
             break;
             case 6:
             case 8: {
                 bottomNavColor = R.color.colorGray;
+                bottomNavColor = Color.parseColor("#5B5B5B");
             }
             break;
             case 7: {
                 bottomNavColor = R.color.colorApplianceText;
+                bottomNavColor = Color.parseColor("#FFA700");
             }
             break;
             case 9: {
                 bottomNavColor = R.color.colorPaintText;
+                bottomNavColor = Color.parseColor("#7F20FC");
             }
             break;
         }
 
         int[][] states = new int[][]{
                 new int[]{android.R.attr.state_checked}, // state_checked
-                new int[]{}
+                new int[]{-android.R.attr.state_checked},
         };
 
         int[] colors = new int[]{
-                R.color.menuSelectedColor,
-                bottomNavColor
+                bottomNavColor,
+                Color.parseColor("#6A6A6A")
+               // R.color.menuSelectedColor,
         };
 
         ColorStateList myTextColorList = new ColorStateList(states, colors);
         navigation.setItemTextColor(myTextColorList);
         navigation.setItemIconTintList(myTextColorList);
-       /* if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            selectedItem.setIconTintList(ColorStateList.valueOf(ContextCompat.getColor(context, bottomNavColor)));
-        }*/
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            selectedItem.setIconTintList(ColorStateList.valueOf(bottomNavColor));
+        }
+//        navigation.setItemIconTintList(ContextCompat.getColorStateList(context, bottomNavColor));
     }
 
     //For Switching Fragments
