@@ -1,5 +1,6 @@
 package service.com.surebot.info.serviceperson.activities;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -113,6 +114,7 @@ public class PartnerSignupWorkTypeActivity extends BaseActivity implements Signu
         ApplicationClass.setCategorySelection(category.getId());
         setAppTheme();
         Utils.startIntent(context, OnBoardProfileActivity.class, false);
+        overridePendingTransition(R.anim.fade_in_animation, R.anim.fade_out_animation);
     }
 }
 

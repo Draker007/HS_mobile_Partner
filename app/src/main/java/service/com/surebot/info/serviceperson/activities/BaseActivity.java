@@ -1,5 +1,6 @@
 package service.com.surebot.info.serviceperson.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -53,8 +54,9 @@ public class BaseActivity extends AppCompatActivity {
             break;
         }
         setTheme(theme);
-        recreate();
-        //overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-        overridePendingTransition(R.anim.fade_in_animation, R.anim.fade_out_animation);
+        finish();
+        startActivity(new Intent(this, PartnerSignupWorkTypeActivity.class));
+        overridePendingTransition(0,0);
+
     }
 }
